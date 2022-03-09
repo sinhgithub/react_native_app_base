@@ -1,0 +1,1088 @@
+{
+	"info": {
+		"_postman_id": "f7cbd6e1-fbf9-4613-b546-ab72aeccff84",
+		"name": "Harmory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Job",
+			"item": [
+				{
+					"name": "Tạo công việc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodW4xZ0BnbWFpbC5jb20iLCJpYXQiOjE2NDIyNzg1MzcsImV4cCI6MTY0MjI4MjEzNywibmFtZSI6Imh1bmciLCJ0eXBlIjoiRU1QTE9ZRVIiLCJ1c2VySWQiOjI0LCJlbWFpbCI6Imh1bjFnQGdtYWlsLmNvbSJ9.av8l_hCQcSLq5CgHTUVAXvARF0FyjFVAjE7J-L78R3HYdcu5nf_7Y4WTul1wQppWEw_28Ltw-7OZpJeNlOELDA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Senior PHP\",\n    \"category\": {\n        \"id\": 1\n    },\n    \"code\": \"DEV123\",\n    \"company_name\": \"abcd\",\n    \"company_description\": \"123123\",\n    \"team_size\": 1,\n    \"company_website\": \"google.com\",\n    \"type\": \"FULLTIME\",\n    \"rank\": \"FRESHER\",\n    \"wage_from\": 10000000,\n    \"wage_to\": 12000000,\n    \"age_from\": 22,\n    \"wage_type\": \"HOUR\",\n    \"age_to\": 30,\n    \"sex\": \"ALL\",\n    \"job_description\": \"job_descriptionjob_descriptionjob_description\",\n    \"literacy\": \"COLLEGE\",\n    \"experience_level\": \"MIDDLE\",\n    \"experience_description\": \"123123123\",\n    \"contact_type\": [\"FILE\", \"ONLINE\"],\n    \"language\": {\n        \"id\": 1\n    },\n    \"address\": \"123\",\n    \"province\": {\n        \"id\": 1\n    },\n    \"district\": {\n        \"id\": 1\n    },\n    \"country\": {\n        \"id\": 1\n    },\n    \"contact_name\": \"tungdx\",\n    \"contact_phone\": \"0987654321\",\n    \"duration_day\": 10,\n    \"expiration_date\": \"2022-02-01T00:00:00\",\n    \"state\": \"PENDING\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/job",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"job"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Chi tiêt công việc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/job/2",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"job",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Danh sach lich lam viec",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/calendar-work",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"calendar-work"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lọc danh sách công việc",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/job?province_id=1&category_id=1,2,3&type=FULLTIME,PARTTIME&experience_level=MIDDLE&wage_from=1000000&wage_to=11000000&created_at=2022-02-01T00:00:00",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"job"
+							],
+							"query": [
+								{
+									"key": "province_id",
+									"value": "1"
+								},
+								{
+									"key": "category_id",
+									"value": "1,2,3"
+								},
+								{
+									"key": "type",
+									"value": "FULLTIME,PARTTIME"
+								},
+								{
+									"key": "experience_level",
+									"value": "MIDDLE"
+								},
+								{
+									"key": "wage_from",
+									"value": "1000000"
+								},
+								{
+									"key": "wage_to",
+									"value": "11000000"
+								},
+								{
+									"key": "created_at",
+									"value": "2022-02-01T00:00:00"
+								},
+								{
+									"key": "key",
+									"value": "java",
+									"disabled": true
+								},
+								{
+									"key": "rank",
+									"value": "FRESHER",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gửi yêu cầu nhận việc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodW5nQGdtYWlsLmNvbSIsImlhdCI6MTY0MDg4Njg4MCwiZXhwIjoxNjQwODkwNDgwLCJ1c2VySWQiOjEsImVtYWlsIjoiaHVuZ0BnbWFpbC5jb20ifQ.98nMVFL0zTVsJG9NdQg-KMTEQG2wkKzeitS9TwAW-XUp96TV1D0P2HpUh3gSiBoyJM2n9JTCCW9Va9fUf0caeA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/job/3/apply",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"job",
+								"3",
+								"apply"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Thay đổi trạng thái yêu cầu nhận việc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodW5nQGdtYWlsLmNvbSIsImlhdCI6MTY0MDg5NTA3NSwiZXhwIjoxNjQwODk4Njc1LCJ1c2VySWQiOjEsImVtYWlsIjoiaHVuZ0BnbWFpbC5jb20ifQ.0D2h8LgfP9ml78HFTvG5Qa_VQxnU9VpS3ABBIhDcodFkut_v4kpTR79c3D0CgXa29d2OaysY1xE7D43fnB9LdA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\": 1,\n    \"job_id\": 3,\n    \"start_date\": \"2021-12-29\",\n    \"end_date\": \"2022-01-15\",\n    \"start_time\": \"07:00:00\",\n    \"end_time\": \"12:00:00\",\n    \"state\": \"APPROVED\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/job/changeStateRequestJob",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"job",
+								"changeStateRequestJob"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update trạng thái công việc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodW5nQGdtYWlsLmNvbSIsImlhdCI6MTY0MDgwOTEzNywiZXhwIjoxNjQwODEyNzM3LCJ1c2VySWQiOjEsImVtYWlsIjoiaHVuZ0BnbWFpbC5jb20ifQ.cLJWW9JHpS-x7-lPsyDFabfKODG3YpeFQqPX9g5NWmrTykG99cX-No8Qt1OtrYSB18EpI_eSBaBoREVea1Z2ww",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ids\" : [2,3],\n    \"state\": \"PUBLIC\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/job/changeState",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"job",
+								"changeState"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Danh sách công việc trang chủ",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/job?collection=HOME_PAGE",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"job"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "java",
+									"disabled": true
+								},
+								{
+									"key": "rank",
+									"value": "FRESHER",
+									"disabled": true
+								},
+								{
+									"key": "collection",
+									"value": "HOME_PAGE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Danh sách công việc của nhà tuyển dụng (private)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/job/24/employer",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"job",
+								"24",
+								"employer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Danh sách yêu cầu của nhà tuyển dụng",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodW4xZ0BnbWFpbC5jb20iLCJpYXQiOjE2NDIzMTY1NjYsImV4cCI6MTY0MjMyMDE2NiwibmFtZSI6Imh1bmciLCJ0eXBlIjoiRU1QTE9ZRVIiLCJ1c2VySWQiOjI0LCJlbWFpbCI6Imh1bjFnQGdtYWlsLmNvbSJ9.NQERCDF9jXjwnBptqUwnGnfUi1kcd37HxR55NvtAyJd6qkMmJ3w9gHsvX5JJ-goISJkkENhK3GrlPPaPGZ08dg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/job_apply/24/employer?state=PENDING",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"job_apply",
+								"24",
+								"employer"
+							],
+							"query": [
+								{
+									"key": "state",
+									"value": "PENDING"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Danh sách yêu cầu theo tin tuyển dụng",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJodW4xZ0BnbWFpbC5jb20iLCJpYXQiOjE2NDIzMTY1NjYsImV4cCI6MTY0MjMyMDE2NiwibmFtZSI6Imh1bmciLCJ0eXBlIjoiRU1QTE9ZRVIiLCJ1c2VySWQiOjI0LCJlbWFpbCI6Imh1bjFnQGdtYWlsLmNvbSJ9.NQERCDF9jXjwnBptqUwnGnfUi1kcd37HxR55NvtAyJd6qkMmJ3w9gHsvX5JJ-goISJkkENhK3GrlPPaPGZ08dg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "state",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/api/job_apply/23/job?state=PUBLIC",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"job_apply",
+								"23",
+								"job"
+							],
+							"query": [
+								{
+									"key": "state",
+									"value": "PUBLIC"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Đăng nhập",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"hun1g@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/auth/login",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Đăng ký người tìm việc",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"hun1g@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/auth/register",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Đăng ký nhà tuyển dụng",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hùng\",\r\n    \"phone\": \"0975412451\",\r\n    \"avatar\": \"upload/images/1640531421_Screenshot_1.png\",\r\n    \"email\": \"hung1234@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"employer\": {\r\n        \"logo\": \"upload/images/1640531421_Screenshot_1.png\",\r\n        \"banner\": \"upload/images/1640531421_Screenshot_1.png\",\r\n        \"companyName\": \"Công ty A\",\r\n        \"website\": \"abc.com\",\r\n        \"teamSizeId\": 1,\r\n        \"provinceId\": 1,\r\n        \"districtId\": 1,\r\n        \"address\": \"Mỹ Đình Plaza\",\r\n        \"demandSizeId\": 1,\r\n        \"businessCategoryIds\": [\r\n            1,\r\n            2,\r\n            3\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/auth/register",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cập nhập thông tin người tìm việc",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hùng\",\r\n    \"phone\": \"0975412451\",\r\n    \"avatar\": \"upload/images/1640531421_Screenshot_1.png\",\r\n    \"password\": null,\r\n    \"jobSeeker\":{\r\n        \"address\": \"Mỹ đình hà nội 1\",\r\n        \"taxCode\": \"12345\",\r\n        \"education\": \"Đại học hà nội\",\r\n        \"majors\": \"Công nghệ thông tin\",\r\n        \"educationStatus\": \"Đã tốt nghiệp\",\r\n        \"skill\":[\r\n            {\r\n                \"id\": 1,\r\n                \"name\": \"Kỹ năng giao tiếp\",\r\n                \"description\": \"Giao tiếp tốt\"\r\n            },\r\n            {\r\n                \"id\": 2,\r\n                \"name\": \"Tiếng anh\",\r\n                \"description\": \"Tiếng anh giao tiếp tốt\"\r\n            }\r\n        ],\r\n        \"workExperience\":[\r\n            {\r\n                \"companyName\": \"ABC\",\r\n                \"position\": \"Developer\",\r\n                \"startDate\": \"2021-12-27\",\r\n                \"endDate\": \"2021-12-12\",\r\n                \"description\": \"Phát triển dự án abc bằng ngôn ngữ java\"\r\n            },\r\n            {\r\n                \"companyName\": \"ABC1\",\r\n                \"position\": \"Developer1\",\r\n                \"startDate\": \"2021-12-27\",\r\n                \"endDate\": \"2021-12-12\",\r\n                \"description\": \"Phát triển dự án abc bằng ngôn ngữ php\"\r\n            }\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/user",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Thông tin user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/user",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cập nhập thông tin nhà tuyển dụng",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"hung\",\r\n    \"phone\": \"13133131\",\r\n    \"avatar\": \"\",\r\n    \"password\": null,\r\n    \"employer\": {\r\n        \"logo\": \"upload/images/1640531421_Screenshot_1.png\",\r\n        \"banner\": \"upload/images/1640531421_Screenshot_1.png\",\r\n        \"companyName\": \"123123\",\r\n        \"website\": \"123.vn\",\r\n        \"teamSizeId\": 3,\r\n        \"provinceId\": 1,\r\n        \"districtId\": 1,\r\n        \"address\": 290,\r\n        \"demandSizeId\": 4,\r\n        \"businessCategoryIds\": [\r\n            1,\r\n            2\r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/user",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/users?type=EMPLOYER",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "EMPLOYER"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List user home page",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/users/top-employer",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"top-employer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Master data",
+			"item": [
+				{
+					"name": "Team size",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/master/team-size",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"master",
+								"team-size"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Danh mục việc làm",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/master/business-category",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"master",
+								"business-category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tiêu chí kỹ năng",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/master/skill-criteria",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"master",
+								"skill-criteria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Demand size",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/master/demand-size",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"master",
+								"demand-size"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Danh mục việc làm trang chủ",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/master/business-category?collection=HOME_PAGE",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"master",
+								"business-category"
+							],
+							"query": [
+								{
+									"key": "collection",
+									"value": "HOME_PAGE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Danh sách thành phố",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/master/provinces",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"master",
+								"provinces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Danh sách quận huyện",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/master/districts?provinceId=1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"master",
+								"districts"
+							],
+							"query": [
+								{
+									"key": "provinceId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "Create blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"thumbnail\": \"https://cdn.nguyenkimmall.com/images/detailed/555/may-anh-cho-nguoi-moi.jpg\",\r\n    \"title\": \"7 điều người quản lý thời gian thông minh không bao giờ làm\",\r\n    \"shortContent\": \"Điều gì tạo nên sự khác biệt giữa người quản lý thời gian thông minh và người luôn bận rộn nhưng kết quả lại chẳng\",\r\n    \"content\": \"Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/blogs",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List blog",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"thumbnail\": \"https://cdn.nguyenkimmall.com/images/detailed/555/may-anh-cho-nguoi-moi.jpg\",\r\n    \"title\": \"7 điều người quản lý thời gian thông minh không bao giờ làm\",\r\n    \"shortContent\": \"Điều gì tạo nên sự khác biệt giữa người quản lý thời gian thông minh và người luôn bận rộn nhưng kết quả lại chẳng\",\r\n    \"content\": \"Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/blogs",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"blogs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Blog detail",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"thumbnail\": \"https://cdn.nguyenkimmall.com/images/detailed/555/may-anh-cho-nguoi-moi.jpg\",\r\n    \"title\": \"7 điều người quản lý thời gian thông minh không bao giờ làm\",\r\n    \"shortContent\": \"Điều gì tạo nên sự khác biệt giữa người quản lý thời gian thông minh và người luôn bận rộn nhưng kết quả lại chẳng\",\r\n    \"content\": \"Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/blogs/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete blog",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"thumbnail\": \"https://cdn.nguyenkimmall.com/images/detailed/555/may-anh-cho-nguoi-moi.jpg\",\r\n    \"title\": \"7 điều người quản lý thời gian thông minh không bao giờ làm\",\r\n    \"shortContent\": \"Điều gì tạo nên sự khác biệt giữa người quản lý thời gian thông minh và người luôn bận rộn nhưng kết quả lại chẳng\",\r\n    \"content\": \"Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/blogs/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"thumbnail\": \"https://cdn.nguyenkimmall.com/images/detailed/555/may-anh-cho-nguoi-moi.jpg\",\r\n    \"title\": \"7 điều người quản lý thời gian thông minh không bao giờ làm\",\r\n    \"shortContent\": \"Điều gì tạo nên sự khác biệt giữa người quản lý thời gian thông minh và người luôn bận rộn nhưng kết quả lại chẳng\",\r\n    \"content\": \"Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.Khó từ chối hoặc muốn tự mình thực hiện tất cả công việc vì không tin tưởng bất kỳ ai khác có thể làm tốt hơn là nguyên nhân khiến bạn có quá nhiều việc phải làm. Dù là gì, đảm nhận quá nhiều việc là cách sử dụng thời gian kém hiệu quả. Nó khiến bạn bị đánh giá là làm việc vội vàng, cẩu thả bởi chất lượng đạt được không như mong đợi. Chúng ta có xu hướng tính toán sai thời gian hoàn thành một nhiệm vụ. Đôi khi bạn ước tính việc gì đó chỉ mất một giờ, nhưng thực tế nó lại mất gần 2 giờ hoặc ngược lại. Dù điều gì xảy ra thì nó cũng gây ảnh hưởng đến toàn bộ lịch trình của bạn và điều đáng lẽ phải hoàn thành ngày hôm nay phải đợi đến ngày mai.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HOST}}/api/blogs/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"blogs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Employer",
+			"item": [
+				{
+					"name": "Thông tin nhà tuyển dụng (public)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/employer/1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"employer",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Danh sách tin việc đang tuyển của nhà tuyển dụng",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/api/employer/1/job",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"employer",
+								"1",
+								"job"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Upload ảnh",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/NGUYEN-HUNG/Documents/Lightshot/Screenshot_1.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{HOST}}/api/file/upload/images",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"file",
+						"upload",
+						"images"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
