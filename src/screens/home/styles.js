@@ -7,8 +7,7 @@ import { statusBarHeight, BOTTOM_TAB_HEIGHT } from 'constants/size';
 const styles = StyleSheet.create({
   homeScreen: {
     backgroundColor: BACKGROUND_COLOR.White,
-    flex: 1,
-    paddingBottom: BOTTOM_TAB_HEIGHT
+    flex: 1
   },
   scrollView: {
     flex: 1

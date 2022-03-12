@@ -28,6 +28,7 @@ import MainHeader from 'components/MainHeader';
 import DetailJob from 'screens/detail_job';
 import { useSelector } from 'react-redux';
 import Login from 'screens/auth/login';
+import FilterJobScreen from 'screens/filter_job';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -301,6 +302,16 @@ export const AppStackScreen = () => {
         name={SCREENS_NAME.MAIN_SCREEN}
         component={TabStack}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.DETAIL_JOB_SCREEN}
+        component={DetailJob}
+        options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.FILTER_JOB}
+        component={FilterJobScreen}
+        options={{ headerShown: true }}
       />
     </Stack.Navigator>
   );

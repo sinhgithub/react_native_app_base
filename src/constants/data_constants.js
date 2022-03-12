@@ -97,3 +97,18 @@ export const tabFindJobScreen = [
     title: 'Ứng tuyển'
   }
 ];
+
+export const tabWorkScreen = [
+  {
+    id: 'continue',
+    title: 'Tiếp theo'
+  },
+  {
+    id: 'workCalendar',
+    title: 'Lịch làm việc'
+  },
+  {
+    id: 'job',
+    title: 'Công việc'
+  }
+];

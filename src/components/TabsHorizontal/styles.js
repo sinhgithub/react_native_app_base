@@ -1,11 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { SPACING, DEVICE_WIDTH } from 'constants/size';
+import { SPACING } from 'constants/size';
 import { FONT_SIZE, FONT_FAMILY } from 'constants/appFonts';
 import { TEXT_COLOR, CUSTOM_COLOR } from 'constants/colors';
 
 const styles = StyleSheet.create({
   tabsContent: {
-    width: DEVICE_WIDTH,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomColor: CUSTOM_COLOR.BasicGray,

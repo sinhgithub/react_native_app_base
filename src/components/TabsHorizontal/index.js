@@ -1,7 +1,6 @@
-import React, { memo, FC, useCallback, useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import React, { memo, useCallback, useState, useEffect, useMemo } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import { DEVICE_WIDTH } from 'constants/size';
 
 const Tabs = props => {
   const {
@@ -16,29 +15,45 @@ const Tabs = props => {
     tabItemStyle
   } = props;
 
-  const [sizeTabsContainer, setSizeTabsContainer] = useState({});
-  const getSizeTabsContainer = useCallback(e => {
-    const nativeEvent = e.nativeEvent;
-    setSizeTabsContainer(nativeEvent.layout);
-  }, []);
+  const initTabIndex = useMemo(() => {
+    if (tabActive) {
+      return { index: tabActive, isClick: false };
+    }
+    return { index: 0, isClick: false };
+  }, [tabActive]);
 
-  const [tabIndex, setTabIndex] = useState(tabActive || 0);
+  const [tabIndex, setTabIndex] = useState(initTabIndex);
 
   useEffect(() => {
-    onPress?.(tabIndex);
+    if (tabIndex.isClick) {
+      onPress?.(tabIndex);
+    }
   }, [onPress, tabIndex]);
 
-  const handlePressTab = useCallback(index => {
-    setTabIndex?.(index);
-  }, []);
+  const handlePressTab = useCallback(
+    index => {
+      setTabIndex?.(prev => {
+        if (prev.index !== index) {
+          return { index, isClick: true };
+        }
+        return tabIndex;
+      });
+    },
+    [tabIndex]
+  );
 
   const tabs = data.map((tab, index) => {
-    const styleBorderBottom = { borderBottomWidth: tabIndex === index ? 2 : 0 };
+    const styleBorderBottom = { borderBottomWidth: tabIndex.index === index ? 2 : 0 };
     return (
       <TouchableOpacity
-        style={[styles.tabItem, styleBorderBottom, tabItemStyle]}
+        style={[
+          styles.tabItem,
+          { width: data?.length > 0 ? `${100 / data?.length}%` : 'auto' },
+          styleBorderBottom,
+          tabItemStyle
+        ]}
         onPress={() => handlePressTab?.(index)}
-        activeOpacity={tabIndex === index ? 1 : 0.6}
+        activeOpacity={tabIndex.index === index ? 1 : 0.6}
         key={`${tab.id || index}`}>
         <Text style={[styles.tabItemTitle, titleStyle]}>{tab.title}</Text>
         {isDisplayTotal && tab.total && (
@@ -49,13 +64,9 @@ const Tabs = props => {
   }, []);
 
   return (
-    <ScrollView
-      showsHorizontalScrollIndicator={false}
-      horizontal
-      style={[styles.tabs, containerStyle]}
-      onLayout={e => getSizeTabsContainer(e)}>
+    <View style={[styles.tabs, containerStyle]}>
       <View style={[styles.tabsContent, tabsStyle]}>{tabs}</View>
-    </ScrollView>
+    </View>
   );
 };
 

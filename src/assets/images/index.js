@@ -42,3 +42,4 @@ export { default as ic_avatar } from './ic_avatar.png';
 export { default as chat_empty } from './chat_empty.png';
 export { default as ic_benefit } from './ic_benefit.png';
 export { default as ic_logo } from './logo.png';
+export { default as find } from './find.png';

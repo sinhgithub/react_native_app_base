@@ -25,9 +25,14 @@ export const AUTH = {
 };
 
 export const GET_LIST_JOB = {
-  HOME_PAGE: asyncTypes('GET_LIST_JOB/HOME_PAGE')
+  HOME_PAGE: asyncTypes('GET_LIST_JOB/HOME_PAGE'),
+  ALL_JOB: asyncTypes('GET_LIST_JOB/ALL_JOB')
 };
 
 export const RECEIVE_JOB = {
   RECEIVE_JOB: asyncTypes('RECEIVE_JOB')
+};
+
+export const FILTER = {
+  FILTER_JOB_BY_LIST: asyncTypes('FILTER/FILTER_JOB_BY_LIST')
 };

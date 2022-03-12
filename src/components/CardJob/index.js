@@ -13,20 +13,20 @@ const CardJob = props => {
   const [sizeCardJobContentImage, setSizeCardJobContentImage] = useState(null);
 
   const dataCardJob = useMemo(() => {
-    const address = `${data.address}, ${mapDistrictsAndProvince(data.district, data.province)}`;
-    const wage = mapWageFromTo(data.wageFrom, data.wageTo);
+    const address = `${data?.address}, ${mapDistrictsAndProvince(data?.district, data?.province)}`;
+    const wage = mapWageFromTo(data?.wageFrom, data?.wageTo);
 
-    const timeRemaining = formatFeatureDurationDate(data.expirationDate);
+    const timeRemaining = formatFeatureDurationDate(data?.expirationDate);
     return {
-      id: data.id,
-      title: data.title,
+      id: data?.id,
+      title: data?.title,
       address,
       wage,
       timeRemaining: timeRemaining
         ? `${translate('common.remind')} ${timeRemaining}`
         : translate('common.expire'),
       isBonus: data?.bonus?.length > 0,
-      isPaidAfterWork: data.paidAfterWork
+      isPaidAfterWork: data?.paidAfterWork
     };
   }, [data]);
 
@@ -37,11 +37,11 @@ const CardJob = props => {
         onPress={() =>
           onPress({
             ...data,
-            addressMapped: dataCardJob.address,
-            wageMapped: dataCardJob.wage,
-            timeRemainingMapped: dataCardJob.timeRemaining,
-            isPaidAfterWorkMapped: dataCardJob.isPaidAfterWork,
-            isBonusMapped: dataCardJob.isBonus
+            addressMapped: dataCardJob?.address,
+            wageMapped: dataCardJob?.wage,
+            timeRemainingMapped: dataCardJob?.timeRemaining,
+            isPaidAfterWorkMapped: dataCardJob?.isPaidAfterWork,
+            isBonusMapped: dataCardJob?.isBonus
           })
         }
         activeOpacity={0.6}>
@@ -52,18 +52,20 @@ const CardJob = props => {
               setSizeCardJobContentImage(e.nativeEvent.layout);
             }
           }}>
-          {!dataCardJob.jobBanner && <Text style={styles.cardJobContentImageTextDesc}>Banner</Text>}
-          {sizeCardJobContentImage && dataCardJob.jobBanner && (
+          {!dataCardJob?.jobBanner && (
+            <Text style={styles.cardJobContentImageTextDesc}>Banner</Text>
+          )}
+          {sizeCardJobContentImage && dataCardJob?.jobBanner && (
             <FastImage
               style={[
                 styles.image,
                 {
-                  width: sizeCardJobContentImage.width,
-                  height: sizeCardJobContentImage.width
+                  width: sizeCardJobContentImage?.width,
+                  height: sizeCardJobContentImage?.width
                 }
               ]}
               source={{
-                uri: dataCardJob.jobBanner
+                uri: dataCardJob?.jobBanner
               }}
               resizeMode={FastImage.resizeMode.stretch}
             />
@@ -71,18 +73,18 @@ const CardJob = props => {
         </View>
         <View style={styles.cardJobContentInfo}>
           <Text style={styles.cardJobContentInfoName} numberOfLines={2}>
-            {dataCardJob.title}
+            {dataCardJob?.title}
           </Text>
           <Text style={styles.cardJobContentInfoIncome} numberOfLines={1}>
-            {dataCardJob.wage}
+            {dataCardJob?.wage}
           </Text>
           <Text style={styles.cardJobContentInfoAddress} numberOfLines={2}>
-            {dataCardJob.address}
+            {dataCardJob?.address}
           </Text>
           <View style={styles.buttonsWrapper}>
             <Button
               type="card"
-              title={dataCardJob.timeRemaining}
+              title={dataCardJob?.timeRemaining}
               containerStyle={styles.buttonContainerStyle}
               buttonStyle={styles.buttonStyle}
               titleStyle={styles.titleButtonStyle}

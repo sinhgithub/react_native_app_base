@@ -25,11 +25,7 @@ const TabBar = props => {
       <View
         style={[
           {
-            width: DEVICE_WIDTH,
             overflow: 'hidden',
-            position: 'absolute',
-            bottom: 0,
-            justifyContent: 'flex-end',
             borderTopColor: CUSTOM_COLOR.BasicGray,
             borderTopWidth: 1
           },

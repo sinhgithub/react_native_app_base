@@ -12,10 +12,8 @@ const tabWidth = width / tabsLength;
 const TabBar = props => {
   return (
     <>
-      <View {...{ width, height }} style={styles.container}>
-        <View style={styles.absoluteFill}>
-          <StaticTabBar value={-width + tabWidth * 2} {...props} />
-        </View>
+      <View {...{ height }} style={styles.container}>
+        <StaticTabBar {...props} />
       </View>
     </>
   );
@@ -23,12 +21,13 @@ const TabBar = props => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: BACKGROUND_COLOR.MainTab
-  },
-  absoluteFill: {
-    ...StyleSheet.absoluteFill,
-    elevation: 5
   }
+  // absoluteFill: {
+  //   ...StyleSheet.absoluteFill,
+  //   elevation: 5
+  // }
 });
 
 export default React.memo(TabBar);
