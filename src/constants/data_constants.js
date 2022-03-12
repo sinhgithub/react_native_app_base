@@ -112,3 +112,14 @@ export const tabWorkScreen = [
     title: 'Công việc'
   }
 ];
+
+export const tabMessageBoxScreen = [
+  {
+    id: 'message',
+    title: 'Tin nhắn'
+  },
+  {
+    id: 'notify',
+    title: 'Thông báo'
+  }
+];

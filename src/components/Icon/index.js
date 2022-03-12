@@ -6,7 +6,8 @@ import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconFeather from 'react-native-vector-icons/Feather';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
-// import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Icon = props => {
   const { fontName, size, color, name } = props;
@@ -21,8 +22,10 @@ const Icon = props => {
       return <IconEntypo name={name} size={size} color={color} />;
     case 'FontAwesome5Pro':
       return <FontAwesome5Pro name={name} size={size} color={color} />;
-    // case 'MaterialIcons':
-    //   return <MaterialIcons name={name} size={size} color={color} />;
+    case 'MaterialIcons':
+      return <MaterialIcons name={name} size={size} color={color} />;
+    case 'MaterialCommunityIcons':
+      return <MaterialCommunityIcons name={name} size={size} color={color} />;
     default:
       return <IconFontAwesome name={name} size={size} color={color} />;
   }

@@ -16,9 +16,6 @@ const CustomCalendar = props => {
         yearTextStyles={styles.yearTextStyles}
         arrowStyles={styles.arrowStyles}
         initialViewDate={now}
-        activeDateTextStyle={styles.activeDateTextStyle}
-        currentDateTextStyle={styles.currentDateTextStyle}
-        dateTextStyle={styles.dateTextStyle}
         onChange={onChangeDate}
       />
     </View>
