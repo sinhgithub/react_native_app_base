@@ -1,0 +1,122 @@
+diff --git a/node_modules/react-native-styled-datepicker/src/constants/index.js b/node_modules/react-native-styled-datepicker/src/constants/index.js
+index eb1f421..72fc204 100644
+--- a/node_modules/react-native-styled-datepicker/src/constants/index.js
++++ b/node_modules/react-native-styled-datepicker/src/constants/index.js
+@@ -3,4 +3,4 @@ export const CALENDAR_STATES = {
+   TODAY: "today",
+ };
+ 
+-export const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
++export const MONTHS = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4","Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+diff --git a/node_modules/react-native-styled-datepicker/src/index.js b/node_modules/react-native-styled-datepicker/src/index.js
+index 07728df..b516a57 100644
+--- a/node_modules/react-native-styled-datepicker/src/index.js
++++ b/node_modules/react-native-styled-datepicker/src/index.js
+@@ -66,6 +66,7 @@ const DatePicker = ({
+   disabledDateStyles = {},
+   fontFamily,
+   onChange,
++  isCustomDateContainer
+ }) => {
+   const [selectedDate, setSelectedDate] = useState(initialSelectedDate || moment().format("YYYY-MM-DD"));
+   const [isMonthView, setMonthView] = useState(false);
+@@ -148,15 +149,16 @@ const DatePicker = ({
+ 
+   const renderCalendarHeader = (date) => {
+     return (
+-      <View style={styles.calendarHeaderContainer}>
+-        <TouchableOpacity onPress={toggleMonthView} style={[styles.calendarHeaderWrapper, calendarHeaderWrapperStyles]}>
+-          <Text style={[styles.calendarHeader, calendarHeaderTextStyles, sharedTextStyles]}>{moment(new Date(date)).format("MMMM")}</Text>
+-        </TouchableOpacity>
+-
+-        <TouchableOpacity onPress={toggleYearView} style={[styles.calendarHeaderWrapper, calendarHeaderWrapperStyles]}>
+-          <Text style={[styles.calendarHeader, calendarHeaderTextStyles, sharedTextStyles]}>{moment(new Date(date)).format("YYYY")}</Text>
+-        </TouchableOpacity>
+-      </View>
++      <>
++        <View style={styles.calendarHeaderContainer}>
++          <TouchableOpacity onPress={toggleMonthView} style={[styles.calendarHeaderWrapper, calendarHeaderWrapperStyles]}>
++            <Text style={[styles.calendarHeader, calendarHeaderTextStyles, sharedTextStyles]}>{moment(new Date(date)).format("MMMM")}</Text>
++          </TouchableOpacity>
++          <TouchableOpacity onPress={toggleYearView} style={[styles.calendarHeaderWrapper, calendarHeaderWrapperStyles]}>
++            <Text style={[styles.calendarHeader, calendarHeaderTextStyles, sharedTextStyles]}>{moment(new Date(date)).format("YYYY")}</Text>
++          </TouchableOpacity>
++        </View>
++      </>
+     );
+   };
+ 
+@@ -208,20 +210,6 @@ const DatePicker = ({
+     }
+   };
+ 
+-  const renderCalendarDate = ({ date, state }) => {
+-    return (
+-      <TouchableOpacity
+-        disabled={state === CALENDAR_STATES.DISABLED}
+-        onPress={() => {
+-          onChangeSelectedDate(date.dateString);
+-        }}
+-        style={calendarDayContainerStyle(date, state)}
+-      >
+-        <Text style={[calendarDayTextStyle(date, state), sharedTextStyles]}>{date.day}</Text>
+-      </TouchableOpacity>
+-    );
+-  };
+-
+   const renderCalendarArrow = (direction) => {
+     return (
+       <View style={[styles.calendarArrowContainer, arrowWrapperStyles]}>
+@@ -333,7 +321,7 @@ const DatePicker = ({
+         onChangeSelectedDate(newSelectedMoment.format("YYYY-MM-DD"));
+       }
+     } else if (minMoment) {
+-      if (newSelectedMoment.isBefore(minMoment)) {
++      if (newSelectedMoment?.isBefore(minMoment)) {
+         onChangeSelectedDate(minMoment.format("YYYY-MM-DD"));
+       } else {
+         onChangeSelectedDate(newSelectedMoment.format("YYYY-MM-DD"));
+@@ -409,18 +397,27 @@ const DatePicker = ({
+       {isCalendarView && (
+         <Animated.View style={{ opacity: calendarOpacity, position: "absolute", width: "100%" }}>
+           <Calendar
+-            current={initialDate}
++            initialDate={initialViewDate}
++            current={selectedDate}
+             maxDate={maxDate ? maxMoment.format("YYYY-MM-DD") : undefined}
+             minDate={minDate ? minMoment?.format("YYYY-MM-DD") : undefined}
+             firstDay={1} // starts from monday
+             renderHeader={renderCalendarHeader}
+-            dayComponent={renderCalendarDate}
+             renderArrow={renderCalendarArrow}
+             theme={{
+-              calendarBackground: "transparent",
+-              textSectionTitleColor: "#000000",
+-              textDayHeaderFontFamily: fontFamily,
++              /**
++               *  this is style of Date custom
++                  initDateContainer: {backgroundColor: 'yellow'},
++                  activeDateContainer: {backgroundColor: 'green'},
++                  commonDateContainer: {backgroundColor: 'blue'},
++                  initDateText: {color: 'yellow'},
++                  activeDateText: {color: 'green'},
++                  outMonthDateText: {color: 'blue'}
++                  inMonthDateText: {color: 'yellow'}
++              */
+             }}
++            isCustomDateContainer={isCustomDateContainer}
++            onDayPress={onChangeSelectedDate}
+           />
+         </Animated.View>
+       )}
+@@ -471,6 +468,7 @@ const styles = StyleSheet.create({
+   calendarHeader: {
+     color: "black",
+     overflow: "hidden",
++    textTransform: 'capitalize'
+   },
+   calendarHeaderWrapper: {
+     backgroundColor: "#ffffff",
+diff --git a/node_modules/react-native-styled-datepicker/src/styles b/node_modules/react-native-styled-datepicker/src/styles
+new file mode 100644
+index 0000000..e69de29

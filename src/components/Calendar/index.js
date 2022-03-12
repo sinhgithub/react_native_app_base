@@ -1,101 +1,28 @@
-import React, { memo } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { memo, useCallback } from 'react';
+import { View } from 'react-native';
 import styles from './styles';
-import { Calendar, CalendarList, Agenda, LocaleConfig } from 'react-native-calendars';
-import { Icon } from 'components/';
 import moment from 'moment';
+import DatePicker from 'react-native-styled-datepicker';
 
-LocaleConfig.locales['vn'] = {
-  monthNames: [
-    'Janvier',
-    'Février',
-    'Mars',
-    'Avril',
-    'Mai',
-    'Juin',
-    'Juillet',
-    'Août',
-    'Septembre',
-    'Octobre',
-    'Novembre',
-    'Décembre'
-  ],
-  monthNamesShort: [
-    'Janv.',
-    'Févr.',
-    'Mars',
-    'Avril',
-    'Mai',
-    'Juin',
-    'Juil.',
-    'Août',
-    'Sept.',
-    'Oct.',
-    'Nov.',
-    'Déc.'
-  ],
-  dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-  dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-  today: "Aujourd'hui"
-};
-LocaleConfig.defaultLocale = 'vn';
-
+const minDate = moment(new Date('2010-01-01')).format('YYYY-MM-DD');
+const now = moment(new Date()).format('YYYY-MM-DD');
 const CustomCalendar = props => {
+  const onChangeDate = useCallback(date => console.log(date), []);
   return (
     <View style={styles.container}>
-      <Calendar
-        // Initially visible month. Default = now
-        current={moment(new Date()).format('YYYY-MM-DD')}
-        // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-        // minDate={'2012-05-10'}
-        // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-        // maxDate={'2012-05-30'}
-        // Handler which gets executed on day press. Default = undefined
-        onDayPress={day => {
-          console.log('selected day', day);
-        }}
-        // Handler which gets executed on day long press. Default = undefined
-        onDayLongPress={day => {
-          console.log('selected day', day);
-        }}
-        // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
-        monthFormat={'yyyy MM'}
-        // Handler which gets executed when visible month changes in calendar. Default = undefined
-        onMonthChange={month => {
-          console.log('month changed', month);
-        }}
-        disableMonthChange={true}
-        // If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday
-        firstDay={1}
-        // Hide day names. Default = false
-        hideDayNames={false}
-        // Show week numbers to the left. Default = false
-        showWeekNumbers={true}
-        // Handler which gets executed when press arrow icon left. It receive a callback can go back month
-        onPressArrowLeft={subtractMonth => subtractMonth()}
-        // Handler which gets executed when press arrow icon right. It receive a callback can go next month
-        onPressArrowRight={addMonth => addMonth()}
-        // Disable left arrow. Default = false
-        disableArrowLeft={false}
-        // Disable right arrow. Default = false
-        disableArrowRight={false}
-        // Disable all touch events for disabled days. can be override with disableTouchEvent in markedDates
-        disableAllTouchEventsForDisabledDays={false}
-        // Replace default month and year title with custom one. the function receive a date as parameter
-        renderHeader={date => {
-          return (
-            <View>
-              <Text>Heder calendar</Text>
-            </View>
-          );
-        }}
-        // Enable the option to swipe between months. Default = false
-        enableSwipeMonths={true}
+      <DatePicker
+        isCustomDateContainer
+        minDate={minDate}
+        yearTextStyles={styles.yearTextStyles}
+        arrowStyles={styles.arrowStyles}
+        initialViewDate={now}
+        activeDateTextStyle={styles.activeDateTextStyle}
+        currentDateTextStyle={styles.currentDateTextStyle}
+        dateTextStyle={styles.dateTextStyle}
+        onChange={onChangeDate}
       />
     </View>
   );
 };
-
-const style = StyleSheet.create({});
 
 export default memo(CustomCalendar);
