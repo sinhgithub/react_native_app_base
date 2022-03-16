@@ -8,10 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* react_native_app_baseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* react_native_app_baseTests.m */; };
+		116E3B4F7C66471E8CE24FC9 /* SVN-Gilroy Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9530E5FDFA694AC685F0DA58 /* SVN-Gilroy Italic.otf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		264009D182ED476995BB019C /* SVN-Gilroy Black Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 60C325ACE4E04E6F894EE114 /* SVN-Gilroy Black Italic.otf */; };
+		2C2960F44D354526A602658B /* SVN-Gilroy Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0825E78946664BCC95905AA0 /* SVN-Gilroy Regular.otf */; };
+		2ED69218187A473B8C9D19FC /* SVN-Gilroy SemiBold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F176E26AA30C405AAD14C7F6 /* SVN-Gilroy SemiBold Italic.otf */; };
+		31A935C86B9E4D5D9733344C /* SVN-Gilroy Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6926BFBCEE6E4BCBAAAADBA8 /* SVN-Gilroy Light.otf */; };
+		55FC262BBEA141FFB5E758AA /* SVN-Gilroy Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA7205D166B6477F83EE22C8 /* SVN-Gilroy Bold.otf */; };
+		65F49E6304C14509A2DF6033 /* SVN-Gilroy Xlight Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 46794E850F8D415C9F3E5F04 /* SVN-Gilroy Xlight Italic.otf */; };
+		6F01904D6C1146ACB2EB2E14 /* SVN-Gilroy Xlight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704AA5EA04CBAB665367F /* SVN-Gilroy Xlight.otf */; };
+		794C4CB4E2E041A98474F822 /* SVN-Gilroy XBold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C3A96F9E949199EB045E8 /* SVN-Gilroy XBold Italic.otf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		87F92194F4884FA1AD8EFE99 /* SVN-Gilroy Light Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2B78E580D119423AA489F7C6 /* SVN-Gilroy Light Italic.otf */; };
+		8CF0ABD47D8294FB016F2DFE /* libPods-react_native_app_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07865035A2EEB03EF199E6D2 /* libPods-react_native_app_base.a */; };
+		90B140A134A844EFAE8322F9 /* SVN-Gilroy Heavy Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 14260D6E0B0D438E94D6658B /* SVN-Gilroy Heavy Italic.otf */; };
+		92EA2CBE72B64F159F8D9EAA /* SVN-Gilroy Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = F01885CFF39F4C27833E224E /* SVN-Gilroy Thin.otf */; };
+		96960FF4F70D42439B5B22F9 /* SVN-Gilroy Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9BAF5EDD69D04FDA89D58895 /* SVN-Gilroy Black.otf */; };
+		BD6BAF4094474525832748FB /* SVN-Gilroy Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CC3F0D76D93247DA8281A60C /* SVN-Gilroy Medium.otf */; };
+		D191044DB8AEBC275754BF7D /* libPods-react_native_app_base-react_native_app_baseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1964CC140A2FB2F8E1944172 /* libPods-react_native_app_base-react_native_app_baseTests.a */; };
+		DF018B2CB5AF45ED861EB6F8 /* SVN-Gilroy SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B83914E6801F4525831B1A53 /* SVN-Gilroy SemiBold.otf */; };
+		E7C30CCCC06248A09EA0BA41 /* SVN-Gilroy XBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C7724476724D40BC8BE33879 /* SVN-Gilroy XBold.otf */; };
+		E85D4034817D4E069FF8A1D8 /* SVN-Gilroy Bold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A69E1FB5B1104066B564DBA4 /* SVN-Gilroy Bold Italic.otf */; };
+		EA376DD74B8841478B7192CE /* SVN-Gilroy Thin Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = C93F0BD165E141608904E3E3 /* SVN-Gilroy Thin Italic.otf */; };
+		ECF0403815F148EB9BFB771E /* SVN-Gilroy Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = A74B192AE6BA47EF89B29036 /* SVN-Gilroy Heavy.otf */; };
+		FB0E4FA6A6B0400E9A7705B0 /* SVN-Gilroy Medium Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFBE42DE1047D9861B83E0 /* SVN-Gilroy Medium Italic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,14 +50,70 @@
 		00E356EE1AD99517003FC87E /* react_native_app_baseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = react_native_app_baseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* react_native_app_baseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = react_native_app_baseTests.m; sourceTree = "<group>"; };
+		0196AAAF35BC3AE2B0340D1F /* Pods-react_native_app_base-react_native_app_baseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_app_base-react_native_app_baseTests.release.xcconfig"; path = "Target Support Files/Pods-react_native_app_base-react_native_app_baseTests/Pods-react_native_app_base-react_native_app_baseTests.release.xcconfig"; sourceTree = "<group>"; };
+		02B0842703DC47D7B2AFF851 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = ../src/assets/fonts/AntDesign.ttf; sourceTree = "<group>"; };
+		07865035A2EEB03EF199E6D2 /* libPods-react_native_app_base.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-react_native_app_base.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0825E78946664BCC95905AA0 /* SVN-Gilroy Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Regular.otf"; path = "../src/assets/fonts/SVN-Gilroy Regular.otf"; sourceTree = "<group>"; };
+		099FB6A2F7A74A1687F6FDE6 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = ../src/assets/fonts/Feather.ttf; sourceTree = "<group>"; };
+		0A7B8424DEC309C228609B75 /* Pods-react_native_app_base.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_app_base.release.xcconfig"; path = "Target Support Files/Pods-react_native_app_base/Pods-react_native_app_base.release.xcconfig"; sourceTree = "<group>"; };
+		0B915764764044DC9E881D00 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = ../src/assets/fonts/Foundation.ttf; sourceTree = "<group>"; };
+		0DABE45E58A5498CA0BA4C83 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = ../src/assets/fonts/FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		0E6EE4E948A648089814C131 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* react_native_app_base.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = react_native_app_base.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = react_native_app_base/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = react_native_app_base/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = react_native_app_base/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = react_native_app_base/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = react_native_app_base/main.m; sourceTree = "<group>"; };
+		14260D6E0B0D438E94D6658B /* SVN-Gilroy Heavy Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Heavy Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Heavy Italic.otf"; sourceTree = "<group>"; };
+		1741AC9878EC42C58BF190B7 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = ../src/assets/fonts/FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		1964CC140A2FB2F8E1944172 /* libPods-react_native_app_base-react_native_app_baseTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-react_native_app_base-react_native_app_baseTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E9C3A96F9E949199EB045E8 /* SVN-Gilroy XBold Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy XBold Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy XBold Italic.otf"; sourceTree = "<group>"; };
+		283C6A380495B934C78F194B /* Pods-react_native_app_base-react_native_app_baseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_app_base-react_native_app_baseTests.debug.xcconfig"; path = "Target Support Files/Pods-react_native_app_base-react_native_app_baseTests/Pods-react_native_app_base-react_native_app_baseTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2B78E580D119423AA489F7C6 /* SVN-Gilroy Light Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Light Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Light Italic.otf"; sourceTree = "<group>"; };
+		2C9704AA5EA04CBAB665367F /* SVN-Gilroy Xlight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Xlight.otf"; path = "../src/assets/fonts/SVN-Gilroy Xlight.otf"; sourceTree = "<group>"; };
+		34992FEC390C46A291D9479E /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		39FF7938B4D94A839A7652A2 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		3D4418E91730461E9F6C2BD9 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = ../src/assets/fonts/Octicons.ttf; sourceTree = "<group>"; };
+		3D56C503B40845D2BAF0FF6A /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		3FFE61D0F4AD4E749BEAF1B3 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = ../src/assets/fonts/EvilIcons.ttf; sourceTree = "<group>"; };
+		448E756B81E4482E90B5BCDB /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		44C7E8105A3D4D7FB9EEC3AC /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = ../src/assets/fonts/Ionicons.ttf; sourceTree = "<group>"; };
+		46794E850F8D415C9F3E5F04 /* SVN-Gilroy Xlight Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Xlight Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Xlight Italic.otf"; sourceTree = "<group>"; };
+		48B2B6CA2EEC43289A14D131 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		4AB164E4C77154BFCADFF60B /* Pods-react_native_app_base.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-react_native_app_base.debug.xcconfig"; path = "Target Support Files/Pods-react_native_app_base/Pods-react_native_app_base.debug.xcconfig"; sourceTree = "<group>"; };
+		4CD842DE2F834A41A1F286BA /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		580B8FE569BA4F14B92CB3C1 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		58D2B231C4F3412180E003C5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		5AEB6F509B5F4D71A6664866 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../src/assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
+		60C325ACE4E04E6F894EE114 /* SVN-Gilroy Black Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Black Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Black Italic.otf"; sourceTree = "<group>"; };
+		62DF2101E3D14DE597198E76 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		6926BFBCEE6E4BCBAAAADBA8 /* SVN-Gilroy Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Light.otf"; path = "../src/assets/fonts/SVN-Gilroy Light.otf"; sourceTree = "<group>"; };
+		6A88825F52F843049B604AE0 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = ../src/assets/fonts/MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		6FD6E8E6AC384FFEA6E9AB51 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = ../src/assets/fonts/MaterialIcons.ttf; sourceTree = "<group>"; };
+		7ACFBE42DE1047D9861B83E0 /* SVN-Gilroy Medium Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Medium Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Medium Italic.otf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = react_native_app_base/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8355CA87C2ED4E33B6DC4020 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		85C8B16885B74B4CB0ED5974 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		9530E5FDFA694AC685F0DA58 /* SVN-Gilroy Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Italic.otf"; sourceTree = "<group>"; };
+		9BAF5EDD69D04FDA89D58895 /* SVN-Gilroy Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Black.otf"; path = "../src/assets/fonts/SVN-Gilroy Black.otf"; sourceTree = "<group>"; };
+		A5B0DD550B2B4271ADBE8467 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		A69E1FB5B1104066B564DBA4 /* SVN-Gilroy Bold Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Bold Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Bold Italic.otf"; sourceTree = "<group>"; };
+		A74B192AE6BA47EF89B29036 /* SVN-Gilroy Heavy.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Heavy.otf"; path = "../src/assets/fonts/SVN-Gilroy Heavy.otf"; sourceTree = "<group>"; };
+		A96313CA0E58481A81D07767 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		AD7940C31B0A43EB8855A21F /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = ../src/assets/fonts/Fontisto.ttf; sourceTree = "<group>"; };
+		B22D21452A5349AE91402CFF /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		B83914E6801F4525831B1A53 /* SVN-Gilroy SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy SemiBold.otf"; path = "../src/assets/fonts/SVN-Gilroy SemiBold.otf"; sourceTree = "<group>"; };
+		C01B4A30DC3B453096A8A8D7 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		C7724476724D40BC8BE33879 /* SVN-Gilroy XBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy XBold.otf"; path = "../src/assets/fonts/SVN-Gilroy XBold.otf"; sourceTree = "<group>"; };
+		C93F0BD165E141608904E3E3 /* SVN-Gilroy Thin Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Thin Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Thin Italic.otf"; sourceTree = "<group>"; };
+		CC3F0D76D93247DA8281A60C /* SVN-Gilroy Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Medium.otf"; path = "../src/assets/fonts/SVN-Gilroy Medium.otf"; sourceTree = "<group>"; };
+		D97259E1449943E1AC405A15 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = ../src/assets/fonts/Entypo.ttf; sourceTree = "<group>"; };
+		EA7205D166B6477F83EE22C8 /* SVN-Gilroy Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Bold.otf"; path = "../src/assets/fonts/SVN-Gilroy Bold.otf"; sourceTree = "<group>"; };
+		EB927B11E9B9448DAF64DA80 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = ../src/assets/fonts/FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		F01885CFF39F4C27833E224E /* SVN-Gilroy Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Thin.otf"; path = "../src/assets/fonts/SVN-Gilroy Thin.otf"; sourceTree = "<group>"; };
+		F176E26AA30C405AAD14C7F6 /* SVN-Gilroy SemiBold Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy SemiBold Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy SemiBold Italic.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D191044DB8AEBC275754BF7D /* libPods-react_native_app_base-react_native_app_baseTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF0ABD47D8294FB016F2DFE /* libPods-react_native_app_base.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,8 +170,67 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				07865035A2EEB03EF199E6D2 /* libPods-react_native_app_base.a */,
+				1964CC140A2FB2F8E1944172 /* libPods-react_native_app_base-react_native_app_baseTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2E768474914A4DF8B4950535 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				60C325ACE4E04E6F894EE114 /* SVN-Gilroy Black Italic.otf */,
+				9BAF5EDD69D04FDA89D58895 /* SVN-Gilroy Black.otf */,
+				A69E1FB5B1104066B564DBA4 /* SVN-Gilroy Bold Italic.otf */,
+				EA7205D166B6477F83EE22C8 /* SVN-Gilroy Bold.otf */,
+				14260D6E0B0D438E94D6658B /* SVN-Gilroy Heavy Italic.otf */,
+				A74B192AE6BA47EF89B29036 /* SVN-Gilroy Heavy.otf */,
+				9530E5FDFA694AC685F0DA58 /* SVN-Gilroy Italic.otf */,
+				2B78E580D119423AA489F7C6 /* SVN-Gilroy Light Italic.otf */,
+				6926BFBCEE6E4BCBAAAADBA8 /* SVN-Gilroy Light.otf */,
+				7ACFBE42DE1047D9861B83E0 /* SVN-Gilroy Medium Italic.otf */,
+				CC3F0D76D93247DA8281A60C /* SVN-Gilroy Medium.otf */,
+				0825E78946664BCC95905AA0 /* SVN-Gilroy Regular.otf */,
+				F176E26AA30C405AAD14C7F6 /* SVN-Gilroy SemiBold Italic.otf */,
+				B83914E6801F4525831B1A53 /* SVN-Gilroy SemiBold.otf */,
+				C93F0BD165E141608904E3E3 /* SVN-Gilroy Thin Italic.otf */,
+				F01885CFF39F4C27833E224E /* SVN-Gilroy Thin.otf */,
+				1E9C3A96F9E949199EB045E8 /* SVN-Gilroy XBold Italic.otf */,
+				C7724476724D40BC8BE33879 /* SVN-Gilroy XBold.otf */,
+				46794E850F8D415C9F3E5F04 /* SVN-Gilroy Xlight Italic.otf */,
+				2C9704AA5EA04CBAB665367F /* SVN-Gilroy Xlight.otf */,
+				39FF7938B4D94A839A7652A2 /* AntDesign.ttf */,
+				B22D21452A5349AE91402CFF /* Entypo.ttf */,
+				8355CA87C2ED4E33B6DC4020 /* EvilIcons.ttf */,
+				580B8FE569BA4F14B92CB3C1 /* Feather.ttf */,
+				34992FEC390C46A291D9479E /* FontAwesome.ttf */,
+				3D56C503B40845D2BAF0FF6A /* FontAwesome5_Brands.ttf */,
+				85C8B16885B74B4CB0ED5974 /* FontAwesome5_Regular.ttf */,
+				48B2B6CA2EEC43289A14D131 /* FontAwesome5_Solid.ttf */,
+				448E756B81E4482E90B5BCDB /* Fontisto.ttf */,
+				C01B4A30DC3B453096A8A8D7 /* Foundation.ttf */,
+				A96313CA0E58481A81D07767 /* Ionicons.ttf */,
+				4CD842DE2F834A41A1F286BA /* MaterialCommunityIcons.ttf */,
+				62DF2101E3D14DE597198E76 /* MaterialIcons.ttf */,
+				58D2B231C4F3412180E003C5 /* Octicons.ttf */,
+				A5B0DD550B2B4271ADBE8467 /* SimpleLineIcons.ttf */,
+				0E6EE4E948A648089814C131 /* Zocial.ttf */,
+				02B0842703DC47D7B2AFF851 /* AntDesign.ttf */,
+				D97259E1449943E1AC405A15 /* Entypo.ttf */,
+				3FFE61D0F4AD4E749BEAF1B3 /* EvilIcons.ttf */,
+				099FB6A2F7A74A1687F6FDE6 /* Feather.ttf */,
+				5AEB6F509B5F4D71A6664866 /* FontAwesome.ttf */,
+				0DABE45E58A5498CA0BA4C83 /* FontAwesome5_Brands.ttf */,
+				EB927B11E9B9448DAF64DA80 /* FontAwesome5_Regular.ttf */,
+				1741AC9878EC42C58BF190B7 /* FontAwesome5_Solid.ttf */,
+				AD7940C31B0A43EB8855A21F /* Fontisto.ttf */,
+				0B915764764044DC9E881D00 /* Foundation.ttf */,
+				44C7E8105A3D4D7FB9EEC3AC /* Ionicons.ttf */,
+				6A88825F52F843049B604AE0 /* MaterialCommunityIcons.ttf */,
+				6FD6E8E6AC384FFEA6E9AB51 /* MaterialIcons.ttf */,
+				3D4418E91730461E9F6C2BD9 /* Octicons.ttf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -109,6 +248,8 @@
 				00E356EF1AD99517003FC87E /* react_native_app_baseTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				D29D741F588F02D4D2674F6F /* Pods */,
+				2E768474914A4DF8B4950535 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -124,6 +265,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D29D741F588F02D4D2674F6F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4AB164E4C77154BFCADFF60B /* Pods-react_native_app_base.debug.xcconfig */,
+				0A7B8424DEC309C228609B75 /* Pods-react_native_app_base.release.xcconfig */,
+				283C6A380495B934C78F194B /* Pods-react_native_app_base-react_native_app_baseTests.debug.xcconfig */,
+				0196AAAF35BC3AE2B0340D1F /* Pods-react_native_app_base-react_native_app_baseTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -131,9 +283,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "react_native_app_baseTests" */;
 			buildPhases = (
+				F02ABBFCC8436A39EE50EF56 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				BD2DB13A4F3EEE31FC455525 /* [CP] Embed Pods Frameworks */,
+				8E737C2FDD2441B2FE550DA7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -149,11 +304,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "react_native_app_base" */;
 			buildPhases = (
+				1E5BCDDEB59E81076ABE7332 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				A7DBCAD71871ED08FE5E5B28 /* [CP] Embed Pods Frameworks */,
+				FC5D816917D4EF6D179B8B25 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,6 +372,26 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				264009D182ED476995BB019C /* SVN-Gilroy Black Italic.otf in Resources */,
+				96960FF4F70D42439B5B22F9 /* SVN-Gilroy Black.otf in Resources */,
+				E85D4034817D4E069FF8A1D8 /* SVN-Gilroy Bold Italic.otf in Resources */,
+				55FC262BBEA141FFB5E758AA /* SVN-Gilroy Bold.otf in Resources */,
+				90B140A134A844EFAE8322F9 /* SVN-Gilroy Heavy Italic.otf in Resources */,
+				ECF0403815F148EB9BFB771E /* SVN-Gilroy Heavy.otf in Resources */,
+				116E3B4F7C66471E8CE24FC9 /* SVN-Gilroy Italic.otf in Resources */,
+				87F92194F4884FA1AD8EFE99 /* SVN-Gilroy Light Italic.otf in Resources */,
+				31A935C86B9E4D5D9733344C /* SVN-Gilroy Light.otf in Resources */,
+				FB0E4FA6A6B0400E9A7705B0 /* SVN-Gilroy Medium Italic.otf in Resources */,
+				BD6BAF4094474525832748FB /* SVN-Gilroy Medium.otf in Resources */,
+				2C2960F44D354526A602658B /* SVN-Gilroy Regular.otf in Resources */,
+				2ED69218187A473B8C9D19FC /* SVN-Gilroy SemiBold Italic.otf in Resources */,
+				DF018B2CB5AF45ED861EB6F8 /* SVN-Gilroy SemiBold.otf in Resources */,
+				EA376DD74B8841478B7192CE /* SVN-Gilroy Thin Italic.otf in Resources */,
+				92EA2CBE72B64F159F8D9EAA /* SVN-Gilroy Thin.otf in Resources */,
+				794C4CB4E2E041A98474F822 /* SVN-Gilroy XBold Italic.otf in Resources */,
+				E7C30CCCC06248A09EA0BA41 /* SVN-Gilroy XBold.otf in Resources */,
+				65F49E6304C14509A2DF6033 /* SVN-Gilroy Xlight Italic.otf in Resources */,
+				6F01904D6C1146ACB2EB2E14 /* SVN-Gilroy Xlight.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +411,118 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
+		1E5BCDDEB59E81076ABE7332 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-react_native_app_base-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E737C2FDD2441B2FE550DA7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base-react_native_app_baseTests/Pods-react_native_app_base-react_native_app_baseTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base-react_native_app_baseTests/Pods-react_native_app_base-react_native_app_baseTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base-react_native_app_baseTests/Pods-react_native_app_base-react_native_app_baseTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A7DBCAD71871ED08FE5E5B28 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base/Pods-react_native_app_base-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base/Pods-react_native_app_base-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base/Pods-react_native_app_base-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD2DB13A4F3EEE31FC455525 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base-react_native_app_baseTests/Pods-react_native_app_base-react_native_app_baseTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base-react_native_app_baseTests/Pods-react_native_app_base-react_native_app_baseTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base-react_native_app_baseTests/Pods-react_native_app_base-react_native_app_baseTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F02ABBFCC8436A39EE50EF56 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-react_native_app_base-react_native_app_baseTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC5D816917D4EF6D179B8B25 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base/Pods-react_native_app_base-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base/Pods-react_native_app_base-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-react_native_app_base/Pods-react_native_app_base-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -286,6 +576,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 283C6A380495B934C78F194B /* Pods-react_native_app_base-react_native_app_baseTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -312,6 +603,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0196AAAF35BC3AE2B0340D1F /* Pods-react_native_app_base-react_native_app_baseTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -335,6 +627,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AB164E4C77154BFCADFF60B /* Pods-react_native_app_base.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -360,6 +653,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A7B8424DEC309C228609B75 /* Pods-react_native_app_base.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -414,6 +708,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -478,6 +773,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

@@ -21,7 +21,8 @@ const auth = (state = initialState, action) => {
     case AUTH.LOGIN.HANDLER: {
       return {
         ...state,
-        loading: true
+        loading: true,
+        isLogin: false
       };
     }
 
@@ -36,7 +37,8 @@ const auth = (state = initialState, action) => {
     case AUTH.LOGIN.FAILURE: {
       return {
         ...state,
-        loading: false
+        loading: false,
+        isLogin: false
       };
     }
 

@@ -1,12 +1,12 @@
 /* eslint-disable comma-dangle */
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, ImageBackground, TextInput, ScrollView } from 'react-native';
+import { View, ImageBackground, TextInput, ScrollView, Alert} from 'react-native';
 import styles from './styles';
 import { loginFormConfigs } from 'configs/loginFormConfigs';
 import useKeyboard from 'src/hooks/useKeyboard';
 import Button from 'components/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginHandle } from 'actions/auth';
+import { loginFailure, loginHandle } from 'actions/auth';
 import { translate } from 'src/i18n';
 import { useNavigation } from '@react-navigation/native';
 import SCREENS_NAME from 'constants/screens';
@@ -26,10 +26,31 @@ const Login = () => {
     setValue(prev => ({ ...prev, [id]: v }));
   }, []);
 
+  const createThreeButtonAlert = (data,url) =>{
+    Alert.alert(
+      data,
+      url,
+      [
+        {
+          text: "Ask me later",
+          onPress: () => dispatch(loginFailure())
+        },
+        {
+          text: "Cancel",
+          onPress: () => dispatch(loginFailure()),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => dispatch(loginFailure())}
+      ]
+    );
+  }
+    
+
   const onSubmit = useCallback(() => {
     const params = {
       email: value?.user?.trim(),
-      password: value?.password?.trim()
+      password: value?.password?.trim(),
+      callback: createThreeButtonAlert
     };
     if (value?.user && value?.password) {
       dispatch(loginHandle(params));
