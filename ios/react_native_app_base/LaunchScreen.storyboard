@@ -17,26 +17,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg2.png" translatesAutoresizingMaskIntoConstraints="NO" id="AsN-0J-qHB">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background.png" translatesAutoresizingMaskIntoConstraints="NO" id="Sjw-g5-Lkb">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kisspng-logo-phoenix-art-5afffc96998f80.692522331526725782629.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="1Wh-UA-Rz5">
-                                <rect key="frame" x="67.5" y="269.5" width="240" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="e8V-9E-UAW">
+                                <rect key="frame" x="62.5" y="223.5" width="250" height="220"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="VjX-HN-uM8"/>
-                                    <constraint firstAttribute="width" constant="240" id="vDz-9t-zkY"/>
+                                    <constraint firstAttribute="width" constant="250" id="9N6-2M-FXY"/>
+                                    <constraint firstAttribute="height" constant="220" id="xRE-dm-7vw"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="AsN-0J-qHB" firstAttribute="trailing" secondItem="Bcu-3y-fUS" secondAttribute="trailing" id="4Iw-Pk-gEX"/>
-                            <constraint firstItem="AsN-0J-qHB" firstAttribute="bottom" secondItem="Ze5-6b-2t3" secondAttribute="bottom" id="5pt-F9-mxZ"/>
-                            <constraint firstItem="1Wh-UA-Rz5" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="6nw-zW-OhN"/>
-                            <constraint firstItem="AsN-0J-qHB" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Gc9-qF-2Pu"/>
-                            <constraint firstItem="AsN-0J-qHB" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="X6s-Fl-shx"/>
-                            <constraint firstItem="1Wh-UA-Rz5" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="sQH-Ec-6wF"/>
+                            <constraint firstItem="Sjw-g5-Lkb" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" id="B11-1h-g6V"/>
+                            <constraint firstItem="Sjw-g5-Lkb" firstAttribute="bottom" secondItem="Bcu-3y-fUS" secondAttribute="bottom" id="IDx-hf-UWC"/>
+                            <constraint firstItem="Sjw-g5-Lkb" firstAttribute="top" secondItem="Bcu-3y-fUS" secondAttribute="top" id="KQF-pa-yDl"/>
+                            <constraint firstItem="e8V-9E-UAW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="O0d-4k-Zgi"/>
+                            <constraint firstItem="Sjw-g5-Lkb" firstAttribute="trailing" secondItem="Bcu-3y-fUS" secondAttribute="trailing" id="RG0-6M-Xcj"/>
+                            <constraint firstItem="e8V-9E-UAW" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Yby-sO-hWj"/>
+                            <constraint firstItem="e8V-9E-UAW" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="gDE-C2-LEs"/>
+                            <constraint firstItem="e8V-9E-UAW" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="hr0-hB-bgY"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -46,8 +48,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg2.png" width="840" height="859"/>
-        <image name="kisspng-logo-phoenix-art-5afffc96998f80.692522331526725782629.jpg" width="900" height="480"/>
+        <image name="background.png" width="375" height="812"/>
+        <image name="splash_icon.png" width="600" height="529"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
