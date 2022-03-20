@@ -17,6 +17,8 @@
 		2ED69218187A473B8C9D19FC /* SVN-Gilroy SemiBold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F176E26AA30C405AAD14C7F6 /* SVN-Gilroy SemiBold Italic.otf */; };
 		31A935C86B9E4D5D9733344C /* SVN-Gilroy Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6926BFBCEE6E4BCBAAAADBA8 /* SVN-Gilroy Light.otf */; };
 		55FC262BBEA141FFB5E758AA /* SVN-Gilroy Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA7205D166B6477F83EE22C8 /* SVN-Gilroy Bold.otf */; };
+		5D321DBA27E5B2C90097C7CC /* bg2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5D321DB927E5B2C90097C7CC /* bg2.png */; };
+		5D321DBC27E5B34C0097C7CC /* kisspng-logo-phoenix-art-5afffc96998f80.692522331526725782629.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5D321DBB27E5B34B0097C7CC /* kisspng-logo-phoenix-art-5afffc96998f80.692522331526725782629.jpg */; };
 		65F49E6304C14509A2DF6033 /* SVN-Gilroy Xlight Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 46794E850F8D415C9F3E5F04 /* SVN-Gilroy Xlight Italic.otf */; };
 		6F01904D6C1146ACB2EB2E14 /* SVN-Gilroy Xlight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704AA5EA04CBAB665367F /* SVN-Gilroy Xlight.otf */; };
 		794C4CB4E2E041A98474F822 /* SVN-Gilroy XBold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C3A96F9E949199EB045E8 /* SVN-Gilroy XBold Italic.otf */; };
@@ -86,6 +88,8 @@
 		580B8FE569BA4F14B92CB3C1 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		58D2B231C4F3412180E003C5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		5AEB6F509B5F4D71A6664866 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../src/assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
+		5D321DB927E5B2C90097C7CC /* bg2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg2.png; sourceTree = "<group>"; };
+		5D321DBB27E5B34B0097C7CC /* kisspng-logo-phoenix-art-5afffc96998f80.692522331526725782629.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "kisspng-logo-phoenix-art-5afffc96998f80.692522331526725782629.jpg"; sourceTree = "<group>"; };
 		60C325ACE4E04E6F894EE114 /* SVN-Gilroy Black Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Black Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Black Italic.otf"; sourceTree = "<group>"; };
 		62DF2101E3D14DE597198E76 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		6926BFBCEE6E4BCBAAAADBA8 /* SVN-Gilroy Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Light.otf"; path = "../src/assets/fonts/SVN-Gilroy Light.otf"; sourceTree = "<group>"; };
@@ -156,9 +160,11 @@
 		13B07FAE1A68108700A75B9A /* react_native_app_base */ = {
 			isa = PBXGroup;
 			children = (
+				5D321DBB27E5B34B0097C7CC /* kisspng-logo-phoenix-art-5afffc96998f80.692522331526725782629.jpg */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				5D321DB927E5B2C90097C7CC /* bg2.png */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -370,6 +376,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D321DBA27E5B2C90097C7CC /* bg2.png in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				264009D182ED476995BB019C /* SVN-Gilroy Black Italic.otf in Resources */,
@@ -389,6 +396,7 @@
 				EA376DD74B8841478B7192CE /* SVN-Gilroy Thin Italic.otf in Resources */,
 				92EA2CBE72B64F159F8D9EAA /* SVN-Gilroy Thin.otf in Resources */,
 				794C4CB4E2E041A98474F822 /* SVN-Gilroy XBold Italic.otf in Resources */,
+				5D321DBC27E5B34C0097C7CC /* kisspng-logo-phoenix-art-5afffc96998f80.692522331526725782629.jpg in Resources */,
 				E7C30CCCC06248A09EA0BA41 /* SVN-Gilroy XBold.otf in Resources */,
 				65F49E6304C14509A2DF6033 /* SVN-Gilroy Xlight Italic.otf in Resources */,
 				6F01904D6C1146ACB2EB2E14 /* SVN-Gilroy Xlight.otf in Resources */,
@@ -631,7 +639,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = react_native_app_base/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -645,6 +655,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = react_native_app_base;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -657,7 +668,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = react_native_app_base/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -670,6 +683,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = react_native_app_base;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

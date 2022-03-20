@@ -1,32 +1,32 @@
-import {StyleSheet} from 'react-native';
-import {navbarHeight, screenHeight} from 'constants/size';
-import {SPACING} from 'constants/space';
-import {CUSTOM_COLOR, TEXT_COLOR} from 'constants/colors';
+import { Platform, StyleSheet } from 'react-native';
+import { navbarHeight, screenHeight } from 'constants/size';
+import { SPACING } from 'constants/space';
+import { CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 
 const styles = StyleSheet.create({
   flex1: {
-    flex: 1,
+    flex: 1
   },
   container: {
-    flex: 1,
+    flex: 1
   },
   scrollView: {
-    flex: 1,
+    flex: 1
   },
   scrollViewContent: {
     height: screenHeight - navbarHeight,
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-end'
   },
   scrollViewContentItem: {
-    paddingHorizontal: SPACING.XXNormal,
+    paddingHorizontal: SPACING.XXNormal
   },
   formGroup: {
-    marginTop: SPACING.Small,
+    marginTop: SPACING.Small
   },
   icon: {
     position: 'absolute',
     top: SPACING.XNormal,
-    left: SPACING.XXNormal,
+    left: SPACING.XXNormal
   },
   input: {
     borderWidth: 1,
@@ -34,8 +34,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingLeft: SPACING.S_50,
     color: TEXT_COLOR.White,
+    paddingVertical: Platform.OS === 'ios' ? 20 : 0
   },
-  formWrapper: {},
+  formWrapper: {}
 });
 
 export default styles;

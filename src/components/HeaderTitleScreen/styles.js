@@ -1,4 +1,4 @@
-import { FONT_FAMILY } from 'constants/appFonts';
+import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
 import { MAIN_HEADER_HEIGHT, SPACING } from 'constants/size';
 import { Shadow } from 'constants/stylesCSS';
@@ -8,31 +8,33 @@ const styles = StyleSheet.create({
   mainHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: SPACING.XNormal,
+    // paddingHorizontal: SPACING.XNormal,
     height: MAIN_HEADER_HEIGHT,
     backgroundColor: BACKGROUND_COLOR.White,
     ...Shadow
   },
   mainHeaderLeft: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingLeft: SPACING.XXNormal,
+    zIndex: 1
   },
   mainHeaderLeftText: {
     fontFamily: FONT_FAMILY.REGULAR,
-    color: TEXT_COLOR.Black,
-    paddingLeft: SPACING.XNormal
+    color: TEXT_COLOR.Black
   },
-  mainHeaderRight: {
-    flexDirection: 'row',
+  titleArea: {
+    justifyContent: 'center',
     alignItems: 'center',
-    flexGrow: 1,
-    flex: 1,
-    justifyContent: 'flex-end'
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+    zIndex: 0
   },
-  mainHeaderRightText: {
-    fontFamily: FONT_FAMILY.REGULAR,
+  titleText: {
+    fontFamily: FONT_FAMILY.BOLD,
     color: TEXT_COLOR.Black,
-    paddingLeft: SPACING.XLarge
+    fontSize: FONT_SIZE.Heading
   }
 });
 

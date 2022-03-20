@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import styles from './styles';
 
@@ -25,7 +25,7 @@ const Button = props => {
       case 'basic':
         return (
           <>
-            <TouchableOpacity style={styles.button} onPress={submitMethod}>
+            <TouchableOpacity style={[styles.button, containerStyle]} onPress={submitMethod}>
               <Text style={styles.buttonTitle}>{title}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.forgetPassword} onPress={forgetPasswordMethod}>
@@ -75,8 +75,10 @@ const Button = props => {
       case 'modal':
         return (
           <>
-            <TouchableOpacity style={[styles.button, { borderRadius: 8 }]} onPress={submitMethod}>
-              <Text style={styles.buttonTitle}>{title}</Text>
+            <TouchableOpacity
+              style={[styles.button, { borderRadius: 8 }, containerStyle]}
+              onPress={submitMethod}>
+              <Text style={[styles.buttonTitle, titleStyle]}>{title}</Text>
             </TouchableOpacity>
           </>
         );
@@ -96,6 +98,7 @@ const Button = props => {
     buttonConfirmStyle,
     buttonRejectStyle,
     buttonStyle,
+    containerStyle,
     forgetPasswordMethod,
     rejectMethod,
     submitMethod,

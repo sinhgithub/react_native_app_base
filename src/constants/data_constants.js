@@ -123,3 +123,18 @@ export const tabMessageBoxScreen = [
     title: 'Thông báo'
   }
 ];
+
+export const tabDetailProfileScreen = [
+  {
+    id: 'account',
+    title: 'Tài khoản'
+  },
+  {
+    id: 'profile',
+    title: 'Giấy tờ'
+  },
+  {
+    id: 'contact',
+    title: 'Liên hệ'
+  }
+];

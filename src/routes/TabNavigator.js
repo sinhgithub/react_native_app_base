@@ -25,10 +25,12 @@ import MessageBoxScreen from 'screens/message_box';
 import ProfileScreen from 'screens/profile';
 import HomeHeader from 'components/HeaderHello';
 import MainHeader from 'components/MainHeader';
+import HeaderTitleScreen from 'components/HeaderTitleScreen';
 import DetailJob from 'screens/detail_job';
 import { useSelector } from 'react-redux';
 import Login from 'screens/auth/login';
 import FilterJobScreen from 'screens/filter_job';
+import DetailProfile from 'screens/profile/Detail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -281,7 +283,7 @@ export const AppStackScreen = () => {
   const { isLogin } = useSelector(state => state.auth);
   return (
     <Stack.Navigator
-      initialRouteName={isLogin ? SCREENS_NAME.MAIN_SCREEN : SCREENS_NAME.AUTH_STACK}
+      initialRouteName={isLogin ? SCREENS_NAME.MAIN_SCREEN : SCREENS_NAME.LOGIN_SCREEN}
       screenOptions={{
         header: () => <MainHeader />,
         cardOverlayEnabled: true,
@@ -312,6 +314,14 @@ export const AppStackScreen = () => {
         name={SCREENS_NAME.FILTER_JOB}
         component={FilterJobScreen}
         options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.DETAIL_PROFILE_SCREEN}
+        component={DetailProfile}
+        options={{
+          headerShown: true,
+          header: () => <HeaderTitleScreen title={'ho so chi tiet'} />
+        }}
       />
     </Stack.Navigator>
   );

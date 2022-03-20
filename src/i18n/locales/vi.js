@@ -45,7 +45,25 @@ export default {
     detail: 'Chi tiết',
     condition: 'Điều kiện',
     time: 'Thời gian',
-    looking_more: 'Tìm hiểu thêm'
+    looking_more: 'Tìm hiểu thêm',
+    find_job_now: 'Tìm việc ngay',
+    appellation: 'Danh hiệu',
+    see_all: 'Xem tất cả',
+    appellation_desc:
+      'Bạn chưa có danh hiệu nào. Hoàn tất hồ sơ để nhận ngay danh hiệu đầu tiên của bạn',
+    complete_profile: 'Hoàn tất hồ sơ',
+    experience_on_ttv: 'Kinh nghiệm trên TTV',
+    experience_on_ttv_desc: 'Bạn chưa làm công việc nào trên TTV',
+    diff_experience: 'Kinh nghiệm khác',
+    diff_experience_desc:
+      'Điền thông tin về các công việc bạn đã từng làm trước đây để làm đẹp hồ sơ và tăng khả năng được duyệt khi nhận việc',
+    add_experience: 'Thêm kinh nghiệm',
+    education_desc: 'Bạn chưa có thông tin học vấn của mình trên TTV',
+    add_education: 'Thêm học vấn',
+    skill: 'Kỹ năng',
+    skill_desc: 'Bạn đươc nhập tối đa 10 kỹ năng',
+    add_skill: 'Thêm kỹ năng',
+    ranking_board: 'Bảng xếp hạng'
   },
   tab_name: {
     home: 'Trang chủ',

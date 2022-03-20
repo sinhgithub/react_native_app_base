@@ -1,6 +1,6 @@
 /* eslint-disable comma-dangle */
 import React, { useCallback, useEffect, useState } from 'react';
-import { View, ImageBackground, TextInput, ScrollView, Alert} from 'react-native';
+import { View, ImageBackground, TextInput, ScrollView, Alert } from 'react-native';
 import styles from './styles';
 import { loginFormConfigs } from 'configs/loginFormConfigs';
 import useKeyboard from 'src/hooks/useKeyboard';
@@ -26,36 +26,37 @@ const Login = () => {
     setValue(prev => ({ ...prev, [id]: v }));
   }, []);
 
-  const createThreeButtonAlert = (data,url) =>{
-    Alert.alert(
-      data,
-      url,
-      [
+  const createThreeButtonAlert = useCallback(
+    (data, url) => {
+      Alert.alert(data, url, [
         {
-          text: "Ask me later",
+          text: 'Ask me later',
           onPress: () => dispatch(loginFailure())
         },
         {
-          text: "Cancel",
+          text: 'Cancel',
           onPress: () => dispatch(loginFailure()),
-          style: "cancel"
+          style: 'cancel'
         },
-        { text: "OK", onPress: () => dispatch(loginFailure())}
-      ]
-    );
-  }
-    
+        { text: 'OK', onPress: () => dispatch(loginFailure()) }
+      ]);
+    },
+    [dispatch]
+  );
 
   const onSubmit = useCallback(() => {
     const params = {
-      email: value?.user?.trim(),
-      password: value?.password?.trim(),
+      // email: value?.user?.trim(),
+      // password: value?.password?.trim(),
+      email: 'hun1g@gmail.com',
+      password: '123456',
       callback: createThreeButtonAlert
     };
-    if (value?.user && value?.password) {
-      dispatch(loginHandle(params));
-    }
-  }, [dispatch, value]);
+    dispatch(loginHandle(params));
+    // if (value?.user && value?.password) {
+    //   dispatch(loginHandle(params));
+    // }
+  }, [createThreeButtonAlert, dispatch, value?.password, value?.user]);
 
   useEffect(() => {
     if (isLogin) {

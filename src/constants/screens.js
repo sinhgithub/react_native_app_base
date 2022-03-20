@@ -9,7 +9,8 @@ const SCREENS_NAME = {
   MESSAGE_BOX_SCREEN: 'MessageBoxScreen',
   PROFILE_SCREEN: 'ProfileScreen',
   DETAIL_JOB_SCREEN: 'DetailJobScreen',
-  FILTER_JOB: 'FilterJobScreen'
+  FILTER_JOB: 'FilterJobScreen',
+  DETAIL_PROFILE_SCREEN: 'DetailProfileScreen'
 };
 
 export default SCREENS_NAME;

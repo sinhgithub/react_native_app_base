@@ -13,7 +13,7 @@ const CovidUpdateButton = () => {
         <Image source={covidSecuriry} style={styles.imgae} resizeMode="stretch" />
         <Text style={styles.titleText}>Covid passport</Text>
       </View>
-      <Icon name="right" fontName="AntDesign" size={20} color={'orange'} />
+      <Icon name="right" fontName="AntDesign" size={20} color={'white'} />
     </TouchableOpacity>
   );
 };
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     width: '80%',
-    backgroundColor: BACKGROUND_COLOR.CatalinaBlue,
+    backgroundColor: BACKGROUND_COLOR.Orange,
     borderRadius: 30,
     paddingHorizontal: SPACING.XNormal,
     paddingVertical: SPACING.XSmall
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.Title3,
     fontFamily: FONT_FAMILY.BOLD,
     paddingLeft: SPACING.XNormal,
-    color: TEXT_COLOR.Orange
+    color: TEXT_COLOR.White
   },
   imgae: {
     width: 50,

@@ -6,7 +6,7 @@ import { AppText } from 'src/components';
 import { useNavigation } from '@react-navigation/native';
 
 const MainHeader = props => {
-  const { mainHeaderRightText, containerStyle } = props;
+  const { containerStyle, title } = props;
   const navigation = useNavigation();
   const onPressGoBack = useCallback(() => {
     navigation.goBack();
@@ -19,13 +19,9 @@ const MainHeader = props => {
           common.go_back
         </AppText>
       </TouchableOpacity>
-      {!!mainHeaderRightText && (
-        <View style={styles.mainHeaderRight}>
-          <Text numberOfLines={1} style={styles.mainHeaderRightText} translate>
-            {mainHeaderRightText}
-          </Text>
-        </View>
-      )}
+      <View style={styles.titleArea}>
+        <Text style={styles.titleText}>{title}</Text>
+      </View>
     </View>
   );
 };
