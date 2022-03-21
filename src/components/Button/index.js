@@ -74,13 +74,11 @@ const Button = props => {
         );
       case 'modal':
         return (
-          <>
-            <TouchableOpacity
-              style={[styles.button, { borderRadius: 8 }, containerStyle]}
-              onPress={submitMethod}>
-              <Text style={[styles.buttonTitle, titleStyle]}>{title}</Text>
-            </TouchableOpacity>
-          </>
+          <TouchableOpacity
+            style={[styles.button, { borderRadius: 8 }, containerStyle]}
+            onPress={submitMethod}>
+            <Text style={[styles.buttonTitle, titleStyle]}>{title}</Text>
+          </TouchableOpacity>
         );
       default:
         return (

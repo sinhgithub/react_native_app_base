@@ -10,86 +10,62 @@ import { getListAllJobHandle } from 'actions/getListJob';
 import { filterJobByList } from 'actions/filter';
 import { useDispatch, useSelector } from 'react-redux';
 import SCREEN_NAME from 'constants/screens';
+import ListAllJob from './components/ListAllJob';
+import ListSavedJob from './components/ListSavedJob';
+import ListJobApply from './components/ListJobApply';
 
 const numberSkeleton = 4;
 let ev;
 
 const FindJobScreen = props => {
   const navigation = useNavigation();
-  const dispatch = useDispatch();
 
-  const { listAllJobFiltered, listAllJob, loading } = useSelector(state => state.listJob);
-  const [searchText, setSearchText] = useState(null);
-  const [isSearchText, setIsSearchText] = useState(false);
+  const [content, setContent] = useState(<ListAllJob />);
 
-  useEffect(() => {
-    dispatch(getListAllJobHandle());
-  }, [dispatch]);
-
-  const onClickCardJob = useCallback(
-    data => {
-      navigation.navigate(SCREEN_NAME.DETAIL_JOB_SCREEN, { cardJob: data });
-    },
-    [navigation]
-  );
-
-  const onChangeTab = useCallback(
-    index => {
-      setSearchText('');
-      Keyboard.dismiss();
-      dispatch(filterJobByList(index));
-    },
-    [dispatch]
-  );
-
-  const handleSetIsSearchText = useCallback(() => {
-    setIsSearchText(true);
-  }, []);
-
-  const onSearchText = useCallback(
-    v => {
-      handleSetIsSearchText(true);
-      setSearchText(v);
-    },
-    [handleSetIsSearchText]
-  );
-
-  useEffect(() => {
-    if (isSearchText) {
-      if (searchText !== '') {
-        ev = setTimeout(() => {
-          dispatch(getListAllJobHandle(searchText));
-        }, 300);
-      } else {
-        dispatch(getListAllJobHandle());
-      }
+  const onChangeTab = useCallback(index => {
+    // setSearchText('');
+    Keyboard.dismiss();
+    switch (index.index) {
+      case 0:
+        setContent(<ListAllJob />);
+        break;
+      case 1:
+        setContent(<ListSavedJob />);
+        break;
+      case 2:
+        setContent(<ListJobApply />);
+        break;
+      default:
+        setContent(<ListAllJob />);
+        break;
     }
-    return () => {
-      if (ev) {
-        clearTimeout(ev);
-        ev = undefined;
-      }
-    };
-  }, [dispatch, isSearchText, searchText]);
-
-  const renderJobs = ({ item }) => {
-    return <CardJob key={item?.id} data={item} onPress={onClickCardJob} />;
-  };
-
-  const renderSkeleton = useCallback(() => {
-    return Array(numberSkeleton)
-      .fill('')
-      .map((item, index) => {
-        return <CardJobSkeleton key={index} />;
-      });
+    // dispatch(filterJobByList(index));
   }, []);
 
-  const onPressFilter = useCallback(() => {
-    navigation.navigate(SCREEN_NAME.FILTER_JOB);
-  }, [navigation]);
+  // useEffect(() => {
+  //   if (isSearchText) {
+  //     if (searchText !== '') {
+  //       ev = setTimeout(() => {
+  //         dispatch(getListAllJobHandle(searchText));
+  //       }, 300);
+  //     } else {
+  //       dispatch(getListAllJobHandle());
+  //     }
+  //   }
+  //   return () => {
+  //     if (ev) {
+  //       clearTimeout(ev);
+  //       ev = undefined;
+  //     }
+  //   };
+  // }, [dispatch, isSearchText, searchText]);
 
   return (
-    <View style={styles.findJobScreen}>
+    <View
+      style={styles.findJobScreen}
+      onStartShouldSetResponder={() => {
+        Keyboard.dismiss();
+      }}>
       <View style={styles.tabs} onStartShouldSetResponder={() => Keyboard.dismiss()}>
         <TabsHorizontal
           data={tabFindJobScreen}
@@ -97,25 +73,7 @@ const FindJobScreen = props => {
           onPress={onChangeTab}
         />
       </View>
-      <View style={styles.searchInput}>
-        <SearchInput
-          onChange={onSearchText}
-          value={searchText}
-          hideSearchIcon
-          onFilter={onPressFilter}
-        />
-      </View>
-      {loading ? (
-        renderSkeleton()
-      ) : (
-        <View>
-          <FlatList
-            keyExtractor={(item, index) => item?.id || index}
-            renderItem={renderJobs}
-            data={listAllJobFiltered || listAllJob?.data || []}
-          />
-        </View>
-      )}
+      <View style={{ flex: 1 }}>{content}</View>
     </View>
   );
 };

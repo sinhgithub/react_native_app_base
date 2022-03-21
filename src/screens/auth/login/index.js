@@ -56,7 +56,7 @@ const Login = () => {
     // if (value?.user && value?.password) {
     //   dispatch(loginHandle(params));
     // }
-  }, [createThreeButtonAlert, dispatch, value?.password, value?.user]);
+  }, [createThreeButtonAlert, dispatch]);
 
   useEffect(() => {
     if (isLogin) {
@@ -73,6 +73,7 @@ const Login = () => {
           placeholder={placeholder}
           onFocus={onFocus}
           onChangeText={v => onChange(id, v)}
+          Pers
         />
         <View style={styles.icon}>{icon}</View>
       </View>
@@ -84,7 +85,7 @@ const Login = () => {
       source={require('assets/images/bg-login.jpg')}
       resizeMode="stretch"
       style={styles.flex1}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={styles.scrollView} keyboardShouldPersistTaps="alway">
         <View
           style={[
             styles.scrollViewContent,

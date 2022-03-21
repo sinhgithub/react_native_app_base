@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { SPACING } from 'constants/size';
-import { BACKGROUND_COLOR, TEXT_COLOR, CUSTOM_COLOR } from 'constants/colors';
-import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
+import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
+import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 
 const styles = StyleSheet.create({
   searchInput: {
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     height: 40,
     borderRadius: 20,
-    paddingRight: SPACING.XXNormal,
+    paddingHorizontal: SPACING.XXNormal,
     fontSize: FONT_SIZE.Small,
     color: TEXT_COLOR.Black,
     fontFamily: FONT_FAMILY.REGULAR

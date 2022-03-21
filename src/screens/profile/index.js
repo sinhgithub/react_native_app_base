@@ -3,7 +3,6 @@ import { ScrollView, View } from 'react-native';
 import Header from './components/Header';
 import styles from './styles';
 import AvatarArea from './components/AvatarArea';
-import CovidUpdateButton from './components/CovidUpdateButton';
 import Section from './components/Section';
 import { BackgroundTextBox } from 'components/';
 import { translate } from 'src/i18n';
@@ -19,9 +18,6 @@ const ProfileScreen = props => {
       <ScrollView style={styles.flex1}>
         <View style={styles.avatarArea}>
           <AvatarArea />
-        </View>
-        <View style={styles.covidUpdateButton}>
-          <CovidUpdateButton />
         </View>
         <View style={[styles.section, styles.mtLittle]}>
           <Section

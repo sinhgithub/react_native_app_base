@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 import { SPACING } from 'constants/size';
 import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
 import { scale } from 'utils/responsive';
-import { statusBarHeight, BOTTOM_TAB_HEIGHT } from 'constants/size';
 
 const styles = StyleSheet.create({
   homeScreen: {

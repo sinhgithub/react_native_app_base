@@ -12,14 +12,15 @@ axios.interceptors.request.use(config => {
 });
 
 export default class APIUtils {
-  static get(uri, params, headers) {
+  static get(uri, params, headers, callback) {
     return new Promise((resolve, reject) => {
       axios
-        .get(uri, {})
+        .get(uri, { params })
         .then(response => {
           resolve(response);
         })
         .catch(err => {
+          callback?.(err);
           reject(handleErrorMessage(err));
         });
     });
@@ -47,7 +48,7 @@ export default class APIUtils {
     );
   }
 
-  static post(uri, postData, headers) {
+  static post(uri, postData, headers, callback) {
     return new Promise((resolve, reject) => {
       axios
         .post(uri, postData, {
@@ -62,6 +63,7 @@ export default class APIUtils {
         })
         .catch(err => {
           console.log('errr 3', { err });
+          callback?.();
           reject(handleErrorMessage(err));
         });
     });
@@ -110,7 +112,7 @@ export default class APIUtils {
     });
   }
 
-  static put(uri, updateData) {
+  static put(uri, updateData, handleErr) {
     return new Promise((resolve, reject) =>
       axios
         .put(uri, updateData, {
@@ -125,7 +127,7 @@ export default class APIUtils {
         })
         .catch(err => {
           console.log('err', err);
-
+          handleErr?.(err);
           // console.log('[error]', { err });
           reject(handleErrorMessage(err));
         })

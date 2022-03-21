@@ -40,7 +40,9 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY.REGULAR,
     fontSize: FONT_SIZE.BodyText,
     color: TEXT_COLOR.Black,
-    paddingLeft: SPACING.XXNormal
+    paddingLeft: SPACING.XXNormal,
+    paddingRight: SPACING.XNormal,
+    flex: 1
   },
   jobContactItemContentIconAction: {
     flexDirection: 'row'

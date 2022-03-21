@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   buttonConfirm: {
-    backgroundColor: BACKGROUND_COLOR.Orange
+    backgroundColor: BACKGROUND_COLOR.RedBasic
   },
   buttonConfirmTitle: {
     color: TEXT_COLOR.White
@@ -70,10 +70,10 @@ const styles = StyleSheet.create({
   buttonReject: {
     backgroundColor: BACKGROUND_COLOR.White,
     borderWidth: 1,
-    borderColor: CUSTOM_COLOR.Orange
+    borderColor: CUSTOM_COLOR.RedBasic
   },
   buttonRejectTitle: {
-    color: TEXT_COLOR.Orange
+    color: TEXT_COLOR.RedBasic
   }
 });
 

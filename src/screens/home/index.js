@@ -36,8 +36,10 @@ const HomeScreen = () => {
   const onClickRowBigIcon = useCallback(id => {
     switch (id) {
       case idTreeBigIcons.find_job:
+        navigation.navigate(SCREEN_NAME.FIND_JOB_SCREEN);
         break;
       case idTreeBigIcons.income:
+        navigation.navigate(SCREEN_NAME.INCOME_SCREEN);
         break;
       case idTreeBigIcons.support:
         break;
@@ -46,8 +48,9 @@ const HomeScreen = () => {
     }
   }, []);
 
-  const listJob = listJobHomePage.map(job => {
-    return <CardJob onPress={onClickCardJob} data={job} key={job.id} />;
+  const listJob = listJobHomePage.map((job, index) => {
+    const isLastItem = index === listJobHomePage.length - 1;
+    return <CardJob onPress={onClickCardJob} data={job} key={job.id} isLastItem={isLastItem} />;
   });
 
   const listSkeleton = Array(3)

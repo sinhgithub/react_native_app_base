@@ -9,7 +9,7 @@ import { mapWageFromTo } from 'helpers/wage';
 import { formatFeatureDurationDate } from 'helpers/formatTime';
 
 const CardJob = props => {
-  const { onPress, data } = props;
+  const { onPress, data, hideAllFlag, hideBorder, isLastItem } = props;
   const [sizeCardJobContentImage, setSizeCardJobContentImage] = useState(null);
 
   const dataCardJob = useMemo(() => {
@@ -33,7 +33,7 @@ const CardJob = props => {
   return (
     <View style={styles.cardJob}>
       <TouchableOpacity
-        style={styles.cardJobContent}
+        style={[styles.cardJobContent, (hideBorder || isLastItem) && { borderBottomWidth: 0 }]}
         onPress={() =>
           onPress({
             ...data,
@@ -81,33 +81,35 @@ const CardJob = props => {
           <Text style={styles.cardJobContentInfoAddress} numberOfLines={2}>
             {dataCardJob?.address}
           </Text>
-          <View style={styles.buttonsWrapper}>
-            <Button
-              type="card"
-              title={dataCardJob?.timeRemaining}
-              containerStyle={styles.buttonContainerStyle}
-              buttonStyle={styles.buttonStyle}
-              titleStyle={styles.titleButtonStyle}
-            />
-            {dataCardJob.isBonus && (
+          {!hideAllFlag && (
+            <View style={styles.buttonsWrapper}>
               <Button
                 type="card"
-                title={translate('common.have_bonus')}
-                containerStyle={[styles.buttonContainerStyle, styles.ml4]}
-                buttonStyle={styles.buttonBonusStyle}
-                titleStyle={styles.titleButtonBonusStyle}
+                title={dataCardJob?.timeRemaining}
+                containerStyle={styles.buttonContainerStyle}
+                buttonStyle={styles.buttonStyle}
+                titleStyle={styles.titleButtonStyle}
               />
-            )}
-            {dataCardJob.isPaidAfterWork && (
-              <Button
-                type="card"
-                title={translate('common.wage_after_work')}
-                containerStyle={[styles.buttonContainerStyle, styles.ml4]}
-                buttonStyle={styles.buttonPaidAfterWorkStyle}
-                titleStyle={styles.titleButtonPaidAfterWorkStyle}
-              />
-            )}
-          </View>
+              {dataCardJob.isBonus && (
+                <Button
+                  type="card"
+                  title={translate('common.have_bonus')}
+                  containerStyle={[styles.buttonContainerStyle, styles.ml4]}
+                  buttonStyle={styles.buttonBonusStyle}
+                  titleStyle={styles.titleButtonBonusStyle}
+                />
+              )}
+              {dataCardJob.isPaidAfterWork && (
+                <Button
+                  type="card"
+                  title={translate('common.wage_after_work')}
+                  containerStyle={[styles.buttonContainerStyle, styles.ml4]}
+                  buttonStyle={styles.buttonPaidAfterWorkStyle}
+                  titleStyle={styles.titleButtonPaidAfterWorkStyle}
+                />
+              )}
+            </View>
+          )}
         </View>
       </TouchableOpacity>
     </View>

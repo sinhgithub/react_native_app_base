@@ -138,3 +138,18 @@ export const tabDetailProfileScreen = [
     title: 'Liên hệ'
   }
 ];
+
+export const tabIncomeScreen = [
+  {
+    id: 'common',
+    title: 'Tổng quan'
+  },
+  {
+    id: 'history',
+    title: 'Lịch sử ví'
+  },
+  {
+    id: 'Rút tiền',
+    title: 'Rút tiền'
+  }
+];

@@ -1,5 +1,4 @@
 export { default as Indicator } from './CircleIndicator';
-export { default as ErrorBoundary } from './ErrorBoundary';
 export { default as AppText } from './AppText';
 export { default as Icon } from './Icon';
 export { default as NotificationWarning } from './NotificationWarning';
@@ -21,3 +20,5 @@ export { default as NotificationSkeleton } from './Notification/NotificationSkel
 export { default as ConversationSkeleton } from './Conversation/ConversationSkeleton';
 export { default as BackgroundTextBox } from './BackgroundTextBox';
 export { default as Form } from './Form';
+export { default as CompleteModal } from './Modal/CompleteModal';
+export { default as ConfirmModal } from './Modal/ConfirmModal';

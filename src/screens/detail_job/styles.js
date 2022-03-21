@@ -1,5 +1,5 @@
 import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
-import { SPACING, DEVICE_WIDTH, HEIGHT_BUTTON_BOTTOM } from 'constants/size';
+import { SPACING, DEVICE_WIDTH, HEIGHT_BUTTON_BOTTOM, DEVICE_HEIGHT } from 'constants/size';
 import { StyleSheet } from 'react-native';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 
@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
   },
   buttonModalArea: {
     paddingHorizontal: SPACING.XXNormal
-  }
+  },
+  successModal: {}
 });
 
 export default styles;

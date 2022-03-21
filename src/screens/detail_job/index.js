@@ -12,7 +12,8 @@ import Benefit from './components/Benefit';
 import JobRequire from './components/JobRequire';
 import JobContact from './components/JobContact';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAnimatedBottomModalSuccess, setAnimatedBottomModalFailure } from 'actions/system';
+import { setAnimatedBottomModalSuccess, showCompleteModal, showConfirmModal } from 'actions/system';
+import { saveJobHandle } from 'actions/saveJob';
 import { receiveJobHandle } from 'actions/receive_job';
 
 const DetailJob = props => {
@@ -21,7 +22,6 @@ const DetailJob = props => {
   const dispatch = useDispatch();
   const { animatedBottomModal } = useSelector(state => state.system);
   const [modalBonusInfo, setModalBonusInfo] = useState(null);
-  const { token } = useSelector(state => state.auth.memberInfo);
   const { onPressWarningBox = () => {} } = props;
 
   useEffect(() => {
@@ -144,12 +144,150 @@ const DetailJob = props => {
   }, [animatedBottomModal.content, dispatch]);
 
   const onReceiveJob = useCallback(() => {
-    dispatch(receiveJobHandle({ jobId: cardJob.id }));
-  }, [cardJob?.id, dispatch]);
+    dispatch(
+      showConfirmModal({
+        title: 'Bạn ứng tuyển công việc này chứ ?',
+        icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+        content: 'Yêu cầu nhận việc của bạn sẽ được gởi đến Người tuyển dụng',
+        buttonTitleReject: 'Huỷ bỏ',
+        buttonTitleConfirm: 'Xác nhận',
+        onConfirm: () => {
+          dispatch(
+            receiveJobHandle({
+              jobId: cardJob.id,
+              callback: () => {
+                dispatch(
+                  showCompleteModal({
+                    title: 'Chúc mừng',
+                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                    content: 'Bạn đã nhận việc thành công',
+                    buttonTitle: 'Xác nhận',
+                    onConfirm: () => {
+                      navigation.goBack();
+                    },
+                    onClose: () => {
+                      navigation.goBack();
+                    }
+                  })
+                );
+              },
+              failure: () => {
+                dispatch(
+                  showCompleteModal({
+                    title: 'Nhận việc không thành công',
+                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                    content: 'Bạn đã ứng tuyển công việc này rồi, vui lòng kiểm tra lại',
+                    buttonTitle: 'Xác nhận',
+                    onConfirm: () => {
+                      navigation.goBack();
+                    },
+                    onClose: () => {
+                      navigation.goBack();
+                    }
+                  })
+                );
+              },
+              handleErr: () => {
+                dispatch(
+                  showCompleteModal({
+                    title: 'Nhận việc không thành công',
+                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                    content: 'Bạn đã ứng tuyển công việc này rồi, vui lòng kiểm tra lại',
+                    buttonTitle: 'Xác nhận',
+                    onConfirm: () => {
+                      navigation.goBack();
+                    },
+                    onClose: () => {
+                      navigation.goBack();
+                    }
+                  })
+                );
+              }
+            })
+          );
+        },
+        onClose: () => {
+          // do no thing
+        },
+        onReject: () => {
+          // do no thing
+        }
+      })
+    );
+  }, [cardJob.id, dispatch, navigation]);
 
   const onSaveJob = useCallback(() => {
-    console.log('asjdjasd');
-  }, []);
+    dispatch(
+      showConfirmModal({
+        title: 'Bạn muốn lưu công việc này chứ ?',
+        icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+        content: 'Công việc sẽ được lưu lại trên tài khoản của bạn',
+        buttonTitleReject: 'Huỷ bỏ',
+        buttonTitleConfirm: 'Xác nhận',
+        onConfirm: () => {
+          dispatch(
+            saveJobHandle({
+              jobId: cardJob.id,
+              callback: () => {
+                dispatch(
+                  showCompleteModal({
+                    title: 'Chúc mừng',
+                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                    content: 'Bạn đã lưu việc thành công',
+                    buttonTitle: 'Xác nhận',
+                    onConfirm: () => {
+                      navigation.goBack();
+                    },
+                    onClose: () => {
+                      navigation.goBack();
+                    }
+                  })
+                );
+              },
+              failure: () => {
+                dispatch(
+                  showCompleteModal({
+                    title: 'Lưu việc không thành công',
+                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                    content: 'Bạn đã lưu công việc này rồi, vui lòng kiểm tra lại',
+                    buttonTitle: 'Xác nhận',
+                    onConfirm: () => {
+                      navigation.goBack();
+                    },
+                    onClose: () => {
+                      navigation.goBack();
+                    }
+                  })
+                );
+              },
+              handleErr: () => {
+                dispatch(
+                  showCompleteModal({
+                    title: 'Lưu việc không thành công',
+                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                    content: 'Bạn đã lưu công việc này rồi, vui lòng kiểm tra lại',
+                    buttonTitle: 'Xác nhận',
+                    onConfirm: () => {
+                      navigation.goBack();
+                    },
+                    onClose: () => {
+                      navigation.goBack();
+                    }
+                  })
+                );
+              }
+            })
+          );
+        },
+        onClose: () => {
+          // do no thing
+        },
+        onReject: () => {
+          // do no thing
+        }
+      })
+    );
+  }, [cardJob.id, dispatch, navigation]);
 
   return (
     <View style={styles.detailScreen}>

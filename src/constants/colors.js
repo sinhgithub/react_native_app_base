@@ -97,6 +97,7 @@ export const CUSTOM_COLOR = {
   MainTab: '#FFFFFF',
   BasicGray: '#eae7e2',
   Pink: '#ffe5e4',
+  modalSystem: 'rgba(167,167,167,0.7)'
 };
 
 export const TEXT_COLOR = {
@@ -140,6 +141,7 @@ export const TEXT_COLOR = {
   MainTab: CUSTOM_COLOR.MainTab,
   BasicGray: CUSTOM_COLOR.BasicGray,
   Pink: CUSTOM_COLOR.Pink,
+  modalSystem: CUSTOM_COLOR.modalSystem
 };
 
 export const BACKGROUND_COLOR = {
@@ -178,6 +180,7 @@ export const BACKGROUND_COLOR = {
   MainTab: CUSTOM_COLOR.MainTab,
   BasicGray: CUSTOM_COLOR.BasicGray,
   Pink: CUSTOM_COLOR.Pink,
+  modalSystem: CUSTOM_COLOR.modalSystem
 };
 
 export const HEADER_COLOR = CUSTOM_COLOR.White;
@@ -187,6 +190,7 @@ export const BUTTON_COLOR = {
   PrimaryOpacity: CUSTOM_COLOR.OrangeOpacity,
   DisablePrimary: CUSTOM_COLOR.Silver,
   Secondary: CUSTOM_COLOR.SilverChalice,
+  modalSystem: CUSTOM_COLOR.modalSystem
 };
 
 export const COLOR_ACTIVE = '#F5831E';

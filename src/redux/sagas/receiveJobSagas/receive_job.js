@@ -3,16 +3,18 @@ import { call, put } from 'redux-saga/effects';
 import { apiReceiveJob } from 'services/api/receiveJob';
 
 export function* receiveJobSaga(obj) {
-  const { jobId } = obj.payload;
+  const { jobId, callback, failure, handleErr } = obj.payload;
   try {
-    const res = yield call(apiReceiveJob, jobId);
-    console.log('======> response receive job ========>', res);
+    const res = yield call(apiReceiveJob, jobId, handleErr);
     if (res.status === 200) {
       yield put(receiveJobSuccess(res.data));
+      return callback?.();
     } else {
       yield put(receiveJobFailure(res));
+      return failure?.();
     }
   } catch (error) {
     yield put(receiveJobFailure(error));
+    failure?.();
   }
 }

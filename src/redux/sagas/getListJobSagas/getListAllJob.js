@@ -1,27 +1,14 @@
 import { getListAllJobFailure, getListAllJobSuccess } from 'src/redux/actions/getListJob';
 import { call, put } from 'redux-saga/effects';
-import { apiListAllJob, apiListAllJobByKey } from 'services/api/listJobApi';
-import { filterJobByList } from 'actions/filter';
-import { store } from 'store/index';
+import { apiListAllJob } from 'services/api/listJobApi';
 
 export function* getListAllJobSaga(obj) {
-  if (store.getState().listJob.listAllJobFiltered?.length > 0) {
-    console.log(
-      store.getState().listJob.listAllJobFiltered?.length,
-      'store.getState().listJob.listAllJobFiltered?.length'
-    );
-    yield put(filterJobByList('reset'));
-  }
+  const { key, page, size, isLoadMore } = obj.payload;
   try {
-    let res;
-    if (!obj?.payload) {
-      res = yield call(apiListAllJob);
-    } else {
-      res = yield call(apiListAllJobByKey, obj?.payload);
-    }
-    console.log('======> list all job ========>', res);
+    const res = yield call(apiListAllJob, { key, page, size });
     if (res.status === 200) {
-      yield put(getListAllJobSuccess(res.data));
+      const data = { ...res.data, isLoadMore };
+      yield put(getListAllJobSuccess(data));
     } else {
       yield put(getListAllJobFailure(res));
     }

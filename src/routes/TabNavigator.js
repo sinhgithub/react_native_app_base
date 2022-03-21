@@ -31,6 +31,7 @@ import { useSelector } from 'react-redux';
 import Login from 'screens/auth/login';
 import FilterJobScreen from 'screens/filter_job';
 import DetailProfile from 'screens/profile/Detail';
+import Income from 'screens/income';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -320,7 +321,15 @@ export const AppStackScreen = () => {
         component={DetailProfile}
         options={{
           headerShown: true,
-          header: () => <HeaderTitleScreen title={'ho so chi tiet'} />
+          header: () => <HeaderTitleScreen title={'Hồ sơ chi tiết'} />
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.INCOME_SCREEN}
+        component={Income}
+        options={{
+          headerShown: true,
+          header: () => <HeaderTitleScreen title={'Thu nhập'} />
         }}
       />
     </Stack.Navigator>

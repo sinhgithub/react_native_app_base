@@ -1,7 +1,6 @@
 import { NavigationContainer, useNavigationContainerRef } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Indicator, AnimatedModal } from 'components/';
-import ErrorBoundary from 'components/ErrorBoundary';
+import { Indicator, AnimatedModal, CompleteModal, ConfirmModal } from 'components/';
 import { CUSTOM_COLOR } from 'constants/colors';
 import SCREENS_NAME from 'constants/screens';
 import React, { Suspense, useEffect, useRef } from 'react';
@@ -25,12 +24,24 @@ const RootStackScreen = props => {
 const RootNavigator = props => {
   const routeNameRef = useRef();
   const navigationRef = useNavigationContainerRef();
-  const { animatedBottomModal } = useSelector(state => state.system);
+  const { animatedBottomModal, completeModal, confirmModal } = useSelector(state => state.system);
   const { loading } = useSelector(state => state.auth);
 
   useEffect(() => {
     initLanguge();
   }, []);
+
+  const renderSystemModal = () => {
+    if (animatedBottomModal.isDisplay && animatedBottomModal.content) {
+      return <AnimatedModal>{animatedBottomModal.content}</AnimatedModal>;
+    }
+    if (completeModal) {
+      return <CompleteModal />;
+    }
+    if (confirmModal) {
+      return <ConfirmModal />;
+    }
+  };
 
   return (
     <NavigationContainer
@@ -47,12 +58,8 @@ const RootNavigator = props => {
         }>
         <>
           <SafeAreaProvider>
-            <ErrorBoundary>
-              <RootStackScreen {...props} />
-              {animatedBottomModal.isDisplay && animatedBottomModal.content && (
-                <AnimatedModal>{animatedBottomModal.content}</AnimatedModal>
-              )}
-            </ErrorBoundary>
+            <RootStackScreen {...props} />
+            {renderSystemModal()}
           </SafeAreaProvider>
           <SafeAreaView style={styles.safeAreaView} edges={['bottom']} />
           {loading && <AppLoading loading={loading} />}

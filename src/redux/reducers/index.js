@@ -6,6 +6,7 @@ import setting from './settings';
 import listJob from './listJob';
 import system from './system';
 import receiveJob from './receive_job';
+import calendarWork from './calendar_work';
 
 const systemPersistConfig = {
   key: 'system',
@@ -42,10 +43,18 @@ const receiveJobPersistConfig = {
   version: 1.0
 };
 
+const calendarWorkPersistConfig = {
+  key: 'saveJob',
+  storage: AsyncStorage,
+  whitelist: [],
+  version: 1.0
+};
+
 export default combineReducers({
   system: persistReducer(systemPersistConfig, system),
   auth: persistReducer(authPersistConfig, auth),
   setting: persistReducer(settingPersistConfig, setting),
   listJob: persistReducer(getListJobPersistConfig, listJob),
-  receiveJob: persistReducer(receiveJobPersistConfig, receiveJob)
+  receiveJob: persistReducer(receiveJobPersistConfig, receiveJob),
+  calendarWork: persistReducer(calendarWorkPersistConfig, calendarWork)
 });

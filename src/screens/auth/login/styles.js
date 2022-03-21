@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingLeft: SPACING.S_50,
     color: TEXT_COLOR.White,
-    paddingVertical: Platform.OS === 'ios' ? 20 : 0
+    paddingVertical: Platform.OS === 'ios' ? 20 : 10
   },
   formWrapper: {}
 });

@@ -1,39 +1,56 @@
-import React, { memo, useCallback, useState, useEffect } from 'react';
+import React, { memo, useCallback, useState, useMemo, useEffect } from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { CardJob, CardJobSkeleton } from 'components/';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { empty_quote } from 'assets/images';
 import { BACKGROUND_COLOR } from 'constants/colors';
 import { Button } from 'components/';
 import { useNavigation } from '@react-navigation/native';
 import SCREEN_NAME from 'constants/screens';
+import { getListAppliedJobHandle } from 'actions/getListJob';
+import { find } from 'assets/images';
 
 const Working = props => {
-  const listJobContinue = useSelector(state => state?.listJob?.listAllJob?.data);
+  const dispatch = useDispatch();
+  const { listAppliedJob, loadingAppliedJob, metaDataAppliedJob } = useSelector(
+    state => state?.listJob
+  );
+  const list = useMemo(() => {
+    const result = [];
+    for (const k in listAppliedJob) {
+      result.push(listAppliedJob[k]);
+    }
+    return result;
+  }, [listAppliedJob]);
   const navigation = useNavigation();
-  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch(
+      getListAppliedJobHandle({
+        handleErr: v => {
+          //do no thing
+        }
+      })
+    );
+  }, [dispatch]);
 
   const renderItem = ({ item }) => {
-    return <CardJob onPress={() => {}} data={item} />;
+    return <CardJob onPress={() => {}} data={item} hideAllFlag />;
   };
+
+  const onClickFindJobNow = useCallback(() => {
+    navigation.navigate(SCREEN_NAME.FIND_JOB_SCREEN);
+  }, [navigation]);
 
   const renderListEmptyComponent = () => {
     return (
       <View style={styles.imageFindJob}>
-        <Image source={empty_quote} style={styles.image} resizeMode="contain" />
-        <Text>Bạn chưa nhận công việc nào</Text>
+        <Image source={find} style={styles.image} resizeMode="contain" />
+        <Text>Bạn chưa có việc làm</Text>
+        <Button title="Tìm việc ngay" type="basic" submitMethod={onClickFindJobNow} />
       </View>
     );
   };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, []);
 
   const listSkeleton = Array(5)
     .fill('')
@@ -43,13 +60,13 @@ const Working = props => {
 
   return (
     <View style={styles.container}>
-      {loading ? (
+      {loadingAppliedJob ? (
         listSkeleton
       ) : (
         <FlatList
           contentContainerStyle={styles.flex1}
           keyExtractor={(item, index) => `${item?.id || index}`}
-          data={[]}
+          data={list || []}
           renderItem={renderItem}
           ListEmptyComponent={renderListEmptyComponent()}
         />

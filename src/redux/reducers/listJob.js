@@ -3,8 +3,18 @@ import { GET_LIST_JOB, FILTER } from 'actionsType';
 const initialState = {
   loading: false,
   listJobHomePage: [],
-  listAllJob: [],
-  listAllJobFiltered: null
+  listAllJob: {},
+  listAllJobFiltered: null,
+  metaData: {},
+  loadingFollowJob: false,
+  listFollowJob: {},
+  metaDataFollowJob: {},
+  listApplyJob: {},
+  loadingApplyJob: false,
+  metaDataApplyJob: {},
+  listAppliedJob: {},
+  loadingAppliedJob: false,
+  metaDataAppliedJob: {}
 };
 
 const listJob = (state = initialState, action) => {
@@ -30,16 +40,24 @@ const listJob = (state = initialState, action) => {
     }
 
     case GET_LIST_JOB.ALL_JOB.HANDLER: {
+      const { isLoadMore } = action.payload;
       return {
         ...state,
-        loading: true
+        loading: isLoadMore ? false : true
       };
     }
     case GET_LIST_JOB.ALL_JOB.SUCCESS: {
+      const { data, metadata } = action.payload;
+      const newData = { ...state.listAllJob };
+      data.forEach(item => {
+        newData[item.id] = item;
+      }, []);
+
       return {
         ...state,
         loading: false,
-        listAllJob: action.payload
+        listAllJob: newData,
+        metaData: metadata
       };
     }
     case GET_LIST_JOB.ALL_JOB.FAILURE: {
@@ -48,29 +66,85 @@ const listJob = (state = initialState, action) => {
         loading: false
       };
     }
-    case FILTER.FILTER_JOB_BY_LIST.ORIGIN: {
-      let newData = [];
-      console.log(action?.payload, 'action.payload');
-      switch (action.payload) {
-        case 0:
-          newData = [...state.listAllJob.data];
-          break;
-        case 1:
-          newData = state.listAllJob.data.filter(item => item);
-          break;
-        case 2:
-          newData = state.listAllJob.data.filter(item => item);
-          break;
-        case 'reset':
-          newData = null;
-          break;
-        default:
-          newData = [...state.listAllJob.data];
-          break;
-      }
+
+    case GET_LIST_JOB.FOLLOW_JOB.HANDLER: {
+      const { isLoadMore } = action.payload;
       return {
         ...state,
-        listAllJobFiltered: newData
+        loadingFollowJob: isLoadMore ? false : true
+      };
+    }
+    case GET_LIST_JOB.FOLLOW_JOB.SUCCESS: {
+      const { data, metadata } = action.payload;
+      const newData = { ...state.listFollowJob };
+      data.forEach(item => {
+        newData[item.id.job.id] = item.id.job;
+      }, []);
+      return {
+        ...state,
+        loadingFollowJob: false,
+        listFollowJob: newData,
+        metaDataFollowJob: metadata
+      };
+    }
+    case GET_LIST_JOB.FOLLOW_JOB.FAILURE: {
+      return {
+        ...state,
+        loadingFollowJob: false
+      };
+    }
+
+    case GET_LIST_JOB.APPLY_JOB.HANDLER: {
+      const { isLoadMore } = action.payload;
+      return {
+        ...state,
+        loadingApplyJob: isLoadMore ? false : true
+      };
+    }
+    case GET_LIST_JOB.APPLY_JOB.SUCCESS: {
+      const { data, metadata } = action.payload;
+      const newData = { ...state.listApplyJob };
+      data.forEach(item => {
+        newData[item.id.job.id] = item.id.job;
+      }, []);
+      return {
+        ...state,
+        loadingApplyJob: false,
+        listApplyJob: newData,
+        metaDataApplyJob: metadata
+      };
+    }
+    case GET_LIST_JOB.APPLY_JOB.FAILURE: {
+      return {
+        ...state,
+        loadingApplyJob: false
+      };
+    }
+
+    case GET_LIST_JOB.APPLIED_JOB.HANDLER: {
+      const isLoadMore = action?.payload?.isLoadMore;
+      return {
+        ...state,
+        loadingAppliedJob: isLoadMore ? false : true
+      };
+    }
+    case GET_LIST_JOB.APPLIED_JOB.SUCCESS: {
+      const { data, metadata } = action.payload;
+      const newData = { ...state.listAppliedJob };
+      data.forEach(item => {
+        newData[item.id.job.id] = item.id.job;
+      }, []);
+      return {
+        ...state,
+        loadingAppliedJob: false,
+        listAppliedJob: newData,
+        metaDataAppliedJob: metadata
+      };
+    }
+    case GET_LIST_JOB.APPLIED_JOB.FAILURE: {
+      return {
+        ...state,
+        loadingAppliedJob: false
       };
     }
     default:
