@@ -56,5 +56,13 @@ export const CALENDAR_WORK = {
 export const USER = {
   CHECK_IN: asyncTypes('USER/CHECK_IN'),
   CHECK_OUT: asyncTypes('USER/CHECK_OUT'),
-  ABSENCE: asyncTypes('USER/ABSENCE')
+  ABSENCE: asyncTypes('USER/ABSENCE'),
+  GET_USER: asyncTypes('USER/GET_USER')
+};
+
+export const WALLET = {
+  GET_WALLET: asyncTypes('WALLET/GET_WALLET'),
+  GET_WALLET_WITH_DRAW: asyncTypes('WALLET/GET_WALLET_WITH_DRAW'),
+  GET_WALLET_HISTORY: asyncTypes('WALLET/GET_WALLET_HISTORY'),
+  GET_WALLET_TOTAL: asyncTypes('WALLET/GET_WALLET_TOTAL')
 };

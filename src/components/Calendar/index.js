@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import styles from './styles';
 import moment from 'moment';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
@@ -49,28 +49,10 @@ const CustomCalendar = props => {
         minDate={'2000-01-01'}
         maxDate={'2100-01-31'}
         onDayPress={date => {
-          onPressDay(id, date, data);
+          onPressDay?.(id, date, data);
         }}
         current={'2022-03-28'}
-        // onDayLongPress={day => {
-        //   console.log('selected day', day);
-        // }}
-        // monthFormat={'DD MM YYYY'}
-        // onMonthChange={month => {
-        //   console.log('month changed', month);
-        // }}
         hideArrows={true}
-        // renderArrow={direction => {
-        //   if (direction === 'left') {
-        //     return (
-        //       <Icon fontName="AntDesign" color={CUSTOM_COLOR.Red} size={30} name="arrowleft" />
-        //     );
-        //   } else {
-        //     return (
-        //       <Icon fontName="AntDesign" color={CUSTOM_COLOR.Red} size={30} name="arrowright" />
-        //     );
-        //   }
-        // }}
         firstDay={1}
         onPressArrowLeft={subtractMonth => subtractMonth()}
         onPressArrowRight={addMonth => addMonth()}
@@ -78,16 +60,9 @@ const CustomCalendar = props => {
           const dayDetail = moment(date[0]).format('DD/MM/YYYY');
           return (
             <View style={styles.headerArea}>
-              {/* <TouchableOpacity
-                onPress={() => {
-                  refCalendar.updateMonth(date);
-                }}>
-                <Icon fontName="AntDesign" color={CUSTOM_COLOR.Red} size={30} name="arrowleft" />
-              </TouchableOpacity> */}
               <View style={styles.dateHeader}>
                 <Text style={styles.dateHeaderText}>{dayDetail}</Text>
               </View>
-              {/* <Icon fontName="AntDesign" color={CUSTOM_COLOR.Red} size={30} name="arrowright" /> */}
             </View>
           );
         }}

@@ -17,10 +17,22 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center'
   },
+
   mainHeaderLeftText: {
     fontFamily: FONT_FAMILY.REGULAR,
     color: TEXT_COLOR.Black,
     paddingLeft: SPACING.XNormal
+  },
+  mainHeaderMiddle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    textAlign: 'center'
+  },
+  mainHeaderMiddleText: {
+    textAlign: 'center',
+    flex: 1
   },
   mainHeaderRight: {
     flexDirection: 'row',

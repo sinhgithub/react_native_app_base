@@ -4,10 +4,9 @@ import { RootSiblingParent } from 'react-native-root-siblings';
 import { PersistGate } from 'redux-persist/integration/react';
 import storeConfig from 'store/index';
 import { initLanguge } from './i18n';
-import RootNavigator from './routes/RootNavigator';
+import RootNavigator from './routes';
 import { StyleSheet } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
-import { useSelector } from 'react-redux';
 import { BACKGROUND_COLOR } from './constants/colors';
 
 Text.defaultProps = Text.defaultProps || {};

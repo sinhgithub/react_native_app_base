@@ -7,6 +7,8 @@ import listJob from './listJob';
 import system from './system';
 import receiveJob from './receive_job';
 import calendarWork from './calendar_work';
+import wallets from './wallet';
+import user from './user';
 
 const systemPersistConfig = {
   key: 'system',
@@ -50,11 +52,27 @@ const calendarWorkPersistConfig = {
   version: 1.0
 };
 
+const walletsPersistConfig = {
+  key: 'wallets',
+  storage: AsyncStorage,
+  whitelist: [],
+  version: 1.0
+};
+
+const userPersistConfig = {
+  key: 'user',
+  storage: AsyncStorage,
+  whitelist: [],
+  version: 1.0
+};
+
 export default combineReducers({
   system: persistReducer(systemPersistConfig, system),
   auth: persistReducer(authPersistConfig, auth),
   setting: persistReducer(settingPersistConfig, setting),
   listJob: persistReducer(getListJobPersistConfig, listJob),
   receiveJob: persistReducer(receiveJobPersistConfig, receiveJob),
-  calendarWork: persistReducer(calendarWorkPersistConfig, calendarWork)
+  calendarWork: persistReducer(calendarWorkPersistConfig, calendarWork),
+  wallets: persistReducer(walletsPersistConfig, wallets),
+  user: persistReducer(userPersistConfig, user)
 });

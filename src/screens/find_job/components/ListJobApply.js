@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import SCREEN_NAME from 'constants/screens';
 import { CUSTOM_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
-import { v4 as uuidv4 } from 'uuid';
 
 const numberSkeleton = 4;
 let ev;
@@ -128,7 +127,7 @@ const ListJobApply = props => {
         renderSkeleton()
       ) : (
         <FlatList
-          keyExtractor={() => uuidv4()}
+          keyExtractor={(item, index) => `${item?.id || index}${index}`}
           renderItem={renderJobs}
           data={listData?.length > 0 ? listData : list || []}
           onEndReached={loadMore}

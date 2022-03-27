@@ -1,68 +1,32 @@
-/* eslint-disable comma-dangle */
-import React, { useCallback, useEffect, useState } from 'react';
-import { View, ImageBackground, TextInput, ScrollView, Alert } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { View, ImageBackground, TextInput, ScrollView } from 'react-native';
 import styles from './styles';
 import { loginFormConfigs } from 'configs/loginFormConfigs';
 import useKeyboard from 'src/hooks/useKeyboard';
 import Button from 'components/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginFailure, loginHandle } from 'actions/auth';
+import { useDispatch } from 'react-redux';
+import { loginHandle } from 'actions/auth';
 import { translate } from 'src/i18n';
-import { useNavigation } from '@react-navigation/native';
-import SCREENS_NAME from 'constants/screens';
 
 const Login = () => {
   const keyboard = useKeyboard();
   const [value, setValue] = useState({});
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const isLogin = useSelector(state => state.auth.isLogin);
-
-  const onFocus = useCallback(() => {
-    // scrollRef.scrollTo(0, -keyboard?.height || 0, true);
-  }, []);
 
   const onChange = useCallback((id, v) => {
     setValue(prev => ({ ...prev, [id]: v }));
   }, []);
 
-  const createThreeButtonAlert = useCallback(
-    (data, url) => {
-      Alert.alert(data, url, [
-        {
-          text: 'Ask me later',
-          onPress: () => dispatch(loginFailure())
-        },
-        {
-          text: 'Cancel',
-          onPress: () => dispatch(loginFailure()),
-          style: 'cancel'
-        },
-        { text: 'OK', onPress: () => dispatch(loginFailure()) }
-      ]);
-    },
-    [dispatch]
-  );
-
   const onSubmit = useCallback(() => {
     const params = {
-      // email: value?.user?.trim(),
-      // password: value?.password?.trim(),
-      email: 'hun1g@gmail.com',
-      password: '123456',
-      callback: createThreeButtonAlert
+      email: value?.user?.trim(),
+      password: value?.password?.trim()
     };
-    dispatch(loginHandle(params));
-    // if (value?.user && value?.password) {
-    //   dispatch(loginHandle(params));
-    // }
-  }, [createThreeButtonAlert, dispatch]);
-
-  useEffect(() => {
-    if (isLogin) {
-      navigation.navigate(SCREENS_NAME.MAIN_SCREEN);
+    if (value?.user && value?.password) {
+      dispatch(loginHandle(params));
     }
-  }, [isLogin, navigation]);
+    dispatch(loginHandle({ email: 'ungvien1@gmail.com', password: '123456' }));
+  }, [dispatch, value?.password, value?.user]);
 
   const listInput = loginFormConfigs.map((item, index) => {
     const { placeholder, icon, id } = item;
@@ -71,9 +35,8 @@ const Login = () => {
         <TextInput
           style={styles.input}
           placeholder={placeholder}
-          onFocus={onFocus}
           onChangeText={v => onChange(id, v)}
-          Pers
+          autoCapitalize="none"
         />
         <View style={styles.icon}>{icon}</View>
       </View>

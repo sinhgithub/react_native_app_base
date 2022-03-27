@@ -10,13 +10,19 @@ import { useSelector } from 'react-redux';
 import { initLanguge } from 'src/i18n';
 import { AppStackScreen } from './TabNavigator';
 import AppLoading from 'components/AppLoading';
+import { AuthStackScreen } from './AuthNavigator';
 
 const RootStack = createStackNavigator();
 
 const RootStackScreen = props => {
+  const { isLogin } = useSelector(state => state.auth);
   return (
     <RootStack.Navigator screenOptions={{ headerShown: false }}>
-      <RootStack.Screen name={SCREENS_NAME.APP_STACK} component={AppStackScreen} />
+      {isLogin ? (
+        <RootStack.Screen name={SCREENS_NAME.APP_STACK} component={AppStackScreen} />
+      ) : (
+        <RootStack.Screen name={SCREENS_NAME.AUTH_STACK} component={AuthStackScreen} />
+      )}
     </RootStack.Navigator>
   );
 };

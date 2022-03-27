@@ -70,30 +70,6 @@ const forHeaderFade = ({ current, next }) => {
   };
 };
 
-const AuthStack = () => {
-  return (
-    <Stack.Navigator
-      initialRouteName={SCREENS_NAME.LOGIN_SCREEN}
-      screenOptions={{
-        transitionSpec: {
-          open: config,
-          close: config
-        },
-        cardStyleInterpolator: forFade,
-        headerStyleInterpolator: forHeaderFade
-      }}>
-      <Stack.Screen
-        name={SCREENS_NAME.LOGIN_SCREEN}
-        component={Login}
-        options={{
-          title: 'screen_name.login_screen',
-          headerShown: false
-        }}
-      />
-    </Stack.Navigator>
-  );
-};
-
 const HomeStack = () => {
   return (
     <Stack.Navigator
@@ -281,10 +257,9 @@ export const TabStack = () => {
 };
 
 export const AppStackScreen = () => {
-  const { isLogin } = useSelector(state => state.auth);
   return (
     <Stack.Navigator
-      initialRouteName={isLogin ? SCREENS_NAME.MAIN_SCREEN : SCREENS_NAME.LOGIN_SCREEN}
+      initialRouteName={SCREENS_NAME.MAIN_SCREEN}
       screenOptions={{
         header: () => <MainHeader />,
         cardOverlayEnabled: true,
@@ -296,11 +271,6 @@ export const AppStackScreen = () => {
         cardStyleInterpolator: forFade,
         headerStyleInterpolator: forHeaderFade
       }}>
-      <Stack.Screen
-        name={SCREENS_NAME.AUTH_STACK}
-        component={AuthStack}
-        options={{ headerShown: false }}
-      />
       <Stack.Screen
         name={SCREENS_NAME.MAIN_SCREEN}
         component={TabStack}

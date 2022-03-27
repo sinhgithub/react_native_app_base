@@ -15,15 +15,17 @@ import { getListJobHomePageHandle } from 'actions/getListJob';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import SCREEN_NAME from 'constants/screens';
+import { getUserHandle } from 'actions/user';
 
 const HomeScreen = () => {
   const numberNewMessage = 5;
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { listJobHomePage, loading } = useSelector(state => state.listJob);
-
+  const { user, loading: loadingUser } = useSelector(state => state.user);
   useEffect(() => {
     dispatch(getListJobHomePageHandle());
+    dispatch(getUserHandle({}));
   }, [dispatch]);
 
   const onClickCardJob = useCallback(

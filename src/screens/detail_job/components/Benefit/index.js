@@ -47,7 +47,7 @@ const Benefit = props => {
         onToggle={handleToggleContent}
       />
       <View style={styles.benefitContent}>
-        {isShowContent && data.length > 0 ? listBonus : null}
+        {isShowContent && data?.length > 0 ? listBonus : null}
       </View>
     </View>
   );

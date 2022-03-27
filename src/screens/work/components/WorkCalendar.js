@@ -1,5 +1,5 @@
 import React, { memo, useMemo, useEffect, useCallback, useState } from 'react';
-import { View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Modal, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import { CalendarCustom } from 'components/';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -9,17 +9,12 @@ import { FlatList } from 'react-native-gesture-handler';
 import { CardJob, Icon } from 'components/';
 import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
-import { v4 } from 'uuid';
 import { Shadow } from 'constants/stylesCSS';
 import moment from 'moment';
-import Button from 'components/Button';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
-import _ from 'lodash';
 
 const WorkCalendar = props => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-
   const { calendarWork, loading } = useSelector(state => state?.calendarWork);
   const [detailModal, setDetailModal] = useState(null);
   const list = useMemo(() => {
@@ -40,26 +35,23 @@ const WorkCalendar = props => {
     );
   }, [dispatch]);
 
-  const onPressDay = useCallback(
-    (id, date, data) => {
-      const markedDates = [];
-      data.forEach(calendar => {
-        const dateTmp = moment(new Date(calendar.date)).format('YYYY-MM-DD');
-        markedDates.push(dateTmp);
-      }, []);
-      if (markedDates?.includes(date.dateString)) {
-        data.find(value => {
-          const detailDay = moment(value.date).format('YYYY-MM-DD');
-          if (detailDay === date.dateString) {
-            setDetailModal(value);
-          }
-        });
-      } else {
-        return;
-      }
-    },
-    [setDetailModal]
-  );
+  const onPressDay = useCallback((id, date, data) => {
+    const markedDates = [];
+    data.forEach(calendar => {
+      const dateTmp = moment(calendar.date).format('YYYY-MM-DD');
+      markedDates.push(dateTmp);
+    }, []);
+    if (markedDates?.includes(date.dateString)) {
+      data.forEach(value => {
+        const detailDay = moment(value.date).format('YYYY-MM-DD');
+        if (detailDay === date.dateString) {
+          setDetailModal(value);
+        }
+      });
+    } else {
+      return;
+    }
+  }, []);
 
   const onCheckIn = data => {
     const onConfirm = () => {
@@ -263,14 +255,14 @@ const WorkCalendar = props => {
     }
   ];
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({ item, index }) => {
     const markedDates = {};
     item.forEach(calendar => {
       const date = moment(calendar.date).format('YYYY-MM-DD');
       markedDates[date] = { selected: true, color: 'blue', textColor: 'red' };
     }, []);
     return (
-      <View style={styles.wrapper} key={v4()}>
+      <View style={styles.wrapper} key={item?.id || index}>
         <CardJob onPress={() => {}} data={item[0].job} hideAllFlag hideBorder />
         <CalendarCustom
           data={item}
@@ -283,7 +275,6 @@ const WorkCalendar = props => {
   };
 
   const renderModalDetail = data => {
-    console.log(data, 'datadtadtadt');
     const date = moment(data?.date).format('DD-MM-YYYY');
     const employerChecking = data?.checkInTime
       ? moment(data?.checkInTime).format('DD-MM-YYYY HH:mm')
@@ -388,9 +379,11 @@ const WorkCalendar = props => {
             <Icon name="closecircle" fontName="AntDesign" size={25} color={CUSTOM_COLOR.RedBasic} />
           </TouchableOpacity>
         </View>
-        <Text style={styles.modalDetailJobName}>{data?.job?.title}</Text>
-        {listValue}
-        <View style={styles.buttonArea}>{listButton}</View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <Text style={styles.modalDetailJobName}>{data?.job?.title}</Text>
+          {listValue}
+          <View style={styles.buttonArea}>{listButton}</View>
+        </ScrollView>
       </View>
     );
   };
@@ -451,7 +444,8 @@ const styles = StyleSheet.create({
   },
   contentDetail: {
     width: '90%',
-    maxHeight: '80%',
+    maxHeight: '70%',
+    minHeight: '50%',
     backgroundColor: BACKGROUND_COLOR.BasicGray,
     padding: SPACING.XXNormal,
     borderRadius: 10
