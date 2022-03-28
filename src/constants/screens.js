@@ -11,7 +11,8 @@ const SCREENS_NAME = {
   DETAIL_JOB_SCREEN: 'DetailJobScreen',
   FILTER_JOB: 'FilterJobScreen',
   DETAIL_PROFILE_SCREEN: 'DetailProfileScreen',
-  INCOME_SCREEN: 'IncomeScreen'
+  INCOME_SCREEN: 'IncomeScreen',
+  WITHDRAW_REQUEST: 'WithdrawRequestScreen'
 };
 
 export default SCREENS_NAME;

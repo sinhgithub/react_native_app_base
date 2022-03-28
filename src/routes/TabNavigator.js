@@ -27,11 +27,10 @@ import HomeHeader from 'components/HeaderHello';
 import MainHeader from 'components/MainHeader';
 import HeaderTitleScreen from 'components/HeaderTitleScreen';
 import DetailJob from 'screens/detail_job';
-import { useSelector } from 'react-redux';
-import Login from 'screens/auth/login';
 import FilterJobScreen from 'screens/filter_job';
 import DetailProfile from 'screens/profile/Detail';
 import Income from 'screens/income';
+import WithdrawRequestScreen from 'screens/withdraw_request';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -300,6 +299,14 @@ export const AppStackScreen = () => {
         options={{
           headerShown: true,
           header: () => <HeaderTitleScreen title={'Thu nhập'} />
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.WITHDRAW_REQUEST}
+        component={WithdrawRequestScreen}
+        options={{
+          headerShown: true,
+          header: () => <HeaderTitleScreen title={'Yêu cầu rút tiền'} />
         }}
       />
     </Stack.Navigator>

@@ -8,7 +8,10 @@ const initialState = {
   loadingWalletHistory: false,
 
   loadingWalletWithDraw: false,
-  walletWithDraw: []
+  walletWithDraw: [],
+
+  loadingWalletTotal: false,
+  walletTotal: []
 };
 
 const wallets = (state = initialState, action) => {
@@ -70,6 +73,26 @@ const wallets = (state = initialState, action) => {
       return {
         ...state,
         loadingWalletWithDraw: false
+      };
+    }
+    // ================================================
+    case WALLET.GET_WALLET_TOTAL.HANDLER: {
+      return {
+        ...state,
+        loadingWalletTotal: true
+      };
+    }
+    case WALLET.GET_WALLET_TOTAL.SUCCESS: {
+      return {
+        ...state,
+        loadingWalletTotal: false,
+        walletTotal: action.payload
+      };
+    }
+    case WALLET.GET_WALLET_TOTAL.FAILURE: {
+      return {
+        ...state,
+        loadingWalletTotal: false
       };
     }
     // ================================================

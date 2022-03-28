@@ -5,8 +5,8 @@ import { ICBack } from 'assets/icons';
 import { AppText } from 'src/components';
 import { useNavigation } from '@react-navigation/native';
 
-const MainHeader = props => {
-  const { containerStyle, title } = props;
+const HeaderTitleScreen = props => {
+  const { containerStyle, title, showRightButton, onPress } = props;
   const navigation = useNavigation();
   const onPressGoBack = useCallback(() => {
     navigation.goBack();
@@ -22,8 +22,13 @@ const MainHeader = props => {
       <View style={styles.titleArea}>
         <Text style={styles.titleText}>{title}</Text>
       </View>
+      {showRightButton && (
+        <TouchableOpacity style={styles.mainHeaderRight} onPress={onPress}>
+          <Text style={styles.titleRight}>Yeu cau rut tien</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
 
-export default memo(MainHeader);
+export default memo(HeaderTitleScreen);

@@ -35,6 +35,16 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY.BOLD,
     color: TEXT_COLOR.Black,
     fontSize: FONT_SIZE.Heading
+  },
+  mainHeaderRight: {
+    paddingRight: SPACING.XXNormal,
+    alignItems: 'center',
+    flexDirection: 'row'
+  },
+  titleRight: {
+    fontFamily: FONT_FAMILY.BOLD,
+    fontSize: FONT_SIZE.BodyText,
+    color: TEXT_COLOR.RedBasic
   }
 });
 

@@ -1,28 +1,28 @@
 import React, { memo, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { getUserHandle } from 'actions/user';
-import { useDispatch, useSelector, useStore } from 'react-redux';
+import { getWalletTotalHandle } from 'actions/wallet';
+import { useDispatch, useSelector } from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import { Icon } from 'components/';
 
-import { MAIN_HEADER_HEIGHT, SPACING } from 'constants/size';
+import { SPACING } from 'constants/size';
 
 import { FONT_SIZE, FONT_FAMILY } from 'constants/appFonts';
 
-import { BACKGROUND_COLOR, TEXT_COLOR, CUSTOM_COLOR } from 'constants/colors';
+import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
 import { Shadow } from 'constants/stylesCSS';
 import { formatNumber } from 'helpers/formatNumber';
 
 const IncomeOverView = props => {
   const { user, loading } = useSelector(state => state.user);
+  const { walletTotal, loadingWalletTotal } = useSelector(state => state.wallets);
   const { avatar } = user;
   const [avatarSize, setAvatarSize] = useState(null);
   const dispatch = useDispatch();
-  console.log(avatarSize, 'avatarSize');
-  // useEffect(() => {
-  //   dispatch(getUserHandle());
-  // }, [dispatch]);
-  // console.log(user, 'user');
+  useEffect(() => {
+    dispatch(getWalletTotalHandle({}));
+  }, [dispatch]);
+  console.log(user, 'user');
   return (
     <View style={styles.container}>
       <View
@@ -54,15 +54,15 @@ const IncomeOverView = props => {
         )}
       </View>
       <View style={styles.content}>
-        <Text style={styles.contentNameText}>Le Thanh Phuoc</Text>
+        <Text style={styles.contentNameText}>{user?.name || ''}</Text>
         <View style={styles.mgt4}>
           <View style={styles.row1}>
             <Icon fontName="AntDesign" name="star" size={20} color={BACKGROUND_COLOR.RedBasic} />
-            <Text style={styles.commonSmallText}>Ung vien</Text>
+            <Text style={styles.commonSmallText}>{user?.type || ''}</Text>
           </View>
           <View style={styles.row2}>
             <Icon fontName="AntDesign" name="mail" size={20} color={BACKGROUND_COLOR.RedBasic} />
-            <Text style={styles.commonSmallText}>lethanhphuoc@gmail.com</Text>
+            <Text style={styles.commonSmallText}>{user?.email || ''}</Text>
           </View>
         </View>
         <View style={styles.info}>
@@ -74,7 +74,7 @@ const IncomeOverView = props => {
                 size={20}
                 color={BACKGROUND_COLOR.BlueStone}
               />
-              <Text style={styles.infoIncome}>{formatNumber(10000000, ',')}</Text>
+              <Text style={styles.infoIncome}>{formatNumber(walletTotal?.total, ',')}</Text>
             </View>
             <Text style={styles.infoIncomeText}>Tổng số dư</Text>
           </View>
@@ -86,7 +86,7 @@ const IncomeOverView = props => {
                 size={20}
                 color={BACKGROUND_COLOR.RedBasic}
               />
-              <Text style={styles.infoIncome}>{formatNumber(10000000, ',')}</Text>
+              <Text style={styles.infoIncome}>{formatNumber(walletTotal?.balance, ',')}</Text>
             </View>
             <Text style={styles.infoIncomeText}>Tổng thu nhập</Text>
           </View>
@@ -98,11 +98,13 @@ const IncomeOverView = props => {
 
 const styles = StyleSheet.create({
   row1: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   row2: {
     flexDirection: 'row',
-    marginTop: SPACING.Small
+    marginTop: SPACING.Small,
+    alignItems: 'center'
   },
   mgt4: {
     marginTop: SPACING.Small
