@@ -1,8 +1,12 @@
-import { ic_logo } from 'assets/images';
+import { StackActions, useNavigation } from '@react-navigation/native';
+import { customerRegisterHandle } from 'actions/auth';
+import { bosanaLogo } from 'assets/images';
 import AppText from 'components/AppText';
+import { ModalNotification } from 'components/Modal';
 import StyledTouchable from 'components/StyledTouchable';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { CUSTOM_COLOR } from 'constants/colors';
+import SCREENS_NAME from 'constants/screens';
 import { Formik } from 'formik';
 import { translate } from 'language';
 import React, { useState } from 'react';
@@ -18,62 +22,65 @@ import {
 import { useDispatch } from 'react-redux';
 import { scale } from 'utils/responsive';
 import * as Yup from 'yup';
-import CustomInput from '../components/CustomInput';
-import RegisterTypeModal from '../components/RegisterTypeModal';
-import { useNavigation, StackActions } from '@react-navigation/native';
-import SCREENS_NAME from 'constants/screens';
-import { loginHandle } from 'actions/auth';
-import { ModalNotification } from 'components/Modal';
+import CustomInput from '../../components/CustomInput';
 
 const { width: WIDTH } = Dimensions.get('window');
-const phoneRegExp = /((0|1)+([0-9]{8,10})\b)/g;
 
-const LoginSchema = Yup.object().shape({
+const registerSchema = Yup.object().shape({
   password: Yup.string().required('auth.passwordRequired').min(6, 'auth.passwordError'),
-  account: Yup.string()
-    .required('auth.userNameRequired')
-    .matches(phoneRegExp, 'auth.phoneNumberError')
+  account: Yup.string().required('auth.userNameRequired'),
+  confirmPassword: Yup.string()
+    .required('auth.passwordRequired')
+    .oneOf([Yup.ref('password'), null], 'auth.confirmPasswordError')
 });
 
-const registerTypeData = [
-  { id: '1', title: 'auth.vip', type: 'vip' },
-  { id: '2', title: 'auth.distributor', type: 'distributor' },
-  { id: '3', title: 'auth.saleEmployer', type: 'sale' }
-];
-const LoginScreen = () => {
+const RegisterScreen = props => {
   const [isShowPassword, setShowPassword] = useState(false);
-  const [isShowModal, setShowModal] = useState(false);
+  const [isShowConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const onRegisterSuccess = () => {
-    navigation.dispatch(StackActions.replace(SCREENS_NAME.MAIN_SCREEN));
+    setTimeout(() => {
+      ModalNotification.showSuccess('popup.title', 'auth.registerSuccess', [
+        {
+          text: 'popup.close',
+          onPress: () => {
+            navigation.dispatch(StackActions.replace(SCREENS_NAME.LOGIN_SCREEN));
+          }
+        }
+      ]);
+    });
   };
 
   const onRegisterFail = () => {
     setTimeout(() => {
-      ModalNotification.showError('popup.title', 'auth.loginError');
+      ModalNotification.showError('popup.title', 'auth.registerFailure');
     });
   };
 
   return (
     <View style={styles.flex_1} onStartShouldSetResponder={() => Keyboard.dismiss()}>
       <KeyboardAvoidingView enabled behavior="padding" style={styles.container}>
-        <Image source={ic_logo} style={styles.logo} />
+        <Image source={bosanaLogo} style={styles.logo} />
         <Formik
           initialValues={{
             account: '',
-            password: ''
+            password: '',
+            confirmPassword: '',
+            parent: ''
           }}
           validateOnMount={true}
-          validationSchema={LoginSchema}
+          validationSchema={registerSchema}
           onSubmit={(values, actions) => {
             const params = {
               account: values.account.trim(),
-              password: values.password.trim()
+              password: values.password.trim(),
+              re_password: values.password.trim(),
+              parent: values.parent.trim()
             };
-            dispatch(loginHandle(params, onRegisterSuccess, onRegisterFail));
+            dispatch(customerRegisterHandle(params, onRegisterSuccess, onRegisterFail));
             actions.setSubmitting(false);
           }}>
           {({
@@ -89,11 +96,12 @@ const LoginScreen = () => {
             return (
               <View style={styles.formlogin}>
                 <AppText translate style={styles.loginText}>
-                  auth.login
+                  auth.createAccount
                 </AppText>
-                <AppText translate style={styles.loginDescTxt}>
-                  auth.loginDesc
+                <AppText translate style={styles.registerTypeTxt}>
+                  auth.vip
                 </AppText>
+
                 <CustomInput
                   value={values.account}
                   handleChange={handleChange}
@@ -103,7 +111,6 @@ const LoginScreen = () => {
                   isTouched={touched.account}
                   name={'account'}
                   placeholder={translate('auth.userNamePlaceholder')}
-                  keyboardType="number-pad"
                 />
                 <CustomInput
                   value={values.password}
@@ -119,15 +126,41 @@ const LoginScreen = () => {
                   placeholder={translate('auth.passwordPlaceholder')}
                 />
 
+                <CustomInput
+                  title={'auth.confirmPassword'}
+                  isRequired
+                  value={values.confirmPassword}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  maxLength={20}
+                  error={errors.confirmPassword}
+                  isTouched={touched.confirmPassword}
+                  name={'confirmPassword'}
+                  isPassword
+                  toggleShowPassword={setShowConfirmPassword}
+                  isShowPassword={isShowConfirmPassword}
+                  placeholder={translate('auth.confirmPasswordPlaceholder')}
+                />
+
+                <CustomInput
+                  value={values.parent}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  maxLength={50}
+                  error={errors.parent}
+                  isTouched={touched.parent}
+                  name={'parent'}
+                  placeholder={translate('auth.parentPlaceholder')}
+                />
+
                 <StyledTouchable
                   onPress={handleSubmit}
                   disabled={!isValid || isSubmitting}
                   customStyle={[styles.loginBtn]}>
                   <AppText style={[styles.loginTxt]} translate>
-                    auth.login
+                    auth.register
                   </AppText>
                 </StyledTouchable>
-
                 {/* <StyledTouchable
                   onPress={() =>
                     navigation.navigate(SCREENS_NAME.MAIN_SCREEN, {
@@ -135,34 +168,24 @@ const LoginScreen = () => {
                     })
                   }
                   customStyle={[styles.forgotBtn]}>
-                  <AppText style={[styles.forgotTxt]} translate>
+                  <AppText style={[styles.gobackTxt]} translate>
                     auth.goback
                   </AppText>
                 </StyledTouchable> */}
-
-                <StyledTouchable
-                  onPress={() => setShowModal(true)}
-                  customStyle={[styles.forgotBtn]}>
-                  <Text style={[styles.forgotTxt]} translate>
-                    {`${translate('auth.notHaveAccount')} `}
-                    <Text translate style={[styles.registerTxt]}>
-                      {translate('auth.register')}
-                    </Text>
-                  </Text>
-                </StyledTouchable>
               </View>
             );
           }}
         </Formik>
-        <RegisterTypeModal
-          visible={isShowModal}
-          data={registerTypeData}
-          onHideModal={() => setShowModal(false)}
-          onPressItem={item => {
-            setShowModal(false);
-            navigation.navigate(SCREENS_NAME.REGISTER_SCREEN, { registerType: item.type });
-          }}
-        />
+        <StyledTouchable
+          onPress={() => navigation.navigate(SCREENS_NAME.LOGIN_SCREEN)}
+          customStyle={[styles.forgotBtn]}>
+          <Text style={[styles.forgotTxt]} translate>
+            {`${translate('auth.haveAccount')} `}
+            <Text translate style={[styles.registerTxt]}>
+              {translate('auth.login')}
+            </Text>
+          </Text>
+        </StyledTouchable>
       </KeyboardAvoidingView>
     </View>
   );
@@ -247,11 +270,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: CUSTOM_COLOR.Red
   },
-  loginDescTxt: {
+  registerTypeTxt: {
     alignSelf: 'center',
     fontFamily: FONT_FAMILY.REGULAR,
     fontSize: FONT_SIZE.SubHead,
-    color: CUSTOM_COLOR.Gray
+    color: CUSTOM_COLOR.Pomegranateapprox
   },
   loginBtn: {
     marginHorizontal: scale(24),
@@ -273,13 +296,20 @@ const styles = StyleSheet.create({
     color: CUSTOM_COLOR.Black,
     fontFamily: FONT_FAMILY.REGULAR,
     alignSelf: 'center',
-    fontSize: FONT_SIZE.SubHead
+    fontSize: FONT_SIZE.SubHead,
+    paddingTop: scale(12)
   },
   registerTxt: {
     color: CUSTOM_COLOR.Pomegranateapprox,
     fontFamily: FONT_FAMILY.MEDIUM,
     fontSize: FONT_SIZE.SubHead
+  },
+  gobackTxt: {
+    color: CUSTOM_COLOR.Black,
+    fontFamily: FONT_FAMILY.REGULAR,
+    alignSelf: 'center',
+    fontSize: FONT_SIZE.BodyText
   }
 });
 
-export default LoginScreen;
+export default RegisterScreen;
