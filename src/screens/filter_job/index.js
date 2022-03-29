@@ -1,27 +1,44 @@
-import React, { memo, useCallback, useState, useMemo } from 'react';
+import React, { memo, useCallback, useState, useMemo, useEffect } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './styles';
 import { TextBoxRadius } from 'components/';
-import provincesVNData from 'src/global/provincesVNData.json';
-import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { getListProvinceHandle } from 'actions/master_data';
+import { useNavigation } from '@react-navigation/core';
+import SCREENS_NAME from 'constants/screens';
 
 const FilterJob = props => {
-  const [activeItem, setActiveItem] = useState(0);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const [activeItem, setActiveItem] = useState({ index: 0, data: null });
+  const [search, setSearch] = useState(null);
+  const { provinces, loading } = useSelector(state => state.masterData);
+
+  useEffect(() => {
+    dispatch(getListProvinceHandle({}));
+  }, [dispatch]);
+
   const listSuggestData = useMemo(() => {
     const result = [];
-    for (const k in provincesVNData) {
-      let name = provincesVNData[k].name
-        .toUpperCase()
-        .replace('TỈNH ', '')
-        .replace('THÀNH PHỐ ', '');
-      result.push(name);
+    if (provinces) {
+      for (const k in provinces) {
+        result.push(provinces?.[k]?.name);
+      }
     }
+
     return result;
-  }, []);
+  }, [provinces]);
 
   const onPressItemFilter = useCallback((data, index) => {
-    setActiveItem?.(index);
+    setActiveItem?.({ index, data });
+    setSearch({ index, data });
   }, []);
+
+  useEffect(() => {
+    if (search) {
+      navigation.navigate(SCREENS_NAME.FIND_JOB_SCREEN, { searchProvince: search || activeItem });
+    }
+  }, [navigation, search]);
 
   const listSuggest = listSuggestData.map((province, index) => {
     return (
@@ -29,8 +46,9 @@ const FilterJob = props => {
         data={province}
         text={province}
         index={index}
-        activeItem={activeItem}
+        activeItem={activeItem.index}
         onPress={onPressItemFilter}
+        key={index}
       />
     );
   });

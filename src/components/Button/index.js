@@ -1,3 +1,4 @@
+import { BACKGROUND_COLOR } from 'constants/colors';
 import React, { memo, useCallback } from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import styles from './styles';
@@ -17,7 +18,8 @@ const Button = props => {
     buttonRejectStyle,
     buttonConfirmStyle,
     titleRejectStyle,
-    titleConfirmStyle
+    titleConfirmStyle,
+    disable
   } = props;
 
   const renderButton = useCallback(() => {
@@ -75,15 +77,25 @@ const Button = props => {
       case 'modal':
         return (
           <TouchableOpacity
-            style={[styles.button, { borderRadius: 8 }, containerStyle]}
-            onPress={submitMethod}>
+            style={[
+              styles.button,
+              { borderRadius: 8 },
+              disable && { backgroundColor: BACKGROUND_COLOR.BasicGray },
+              containerStyle
+            ]}
+            onPress={submitMethod}
+            activeOpacity={disable ? 1 : 0.6}>
             <Text style={[styles.buttonTitle, titleStyle]}>{title}</Text>
           </TouchableOpacity>
         );
       default:
         return (
           <>
-            <TouchableOpacity type="submit" style={styles.button} onPress={submitMethod}>
+            <TouchableOpacity
+              type="submit"
+              style={styles.button}
+              onPress={submitMethod}
+              activeOpacity={disable ? 1 : 0.6}>
               <Text style={styles.buttonTitle}>{title}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.forgetPassword} onPress={forgetPasswordMethod}>

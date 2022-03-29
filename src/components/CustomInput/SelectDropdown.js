@@ -1,0 +1,58 @@
+import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
+import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
+import { SPACING } from 'constants/size';
+import React, { memo, useMemo } from 'react';
+import { View, Text, StyleSheet, TextInput } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
+import { Icon } from 'components/';
+import { formatNumber } from 'helpers/formatNumber';
+const Component = props => {
+  const { data, onChange } = props;
+
+  return (
+    <View style={styles.container}>
+      <SelectDropdown
+        buttonStyle={styles.wrapper}
+        buttonTextStyle={styles.buttonText}
+        rowTextStyle={styles.rowTextStyle}
+        defaultButtonText="Chọn ví cần rút"
+        data={data}
+        renderDropdownIcon={() => (
+          <Icon name="caretdown" fontName="AntDesign" size={15} color={CUSTOM_COLOR.BasicGray} />
+        )}
+        onSelect={(selectedItem, index) => {
+          onChange?.(selectedItem, index);
+        }}
+        buttonTextAfterSelection={(selectedItem, index) => {
+          return selectedItem;
+        }}
+        rowTextForSelection={(item, index) => {
+          return item;
+        }}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  wrapper: {
+    width: '100%',
+    height: 40,
+    backgroundColor: BACKGROUND_COLOR.White,
+    borderWidth: 1,
+    borderColor: CUSTOM_COLOR.BasicGray,
+    borderRadius: 10
+  },
+  buttonText: {
+    fontFamily: FONT_FAMILY.REGULAR,
+    fontSize: FONT_SIZE.BodyText,
+    color: TEXT_COLOR.Black
+  },
+  rowTextStyle: {
+    fontFamily: FONT_FAMILY.REGULAR,
+    fontSize: FONT_SIZE.BodyText,
+    color: TEXT_COLOR.Black
+  }
+});
+
+export default memo(Component);

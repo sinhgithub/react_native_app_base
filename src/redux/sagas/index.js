@@ -6,6 +6,7 @@ import saveJobSagas from './saveJobSagas';
 import calendarWorkSagas from './calendarWorkSagas';
 import walletSagas from './walletSagas';
 import userSagas from './userSagas';
+import masterDataSagas from './masterDataSagas';
 
 export default function* rootSaga() {
   yield all([
@@ -15,6 +16,7 @@ export default function* rootSaga() {
     saveJobSagas(),
     calendarWorkSagas(),
     walletSagas(),
-    userSagas()
+    userSagas(),
+    masterDataSagas()
   ]);
 }

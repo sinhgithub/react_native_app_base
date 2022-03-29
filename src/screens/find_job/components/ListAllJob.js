@@ -39,7 +39,7 @@ const ListAllJob = props => {
     if (isSearchText) {
       if (searchText !== '') {
         ev = setTimeout(() => {
-          dispatch(getListAllJobHandle({ key: searchText, page, size }));
+          dispatch(getListAllJobHandle({ key: searchText, search: true }));
         }, 300);
       } else {
         dispatch(getListAllJobHandle({ page, size }));
@@ -51,7 +51,7 @@ const ListAllJob = props => {
         ev = undefined;
       }
     };
-  }, [dispatch, isSearchText, searchText]);
+  }, [dispatch, isSearchText, page, searchText]);
 
   useEffect(() => {
     if (!loading && isRefreshing) {
@@ -61,7 +61,11 @@ const ListAllJob = props => {
 
   useEffect(() => {
     if (page > 0 && list?.length <= metaData?.total) {
-      dispatch(getListAllJobHandle({ page, size, isLoadMore: true }));
+      if (searchText && searchText !== '') {
+        dispatch(getListAllJobHandle({ key: searchText, isLoadMore: true }));
+      } else {
+        dispatch(getListAllJobHandle({ page, size, isLoadMore: true }));
+      }
     }
   }, [dispatch, page]);
 
@@ -105,7 +109,11 @@ const ListAllJob = props => {
   };
   const onRefresh = () => {
     setIsRefreshing(true);
-    dispatch(getListAllJobHandle({ page: 0, size }));
+    if (!searchText) {
+      dispatch(getListAllJobHandle({ page: 0, size }));
+    } else {
+      dispatch(getListAllJobHandle({ key: searchText, search: true }));
+    }
   };
 
   return (

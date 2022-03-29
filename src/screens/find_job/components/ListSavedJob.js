@@ -66,7 +66,11 @@ const ListAllJob = props => {
 
   useEffect(() => {
     if (page > 1 && list?.length <= metaDataFollowJob?.total) {
-      dispatch(getListFollowJobHandle({ page, size, isLoadMore: true }));
+      if (searchText && searchText !== '') {
+        dispatch(getListFollowJobHandle({ key: searchText, isLoadMore: true }));
+      } else {
+        dispatch(getListFollowJobHandle({ page, size, isLoadMore: true }));
+      }
     }
   }, [dispatch, page]);
 
@@ -109,12 +113,15 @@ const ListAllJob = props => {
   }, [navigation]);
 
   const loadMore = () => {
-    console.log('load morre');
     setPage(page + 1);
   };
   const onRefresh = () => {
     setIsRefreshing(true);
-    dispatch(getListFollowJobHandle({ page: 0, size }));
+    if (!searchText) {
+      dispatch(getListFollowJobHandle({ page: 0, size }));
+    } else {
+      dispatch(getListFollowJobHandle({ key: searchText, search: true }));
+    }
   };
 
   return (

@@ -51,3 +51,17 @@ export const getWalletTotalFailure = payload => ({
   type: WALLET.GET_WALLET_TOTAL.FAILURE,
   payload
 });
+
+// =============
+export const withdrawHandle = payload => ({
+  type: WALLET.WITHDRAW.HANDLER,
+  payload
+});
+export const withdrawSuccess = payload => ({
+  type: WALLET.WITHDRAW.SUCCESS,
+  payload
+});
+export const withdrawFailure = payload => ({
+  type: WALLET.WITHDRAW.FAILURE,
+  payload
+});

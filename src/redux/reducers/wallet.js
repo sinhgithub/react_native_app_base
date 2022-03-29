@@ -11,7 +11,10 @@ const initialState = {
   walletWithDraw: [],
 
   loadingWalletTotal: false,
-  walletTotal: []
+  walletTotal: [],
+
+  loadingWithdraw: false,
+  isWithdrawSuccess: false
 };
 
 const wallets = (state = initialState, action) => {
@@ -93,6 +96,26 @@ const wallets = (state = initialState, action) => {
       return {
         ...state,
         loadingWalletTotal: false
+      };
+    }
+    // ================================================
+    case WALLET.WITHDRAW.HANDLER: {
+      return {
+        ...state,
+        loadingWithdraw: true
+      };
+    }
+    case WALLET.WITHDRAW.SUCCESS: {
+      return {
+        ...state,
+        loadingWithdraw: false,
+        isWithdrawSuccess: true
+      };
+    }
+    case WALLET.WITHDRAW.FAILURE: {
+      return {
+        ...state,
+        loadingWithdraw: false
       };
     }
     // ================================================

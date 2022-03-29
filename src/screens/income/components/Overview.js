@@ -1,16 +1,32 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import CardWallet from 'components/CardWallet';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWalletHandle } from 'actions/wallet';
+import HeaderTitleScreen from 'components/HeaderTitleScreen';
+import SCREENS_NAME from 'constants/screens';
+import { useNavigation } from '@react-navigation/core';
 
 const Overview = props => {
   const dispatch = useDispatch();
-
+  const navigation = useNavigation();
   const { loadingWallet, wallets } = useSelector(state => state.wallets);
   useEffect(() => {
     dispatch(getWalletHandle({ callback: () => {}, failure: () => {} }));
   }, [dispatch]);
+
+  const onRequestWithDraw = useCallback(() => {
+    navigation.navigate(SCREENS_NAME.WITHDRAW_REQUEST, { data: wallets });
+  }, [navigation, wallets]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      header: () => (
+        <HeaderTitleScreen title={'Thu nhập'} showRightButton onPress={onRequestWithDraw} />
+      )
+    });
+  }, [navigation, onRequestWithDraw]);
+
   const renderItem = ({ item, index }) => {
     const isLastItem = index === wallets?.length - 1;
     return (

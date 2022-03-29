@@ -1,20 +1,91 @@
 import { BACKGROUND_COLOR } from 'constants/colors';
-import React, { memo } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { memo, useCallback, useMemo, useState } from 'react';
+import { View, StyleSheet, Keyboard, Platform } from 'react-native';
 import { SPACING } from 'constants/size';
-import { Icon } from 'components/';
 import { CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
-import { Shadow } from 'constants/stylesCSS';
-import { CustomInput } from 'components/';
+import { CustomInput, Button } from 'components/';
+import { formatNumber } from 'helpers/formatNumber';
+import { useDispatch } from 'react-redux';
+import { withdrawHandle } from 'actions/wallet';
+
+const getHardCodeCompare = item => {
+  return `${item?.id?.employer?.companyName} ( ${formatNumber(item?.balance, ',')} VND )`;
+};
 
 const WithDrawRequest = props => {
+  const dispatch = useDispatch();
+  const { data } = props?.route?.params;
+
+  const [values, setValues] = useState(null);
+  const [walletSelected, setWalletSelected] = useState(null);
+  const selectInputData = useMemo(() => {
+    if (!data) {
+      return [];
+    }
+    return data.map(item => getHardCodeCompare(item));
+  }, [data]);
+
+  const onSelectWallet = (selectedItem, index) => {
+    const selected = data.find(item => {
+      const compare = getHardCodeCompare(item);
+      if (selectedItem === compare) {
+        return item;
+      }
+    });
+    setWalletSelected(selected);
+    onChangeValue('employerId', selected?.id?.employer?.id);
+  };
+
+  const onChangeValue = (key, value) => {
+    setValues(prev => ({ ...prev, [key]: value }));
+  };
+
+  const isDisableButton = useMemo(() => {
+    if (
+      !values?.employerId ||
+      !values?.withdrawalAmount ||
+      walletSelected?.balance < values?.withdrawalAmount ||
+      values?.withdrawalAmount <= 0
+    ) {
+      return true;
+    }
+    return false;
+  }, [values]);
+
+  const onWithdraw = useCallback(() => {
+    if (!isDisableButton) {
+      dispatch(
+        withdrawHandle({
+          params: values,
+          success: () => {},
+          failure: () => {},
+          handleErr: () => {}
+        })
+      );
+    }
+  }, [isDisableButton, values]);
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} onStartShouldSetResponder={() => Keyboard.dismiss()}>
       <View style={styles.content}>
         <View style={styles.form}>
-          <CustomInput />
-          <CustomInput type="select" />
+          <CustomInput type="select" label="Ví" data={selectInputData} onChange={onSelectWallet} />
+          <CustomInput
+            autoCapitalize="none"
+            type="text"
+            label="Số tiền cần rút"
+            keyboardType="numeric"
+            keyInput="withdrawalAmount"
+            onChange={onChangeValue}
+            placeholder="Nhập số tiền cần rút"
+          />
+          <Button
+            type="modal"
+            title={'Xác nhận'}
+            submitMethod={onWithdraw}
+            disable={isDisableButton}
+          />
         </View>
       </View>
     </View>
@@ -40,7 +111,8 @@ const styles = StyleSheet.create({
     color: TEXT_COLOR.Black
   },
   form: {
-    marginTop: SPACING.XXLarge
+    marginTop: SPACING.XXLarge,
+    paddingHorizontal: SPACING.XXNormal
   }
 });
 

@@ -64,7 +64,11 @@ const ListJobApply = props => {
 
   useEffect(() => {
     if (page > 1 && list?.length <= metaDataApplyJob?.total) {
-      dispatch(getListApplyJobHandle({ page, size, isLoadMore: true }));
+      if (searchText && searchText !== '') {
+        dispatch(getListApplyJobHandle({ key: searchText, isLoadMore: true }));
+      } else {
+        dispatch(getListApplyJobHandle({ page, size, isLoadMore: true }));
+      }
     }
   }, [dispatch, page]);
 
@@ -110,7 +114,11 @@ const ListJobApply = props => {
   };
   const onRefresh = () => {
     setIsRefreshing(true);
-    dispatch(getListApplyJobHandle({ page: 0, size }));
+    if (!searchText) {
+      dispatch(getListApplyJobHandle({ page: 0, size }));
+    } else {
+      dispatch(getListApplyJobHandle({ key: searchText, search: true }));
+    }
   };
 
   return (

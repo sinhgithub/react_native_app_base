@@ -22,7 +22,6 @@ const IncomeOverView = props => {
   useEffect(() => {
     dispatch(getWalletTotalHandle({}));
   }, [dispatch]);
-  console.log(user, 'user');
   return (
     <View style={styles.container}>
       <View

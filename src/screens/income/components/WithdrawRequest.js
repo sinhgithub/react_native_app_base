@@ -10,23 +10,11 @@ import SCREENS_NAME from 'constants/screens';
 const WithdrawRequest = props => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { loadingWalletWithDraw, walletWithDraw } = useSelector(state => state.wallets);
+  const { loadingWalletWithDraw, walletWithDraw, wallets } = useSelector(state => state.wallets);
 
   useEffect(() => {
     dispatch(getWalletWithDrawHandle({ callback: () => {}, failure: () => {} }));
   }, [dispatch]);
-
-  const onRequestWithDraw = useCallback(() => {
-    navigation.navigate(SCREENS_NAME.WITHDRAW_REQUEST, { data: walletWithDraw });
-  }, [navigation, walletWithDraw]);
-
-  useEffect(() => {
-    navigation.setOptions({
-      header: () => (
-        <HeaderTitleScreen title={'Thu nhập'} showRightButton onPress={onRequestWithDraw} />
-      )
-    });
-  }, [navigation, onRequestWithDraw]);
 
   const renderItem = ({ item, index }) => {
     const isLastItem = index === walletWithDraw?.data?.length - 1;

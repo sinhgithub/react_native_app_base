@@ -24,7 +24,7 @@ const HeaderTitleScreen = props => {
       </View>
       {showRightButton && (
         <TouchableOpacity style={styles.mainHeaderRight} onPress={onPress}>
-          <Text style={styles.titleRight}>Yeu cau rut tien</Text>
+          <Text style={styles.titleRight}>Yêu cầu rút tiền</Text>
         </TouchableOpacity>
       )}
     </View>

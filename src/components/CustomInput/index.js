@@ -3,47 +3,60 @@ import { CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
 import React, { memo } from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import SelectDropdown from './SelectDropdown';
+
 const CustomInput = props => {
-  const { type, onChange } = props;
+  const { type, onChange, label, data, keyboardType, keyInput, placeholder } = props;
 
   const renderInput = () => {
     switch (type) {
       case 'text':
-        return <TextInput onChangeText={v => onChange?.(v)} style={styles.input} />;
+        return (
+          <TextInput
+            onChangeText={text => onChange?.(keyInput, text)}
+            style={styles.input}
+            keyboardType={keyboardType}
+            placeholder={placeholder}
+          />
+        );
       case 'select':
         return (
           <View>
-            <Picker
-              selectedValue={'java'}
-              style={styles.select}
-              onValueChange={(itemValue, itemIndex) => {}}
-              mode="dropdown">
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
-            </Picker>
+            <SelectDropdown onChange={onChange} data={data} />
           </View>
         );
       default:
-        return <TextInput style={styles.input} />;
+        return (
+          <TextInput
+            onChangeText={text => onChange?.(keyInput, text)}
+            style={styles.input}
+            keyboardType={keyboardType}
+          />
+        );
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>label input</Text>
+      <Text style={styles.label}>{label}</Text>
       {renderInput()}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    marginTop: SPACING.XNormal
+  },
   input: {
     borderWidth: 1,
     borderColor: CUSTOM_COLOR.BasicGray,
-    minHeight: 40,
-    borderRadius: 10
+    height: 40,
+    borderRadius: 10,
+    paddingHorizontal: SPACING.XNormal,
+    fontFamily: FONT_FAMILY.REGULAR,
+    fontSize: FONT_SIZE.BodyText,
+    color: TEXT_COLOR.Black
   },
   label: {
     fontFamily: FONT_FAMILY.BOLD,

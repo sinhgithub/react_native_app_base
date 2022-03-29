@@ -22,3 +22,8 @@ export const apiWalletTotal = (callback = () => {}) => {
   const url = `${END_POINT}api/wallet/stats`;
   return utils.get(url, {}, {}, callback);
 };
+
+export const apiWithDraw = (params, callback = () => {}) => {
+  const url = `${END_POINT}api/wallet/withdraw`;
+  return utils.post(url, params, {}, callback);
+};
