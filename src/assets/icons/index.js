@@ -29,3 +29,4 @@ export { default as ICTextArea } from './ic_textarea';
 export { default as ICTickSelect } from './ic_tick_select';
 export { default as ICRadioCheck } from './ic_radio_check.js';
 export { default as ICRadioUncheck } from './ic_radio_uncheck.js';
+export { default as ICHomeNew } from './ic_home_new';

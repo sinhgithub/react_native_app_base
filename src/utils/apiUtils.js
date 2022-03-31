@@ -63,7 +63,7 @@ export default class APIUtils {
         })
         .catch(err => {
           console.log('errr 3', { err });
-          callback?.();
+          callback?.(err);
           reject(handleErrorMessage(err));
         });
     });

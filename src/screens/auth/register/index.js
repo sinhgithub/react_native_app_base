@@ -19,67 +19,43 @@ import { useDispatch } from 'react-redux';
 import { scale } from 'utils/responsive';
 import * as Yup from 'yup';
 import CustomInput from '../components/CustomInput';
-import { useNavigation } from '@react-navigation/native';
+// import RegisterTypeModal from '../components/RegisterTypeModal';
+import { useNavigation, StackActions } from '@react-navigation/native';
 import SCREENS_NAME from 'constants/screens';
-import { loginFailure, loginHandle } from 'actions/auth';
-import { showCompleteModal } from 'actions/system';
-import { Icon } from 'components/';
+import { loginHandle } from 'actions/auth';
+import { ModalNotification } from 'components/Modal/NotificationWarning';
 
 const { width: WIDTH } = Dimensions.get('window');
+// const phoneRegExp = /((0|1)+([0-9]{8,10})\b)/g;
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required('auth.passwordRequired').min(6, 'auth.passwordErrorMin'),
   account: Yup.string().required('auth.userNameRequired').max(255, 'auth.accountErrorMax')
 });
 
-const LoginScreen = () => {
+const registerTypeData = [
+  { id: '1', title: 'auth.vip', type: 'vip' },
+  { id: '2', title: 'auth.distributor', type: 'distributor' },
+  { id: '3', title: 'auth.saleEmployer', type: 'sale' }
+];
+const Register = () => {
   const [isShowPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const onRegisterSuccess = () => {
-    dispatch(
-      showCompleteModal({
-        title: 'Đăng nhập thành công',
-        icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-        content: 'Chúc bạn tìm được công việc thích hợp trong thời gian sớm nhất!',
-        buttonTitle: 'Xác nhận',
-        onConfirm: () => {},
-        onClose: () => {}
-      })
-    );
+    navigation.dispatch(StackActions.replace(SCREENS_NAME.MAIN_SCREEN));
   };
 
   const onRegisterFail = () => {
-    dispatch(
-      showCompleteModal({
-        title: 'Đăng nhập không thành công',
-        icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-        content: 'Sai tên đăng nhập hoặc mật khẩu',
-        buttonTitle: 'Đăng nhập lại',
-        onConfirm: () => {},
-        onClose: () => {}
-      })
-    );
+    setTimeout(() => {
+      ModalNotification.showError('popup.title', 'auth.loginError');
+    });
   };
 
   const onPressRegister = () => {
     navigation.navigate(SCREENS_NAME.REGISTER_SCREEN, {});
-  };
-
-  const handleErr = error => {
-    dispatch(loginFailure(error));
-    dispatch(
-      showCompleteModal({
-        title: 'Lỗi kết nối',
-        icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-        content: 'Vui lòng kiểm tra lại',
-        buttonTitle: 'Xác nhận',
-        onConfirm: () => {},
-        onClose: () => {}
-      })
-    );
   };
 
   return (
@@ -95,10 +71,10 @@ const LoginScreen = () => {
           validationSchema={LoginSchema}
           onSubmit={(values, actions) => {
             const params = {
-              email: values.account.trim(),
+              account: values.account.trim(),
               password: values.password.trim()
             };
-            dispatch(loginHandle({ params, onRegisterSuccess, onRegisterFail, handleErr }));
+            dispatch(loginHandle(params, onRegisterSuccess, onRegisterFail));
             actions.setSubmitting(false);
           }}>
           {({
@@ -115,7 +91,7 @@ const LoginScreen = () => {
             return (
               <View style={styles.formlogin}>
                 <AppText translate style={styles.loginText}>
-                  auth.login
+                  Đăng ký
                 </AppText>
                 <CustomInput
                   label="auth.account"
@@ -144,6 +120,21 @@ const LoginScreen = () => {
                   placeholder={translate('auth.passwordPlaceholder')}
                 />
 
+                <CustomInput
+                  label="Nhập lại mật khẩu"
+                  value={values.passwordConfirm}
+                  handleChange={handleChange}
+                  handleBlur={handleBlur}
+                  maxLength={20}
+                  error={errors.passwordConfirm}
+                  isTouched={touched.passwordConfirm}
+                  name={'passwordConfirm'}
+                  isPassword
+                  toggleShowPassword={setShowPassword}
+                  isShowPassword={isShowPassword}
+                  placeholder={'Nhập lại mật khẩu'}
+                />
+
                 <StyledTouchable
                   onPress={handleSubmit}
                   disabled={disabled}
@@ -152,15 +143,15 @@ const LoginScreen = () => {
                     disabled && { backgroundColor: BACKGROUND_COLOR.BasicGray }
                   ]}>
                   <AppText style={[styles.loginTxt]} translate>
-                    auth.login
+                    Đăng ký
                   </AppText>
                 </StyledTouchable>
 
                 <StyledTouchable onPress={onPressRegister} customStyle={[styles.forgotBtn]}>
                   <Text style={[styles.forgotTxt]} translate>
-                    {`${translate('auth.notHaveAccount')} `}
+                    Bạn đã có tài khoản ?{' '}
                     <Text translate style={[styles.registerTxt]}>
-                      {translate('auth.register')}
+                      Đăng nhập
                     </Text>
                   </Text>
                 </StyledTouchable>
@@ -273,4 +264,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginScreen;
+export default Register;

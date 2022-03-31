@@ -63,7 +63,8 @@ export default {
     skill: 'Kỹ năng',
     skill_desc: 'Bạn đươc nhập tối đa 10 kỹ năng',
     add_skill: 'Thêm kỹ năng',
-    ranking_board: 'Bảng xếp hạng'
+    ranking_board: 'Bảng xếp hạng',
+    update_experience: 'Cập nhật kinh nghiệm'
   },
   tab_name: {
     home: 'Trang chủ',
@@ -71,5 +72,24 @@ export default {
     work: 'Làm việc',
     message_box: 'Hộp thư',
     profile: 'Hồ sơ'
+  },
+  auth: {
+    login: 'Đăng nhập',
+    userNamePlaceholder: 'Email hoặc số điện thoại',
+    userNameRequired: 'Tên đăng nhập là bắt buộc',
+    account: 'Tài khoản',
+    password: 'Mật khẩu',
+    passwordPlaceholder: 'Mật khẩu',
+    register: 'Đăng ký',
+    notHaveAccount: 'Bạn chưa có tài khoản? ',
+    passwordRequired: 'Mật khẩu là bắt buộc',
+    accountErrorMax: 'Tên đăng nhập tối đa 255 ký tự'
+  },
+  api: {
+    companyName: 'Tên công ty',
+    position: 'Vị trí',
+    startDate: 'Ngày bắt đầu',
+    endDate: 'Ngày kết thúc',
+    description: 'Mô tả'
   }
 };

@@ -1,4 +1,4 @@
-import { GET_LIST_JOB, FILTER } from 'actionsType';
+import { GET_LIST_JOB } from 'actionsType';
 
 const initialState = {
   loading: false,

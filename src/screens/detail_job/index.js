@@ -1,7 +1,6 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import styles from './styles';
-import MainHeader from 'components/MainHeader';
 import { useNavigation } from '@react-navigation/native';
 import { WarningBox, Button, Icon } from 'src/components';
 import { translate } from 'src/i18n';
@@ -15,27 +14,59 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAnimatedBottomModalSuccess, showCompleteModal, showConfirmModal } from 'actions/system';
 import { saveJobHandle } from 'actions/saveJob';
 import { receiveJobHandle } from 'actions/receive_job';
+import {
+  getListAppliedJobHandle,
+  getListApplyJobHandle,
+  getListFollowJobHandle
+} from 'actions/getListJob';
 
 const DetailJob = props => {
   const navigation = useNavigation();
   const { cardJob } = props.route.params;
   const dispatch = useDispatch();
   const { animatedBottomModal } = useSelector(state => state.system);
+  const { listFollowJob, listApplyJob, listAppliedJob } = useSelector(state => state.listJob);
   const [modalBonusInfo, setModalBonusInfo] = useState(null);
   const { onPressWarningBox = () => {} } = props;
 
   useEffect(() => {
-    navigation.setOptions({
-      header: () => {
-        return (
-          <MainHeader
-            mainHeaderRightText={`${translate('common.profile_code')}: 11020348ANN12M`}
-            containerStyle={styles.headerContainerStyle}
-          />
-        );
+    dispatch(getListFollowJobHandle({}));
+    dispatch(getListApplyJobHandle({}));
+    dispatch(getListAppliedJobHandle({}));
+  }, [dispatch]);
+
+  const disableSaveJob = useMemo(() => {
+    let result = false;
+    if (listFollowJob) {
+      for (const k in listFollowJob) {
+        if (k?.toString() === cardJob?.id?.toString()) {
+          result = true;
+        }
       }
-    });
-  }, [navigation]);
+    }
+    return result;
+  }, [cardJob?.id, listFollowJob]);
+
+  const disableApplyButton = useMemo(() => {
+    let result = false;
+    if (listApplyJob) {
+      for (const k in listApplyJob) {
+        if (k?.toString() === cardJob?.id?.toString()) {
+          result = true;
+        }
+      }
+    }
+    if (!result) {
+      if (listAppliedJob) {
+        for (const k in listAppliedJob) {
+          if (k?.toString() === cardJob?.id?.toString()) {
+            result = true;
+          }
+        }
+      }
+    }
+    return result;
+  }, [cardJob?.id, listAppliedJob, listApplyJob]);
 
   const dataJobDetail = useMemo(() => {
     return {
@@ -327,6 +358,8 @@ const DetailJob = props => {
           type="confirm_reject"
           submitMethod={onReceiveJob}
           rejectMethod={onSaveJob}
+          disableConfirm={disableApplyButton}
+          disableReject={disableSaveJob}
         />
       </View>
     </View>

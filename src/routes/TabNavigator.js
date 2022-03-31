@@ -3,7 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { add, interpolate } from 'react-native-reanimated';
 import SCREENS_NAME from 'constants/screens';
-import { Text, View } from 'react-native';
 import HomeScreen from 'screens/home';
 import { ICON_SIZE } from 'constants/size';
 import {
@@ -16,7 +15,8 @@ import {
   ICMessageActive,
   ICMessageInActive,
   ICProfileActive,
-  ICProfileInActive
+  ICProfileInActive,
+  ICHomeNew
 } from 'assets/icons';
 import FindJobScreen from 'screens/find_job';
 import MainTabbar from 'components/MainTabbar';
@@ -31,6 +31,7 @@ import FilterJobScreen from 'screens/filter_job';
 import DetailProfile from 'screens/profile/Detail';
 import Income from 'screens/income';
 import WithdrawRequestScreen from 'screens/withdraw_request';
+import UpdateProfileScreen from 'screens/update_profile';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -278,7 +279,7 @@ export const AppStackScreen = () => {
       <Stack.Screen
         name={SCREENS_NAME.DETAIL_JOB_SCREEN}
         component={DetailJob}
-        options={{ headerShown: true }}
+        options={{ headerShown: true, header: () => <HeaderTitleScreen title={'Chi tiết'} /> }}
       />
       <Stack.Screen
         name={SCREENS_NAME.FILTER_JOB}
@@ -307,6 +308,13 @@ export const AppStackScreen = () => {
         options={{
           headerShown: true,
           header: () => <HeaderTitleScreen title={'Yêu cầu rút tiền'} />
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.UPDATE_PROFILE_SCREEN}
+        component={UpdateProfileScreen}
+        options={{
+          headerShown: true
         }}
       />
     </Stack.Navigator>

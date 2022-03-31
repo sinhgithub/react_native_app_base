@@ -3,6 +3,8 @@ import LoginScreen from 'screens/auth/login';
 import { createStackNavigator } from '@react-navigation/stack';
 import { add, interpolate } from 'react-native-reanimated';
 import SCREENS_NAME from 'constants/screens';
+import RegisterScreen from 'screens/auth/register';
+import HeaderTitleScreen from 'components/HeaderTitleScreen';
 
 const AuthStack = createStackNavigator();
 const config = {
@@ -40,7 +42,6 @@ const forHeaderFade = ({ current, next }) => {
 };
 
 const screenOptions = {
-  // header: headerProps => <BackHeader {...headerProps} />,
   cardOverlayEnabled: true,
   transitionSpec: {
     open: config,
@@ -60,6 +61,14 @@ export const AuthStackScreen = () => {
         options={{
           title: 'screen_name.login_screen',
           headerShown: false
+        }}
+      />
+      <AuthStack.Screen
+        name={SCREENS_NAME.REGISTER_SCREEN}
+        component={RegisterScreen}
+        options={{
+          headerShown: true,
+          header: headerProps => <HeaderTitleScreen title="Đăng ký" />
         }}
       />
     </AuthStack.Navigator>

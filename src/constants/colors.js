@@ -97,7 +97,8 @@ export const CUSTOM_COLOR = {
   MainTab: '#FFFFFF',
   BasicGray: '#eae7e2',
   Pink: '#ffe5e4',
-  modalSystem: 'rgba(167,167,167,0.7)'
+  modalSystem: 'rgba(167,167,167,0.7)',
+  Pomegranateapprox: '#F12533'
 };
 
 export const TEXT_COLOR = {
@@ -141,7 +142,8 @@ export const TEXT_COLOR = {
   MainTab: CUSTOM_COLOR.MainTab,
   BasicGray: CUSTOM_COLOR.BasicGray,
   Pink: CUSTOM_COLOR.Pink,
-  modalSystem: CUSTOM_COLOR.modalSystem
+  modalSystem: CUSTOM_COLOR.modalSystem,
+  Pomegranateapprox: CUSTOM_COLOR.Pomegranateapprox
 };
 
 export const BACKGROUND_COLOR = {
@@ -180,7 +182,8 @@ export const BACKGROUND_COLOR = {
   MainTab: CUSTOM_COLOR.MainTab,
   BasicGray: CUSTOM_COLOR.BasicGray,
   Pink: CUSTOM_COLOR.Pink,
-  modalSystem: CUSTOM_COLOR.modalSystem
+  modalSystem: CUSTOM_COLOR.modalSystem,
+  Pomegranateapprox: CUSTOM_COLOR.Pomegranateapprox
 };
 
 export const HEADER_COLOR = CUSTOM_COLOR.White;

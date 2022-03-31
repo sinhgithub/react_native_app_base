@@ -57,7 +57,8 @@ export const USER = {
   CHECK_IN: asyncTypes('USER/CHECK_IN'),
   CHECK_OUT: asyncTypes('USER/CHECK_OUT'),
   ABSENCE: asyncTypes('USER/ABSENCE'),
-  GET_USER: asyncTypes('USER/GET_USER')
+  GET_USER: asyncTypes('USER/GET_USER'),
+  UPDATE_USER: asyncTypes('USER/UPDATE_USER')
 };
 
 export const WALLET = {

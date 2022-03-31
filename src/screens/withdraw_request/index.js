@@ -4,10 +4,11 @@ import { View, StyleSheet, Keyboard, Platform } from 'react-native';
 import { SPACING } from 'constants/size';
 import { CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
-import { CustomInput, Button } from 'components/';
+import { CustomInput, Button, Icon } from 'components/';
 import { formatNumber } from 'helpers/formatNumber';
 import { useDispatch } from 'react-redux';
 import { withdrawHandle } from 'actions/wallet';
+import { showCompleteModal } from 'actions/system';
 
 const getHardCodeCompare = item => {
   return `${item?.id?.employer?.companyName} ( ${formatNumber(item?.balance, ',')} VND )`;
@@ -58,13 +59,48 @@ const WithDrawRequest = props => {
       dispatch(
         withdrawHandle({
           params: values,
-          success: () => {},
-          failure: () => {},
-          handleErr: () => {}
+          success: () => {
+            console.log('Gởi yêu cầu thành công!');
+            dispatch(
+              showCompleteModal({
+                title: 'Gởi yêu cầu thành công!',
+                icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                content:
+                  'Bạn đã gởi yêu cầu rút tiền thành công, Yêu cầu của bạn sẽ được xử lý từ 30 - 60 phút',
+                buttonTitle: 'Xác nhận',
+                onConfirm: () => {},
+                onClose: () => {}
+              })
+            );
+          },
+          failure: () => {
+            dispatch(
+              showCompleteModal({
+                title: 'Gởi yêu cầu không thành công!',
+                icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                content: 'Xin vui lòng kiểm tra lại!',
+                buttonTitle: 'Xác nhận',
+                onConfirm: () => {},
+                onClose: () => {}
+              })
+            );
+          },
+          handleErr: () => {
+            dispatch(
+              showCompleteModal({
+                title: 'Lỗi kết nối',
+                icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                content: 'Xin vui lòng kiểm tra lại!',
+                buttonTitle: 'Xác nhận',
+                onConfirm: () => {},
+                onClose: () => {}
+              })
+            );
+          }
         })
       );
     }
-  }, [isDisableButton, values]);
+  }, [dispatch, isDisableButton, values]);
 
   return (
     <View style={styles.container} onStartShouldSetResponder={() => Keyboard.dismiss()}>

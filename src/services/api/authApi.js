@@ -10,9 +10,9 @@ const { END_POINT } = AppConfigs;
  * }
  * @returns
  */
-export const apiLogin = params => {
+export const apiLogin = (params, callback = () => {}) => {
   const url = `${END_POINT}api/auth/login`;
-  return utils.post(url, params);
+  return utils.post(url, params, {}, callback);
 };
 
 export const apiRegisterAccountMember = params => {

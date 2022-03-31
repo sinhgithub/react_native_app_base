@@ -2,7 +2,7 @@ import { SPACING } from 'constants/size';
 import React, { memo, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
 import { Button } from 'components/';
-import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
+import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
 import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
 import { useSelector, useDispatch } from 'react-redux';
 import { hideCompleteModal } from 'actions/system';
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_COLOR.BasicGray,
     padding: SPACING.XNormal,
     borderRadius: 10,
+    minWidth: '70%',
     maxWidth: '80%',
     zIndex: 1
   },
@@ -68,14 +69,15 @@ const styles = StyleSheet.create({
   headingText: {
     fontSize: FONT_SIZE.BodyText,
     fontFamily: FONT_FAMILY.BOLD,
-    color: TEXT_COLOR.RedBasic
+    color: TEXT_COLOR.RedBasic,
+    marginRight: SPACING.XXLarge
   },
   desc: {
     marginTop: SPACING.XNormal,
     fontSize: FONT_SIZE.Heading,
     fontFamily: FONT_FAMILY.REGULAR,
     color: TEXT_COLOR.Black,
-    maxWidth: '90%'
+    lineHeight: LINE_HEIGHT.BodyText
   },
   completeText: {
     backgroundColor: 'red'

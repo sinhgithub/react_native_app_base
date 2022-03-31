@@ -5,14 +5,15 @@ import { FONT_SIZE, FONT_FAMILY } from 'constants/appFonts';
 import { TEXT_COLOR } from 'constants/colors';
 
 const Header = props => {
+  const { onPress = () => {} } = props;
   return (
     <View style={styles.header}>
       <View style={styles.headerLeft}>
-        <Text style={styles.leftText}>Ho so ca nhan</Text>
+        <Text style={styles.leftText}>Hồ sơ cá nhân</Text>
       </View>
       <View style={styles.headerRight}>
-        <TouchableOpacity>
-          <Text style={styles.rightText}>Chi tiet</Text>
+        <TouchableOpacity onPress={onPress}>
+          <Text style={styles.rightText}>Chi tiết</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -37,8 +38,8 @@ const styles = StyleSheet.create({
   },
   rightText: {
     fontSize: FONT_SIZE.Heading,
-    fontFamily: FONT_FAMILY.REGULAR,
-    color: TEXT_COLOR.BlueStone
+    fontFamily: FONT_FAMILY.BOLD,
+    color: TEXT_COLOR.RedBasic
   }
 });
 

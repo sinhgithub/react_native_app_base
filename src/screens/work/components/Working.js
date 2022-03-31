@@ -34,8 +34,9 @@ const Working = props => {
     );
   }, [dispatch]);
 
-  const renderItem = ({ item }) => {
-    return <CardJob onPress={() => {}} data={item} hideAllFlag />;
+  const renderItem = ({ item, index }) => {
+    const isLastItem = list?.length - 1 === index;
+    return <CardJob onPress={() => {}} data={item} hideAllFlag isLastItem={isLastItem} />;
   };
 
   const onClickFindJobNow = useCallback(() => {

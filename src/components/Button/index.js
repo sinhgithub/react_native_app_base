@@ -1,4 +1,4 @@
-import { BACKGROUND_COLOR } from 'constants/colors';
+import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
 import React, { memo, useCallback } from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import styles from './styles';
@@ -19,7 +19,9 @@ const Button = props => {
     buttonConfirmStyle,
     titleRejectStyle,
     titleConfirmStyle,
-    disable
+    disable,
+    disableConfirm,
+    disableReject
   } = props;
 
   const renderButton = useCallback(() => {
@@ -47,8 +49,18 @@ const Button = props => {
         return (
           <View style={styles.rowSpaceBetween}>
             <TouchableOpacity
-              style={[styles.buttonConfirmReject, styles.buttonReject, buttonRejectStyle]}
-              onPress={rejectMethod}>
+              activeOpacity={disableReject ? 1 : 0.6}
+              style={[
+                styles.buttonConfirmReject,
+                styles.buttonReject,
+                buttonRejectStyle,
+                disableReject && { backgroundColor: CUSTOM_COLOR.BasicGray }
+              ]}
+              onPress={() => {
+                if (!disableReject) {
+                  rejectMethod?.();
+                }
+              }}>
               <Text
                 numberOfLines={1}
                 style={[
@@ -60,8 +72,18 @@ const Button = props => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.buttonConfirmReject, styles.buttonConfirm, buttonConfirmStyle]}
-              onPress={submitMethod}>
+              activeOpacity={disableConfirm ? 1 : 0.6}
+              style={[
+                styles.buttonConfirmReject,
+                styles.buttonConfirm,
+                buttonConfirmStyle,
+                disableConfirm && { backgroundColor: CUSTOM_COLOR.BasicGray }
+              ]}
+              onPress={() => {
+                if (!disableConfirm) {
+                  submitMethod?.();
+                }
+              }}>
               <Text
                 numberOfLines={1}
                 style={[
@@ -118,7 +140,9 @@ const Button = props => {
     titleReject,
     titleRejectStyle,
     titleStyle,
-    type
+    type,
+    disableConfirm,
+    disableReject
   ]);
 
   return <View style={[styles.container, containerStyle]}>{renderButton()}</View>;

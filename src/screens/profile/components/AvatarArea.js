@@ -21,9 +21,9 @@ const AvatarArea = () => {
       <View style={styles.info}>
         <View style={styles.infoStatusArea}>
           <Icon fontName="FontAwesome" name="user-secret" size={20} color="red" />
-          <Text style={styles.statusText}>Ho so chua xac thuc</Text>
+          <Text style={styles.statusText}>Hồ sơ chưa xác thực</Text>
         </View>
-        <Text style={styles.codeText}>Ma ho so 459483</Text>
+        {/* <Text style={styles.codeText}>Ma ho so 459483</Text> */}
       </View>
     </View>
   );
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: 40
   },
   info: {
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     paddingLeft: SPACING.XXNormal
   },
   infoStatusArea: {

@@ -12,7 +12,8 @@
     "rs": "npx react-native start --reset-cache",
     "patch": "npx patch-package",
     "build-android": "cd android && ./gradlew build && cd..",
-    "clean-android": "cd android && ./gradlew clean && cd.."
+    "clean-android": "cd android && ./gradlew clean && cd..",
+    "i": "yarn && npm run patch"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
@@ -27,6 +28,7 @@
     "@react-navigation/stack": "^6.0.11",
     "axios": "^0.21.1",
     "d3-shape": "^3.0.1",
+    "formik": "^2.2.9",
     "https": "^1.0.0",
     "i18n-js": "^3.8.0",
     "lodash": "^4.17.21",
@@ -45,6 +47,7 @@
     "react-native-fast-image": "^8.5.11",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-gifted-chat": "^0.16.3",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-modal": "^11.7.0",
     "react-native-permissions": "^3.0.1",
@@ -64,7 +67,8 @@
     "redux-persist": "^6.0.0",
     "redux-saga": "^1.1.3",
     "reselect": "^4.0.0",
-    "yarn": "^1.22.10"
+    "yarn": "^1.22.10",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

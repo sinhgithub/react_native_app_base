@@ -1,16 +1,28 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { View, Text, Animated, Keyboard } from 'react-native';
 import styles from './styles';
 import Input from './Input';
 
 const Form = props => {
-  const { refScroll } = props;
+  const { refScroll, data, onChange, onSubmit } = props;
   const [focus, setFocus] = useState(null);
+
+  const processedData = useMemo(() => {
+    const result = [];
+    if (data) {
+      for (const k in data) {
+        result.push(data[k]);
+      }
+    }
+    return result;
+  }, [data]);
+
+  // console.log(processedData, 'processedData');
 
   const onFocus = useCallback(
     index => {
       setFocus(index);
-      refScroll.current.scrollTo({ x: 0, y: 100, animated: true });
+      // refScroll.current.scrollTo({ x: 0, y: 100, animated: true });
     },
     [refScroll]
   );
@@ -19,15 +31,20 @@ const Form = props => {
     setFocus(null);
   }, []);
 
-  const listInput = Array(5)
-    .fill({})
-    .map((item, index) => {
-      return (
-        <View style={styles.formGroup} key={item.id || index}>
-          <Input onFocus={onFocus} onBlur={onBlur} data={{ ...item, index }} focused={focus} />
-        </View>
-      );
-    });
+  const listInput = processedData?.map((item, index) => {
+    return (
+      <View style={styles.formGroup} key={item.id || index}>
+        <Input
+          placeholder={item.placeholder}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          data={{ ...item, index }}
+          focused={focus}
+          onChange={onChange}
+        />
+      </View>
+    );
+  });
 
   return listInput;
 };

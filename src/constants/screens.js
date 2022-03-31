@@ -12,7 +12,9 @@ const SCREENS_NAME = {
   FILTER_JOB: 'FilterJobScreen',
   DETAIL_PROFILE_SCREEN: 'DetailProfileScreen',
   INCOME_SCREEN: 'IncomeScreen',
-  WITHDRAW_REQUEST: 'WithdrawRequestScreen'
+  WITHDRAW_REQUEST: 'WithdrawRequestScreen',
+  REGISTER_SCREEN: 'RegisterScreen',
+  UPDATE_PROFILE_SCREEN: 'UpdateProfileScreen'
 };
 
 export default SCREENS_NAME;

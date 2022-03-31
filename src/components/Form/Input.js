@@ -3,10 +3,10 @@ import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
 import React, { memo, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, Animated } from 'react-native';
+import { editExperienceForm, sectionProfileType, inputType } from 'constants/data_constants';
 
 const Input = props => {
-  const { isDoubleInput, onBlur, onFocus, data, focused } = props;
-
+  const { isDoubleInput, onBlur, onFocus, data, focused, onChange } = props;
   const animation = React.useRef(new Animated.Value(0)).current;
 
   const translateY = animation.interpolate({
@@ -24,9 +24,94 @@ const Input = props => {
     }
   }, [animation, data.index, focused]);
 
-  const renderCustomInput = () => {
+  const renderInputByType = () => {
+    // switch (data?.type) {
+    //   case inputType.text:
+    //     return (
+    //       <View style={[styles.wrapper, isDoubleInput && styles.widthControl]}>
+    //         {!!data?.label && <Text style={[styles.label]}>{data?.label}</Text>}
+    //         <Animated.View
+    //           style={[
+    //             styles.labelWrapper,
+    //             {
+    //               transform: [
+    //                 {
+    //                   translateY
+    //                 }
+    //               ]
+    //             }
+    //             // focused === data.index && { paddingVertical: SPACING.XSmall }
+    //           ]}>
+    //           {!!data?.placeholder && <Text style={[styles.placeholder]}>{data?.placeholder}</Text>}
+    //         </Animated.View>
+    //         <TextInput
+    //           style={styles.input}
+    //           onBlur={() => onBlur(data.index)}
+    //           onFocus={() => onFocus(data.index)}
+    //           defaultValue={data?.defaultValue}
+    //           onChangeText={text => onChange(data.id, text)}
+    //         />
+    //       </View>
+    //     );
+    //   case inputType.textarea:
+    //     return (
+    //       <View style={[styles.wrapper, isDoubleInput && styles.widthControl]}>
+    //         {!!data?.label && <Text style={[styles.label]}>{data?.label}</Text>}
+    //         <Animated.View
+    //           style={[
+    //             styles.labelWrapper,
+    //             {
+    //               transform: [
+    //                 {
+    //                   translateY
+    //                 }
+    //               ]
+    //             }
+    //             // focused === data.index && { paddingVertical: SPACING.XSmall }
+    //           ]}>
+    //           {!!data?.placeholder && <Text style={[styles.placeholder]}>{data?.placeholder}</Text>}
+    //         </Animated.View>
+    //         <TextInput
+    //           style={styles.inputTextArea}
+    //           onBlur={() => onBlur(data.index)}
+    //           onFocus={() => onFocus(data.index)}
+    //           defaultValue={data?.defaultValue}
+    //           multiline={true}
+    //         />
+    //       </View>
+    //     );
+    //   case inputType.date:
+    //     return (
+    //       <View style={[styles.wrapper, isDoubleInput && styles.widthControl]}>
+    //         {!!data?.label && <Text style={[styles.label]}>{data?.label}</Text>}
+    //         <Animated.View
+    //           style={[
+    //             styles.labelWrapper,
+    //             {
+    //               transform: [
+    //                 {
+    //                   translateY
+    //                 }
+    //               ]
+    //             }
+    //             // focused === data.index && { paddingVertical: SPACING.XSmall }
+    //           ]}>
+    //           {!!data?.placeholder && <Text style={[styles.placeholder]}>{data?.placeholder}</Text>}
+    //         </Animated.View>
+    //         <TextInput
+    //           style={styles.input}
+    //           onBlur={() => onBlur(data.index)}
+    //           onFocus={() => onFocus(data.index)}
+    //           defaultValue={data?.defaultValue}
+    //         />
+    //       </View>
+    //     );
+    //   default:
+    //     return null;
+    // }
     return (
       <View style={[styles.wrapper, isDoubleInput && styles.widthControl]}>
+        {!!data?.label && <Text style={[styles.label]}>{data?.label}</Text>}
         <Animated.View
           style={[
             styles.labelWrapper,
@@ -39,12 +124,15 @@ const Input = props => {
             }
             // focused === data.index && { paddingVertical: SPACING.XSmall }
           ]}>
-          <Text style={[styles.label]}>Số điện thoại</Text>
+          {!!data?.placeholder && <Text style={[styles.placeholder]}>{data?.placeholder}</Text>}
         </Animated.View>
         <TextInput
           style={styles.input}
           onBlur={() => onBlur(data.index)}
           onFocus={() => onFocus(data.index)}
+          defaultValue={data?.defaultValue}
+          onChangeText={text => onChange(data.id, text)}
+          value={data?.value}
         />
       </View>
     );
@@ -52,8 +140,7 @@ const Input = props => {
 
   return (
     <View style={[styles.container, isDoubleInput && styles.containerRow]}>
-      {renderCustomInput()}
-      {isDoubleInput && renderCustomInput()}
+      {renderInputByType()}
     </View>
   );
 };
@@ -73,6 +160,17 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     zIndex: 0
   },
+  inputTextArea: {
+    paddingHorizontal: SPACING.XXNormal,
+    borderWidth: 1,
+    borderColor: 'gray',
+    fontFamily: FONT_FAMILY.REGULAR,
+    fontSize: FONT_SIZE.BodyText,
+    borderRadius: 5,
+    zIndex: 0,
+    minHeight: 100,
+    maxHeight: 150
+  },
   widthControl: {
     width: '46%'
   },
@@ -84,8 +182,14 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_COLOR.White,
     paddingHorizontal: SPACING.XSmall
   },
-  label: {
+  placeholder: {
     color: 'gray'
+  },
+  label: {
+    fontFamily: FONT_FAMILY.REGULAR,
+    fontSize: FONT_SIZE.BodyText,
+    color: TEXT_COLOR.Black,
+    marginBottom: SPACING.Normal
   }
 });
 

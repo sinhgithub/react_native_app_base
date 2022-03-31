@@ -70,8 +70,7 @@ const CustomCalendar = props => {
         markedDates={markedDates}
         markingType={'custom'}
         theme={{
-          todayTextColor: 'white',
-          todayBackgroundColor: 'green',
+          todayTextColor: TEXT_COLOR.RedBasic,
           textDayStyle: {
             fontFamily: FONT_FAMILY.REGULAR,
             color: TEXT_COLOR.Black

@@ -1,8 +1,7 @@
 import React, { memo, useMemo, useEffect, useCallback, useState } from 'react';
-import { View, Text, StyleSheet, Modal, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Modal, TouchableOpacity, ScrollView } from 'react-native';
 import { CalendarCustom } from 'components/';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
 import { calendarWorkHandle, updateCalendarWorkHandle } from 'actions/calendar_work';
 import { showCompleteModal, showConfirmModal } from 'actions/system';
 import { FlatList } from 'react-native-gesture-handler';
@@ -15,7 +14,7 @@ import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 
 const WorkCalendar = props => {
   const dispatch = useDispatch();
-  const { calendarWork, loading } = useSelector(state => state?.calendarWork);
+  const { calendarWork } = useSelector(state => state?.calendarWork);
   const [detailModal, setDetailModal] = useState(null);
   const list = useMemo(() => {
     const result = [];
@@ -259,7 +258,23 @@ const WorkCalendar = props => {
     const markedDates = {};
     item.forEach(calendar => {
       const date = moment(calendar.date).format('YYYY-MM-DD');
-      markedDates[date] = { selected: true, color: 'blue', textColor: 'red' };
+      markedDates[date] = {
+        customStyles: {
+          container: {
+            backgroundColor: calendar.checkInTime
+              ? BACKGROUND_COLOR.RedBasic
+              : calendar.checkOutTime
+              ? BACKGROUND_COLOR.RedError
+              : calendar.cancelTime
+              ? BACKGROUND_COLOR.Black
+              : BACKGROUND_COLOR.RedBasic
+          },
+          text: {
+            color: 'white',
+            fontWeight: 'bold'
+          }
+        }
+      };
     }, []);
     return (
       <View style={styles.wrapper} key={item?.id || index}>

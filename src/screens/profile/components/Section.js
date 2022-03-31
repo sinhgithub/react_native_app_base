@@ -1,15 +1,76 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { Button } from 'components/';
+import { Button, Icon, AppText } from 'components/';
 import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
 import { SPACING } from 'constants/size';
 import { TEXT_COLOR, CUSTOM_COLOR, BACKGROUND_COLOR } from 'constants/colors';
+import { sectionProfileType } from 'constants/data_constants';
+import { Shadow } from 'constants/stylesCSS';
 
 const Section = props => {
-  const { containerStyle, leftTitle, rightTitle, descText, buttonTile, hideRightTittle } = props;
+  const {
+    containerStyle,
+    leftTitle,
+    rightTitle,
+    descText,
+    buttonTile,
+    hideRightTittle,
+    onPressButton,
+    type,
+    data,
+    onDelete,
+    onEdit
+  } = props;
+  const renderItem = () => {
+    if (!data || data?.length <= 0) {
+      return null;
+    }
+    switch (type) {
+      case sectionProfileType.complete_profile:
+        break;
+      case sectionProfileType.update_experience:
+        return data?.map((item, index) => {
+          let ArrayItem = [];
+          for (const k in item) {
+            ArrayItem.push({ key: k, value: item[k] });
+          }
+          const listItem = ArrayItem.map((v, i) => {
+            const isFirstItem = i === 0;
+            const isLastItem = i === ArrayItem.length - 1;
+            return (
+              <ItemTitleValue
+                title={v.key}
+                value={v.value}
+                isFirstItem={isFirstItem}
+                isLastItem={isLastItem}
+              />
+            );
+          });
+          return (
+            <View style={styles.listExperience}>
+              <View style={styles.listExperienceAction}>
+                <TouchableOpacity
+                  style={styles.listExperienceActionEdit}
+                  onPress={() => onEdit?.(item, type)}>
+                  <Icon name="edit" fontName="AntDesign" size={25} color={CUSTOM_COLOR.RedBasic} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.listExperienceActionDelete}
+                  onPress={() => onDelete?.(item, index)}>
+                  <Icon name="delete" fontName="AntDesign" size={25} color={CUSTOM_COLOR.Black} />
+                </TouchableOpacity>
+              </View>
+              {listItem}
+            </View>
+          );
+        });
+      default:
+        return null;
+    }
+  };
   return (
     <View style={[styles.container, containerStyle]}>
-      <View style={styles.heading}>
+      <View style={[styles.heading, data && { paddingVertical: SPACING.Small }]}>
         <View style={styles.headingLeft}>
           <Text style={styles.headingLeftText}>{leftTitle}</Text>
         </View>
@@ -19,13 +80,40 @@ const Section = props => {
           </TouchableOpacity>
         )}
       </View>
-      <Text style={styles.headingTextDesc}>{descText}</Text>
-      <Button
-        type="modal"
-        title={buttonTile}
-        containerStyle={styles.button}
-        titleStyle={styles.titleButton}
-      />
+      {(!data || data?.length <= 0) && (
+        <View>
+          <Text style={styles.headingTextDesc}>{descText}</Text>
+        </View>
+      )}
+      {renderItem()}
+      <View style={{ marginTop: 6 }}>
+        <Button
+          type="modal"
+          title={buttonTile}
+          containerStyle={styles.button}
+          titleStyle={styles.titleButton}
+          submitMethod={() => onPressButton?.(type)}
+        />
+      </View>
+    </View>
+  );
+};
+
+const ItemTitleValue = ({ title, value, isLastItem, isFirstItem }) => {
+  const containerStyleControl = {
+    marginBottom: 0
+  };
+  return (
+    <View style={[styles.itemTitleValue, isLastItem && containerStyleControl]}>
+      <AppText translate style={styles.itemTitleValueTitle}>
+        {`api.${title}`}
+      </AppText>
+      <Text translate style={styles.itemTitleValueDot}>
+        :
+      </Text>
+      <AppText translate style={styles.itemTitleValueContent}>
+        {value}
+      </AppText>
     </View>
   );
 };
@@ -66,6 +154,39 @@ const styles = StyleSheet.create({
   },
   titleButton: {
     color: TEXT_COLOR.Black
+  },
+
+  listExperience: {
+    marginTop: SPACING.XXNormal,
+    backgroundColor: BACKGROUND_COLOR.White,
+    ...Shadow,
+    padding: SPACING.XXNormal,
+    borderRadius: 10
+  },
+  listExperienceAction: {
+    flexDirection: 'row',
+    marginBottom: SPACING.Normal,
+    justifyContent: 'flex-end'
+  },
+  listExperienceActionEdit: {
+    marginRight: SPACING.XNormal
+  },
+  itemTitleValue: {
+    flexDirection: 'row',
+    marginBottom: SPACING.Normal
+  },
+  itemTitleValueTitle: {
+    minWidth: '35%',
+    maxWidth: '40%',
+    fontSize: FONT_SIZE.BodyText,
+    fontFamily: FONT_FAMILY.REGULAR
+  },
+  itemTitleValueDot: {
+    marginLeft: SPACING.Small
+  },
+  itemTitleValueContent: {
+    marginLeft: SPACING.XXNormal,
+    flex: 1
   }
 });
 

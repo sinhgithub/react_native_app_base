@@ -7,6 +7,7 @@ import Avatar from './components/Avatar';
 import { screenHeight, navbarHeight, MAIN_HEADER_HEIGHT, statusBarHeight } from 'constants/size';
 import AccountBank from './components/AccountBank';
 import { BACKGROUND_COLOR } from 'constants/colors';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 const DetailProfile = props => {
   const onChangeTab = useCallback(index => {}, []);
   const refScroll = useRef(null);

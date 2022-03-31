@@ -153,3 +153,20 @@ export const tabIncomeScreen = [
     title: 'Rút tiền'
   }
 ];
+
+export const sectionProfileType = {
+  update_experience: 'update_experience',
+  complete_profile: 'complete_profile'
+};
+
+export const titleUpdateProfile = {
+  experience: 'Thêm kinh nghiệm',
+  complete_profile: 'Hoàn tất hồ sơ',
+  update_experience: 'Cập nhật kinh nghiệm'
+};
+
+export const inputType = {
+  text: 'text',
+  date: 'date',
+  textarea: 'textarea'
+};

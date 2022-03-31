@@ -3,18 +3,18 @@ import { call, put } from 'redux-saga/effects';
 import { apiWithDraw } from 'services/api/wallet';
 
 export function* withDrawSaga(obj) {
-  const { params, callback, failure, handleErr } = obj.payload;
+  const { params, success, failure, handleErr } = obj.payload;
   try {
     const res = yield call(apiWithDraw, params, handleErr);
     if (res.status === 200) {
       yield put(withdrawSuccess(res.data));
-      return callback?.();
+      success?.(res);
     } else {
       yield put(withdrawFailure(res));
-      return failure?.();
+      failure?.(res);
     }
   } catch (error) {
     yield put(withdrawFailure(error));
-    failure?.();
+    failure?.(error);
   }
 }

@@ -9,7 +9,6 @@ import { useNavigation } from '@react-navigation/native';
 import SCREEN_NAME from 'constants/screens';
 
 const ContinueTab = props => {
-  const listJobContinue = useSelector(state => state?.listJob?.listAllJob?.data);
   const navigation = useNavigation();
   const [loading, setLoading] = useState(true);
 
