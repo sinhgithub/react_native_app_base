@@ -39,6 +39,7 @@ const Section = props => {
             const isLastItem = i === ArrayItem.length - 1;
             return (
               <ItemTitleValue
+                key={i}
                 title={v.key}
                 value={v.value}
                 isFirstItem={isFirstItem}
@@ -47,16 +48,16 @@ const Section = props => {
             );
           });
           return (
-            <View style={styles.listExperience}>
+            <View style={styles.listExperience} key={index}>
               <View style={styles.listExperienceAction}>
                 <TouchableOpacity
                   style={styles.listExperienceActionEdit}
-                  onPress={() => onEdit?.(item, type)}>
+                  onPress={() => onEdit?.(item, type, index)}>
                   <Icon name="edit" fontName="AntDesign" size={25} color={CUSTOM_COLOR.RedBasic} />
                 </TouchableOpacity>
                 <TouchableOpacity
                   style={styles.listExperienceActionDelete}
-                  onPress={() => onDelete?.(item, index)}>
+                  onPress={() => onDelete?.(item, type, index)}>
                   <Icon name="delete" fontName="AntDesign" size={25} color={CUSTOM_COLOR.Black} />
                 </TouchableOpacity>
               </View>
@@ -64,10 +65,139 @@ const Section = props => {
             </View>
           );
         });
+      case sectionProfileType.update_education:
+        if (!data || !(data?.education && data?.educationStatus)) {
+          return null;
+        }
+        let ArrayItem = [];
+        for (const k in data) {
+          ArrayItem.push({ key: k, value: data[k] });
+        }
+        const listItem = ArrayItem.map((v, i) => {
+          const isFirstItem = i === 0;
+          const isLastItem = i === ArrayItem.length - 1;
+          return (
+            <ItemTitleValue
+              key={i}
+              title={v.key}
+              value={v.value}
+              isFirstItem={isFirstItem}
+              isLastItem={isLastItem}
+            />
+          );
+        });
+        return (
+          <View style={styles.listExperience}>
+            <View style={styles.listExperienceAction}>
+              <TouchableOpacity
+                style={styles.listExperienceActionEdit}
+                onPress={() => onEdit(data, type, null)}>
+                <Icon name="edit" fontName="AntDesign" size={25} color={CUSTOM_COLOR.RedBasic} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.listExperienceActionDelete}
+                onPress={() => onDelete(data, type, null)}>
+                <Icon name="delete" fontName="AntDesign" size={25} color={CUSTOM_COLOR.Black} />
+              </TouchableOpacity>
+            </View>
+            {listItem}
+          </View>
+        );
+      case sectionProfileType.update_skill:
+        let ArrayItemSkill = [];
+        let filter = {};
+        data
+          .filter(item => item)
+          .forEach(item => {
+            filter[item.id] = item;
+          });
+        for (const k in filter) {
+          ArrayItemSkill.push({ key: k, value: filter[k] });
+        }
+        return ArrayItemSkill?.map((item, index) => {
+          let ArrayItemValue = [];
+          for (const k in item.value) {
+            ArrayItemValue.push({ key: k, value: item.value[k] });
+          }
+          ArrayItemValue.forEach((i, idx) => {
+            if (i.key === 'id') {
+              ArrayItemValue.splice(idx, 1);
+            }
+          });
+          const listItemSkill = ArrayItemValue.map((v, i) => {
+            const isFirstItem = i === 0;
+            const isLastItem = i === ArrayItemSkill.length - 1;
+            return (
+              <ItemTitleValue
+                key={i}
+                title={v.key}
+                value={v.value}
+                isFirstItem={isFirstItem}
+                isLastItem={isLastItem}
+              />
+            );
+          });
+          return (
+            <View style={styles.listExperience} key={index}>
+              <View style={styles.listExperienceAction}>
+                <TouchableOpacity
+                  style={styles.listExperienceActionDelete}
+                  onPress={() => onDelete?.(item, type, index)}>
+                  <Icon name="delete" fontName="AntDesign" size={25} color={CUSTOM_COLOR.Black} />
+                </TouchableOpacity>
+              </View>
+              {listItemSkill}
+            </View>
+          );
+        });
       default:
         return null;
     }
   };
+  const disableDesc = useMemo(() => {
+    switch (type) {
+      case sectionProfileType.update_experience:
+        if (!data || data?.length <= 0) {
+          return false;
+        }
+        return true;
+      case sectionProfileType.update_education:
+        if (
+          (data?.education === '' && data?.educationStatus === '') ||
+          !(data?.education && data?.educationStatus)
+        ) {
+          return false;
+        }
+        return true;
+      case sectionProfileType.update_skill:
+        if (!data || data?.length <= 0) {
+          return false;
+        }
+        return true;
+      default:
+        return false;
+    }
+  }, [data, type]);
+
+  const hideSubmitButton = useMemo(() => {
+    switch (type) {
+      case sectionProfileType.update_experience:
+        return false;
+      case sectionProfileType.update_education:
+        if (
+          (data?.education === '' && data?.educationStatus === '') ||
+          !(data?.education && data?.educationStatus)
+        ) {
+          return false;
+        }
+        return true;
+      case sectionProfileType.update_skill:
+        return false;
+      default:
+        return false;
+    }
+  }, [data, type]);
+
   return (
     <View style={[styles.container, containerStyle]}>
       <View style={[styles.heading, data && { paddingVertical: SPACING.Small }]}>
@@ -80,21 +210,23 @@ const Section = props => {
           </TouchableOpacity>
         )}
       </View>
-      {(!data || data?.length <= 0) && (
+      {!disableDesc && (
         <View>
           <Text style={styles.headingTextDesc}>{descText}</Text>
         </View>
       )}
       {renderItem()}
-      <View style={{ marginTop: 6 }}>
-        <Button
-          type="modal"
-          title={buttonTile}
-          containerStyle={styles.button}
-          titleStyle={styles.titleButton}
-          submitMethod={() => onPressButton?.(type)}
-        />
-      </View>
+      {!hideSubmitButton && (
+        <View style={{ marginTop: 6 }}>
+          <Button
+            type="modal"
+            title={buttonTile}
+            containerStyle={styles.button}
+            titleStyle={styles.titleButton}
+            submitMethod={() => onPressButton?.(type)}
+          />
+        </View>
+      )}
     </View>
   );
 };

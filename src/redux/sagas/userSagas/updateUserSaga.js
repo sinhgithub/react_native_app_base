@@ -4,6 +4,7 @@ import { apiUpdateUser } from 'services/api/user';
 
 export function* updateUserSaga(obj) {
   const { params, success, handleErr, failure } = obj.payload;
+  console.log(handleErr, 'handleErr');
   try {
     const res = yield call(apiUpdateUser, params, handleErr);
     if (res.status === 200) {

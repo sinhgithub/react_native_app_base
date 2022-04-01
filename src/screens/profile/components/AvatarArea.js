@@ -12,7 +12,7 @@ const AvatarArea = () => {
       <View style={styles.avatarAreaImage}>
         <FastImage
           source={{
-            uri: 'https://static.remove.bg/remove-bg-web/726c8211ef4fdb5ce44accdf843f9bab4d2a356a/assets/start_remove-c851bdf8d3127a24e2d137a55b1b427378cd17385b01aec6e59d5d4b5f39d2ec.png'
+            uri: 'https://static.vecteezy.com/system/resources/previews/000/420/940/non_2x/avatar-icon-vector-illustration.jpg'
           }}
           style={styles.avatarImage}
           resizeMode="stretch"

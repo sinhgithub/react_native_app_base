@@ -20,7 +20,7 @@ const JobInfo = props => {
         <FastImage
           style={styles.jobInfoInfoImageImage}
           source={{
-            uri: 'https://jes.edu.vn/wp-content/uploads/2017/10/h%C3%ACnh-%E1%BA%A3nh.jpg'
+            uri: 'https://fpthcm.net/wp-content/uploads/2018/06/cropped-logo_fpt.png'
           }}
           resizeMode={FastImage.resizeMode.stretch}
         />

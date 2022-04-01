@@ -31,3 +31,19 @@ export const updateUserFailure = payload => ({
   payload
 });
 // ========================================
+
+export const getSkillCriteriaHandle = payload => ({
+  type: USER.GET_SKILL_CRITERIA.HANDLER,
+  payload
+});
+
+export const getSkillCriteriaSuccess = payload => ({
+  type: USER.GET_SKILL_CRITERIA.SUCCESS,
+  payload
+});
+
+export const getSkillCriteriaFailure = payload => ({
+  type: USER.GET_SKILL_CRITERIA.FAILURE,
+  payload
+});
+// ========================================

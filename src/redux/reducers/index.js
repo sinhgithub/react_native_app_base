@@ -21,7 +21,7 @@ const systemPersistConfig = {
 const authPersistConfig = {
   key: 'auth',
   storage: AsyncStorage,
-  whitelist: [],
+  whitelist: ['isLogin'],
   version: 1.0
 };
 

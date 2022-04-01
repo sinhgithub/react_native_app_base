@@ -5,7 +5,7 @@ import { FONT_SIZE } from 'constants/appFonts';
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     backgroundColor: BACKGROUND_COLOR.White
   },
   avatar: {
@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
   },
   accountBankContainer: {
     marginTop: SPACING.Large
+  },
+  detailProfile: {
+    paddingHorizontal: SPACING.XXNormal
   }
 });
 

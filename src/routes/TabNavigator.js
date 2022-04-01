@@ -28,10 +28,11 @@ import MainHeader from 'components/MainHeader';
 import HeaderTitleScreen from 'components/HeaderTitleScreen';
 import DetailJob from 'screens/detail_job';
 import FilterJobScreen from 'screens/filter_job';
-import DetailProfile from 'screens/profile/Detail';
+import DetailProfile from 'screens/profile/detail';
 import Income from 'screens/income';
 import WithdrawRequestScreen from 'screens/withdraw_request';
-import UpdateProfileScreen from 'screens/update_profile';
+import UpdateProfileScreen from 'screens/profile/update_profile';
+import AddProfileScreen from 'screens/profile/add_profile';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -313,6 +314,13 @@ export const AppStackScreen = () => {
       <Stack.Screen
         name={SCREENS_NAME.UPDATE_PROFILE_SCREEN}
         component={UpdateProfileScreen}
+        options={{
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.ADD_PROFILE_SCREEN}
+        component={AddProfileScreen}
         options={{
           headerShown: true
         }}

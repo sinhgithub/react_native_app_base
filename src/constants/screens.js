@@ -14,7 +14,8 @@ const SCREENS_NAME = {
   INCOME_SCREEN: 'IncomeScreen',
   WITHDRAW_REQUEST: 'WithdrawRequestScreen',
   REGISTER_SCREEN: 'RegisterScreen',
-  UPDATE_PROFILE_SCREEN: 'UpdateProfileScreen'
+  UPDATE_PROFILE_SCREEN: 'UpdateProfileScreen',
+  ADD_PROFILE_SCREEN: 'AddProfileScreen'
 };
 
 export default SCREENS_NAME;

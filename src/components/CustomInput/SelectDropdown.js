@@ -6,8 +6,9 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Icon } from 'components/';
 import { formatNumber } from 'helpers/formatNumber';
+import { inputType } from 'constants/data_constants';
 const Component = props => {
-  const { data, onChange } = props;
+  const { data, onChange, defaultButtonText } = props;
 
   return (
     <View style={styles.container}>
@@ -15,13 +16,13 @@ const Component = props => {
         buttonStyle={styles.wrapper}
         buttonTextStyle={styles.buttonText}
         rowTextStyle={styles.rowTextStyle}
-        defaultButtonText="Chọn ví cần rút"
+        defaultButtonText={defaultButtonText || 'Chọn ví cần rút'}
         data={data}
         renderDropdownIcon={() => (
           <Icon name="caretdown" fontName="AntDesign" size={15} color={CUSTOM_COLOR.BasicGray} />
         )}
         onSelect={(selectedItem, index) => {
-          onChange?.(selectedItem, index);
+          onChange?.(selectedItem, index, inputType.select);
         }}
         buttonTextAfterSelection={(selectedItem, index) => {
           return selectedItem;

@@ -90,6 +90,11 @@ export default {
     position: 'Vị trí',
     startDate: 'Ngày bắt đầu',
     endDate: 'Ngày kết thúc',
-    description: 'Mô tả'
+    description: 'Mô tả',
+    majors: 'Ngành học',
+    education: 'Trường',
+    educationStatus: 'Tốt nghiệp ?',
+    name: 'Kinh nghiệm',
+    id: 'STT'
   }
 };

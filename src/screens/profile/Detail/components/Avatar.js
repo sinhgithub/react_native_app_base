@@ -4,17 +4,22 @@ import { default_avatar } from 'assets/images';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
+import FastImage from 'react-native-fast-image';
 
 const Avatar = props => {
+  const { avatar } = props;
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <Image source={default_avatar} style={styles.image} resizeMode="contain" />
+        {avatar ? (
+          <FastImage source={{ uri: avatar }} />
+        ) : (
+          <Image source={default_avatar} style={styles.image} resizeMode="contain" />
+        )}
       </View>
       <TouchableOpacity style={styles.changeArea}>
-        <Text style={styles.changeText}>DDooi</Text>
+        <Text style={styles.changeText}>Đổi</Text>
       </TouchableOpacity>
-      <Text style={styles.numberProfile}>FC 198727AAD</Text>
     </View>
   );
 };

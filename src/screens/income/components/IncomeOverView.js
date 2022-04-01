@@ -16,7 +16,7 @@ import { formatNumber } from 'helpers/formatNumber';
 const IncomeOverView = props => {
   const { user, loading } = useSelector(state => state.user);
   const { walletTotal, loadingWalletTotal } = useSelector(state => state.wallets);
-  const { avatar } = user;
+  const avatar = user?.avatar;
   const [avatarSize, setAvatarSize] = useState(null);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -41,9 +41,9 @@ const IncomeOverView = props => {
             ]}
           />
         ) : (
-          <Image
+          <FastImage
             source={{
-              uri: 'https://i-giaitri.vnecdn.net/2021/03/14/Avatar-1615695904-2089-1615696022_680x0.jpg'
+              uri: 'https://static.vecteezy.com/system/resources/previews/000/420/940/non_2x/avatar-icon-vector-illustration.jpg'
             }}
             style={[
               styles.avatar,

@@ -156,17 +156,120 @@ export const tabIncomeScreen = [
 
 export const sectionProfileType = {
   update_experience: 'update_experience',
-  complete_profile: 'complete_profile'
+  complete_profile: 'complete_profile',
+  add_experience: 'add_experience',
+  update_education: 'update_education',
+  add_education: 'add_education',
+  update_skill: 'update_skill',
+  add_skill: 'add_skill'
 };
 
 export const titleUpdateProfile = {
-  experience: 'Thêm kinh nghiệm',
+  add_experience: 'Thêm kinh nghiệm',
   complete_profile: 'Hoàn tất hồ sơ',
-  update_experience: 'Cập nhật kinh nghiệm'
+  update_experience: 'Cập nhật kinh nghiệm',
+  update_education: 'Cập nhật học vấn',
+  add_education: 'Thêm học vấn',
+  update_skill: 'Cập nhật kỹ năng',
+  add_skill: 'Thêm kỹ năng'
 };
 
 export const inputType = {
   text: 'text',
   date: 'date',
-  textarea: 'textarea'
+  textarea: 'textarea',
+  select: 'select',
+  number: 'number',
+  genderRadios: 'genderRadios'
 };
+
+export const addExperienceForm = [
+  {
+    id: 'companyName',
+    placeholder: 'Tên công ty',
+    type: inputType.text,
+    order: 1
+  },
+  {
+    id: 'description',
+    placeholder: 'Mô tả',
+    type: inputType.textarea,
+    order: 5
+  },
+  {
+    id: 'endDate',
+    placeholder: 'Ngày kết thúc',
+    type: inputType.date,
+    order: 4
+  },
+  {
+    id: 'position',
+    placeholder: 'Vị trí',
+    type: inputType.text,
+    order: 2
+  },
+  {
+    id: 'startDate',
+    placeholder: 'Ngày bắt đầu',
+    type: inputType.text,
+    order: 3
+  }
+];
+
+export const addEducationForm = [
+  {
+    id: 'education',
+    placeholder: 'Trường',
+    type: inputType.text
+  },
+  {
+    id: 'majors',
+    placeholder: 'Ngành học',
+    type: inputType.text
+  },
+  {
+    id: 'educationStatus',
+    placeholder: 'Tốt nghiệp/ Chưa tốt nghiệp',
+    type: inputType.date
+  }
+];
+
+export const addSkillForm = [
+  {
+    id: 'skill',
+    type: inputType.select
+  },
+  {
+    id: 'description',
+    type: inputType.textarea,
+    placeholder: 'Mô tả'
+  }
+];
+
+export const detailProfileForm = [
+  {
+    id: 'name',
+    type: inputType.text,
+    label: 'Tên'
+  },
+  {
+    id: 'phone',
+    type: inputType.number,
+    label: 'Số điện thoại'
+  },
+  {
+    id: 'gender',
+    type: inputType.genderRadios,
+    label: 'Giới tính'
+  },
+  {
+    id: 'birthday',
+    type: inputType.date,
+    label: 'Ngày sinh'
+  },
+  {
+    id: 'address',
+    type: inputType.text,
+    label: 'Địa chỉ'
+  }
+];

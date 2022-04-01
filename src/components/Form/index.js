@@ -4,7 +4,7 @@ import styles from './styles';
 import Input from './Input';
 
 const Form = props => {
-  const { refScroll, data, onChange, onSubmit } = props;
+  const { refScroll, data, onChange, onSubmit, defaultTextSelect, dataInputSelect } = props;
   const [focus, setFocus] = useState(null);
 
   const processedData = useMemo(() => {
@@ -14,7 +14,7 @@ const Form = props => {
         result.push(data[k]);
       }
     }
-    return result;
+    return result.sort((a, b) => a.order - b.order);
   }, [data]);
 
   // console.log(processedData, 'processedData');
@@ -41,6 +41,8 @@ const Form = props => {
           data={{ ...item, index }}
           focused={focus}
           onChange={onChange}
+          defaultTextSelect={defaultTextSelect}
+          dataInputSelect={dataInputSelect}
         />
       </View>
     );

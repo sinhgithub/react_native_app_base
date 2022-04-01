@@ -52,10 +52,7 @@ const CardJob = props => {
               setSizeCardJobContentImage(e.nativeEvent.layout);
             }
           }}>
-          {!dataCardJob?.jobBanner && (
-            <Text style={styles.cardJobContentImageTextDesc}>Banner</Text>
-          )}
-          {sizeCardJobContentImage && dataCardJob?.jobBanner && (
+          {sizeCardJobContentImage && dataCardJob?.jobBanner ? (
             <FastImage
               style={[
                 styles.image,
@@ -66,6 +63,20 @@ const CardJob = props => {
               ]}
               source={{
                 uri: dataCardJob?.jobBanner
+              }}
+              resizeMode={FastImage.resizeMode.stretch}
+            />
+          ) : (
+            <FastImage
+              style={[
+                styles.image,
+                {
+                  width: sizeCardJobContentImage?.width,
+                  height: sizeCardJobContentImage?.width
+                }
+              ]}
+              source={{
+                uri: 'https://fpthcm.net/wp-content/uploads/2018/06/cropped-logo_fpt.png'
               }}
               resizeMode={FastImage.resizeMode.stretch}
             />

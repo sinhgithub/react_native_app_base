@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useState, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import Header from './components/Header';
 import styles from './styles';
@@ -8,31 +8,95 @@ import { translate } from 'src/i18n';
 import { useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
 import SCREENS_NAME from 'constants/screens';
-import {
-  sectionProfileType,
-  titleUpdateProfile,
-  editExperienceForm
-} from 'constants/data_constants';
-import { getUserHandle } from 'actions/user';
+import { sectionProfileType, titleUpdateProfile } from 'constants/data_constants';
+import { getUserHandle, updateUserHandle } from 'actions/user';
+import { cloneDeep } from 'lodash';
 
 const ProfileScreen = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const { user, loading } = useSelector(state => state.user);
-
+  const { user } = useSelector(state => state.user);
   useEffect(() => {
     dispatch(getUserHandle({}));
-  }, [dispatch]);
+    const focusListener = navigation.addListener('focus', () => {
+      dispatch(getUserHandle({}));
+    });
+    return () => {
+      focusListener();
+    };
+  }, [dispatch, navigation]);
 
-  const onEdit = (item, type) => {
+  const onEdit = (item, type, index) => {
     switch (type) {
       case sectionProfileType.update_experience:
         navigation.navigate(SCREENS_NAME.UPDATE_PROFILE_SCREEN, {
           updateType: sectionProfileType.update_experience,
           titleScreen: titleUpdateProfile.update_experience,
+          itemRoot: { ...item, index }
+        });
+        break;
+      case sectionProfileType.update_education:
+        navigation.navigate(SCREENS_NAME.UPDATE_PROFILE_SCREEN, {
+          updateType: sectionProfileType.update_education,
+          titleScreen: titleUpdateProfile.update_education,
           itemRoot: item
         });
+        break;
+      default:
+        break;
+    }
+  };
+
+  const onDelete = (item, type, index) => {
+    const userClone = cloneDeep(user);
+    switch (type) {
+      case sectionProfileType.update_experience:
+        userClone.jobSeeker.workExperience.splice(index, 1);
+        dispatch(
+          updateUserHandle({
+            params: userClone,
+            success: v => dispatch(getUserHandle({})),
+            failure: e => {
+              console.log(e);
+            },
+            handleErr: e => {
+              console.log(e);
+            }
+          })
+        );
+        break;
+      case sectionProfileType.update_education:
+        userClone.jobSeeker.education = null;
+        userClone.jobSeeker.educationStatus = null;
+        userClone.jobSeeker.majors = null;
+        dispatch(
+          updateUserHandle({
+            params: userClone,
+            success: v => dispatch(getUserHandle({})),
+            failure: e => {
+              console.log(e);
+            },
+            handleErr: e => {
+              console.log(e);
+            }
+          })
+        );
+        break;
+      case sectionProfileType.update_skill:
+        userClone.jobSeeker.skill.splice(index, 1);
+        dispatch(
+          updateUserHandle({
+            params: userClone,
+            success: v => dispatch(getUserHandle({})),
+            failure: e => {
+              console.log(e);
+            },
+            handleErr: e => {
+              console.log(e);
+            }
+          })
+        );
         break;
       default:
         break;
@@ -43,13 +107,24 @@ const ProfileScreen = props => {
     sectionType => {
       switch (sectionType) {
         case sectionProfileType.complete_profile:
-          navigation.navigate(SCREENS_NAME.UPDATE_PROFILE_SCREEN, {
-            updateType: titleUpdateProfile.complete_profile
-          });
+          navigation.navigate(SCREENS_NAME.DETAIL_PROFILE_SCREEN, {});
           break;
         case sectionProfileType.update_experience:
-          navigation.navigate(SCREENS_NAME.UPDATE_PROFILE_SCREEN, {
-            updateType: titleUpdateProfile.experience
+          navigation.navigate(SCREENS_NAME.ADD_PROFILE_SCREEN, {
+            addType: sectionProfileType.add_experience,
+            titleScreen: titleUpdateProfile.add_experience
+          });
+          break;
+        case sectionProfileType.update_education:
+          navigation.navigate(SCREENS_NAME.ADD_PROFILE_SCREEN, {
+            addType: sectionProfileType.add_education,
+            titleScreen: titleUpdateProfile.add_education
+          });
+          break;
+        case sectionProfileType.update_skill:
+          navigation.navigate(SCREENS_NAME.ADD_PROFILE_SCREEN, {
+            addType: sectionProfileType.add_skill,
+            titleScreen: titleUpdateProfile.add_skill
           });
           break;
         default:
@@ -85,6 +160,7 @@ const ProfileScreen = props => {
             onPressButton={onPressButtonSection}
             type={sectionProfileType.complete_profile}
             key={1}
+            hideRightTittle
           />
         </View>
         {/* <View style={styles.ranking}>
@@ -112,6 +188,7 @@ const ProfileScreen = props => {
             type={sectionProfileType.update_experience}
             data={user?.jobSeeker?.workExperience}
             onEdit={onEdit}
+            onDelete={onDelete}
           />
         </View>
         <View style={styles.section}>
@@ -122,8 +199,15 @@ const ProfileScreen = props => {
             buttonTile={translate('common.add_education')}
             hideRightTitle
             onPressButton={onPressButtonSection}
-            data={user?.jobSeeker}
+            data={{
+              education: user?.jobSeeker?.education,
+              educationStatus: user?.jobSeeker?.educationStatus,
+              majors: user?.jobSeeker?.majors
+            }}
             key={2}
+            type={sectionProfileType.update_education}
+            onEdit={onEdit}
+            onDelete={onDelete}
           />
         </View>
         <View style={styles.section}>
@@ -135,7 +219,9 @@ const ProfileScreen = props => {
             hideRightTitle
             onPressButton={onPressButtonSection}
             data={user?.jobSeeker?.skill}
+            type={sectionProfileType.update_skill}
             key={3}
+            onDelete={onDelete}
           />
         </View>
       </ScrollView>
