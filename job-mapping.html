@@ -1,0 +1,503 @@
+<template>
+  <div>
+    <page-header />
+    <div class="container mt-lg-5">
+      <b-row class="row content-wrapper mx-lg-n2">
+        <div id="jd-col" class="col-12 col-lg-8 px-lg-2 mb-2">
+          <div class="card border-0 job-detail font-montserrat">
+            <img
+              :alt="$eval('item?.employer?.companyName')"
+              class="img-fluid job-banner"
+              style="top: 0px"
+              :src="getImage($eval('item?.employer?.banner'))" />
+            <div class="px-4 py-5">
+              <div class="job-detail-header bg-white border-0 px-3">
+                <div class="media row m-0">
+                  <h1 class="h4 job-title font-weight-bolder mt-4 mb-4 p-0">
+                    {{ $eval('item?.title') }}
+                  </h1>
+                  <div class="col-6 fs-5 p-0">
+                    <div class="wage mb-2">
+                      <span class="icon">
+                        <svg
+                          aria-hidden="true"
+                          focusable="false"
+                          data-prefix="fas"
+                          data-icon="donate"
+                          role="img"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 512 512"
+                          class="mr-8 svg-inline--fa fa-donate">
+                          <path
+                            fill="currentColor"
+                            d="M256 416c114.9 0 208-93.1 208-208S370.9 0 256 0 48 93.1 48 208s93.1 208 208 208zM233.8 97.4V80.6c0-9.2 7.4-16.6 16.6-16.6h11.1c9.2 0 16.6 7.4 16.6 16.6v17c15.5.8 30.5 6.1 43 15.4 5.6 4.1 6.2 12.3 1.2 17.1L306 145.6c-3.8 3.7-9.5 3.8-14 1-5.4-3.4-11.4-5.1-17.8-5.1h-38.9c-9 0-16.3 8.2-16.3 18.3 0 8.2 5 15.5 12.1 17.6l62.3 18.7c25.7 7.7 43.7 32.4 43.7 60.1 0 34-26.4 61.5-59.1 62.4v16.8c0 9.2-7.4 16.6-16.6 16.6h-11.1c-9.2 0-16.6-7.4-16.6-16.6v-17c-15.5-.8-30.5-6.1-43-15.4-5.6-4.1-6.2-12.3-1.2-17.1l16.3-15.5c3.8-3.7 9.5-3.8 14-1 5.4 3.4 11.4 5.1 17.8 5.1h38.9c9 0 16.3-8.2 16.3-18.3 0-8.2-5-15.5-12.1-17.6l-62.3-18.7c-25.7-7.7-43.7-32.4-43.7-60.1.1-34 26.4-61.5 59.1-62.4zM480 352h-32.5c-19.6 26-44.6 47.7-73 64h63.8c5.3 0 9.6 3.6 9.6 8v16c0 4.4-4.3 8-9.6 8H73.6c-5.3 0-9.6-3.6-9.6-8v-16c0-4.4 4.3-8 9.6-8h63.8c-28.4-16.3-53.3-38-73-64H32c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32v-96c0-17.7-14.3-32-32-32z"
+                            class="" />
+                        </svg>
+                      </span>
+                      <span class="text-primary font-weight-bold">{{ salary }}</span>
+                    </div>
+                    <div class="address">
+                      <span class="icon"
+                        ><svg
+                          aria-hidden="true"
+                          focusable="false"
+                          data-prefix="fas"
+                          data-icon="map-marker-alt"
+                          role="img"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 384 512"
+                          class="mr-8 svg-inline--fa fa-map-marker-alt">
+                          <path
+                            fill="currentColor"
+                            d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"
+                            class="" /></svg
+                      ></span>
+                      <span class="address">
+                        {{ $eval('item?.address') }} - {{ $eval('item?.district?.name') }} - {{
+                        $eval('item?.province?.name') }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-6 text-end">
+                    <div class="row">
+                      <div class="col-6">
+                        <el-button
+                          class="btn btn-dark mb-2 py-2 w-100"
+                          type="button"
+                          @click="followJob($eval('item?.id'))">
+                          {{ is_follow ? 'Bỏ lưu' : 'Lưu' }}
+                        </el-button>
+                      </div>
+                      <div class="col-6">
+                        <el-button
+                          v-if="!is_apply"
+                          class="btn btn-custom-primary py-2 w-100"
+                          type="button"
+                          @click="dialogTableVisible = true">
+                          Nhận việc
+                        </el-button>
+                        <el-button
+                          v-else
+                          class="btn btn-secondary py-2 w-100"
+                          type="button"
+                          disabled>
+                          Đã gửi yêu cầu
+                        </el-button>
+                        <el-dialog
+                          title="Nhận việc"
+                          :visible.sync="dialogTableVisible"
+                          class="text-start">
+                          <p>Mã việc: {{ item.code }}</p>
+                          <p>
+                            <font-awesome-icon icon="dollar-sign" class="mr-8" />
+                            Thù lao {{ salary }}
+                          </p>
+                          <p>
+                            <font-awesome-icon icon="clock" class="mr-8" />
+                            Thời gian làm việc {{ $eval('item?.start_time') }}-{{
+                            $eval('item?.end_time') }}
+                          </p>
+                          <p>
+                            <font-awesome-icon icon="calendar-alt" class="mr-8" />
+                            Lịch làm việc {{ $eval('item?.start_date') }} - {{
+                            $eval('item?.end_date') }}
+                          </p>
+                          <div class="dropdown-divider mt-3 col-12" />
+                          <div class="text-end">
+                            <el-button
+                              class="apply-btn btn btn-primary col-lg-4 py-2"
+                              type="button"
+                              @click="jobApply()">
+                              <i class="cli-paper-plane-light mr-2" />
+                              Gửi yêu cầu
+                            </el-button>
+                          </div>
+                        </el-dialog>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                id="section-job-description"
+                class="card-body container py-0 job-detail-body d-flex bg-white row px-3 mt-5 fs-5 m-0">
+                <div class="row mt-3 m-0 p-0">
+                  <h4>Mô tả công việc</h4>
+                  <div class="content_jd" style="padding-left: 35px">
+                    <p>- Số lượng cần tuyển : {{ item.recruitedQuantity }} ứng viên</p>
+                    <p>{{ item.jobDescription }}</p>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <h4>Thông tin thưởng</h4>
+                  <div class="content_jd" style="padding-left: 35px">
+                    <p v-show="item.wageDescription">{{ item.wageDescription }} ứng viên</p>
+                    <div v-for="(bonus, k) in item.bonus" :key="k">
+                      <div
+                        class="cursor-pointer bonus"
+                        :class="{ active: activeBonus }"
+                        @click="toggleBonus()">
+                        <div class="font-weight-bold">
+                          <font-awesome-icon icon="medal" class="fs-6" />
+                          {{ bonus.title }}
+                          <div class="float-end">...</div>
+                        </div>
+                        <div class="bonus_detail">
+                          <div v-if="bonus.bonusFrom" class="mt-1 title">
+                            <span>Thưởng từ {{ formatPrice(bonus.bonusFrom) }}</span>
+                            <span v-if="bonus.bonusTo">
+                              đến <span>{{ formatPrice(bonus.bonusTo) }}</span></span
+                            >
+                          </div>
+                          <div class="detail">
+                            <div
+                              v-if="bonus.bonusDescription"
+                              class="mt-1"
+                              v-html="bonus.bonusDescription" />
+                            <div v-if="bonus.proviso" class="mt-1" v-html="bonus.proviso" />
+                            <div v-if="bonus.time" class="mt-1" v-html="bonus.time" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <p class="h4 title large mb-3 font-weight-bolder p-0">Quyền lợi</p>
+                  <div v-if="item.benefit" v-html="item.benefit" />
+                </div>
+                <div class="row mt-4">
+                  <h4>Yêu cầu công việc</h4>
+                  <div class="content_jd d-flex row px-3">
+                    <div class="col-md-6 p-0">
+                      <div class="bg-gray-100 px-5 py-3">
+                        <div class="d-flex my-4">
+                          <i class="fa fa-inbox mr-2 text-secondary mt-1 me-3 fs-4" />
+                          <div class="title">
+                            <div>Loại công việc</div>
+                            <div class="font-weight-bold">
+                              <span v-if="item.type === 'PARTTIME'">Nhân viên bán thời gian</span>
+                              <span v-if="item.type === 'FULLTIME'">Nhân viên toàn thời gian</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-flex my-4">
+                          <i class="fa fa-layer-group mr-2 text-secondary mt-1 me-3 fs-4" />
+                          <div class="title">
+                            <div>Cấp bậc</div>
+                            <div class="font-weight-bold">
+                              <span v-if="item.type === 'PARTTIME'">Nhân viên bán thời gian</span>
+                              <span v-if="item.type === 'FULLTIME'">Nhân viên toàn thời gian</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-flex my-4">
+                          <i class="fa fa-briefcase mr-2 text-secondary mt-1 me-3 fs-4" />
+                          <div class="title">
+                            <div>Kinh nghiệm</div>
+                            <div class="font-weight-bold">
+                              <span v-if="item.experienceLevel === 'FRESHER'"
+                                >0 - 1 năm kinh nghiệm</span
+                              >
+                              <span v-else-if="item.experienceLevel === 'JUNIOR'"
+                                >1 - 2 năm kinh nghiệm</span
+                              >
+                              <span v-else-if="item.experienceLevel === 'MIDDLE'"
+                                >2 - 3 năm kinh nghiệm</span
+                              >
+                              <span v-else-if="item.experienceLevel === 'SENIOR'"
+                                >5 - 10 năm kinh nghiệm</span
+                              >
+                              <span v-else-if="item.experienceLevel === 'MASTER'"
+                                >hơn 10 năm kinh nghiệm</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="bg-gray-100 px-5 py-3">
+                        <div class="d-flex my-4">
+                          <i class="text-secondary fa fa-venus-mars mt-1 me-3 fs-4" />
+                          <div class="title">
+                            <div>Giới tính</div>
+                            <div class="font-weight-bold">
+                              <span v-if="item.sex === 'ALL'">Nam - Nữ</span>
+                              <span v-else-if="item.sex === 'MALE'">Nam</span>
+                              <span v-else>Nữ</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-flex my-4">
+                          <i class="fa fa-th-large mr-2 text-secondary mt-1 me-3 fs-4" />
+                          <div class="title">
+                            <div>Ngành nghề</div>
+                            <div class="font-weight-bold">
+                              <span v-if="item.category">{{ item.category.name }}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="d-flex my-4">
+                          <i class="fa fa-graduation-cap mr-2 text-secondary mt-1 me-3 fs-4" />
+                          <div class="title">
+                            <div>Học vấn</div>
+                            <div class="font-weight-bold">
+                              <span v-if="item.literacy === 'JUNIOR_HIGH_SCHOOL'">PTCS</span>
+                              <span v-else-if="item.literacy === 'HIGH_SCHOOL'">Trung học</span>
+                              <span v-else-if="item.literacy === 'CERTIFICATE'">Chứng chỉ</span>
+                              <span v-else-if="item.literacy === 'INTERMEDIATE'">Trung cấp</span>
+                              <span v-else-if="item.literacy === 'BACHELOR'">Cử nhân</span>
+                              <span v-else-if="item.literacy === 'ENGINEER'">Kĩ sư</span>
+                              <span v-else-if="item.literacy === 'DOCTOR'">Tiến sĩ</span>
+                              <span v-else-if="item.literacy === 'OTHER'">Khác</span>
+                              <span v-else>Thạc sĩ</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <h4>Thông tin liên hệ</h4>
+                  <div class="content_jd" style="padding-left: 35px">
+                    <p v-show="item.contactName" class="mb-0">
+                      <span class="fw-bold me-3">{{ item.contactName }}</span>
+                      <button
+                        class="btn btn-sm btn-secondary text-center"
+                        style="
+                          border-radius: 50%;
+                          width: 30px;
+                          height: 30px !important;
+                          padding: 0 !important;
+                        "
+                        @click="sms">
+                        <i
+                          class="fa fa-solid fa-comment"
+                          style="margin-left: 5px; margin-top: -3px" />
+                      </button>
+                    </p>
+                    <p v-show="item.contactPhone">
+                      <span class="fw-bold">
+                        <span class="me-3">{{ item.contactPhone }}</span>
+                        <a
+                          class="btn btn-sm btn-secondary text-center"
+                          :href="'tel:'+ item.contactPhone"
+                          style="
+                            border-radius: 50%;
+                            width: 30px;
+                            height: 30px !important;
+                            padding: 0 !important;
+                          ">
+                          <i class="fa fa-solid fa-phone" style="margin-left: 3px"
+                        /></a>
+                      </span>
+                    </p>
+                    <p v-show="item.contactEmail">
+                      <span class="fw-bold">
+                        <span class="me-3">{{ item.contactEmail }}</span>
+                        <a
+                          class="btn btn-sm btn-secondary text-center"
+                          :href="'mailto:kakarevert@gmail.com'"
+                          style="
+                            border-radius: 50%;
+                            width: 30px;
+                            height: 30px !important;
+                            padding: 0 !important;
+                          ">
+                          <i class="fa fa-solid fa-envelope" style="margin-left: 3px"
+                        /></a>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <div class="row mt-4">
+                  <span class="col-6"
+                    ><span class="fw-bold">Ngày đăng tuyển :</span>
+                    <span v-if="item.createdAt">{{ item.createdAt.split('T')[0] }}</span></span
+                  >
+                  <span class="col-6"
+                    ><span class="fw-bold">Ngày hết hạn :</span>
+                    <span v-if="item.expirationDate"
+                      >{{ item.expirationDate.split('T')[0] }}</span
+                    ></span
+                  >
+                </div>
+                <div v-if="item.attachFileName!==null" class="row mt-4">
+                  <h4>Tài liệu đính kèm</h4>
+                  <div class="content_jd" style="padding-left: 35px">
+                    <p v-show="item.attachFile" class="mb-0">
+                      <span class="fw-bold me-3">{{ item.attachFileName }}</span>
+                      <button
+                        style="border-radius: 50%; width: 31px"
+                        class="btn btn-sm btn-secondary text-center"
+                        @click="downloadFile(item.attachFileName,item.attachFile)">
+                        <i
+                          style="margin-left: -6px; margin-top: -2px"
+                          class="fa fa-solid fa-download"></i>
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-5" />
+        </div>
+        <!--        // công ty-->
+        <div id="org-col" class="col-lg-4 px-0 px-lg-2">
+          <div id="section-company" class="card border-0">
+            <div class="card-body company-card bg-white rounded-lg">
+              <div class="h3">Thông tin nhà tuyển dụng</div>
+              <div class="media d-flex mb-3 company-card-head">
+                <div
+                  class="border border-radius"
+                  style="
+                    border-radius: 50%;
+                    width: 75px;
+                    background-size: cover;
+                    background-position: center;
+                    height: 75px;
+                  "
+                  :style="{ backgroundImage: 'url(' + getImage($eval('item?.employer?.logo')) + ')' }" />
+                <div class="media-body p-3 fs-4" style="line-height: 50px">
+                  <router-link
+                    class="text-reset"
+                    :title="$eval('item?.employer?.companyName')"
+                    :to="`/nha-tuyen-dung/${showDetails($eval('item?.employer?.companyName'), $eval('item?.employer?.id'))}`">
+                    <span>{{ $eval('item?.employer?.companyName') }}</span>
+                  </router-link>
+                </div>
+              </div>
+              <ul class="list-company-info list-unstyled border-top border-bottom">
+                <li class="my-3 d-flex align-items-start">
+                  <div class="icon me-1">
+                    <svg
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="map-marker-alt"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 384 512"
+                      class="mr-8 svg-inline--fa fa-map-marker-alt">
+                      <path
+                        fill="currentColor"
+                        d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"
+                        class="" />
+                    </svg>
+                  </div>
+                  <span
+                    >{{ $eval('item?.employer?.address') }} - {{
+                    $eval('item?.employer?.district?.name') }} - {{
+                    $eval('item?.employer?.province?.name') }}</span
+                  >
+                </li>
+                <li class="my-3 d-flex align-items-start">
+                  <div class="icon">
+                    <i class="fa fa-users me-2 text-dark" style="margin-top: 2px" />
+                  </div>
+                  <span>Quy mô công ty {{ $eval('item?.employer?.teamSize?.name') }}</span>
+                </li>
+                <li class="my-3 d-flex align-items-start">
+                  <div class="icon" style="margin-top: -2px">
+                    <svg
+                      id="Capa_1"
+                      width="20px"
+                      height="20px"
+                      viewBox="0 0 20 20"
+                      data-name="Capa 1"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M15.69,4.31H4.31A1.61,1.61,0,0,0,2.7,5.92v8a1.61,1.61,0,0,0,1.61,1.61H15.69a1.61,1.61,0,0,0,1.61-1.61v-8A1.61,1.61,0,0,0,15.69,4.31ZM4.31,4.92H15.69a1,1,0,0,1,1,1v.72H3.31V5.92A1,1,0,0,1,4.31,4.92Zm11.38,10H4.31a1,1,0,0,1-1-1V7.25H16.69v6.67A1,1,0,0,1,15.69,14.92Z" />
+                      <path d="M4.31,6.18A.34.34,0,1,0,4,5.85.34.34,0,0,0,4.31,6.18Z" />
+                      <path d="M5.16,6.18a.34.34,0,0,0,0-.67.34.34,0,0,0,0,.67Z" />
+                      <path d="M6,6.18a.34.34,0,1,0-.33-.33A.34.34,0,0,0,6,6.18Z" />
+                    </svg>
+                  </div>
+                  <span style="margin-left: 3px"
+                    >Website : {{ $eval('item?.employer?.website') }}</span
+                  >
+                </li>
+              </ul>
+              <div class="mt-3 text-collapse">
+                <div
+                  class="text-collapse--content company-profile mb-0"
+                  :class="showMore?'':'text-collapse-close'"
+                  v-html="$eval('item?.employer?.shortDescription')" />
+                <div class="mt-3">
+                  <span v-if="countDate(item.expirationDate)" class="label label-primary mr-8"
+                    >{{ countDate(item.expirationDate) }}</span
+                  >
+                  <span
+                    v-if="item.bonus != null && item.bonus.length>0"
+                    class="label label-outline-primary mr-8"
+                    >Có thưởng</span
+                  >
+                  <span
+                    v-if="item.paidAfterWork != null && item.paidAfterWork"
+                    class="label label-primary-2 mr-8"
+                    >Lương liền</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="card-body company-card bg-white rounded-lg">
+              <div class="h3">Công việc tương tự</div>
+              <div class="jobs mt-4">
+                <div v-for="job in jobs" class="job border-bottom pb-3">
+                  <router-link :to="`/tim-viec-lam/${showDetails(item.title, item.id)}`">
+                    <div class="row text-dark py-3">
+                      <div class="col-3 bgi-size-cover">
+                        <img :src="getImage(job.employer.logo)" alt="" width="100%" />
+                      </div>
+                      <div class="col-9">
+                        <p style="font-weight: 500">{{ job.title }}</p>
+                        <p class="mb-1">{{ job.employer.companyName }}</p>
+                        <p class="mb-1">
+                          <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="fas"
+                            data-icon="map-marker-alt"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 384 512"
+                            class="mr-8 svg-inline--fa fa-map-marker-alt">
+                            <path
+                              fill="currentColor"
+                              d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z" />
+                          </svg>
+                          {{ job.province.name }}
+                        </p>
+                        <p class="mb-1 fw-bold">
+                          <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="fas"
+                            data-icon="donate"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                            class="mr-8 svg-inline--fa fa-donate">
+                            <path
+                              fill="currentColor"
+                              d="M256 416c114.9 0 208-93.1 208-208S370.9 0 256 0 48 93.1 48 208s93.1 208 208 208zM233.8 97.4V80.6c0-9.2 7.4-16.6 16.6-16.6h11.1c9.2 0 16.6 7.4 16.6 16.6v17c15.5.8 30.5 6.1 43 15.4 5.6 4.1 6.2 12.3 1.2 17.1L306 145.6c-3.8 3.7-9.5 3.8-14 1-5.4-3.4-11.4-5.1-17.8-5.1h-38.9c-9 0-16.3 8.2-16.3 18.3 0 8.2 5 15.5 12.1 17.6l62.3 18.7c25.7 7.7 43.7 32.4 43.7 60.1 0 34-26.4 61.5-59.1 62.4v16.8c0 9.2-7.4 16.6-16.6 16.6h-11.1c-9.2 0-16.6-7.4-16.6-16.6v-17c-15.5-.8-30.5-6.1-43-15.4-5.6-4.1-6.2-12.3-1.2-17.1l16.3-15.5c3.8-3.7 9.5-3.8 14-1 5.4 3.4 11.4 5.1 17.8 5.1h38.9c9 0 16.3-8.2 16.3-18.3 0-8.2-5-15.5-12.1-17.6l-62.3-18.7c-25.7-7.7-43.7-32.4-43.7-60.1.1-34 26.4-61.5 59.1-62.4zM480 352h-32.5c-19.6 26-44.6 47.7-73 64h63.8c5.3 0 9.6 3.6 9.6 8v16c0 4.4-4.3 8-9.6 8H73.6c-5.3 0-9.6-3.6-9.6-8v-16c0-4.4 4.3-8 9.6-8h63.8c-28.4-16.3-53.3-38-73-64H32c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32h448c17.7 0 32-14.3 32-32v-96c0-17.7-14.3-32-32-32z" />
+                          </svg>
+                          <span class="text-primary">{{ formatPrice(job.wageFrom) }} đ</span>
+                          <span class="text-primary">- {{ formatPrice(job.wageTo) }} đ</span>
+                        </p>
+                      </div>
+                    </div>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </b-row>
+    </div>
+    <page-footer />
+  </div>
+</template>

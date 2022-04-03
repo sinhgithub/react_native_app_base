@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { tabMessageBoxScreen } from 'constants/data_constants';
 import { TabsHorizontal } from 'components/';
 import styles from './styles';
-import MessagesTab from './components/MessagesTab';
+import MessagesTab from './components/MessageTab';
 import NotificationsTab from './components/NotificationsTab';
 
 const MessageBoxScreen = props => {

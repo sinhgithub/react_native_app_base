@@ -10,6 +10,7 @@ import calendarWork from './calendar_work';
 import wallets from './wallet';
 import user from './user';
 import masterData from './master_data';
+import chat from './chat';
 
 const systemPersistConfig = {
   key: 'system',
@@ -21,7 +22,7 @@ const systemPersistConfig = {
 const authPersistConfig = {
   key: 'auth',
   storage: AsyncStorage,
-  whitelist: ['isLogin'],
+  whitelist: ['isLogin', 'memberInfo'],
   version: 1.0
 };
 
@@ -74,6 +75,13 @@ const masterDataPersistConfig = {
   version: 1.0
 };
 
+const chatPersistConfig = {
+  key: 'chat',
+  storage: AsyncStorage,
+  whitelist: [],
+  version: 1.0
+};
+
 export default combineReducers({
   system: persistReducer(systemPersistConfig, system),
   auth: persistReducer(authPersistConfig, auth),
@@ -83,5 +91,6 @@ export default combineReducers({
   calendarWork: persistReducer(calendarWorkPersistConfig, calendarWork),
   wallets: persistReducer(walletsPersistConfig, wallets),
   user: persistReducer(userPersistConfig, user),
-  masterData: persistReducer(masterDataPersistConfig, masterData)
+  masterData: persistReducer(masterDataPersistConfig, masterData),
+  chat: persistReducer(chatPersistConfig, chat)
 });

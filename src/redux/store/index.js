@@ -1,9 +1,9 @@
-import {createStore, applyMiddleware} from 'redux';
-import {createLogger} from 'redux-logger';
+import { createStore, applyMiddleware } from 'redux';
+import { createLogger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {persistStore, persistReducer} from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 
 import autoMergeLevel1 from 'redux-persist/lib/stateReconciler/autoMergeLevel1';
 
@@ -17,7 +17,7 @@ const persistConfig = {
   storage: AsyncStorage,
   whitelist: [],
   version: 1.0,
-  stateReconciler: autoMergeLevel1,
+  stateReconciler: autoMergeLevel1
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -27,7 +27,7 @@ function configureStore() {
   const sagaMiddleware = createSagaMiddleware();
   if (__DEV__) {
     const loggerMiddleware = createLogger({
-      collapsed: (getState, action, logEntry) => !logEntry.error,
+      collapsed: (getState, action, logEntry) => !logEntry.error
     });
     middlewares.push(loggerMiddleware);
   }
@@ -36,7 +36,7 @@ function configureStore() {
   const persistor = persistStore(store);
   store.sagaTask = sagaMiddleware.run(rootSaga);
 
-  return {store, persistor};
+  return { store, persistor };
 }
 
 const storeConfig = configureStore();

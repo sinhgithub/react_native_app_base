@@ -41,7 +41,26 @@ const auth = (state = initialState, action) => {
         isLogin: false
       };
     }
+    // ==========================================================
+    case AUTH.REGISTER.HANDLER: {
+      return {
+        ...state,
+        loading: true
+      };
+    }
 
+    case AUTH.REGISTER.SUCCESS: {
+      return {
+        ...state,
+        loading: false
+      };
+    }
+    case AUTH.REGISTER.FAILURE: {
+      return {
+        ...state,
+        loading: false
+      };
+    }
     default:
       return state;
   }

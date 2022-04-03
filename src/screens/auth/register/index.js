@@ -22,40 +22,29 @@ import CustomInput from '../components/CustomInput';
 // import RegisterTypeModal from '../components/RegisterTypeModal';
 import { useNavigation, StackActions } from '@react-navigation/native';
 import SCREENS_NAME from 'constants/screens';
-import { loginHandle } from 'actions/auth';
+import { loginFailure, loginHandle, registerFailure, registerHandle } from 'actions/auth';
 import { ModalNotification } from 'components/Modal/NotificationWarning';
+import { showCompleteModal, showConfirmModal } from 'actions/system';
+import { Icon } from 'components/';
 
 const { width: WIDTH } = Dimensions.get('window');
 // const phoneRegExp = /((0|1)+([0-9]{8,10})\b)/g;
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required('auth.passwordRequired').min(6, 'auth.passwordErrorMin'),
-  account: Yup.string().required('auth.userNameRequired').max(255, 'auth.accountErrorMax')
+  account: Yup.string().required('auth.userNameRequired').max(255, 'auth.accountErrorMax'),
+  passwordConfirm: Yup.string()
+    .required('auth.passwordRequired')
+    .oneOf([Yup.ref('password'), null], 'auth.confirmPasswordError')
 });
 
-const registerTypeData = [
-  { id: '1', title: 'auth.vip', type: 'vip' },
-  { id: '2', title: 'auth.distributor', type: 'distributor' },
-  { id: '3', title: 'auth.saleEmployer', type: 'sale' }
-];
 const Register = () => {
   const [isShowPassword, setShowPassword] = useState(false);
-
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const onRegisterSuccess = () => {
-    navigation.dispatch(StackActions.replace(SCREENS_NAME.MAIN_SCREEN));
-  };
-
-  const onRegisterFail = () => {
-    setTimeout(() => {
-      ModalNotification.showError('popup.title', 'auth.loginError');
-    });
-  };
-
-  const onPressRegister = () => {
-    navigation.navigate(SCREENS_NAME.REGISTER_SCREEN, {});
+  const onPressLogin = () => {
+    navigation.navigate(SCREENS_NAME.LOGIN_SCREEN, {});
   };
 
   return (
@@ -71,10 +60,123 @@ const Register = () => {
           validationSchema={LoginSchema}
           onSubmit={(values, actions) => {
             const params = {
-              account: values.account.trim(),
+              email: values.account.trim(),
               password: values.password.trim()
             };
-            dispatch(loginHandle(params, onRegisterSuccess, onRegisterFail));
+            dispatch(
+              registerHandle({
+                params,
+                success: () => {
+                  dispatch(
+                    showConfirmModal({
+                      title: 'Đăng ký thành công!',
+                      icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                      content: 'Bạn có muốn đăng nhập bằng tài khoản mới đăng ký ?',
+                      buttonTitleReject: 'Huỷ bỏ',
+                      buttonTitleConfirm: 'Đăng nhập',
+                      onConfirm: () => {
+                        dispatch(
+                          loginHandle({
+                            params,
+                            onRegisterSuccess: () => {
+                              dispatch(
+                                showCompleteModal({
+                                  title: 'Đăng nhập thành công',
+                                  icon: (
+                                    <Icon
+                                      fontName="AntDesign"
+                                      size={25}
+                                      color="red"
+                                      name="closecircle"
+                                    />
+                                  ),
+                                  content:
+                                    'Chúc bạn tìm được công việc thích hợp trong thời gian sớm nhất!',
+                                  buttonTitle: 'Xác nhận',
+                                  onConfirm: () => {},
+                                  onClose: () => {}
+                                })
+                              );
+                            },
+                            onRegisterFail: () => {
+                              dispatch(
+                                showCompleteModal({
+                                  title: 'Đăng nhập không thành công',
+                                  icon: (
+                                    <Icon
+                                      fontName="AntDesign"
+                                      size={25}
+                                      color="red"
+                                      name="closecircle"
+                                    />
+                                  ),
+                                  content: 'Sai tên đăng nhập hoặc mật khẩu',
+                                  buttonTitle: 'Đăng nhập lại',
+                                  onConfirm: () => {},
+                                  onClose: () => {}
+                                })
+                              );
+                            },
+                            handleErr: () => {
+                              dispatch(loginFailure());
+                              dispatch(
+                                showCompleteModal({
+                                  title: 'Lỗi kết nối',
+                                  icon: (
+                                    <Icon
+                                      fontName="AntDesign"
+                                      size={25}
+                                      color="red"
+                                      name="closecircle"
+                                    />
+                                  ),
+                                  content: 'Vui lòng kiểm tra lại',
+                                  buttonTitle: 'Xác nhận',
+                                  onConfirm: () => {},
+                                  onClose: () => {}
+                                })
+                              );
+                            }
+                          })
+                        );
+                      },
+                      onClose: () => {
+                        // do no thing
+                      },
+                      onReject: () => {
+                        navigation.navigate(SCREENS_NAME.LOGIN_SCREEN, {});
+                      }
+                    })
+                  );
+                },
+                failure: () => {
+                  dispatch(registerFailure());
+                  dispatch(
+                    showCompleteModal({
+                      title: 'Tài khoản đã tồn tại',
+                      icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                      content: 'Vui lòng đăng ký bằng email khác!',
+                      buttonTitle: 'Xác nhận',
+                      onConfirm: () => {},
+                      onClose: () => {}
+                    })
+                  );
+                },
+                handleErr: () => {
+                  dispatch(registerFailure());
+                  dispatch(
+                    showCompleteModal({
+                      title: 'Tài khoản đã tồn tại',
+                      icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                      content: 'Vui lòng đăng ký bằng email khác!',
+                      buttonTitle: 'Xác nhận',
+                      onConfirm: () => {},
+                      onClose: () => {}
+                    })
+                  );
+                }
+              })
+            );
             actions.setSubmitting(false);
           }}>
           {({
@@ -103,7 +205,6 @@ const Register = () => {
                   isTouched={touched.account}
                   name={'account'}
                   placeholder={translate('auth.userNamePlaceholder')}
-                  keyboardType="number-pad"
                 />
                 <CustomInput
                   label="auth.password"
@@ -147,7 +248,7 @@ const Register = () => {
                   </AppText>
                 </StyledTouchable>
 
-                <StyledTouchable onPress={onPressRegister} customStyle={[styles.forgotBtn]}>
+                <StyledTouchable onPress={onPressLogin} customStyle={[styles.forgotBtn]}>
                   <Text style={[styles.forgotTxt]} translate>
                     Bạn đã có tài khoản ?{' '}
                     <Text translate style={[styles.registerTxt]}>

@@ -6,17 +6,12 @@ import SCREENS_NAME from 'constants/screens';
 import HomeScreen from 'screens/home';
 import { ICON_SIZE } from 'constants/size';
 import {
-  ICHomeActive,
-  ICHomeInActive,
-  IFindJobActive,
-  IFindJobInActive,
-  ICWorkActive,
-  ICWorkInActive,
   ICMessageActive,
   ICMessageInActive,
-  ICProfileActive,
-  ICProfileInActive,
-  ICHomeNew
+  ICHomeNew,
+  ICFindJobNew,
+  ICWorkNew,
+  ICAccountNew
 } from 'assets/icons';
 import FindJobScreen from 'screens/find_job';
 import MainTabbar from 'components/MainTabbar';
@@ -33,6 +28,8 @@ import Income from 'screens/income';
 import WithdrawRequestScreen from 'screens/withdraw_request';
 import UpdateProfileScreen from 'screens/profile/update_profile';
 import AddProfileScreen from 'screens/profile/add_profile';
+import DetailChatScreen from 'screens/message_box/components/MessageTab/ChatDetail';
+import { BACKGROUND_COLOR } from 'constants/colors';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -199,8 +196,16 @@ export const TabStack = () => {
         options={({ route }) => ({
           tabBarLabel: 'tab_name.home',
           tabBarIcon: {
-            active: <ICHomeActive width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />,
-            inactive: <ICHomeInActive width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />
+            active: (
+              <ICHomeNew
+                width={ICON_SIZE.MEDIUM}
+                height={ICON_SIZE.MEDIUM}
+                color={BACKGROUND_COLOR.RedBasic}
+              />
+            ),
+            inactive: (
+              <ICHomeNew width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} color={'gray'} />
+            )
           },
           key: 1
         })}
@@ -211,8 +216,16 @@ export const TabStack = () => {
         options={({ route }) => ({
           tabBarLabel: 'tab_name.find_job',
           tabBarIcon: {
-            active: <IFindJobActive width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />,
-            inactive: <IFindJobInActive width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />
+            active: (
+              <ICFindJobNew
+                color={BACKGROUND_COLOR.RedBasic}
+                width={ICON_SIZE.MEDIUM}
+                height={ICON_SIZE.MEDIUM}
+              />
+            ),
+            inactive: (
+              <ICFindJobNew color="gray" width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />
+            )
           },
           key: 2
         })}
@@ -223,8 +236,14 @@ export const TabStack = () => {
         options={({ route }) => ({
           tabBarLabel: 'tab_name.work',
           tabBarIcon: {
-            active: <ICWorkActive width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />,
-            inactive: <ICWorkInActive width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />
+            active: (
+              <ICWorkNew
+                color={BACKGROUND_COLOR.RedBasic}
+                width={ICON_SIZE.MEDIUM}
+                height={ICON_SIZE.MEDIUM}
+              />
+            ),
+            inactive: <ICWorkNew color="gray" width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />
           },
           key: 3
         })}
@@ -247,8 +266,16 @@ export const TabStack = () => {
         options={({ route }) => ({
           tabBarLabel: 'tab_name.profile',
           tabBarIcon: {
-            active: <ICProfileActive width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />,
-            inactive: <ICProfileInActive width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />
+            active: (
+              <ICAccountNew
+                color={BACKGROUND_COLOR.RedBasic}
+                width={ICON_SIZE.MEDIUM}
+                height={ICON_SIZE.MEDIUM}
+              />
+            ),
+            inactive: (
+              <ICAccountNew color="gray" width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />
+            )
           },
           key: 5
         })}
@@ -321,6 +348,13 @@ export const AppStackScreen = () => {
       <Stack.Screen
         name={SCREENS_NAME.ADD_PROFILE_SCREEN}
         component={AddProfileScreen}
+        options={{
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.DETAIL_CHAT_SCREEN}
+        component={DetailChatScreen}
         options={{
           headerShown: true
         }}

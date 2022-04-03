@@ -22,11 +22,17 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { listJobHomePage, loading } = useSelector(state => state.listJob);
-  const { user, loading: loadingUser } = useSelector(state => state.user);
+
   useEffect(() => {
     dispatch(getListJobHomePageHandle());
     dispatch(getUserHandle({}));
-  }, [dispatch]);
+    const focusListener = navigation.addListener('focus', () => {
+      dispatch(getUserHandle({}));
+    });
+    return () => {
+      focusListener();
+    };
+  }, [dispatch, navigation]);
 
   const onClickCardJob = useCallback(
     data => {

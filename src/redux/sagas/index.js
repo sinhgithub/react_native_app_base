@@ -7,6 +7,7 @@ import calendarWorkSagas from './calendarWorkSagas';
 import walletSagas from './walletSagas';
 import userSagas from './userSagas';
 import masterDataSagas from './masterDataSagas';
+import getListChatSagas from './chat';
 
 export default function* rootSaga() {
   yield all([
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     calendarWorkSagas(),
     walletSagas(),
     userSagas(),
-    masterDataSagas()
+    masterDataSagas(),
+    getListChatSagas()
   ]);
 }

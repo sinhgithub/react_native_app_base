@@ -15,7 +15,8 @@ const SCREENS_NAME = {
   WITHDRAW_REQUEST: 'WithdrawRequestScreen',
   REGISTER_SCREEN: 'RegisterScreen',
   UPDATE_PROFILE_SCREEN: 'UpdateProfileScreen',
-  ADD_PROFILE_SCREEN: 'AddProfileScreen'
+  ADD_PROFILE_SCREEN: 'AddProfileScreen',
+  DETAIL_CHAT_SCREEN: 'DetailChatScreen'
 };
 
 export default SCREENS_NAME;

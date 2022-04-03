@@ -6,7 +6,6 @@ export function* getListApplyJobSaga(obj) {
   const { key, page, size, isLoadMore } = obj.payload;
   try {
     const res = yield call(apiListApplyJob, { key, page, size });
-    console.log(res, 'ressssssssß');
     if (res.status === 200) {
       const data = { ...res.data, isLoadMore };
       yield put(getListApplyJobSuccess(data));

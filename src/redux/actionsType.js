@@ -25,7 +25,8 @@ export const SETTINGS = {
 };
 
 export const AUTH = {
-  LOGIN: asyncTypes('AUTH/LOGIN')
+  LOGIN: asyncTypes('AUTH/LOGIN'),
+  REGISTER: asyncTypes('AUTH/REGISTER')
 };
 
 export const GET_LIST_JOB = {
@@ -72,4 +73,10 @@ export const WALLET = {
 
 export const MASTER_DATA = {
   LIST_PROVINCE: asyncTypes('MASTER_DATA/LIST_PROVINCE')
+};
+
+export const CHAT = {
+  GET_LIST_CHAT: asyncTypes('CHAT/GET_LIST_CHAT'),
+  GET_LIST_MESSAGE_BY_ROOM: asyncTypes('CHAT/GET_LIST_MESSAGE_BY_ROOM'),
+  SEND_MESSAGE: asyncTypes('CHAT/SEND_MESSAGE')
 };

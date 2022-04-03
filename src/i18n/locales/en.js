@@ -83,7 +83,8 @@ export default {
     register: 'Đăng ký',
     notHaveAccount: 'Bạn chưa có tài khoản? ',
     passwordRequired: 'Mật khẩu là bắt buộc',
-    accountErrorMax: 'Tên đăng nhập tối đa 255 ký tự'
+    accountErrorMax: 'Tên đăng nhập tối đa 255 ký tự',
+    confirmPasswordError: 'Mật khẩu không trùng khớp'
   },
   api: {
     companyName: 'Tên công ty',

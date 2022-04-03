@@ -1,7 +1,7 @@
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Animated } from 'react-native';
 import { editExperienceForm, sectionProfileType, inputType } from 'constants/data_constants';
 import SelectDropdown from 'components/CustomInput/SelectDropdown';
@@ -182,8 +182,10 @@ const Input = props => {
                     <RadioButtonInput
                       obj={item}
                       index={index}
-                      isSelected={data?.value === item.value}
-                      onPress={() => {}}
+                      isSelected={data.value === item.value}
+                      onPress={v => {
+                        onChange?.(data.id, v);
+                      }}
                       borderWidth={1}
                       buttonInnerColor={'red'}
                       buttonOuterColor={CUSTOM_COLOR.BasicGray}

@@ -1,9 +1,9 @@
-import {StyleSheet} from 'react-native';
-import {paddingHelloHeader, Shadow} from 'constants/stylesCSS';
-import {BACKGROUND_COLOR, TEXT_COLOR} from 'constants/colors';
-import {FONT_FAMILY, FONT_SIZE} from 'constants/appFonts';
-import {SPACING} from 'constants/size';
-import {scale} from 'utils/responsive';
+import { StyleSheet } from 'react-native';
+import { paddingHelloHeader, Shadow } from 'constants/stylesCSS';
+import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
+import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
+import { SPACING } from 'constants/size';
+import { scale } from 'utils/responsive';
 
 const styles = StyleSheet.create({
   headerHello: {
@@ -14,34 +14,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: paddingHelloHeader.paddingHorizontal,
     backgroundColor: BACKGROUND_COLOR.White,
     marginBottom: SPACING.Small,
-    ...Shadow,
+    ...Shadow
   },
   headerHelloLeft: {
     flexGrow: 1,
     marginRight: scale(30),
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   headerHelloLeftText: {
     fontFamily: FONT_FAMILY.XBOLD,
     fontSize: FONT_SIZE.Heading,
-    color: TEXT_COLOR.Black,
+    color: TEXT_COLOR.Black
   },
   headerHelloLeftTextName: {
     fontFamily: FONT_FAMILY.XBOLD,
     fontSize: FONT_SIZE.Heading,
     color: TEXT_COLOR.Black,
+    textTransform: 'capitalize'
   },
   headerHelloRight: {
     flexDirection: 'column',
-    alignItems: 'flex-end',
+    alignItems: 'flex-end'
   },
   headerHelloRightLineMenu: {
     width: scale(30),
     height: scale(5),
     borderRadius: 2,
     backgroundColor: BACKGROUND_COLOR.Gray,
-    marginTop: scale(2),
-  },
+    marginTop: scale(2)
+  }
 });
 
 export default styles;

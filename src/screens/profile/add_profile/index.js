@@ -17,7 +17,7 @@ import {
 import { SPACING } from 'constants/size';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { cloneDeep } from 'lodash';
-import { getSkillCriteriaHandle, updateUserHandle } from 'actions/user';
+import { getSkillCriteriaHandle, getUserHandle, updateUserHandle } from 'actions/user';
 import SCREENS_NAME from 'constants/screens';
 import { showCompleteModal, showConfirmModal } from 'actions/system';
 import { Icon } from 'components/';
@@ -161,6 +161,10 @@ const AddProfileScreen = props => {
                   buttonTitleReject: 'Trở lại',
                   buttonTitleConfirm: 'Thêm tiếp',
                   onConfirm: () => {
+                    console.log('Chúc mừng bạn đã thêm kinh nghiệm thành công');
+                    dispatch(
+                      getUserHandle({ callback: () => {}, handleErr: () => {}, failure: () => {} })
+                    );
                     const cloneValues = cloneDeep(values);
                     for (const k in cloneValues) {
                       cloneValues[k].value = '';
@@ -282,6 +286,9 @@ const AddProfileScreen = props => {
                   buttonTitleReject: 'Trở lại',
                   buttonTitleConfirm: 'Thêm tiếp',
                   onConfirm: () => {
+                    dispatch(
+                      getUserHandle({ callback: () => {}, handleErr: () => {}, failure: () => {} })
+                    );
                     const cloneValues = cloneDeep(values);
                     console.log(cloneValues, 'cloneValues');
                     for (const k in cloneValues) {

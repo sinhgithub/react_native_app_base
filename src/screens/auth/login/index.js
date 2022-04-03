@@ -127,7 +127,6 @@ const LoginScreen = () => {
                   isTouched={touched.account}
                   name={'account'}
                   placeholder={translate('auth.userNamePlaceholder')}
-                  keyboardType="number-pad"
                 />
                 <CustomInput
                   label="auth.password"

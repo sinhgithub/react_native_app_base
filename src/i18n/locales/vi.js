@@ -85,7 +85,8 @@ export default {
     passwordRequired: 'Mật khẩu là bắt buộc',
     accountErrorMax: 'Tên đăng nhập tối đa 255 ký tự',
     passwordErrorMin: 'Mật khẩu tối thiểu 6 ký tự',
-    passwordErrorMax: 'Mật khẩu tối đa 12 ký tự'
+    passwordErrorMax: 'Mật khẩu tối đa 12 ký tự',
+    confirmPasswordError: 'Mật khẩu không trùng khớp'
   },
   api: {
     companyName: 'Tên công ty',
