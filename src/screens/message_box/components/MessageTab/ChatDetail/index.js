@@ -36,6 +36,7 @@ import { showCompleteModal } from 'actions/system';
 const ChatDetail = props => {
   const dispatch = useDispatch();
   const { data } = props?.route.params;
+
   const { messages, messagesMeta, loadingMessages } = useSelector(state => state.chat);
   const { user } = useSelector(state => state.user);
   const [page, setPage] = useState(0);

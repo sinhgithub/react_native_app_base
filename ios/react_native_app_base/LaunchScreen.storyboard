@@ -49,7 +49,7 @@
     </scenes>
     <resources>
         <image name="background.png" width="375" height="812"/>
-        <image name="splash_icon.png" width="600" height="529"/>
+        <image name="splash_icon.png" width="2596" height="419"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -11,6 +11,7 @@ import { initLanguge } from 'src/i18n';
 import { AppStackScreen } from './TabNavigator';
 import AppLoading from 'components/AppLoading';
 import { AuthStackScreen } from './AuthNavigator';
+import { onAuthStateChanged, auth } from 'src/configs/firebase';
 
 const RootStack = createStackNavigator();
 

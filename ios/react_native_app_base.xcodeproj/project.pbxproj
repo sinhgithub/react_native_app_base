@@ -17,8 +17,7 @@
 		2ED69218187A473B8C9D19FC /* SVN-Gilroy SemiBold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F176E26AA30C405AAD14C7F6 /* SVN-Gilroy SemiBold Italic.otf */; };
 		31A935C86B9E4D5D9733344C /* SVN-Gilroy Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6926BFBCEE6E4BCBAAAADBA8 /* SVN-Gilroy Light.otf */; };
 		55FC262BBEA141FFB5E758AA /* SVN-Gilroy Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA7205D166B6477F83EE22C8 /* SVN-Gilroy Bold.otf */; };
-		5DBB448B27E76433005997C0 /* splash_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DBB448A27E76433005997C0 /* splash_icon.png */; };
-		5DBB448D27E7643B005997C0 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DBB448C27E7643B005997C0 /* background.png */; };
+		5DFDFEBA27FCBC7000D1345D /* splash_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DFDFEB927FCBC7000D1345D /* splash_icon.png */; };
 		65F49E6304C14509A2DF6033 /* SVN-Gilroy Xlight Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 46794E850F8D415C9F3E5F04 /* SVN-Gilroy Xlight Italic.otf */; };
 		6F01904D6C1146ACB2EB2E14 /* SVN-Gilroy Xlight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704AA5EA04CBAB665367F /* SVN-Gilroy Xlight.otf */; };
 		794C4CB4E2E041A98474F822 /* SVN-Gilroy XBold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C3A96F9E949199EB045E8 /* SVN-Gilroy XBold Italic.otf */; };
@@ -88,8 +87,7 @@
 		580B8FE569BA4F14B92CB3C1 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		58D2B231C4F3412180E003C5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		5AEB6F509B5F4D71A6664866 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../src/assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
-		5DBB448A27E76433005997C0 /* splash_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_icon.png; sourceTree = "<group>"; };
-		5DBB448C27E7643B005997C0 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		5DFDFEB927FCBC7000D1345D /* splash_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash_icon.png; path = /Applications/SOS/MyWorking/DEV/react_native_app_base/ios/../../../../../../Users/center/Desktop/splash_icon.png; sourceTree = "<absolute>"; };
 		60C325ACE4E04E6F894EE114 /* SVN-Gilroy Black Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Black Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Black Italic.otf"; sourceTree = "<group>"; };
 		62DF2101E3D14DE597198E76 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		6926BFBCEE6E4BCBAAAADBA8 /* SVN-Gilroy Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Light.otf"; path = "../src/assets/fonts/SVN-Gilroy Light.otf"; sourceTree = "<group>"; };
@@ -160,8 +158,7 @@
 		13B07FAE1A68108700A75B9A /* react_native_app_base */ = {
 			isa = PBXGroup;
 			children = (
-				5DBB448C27E7643B005997C0 /* background.png */,
-				5DBB448A27E76433005997C0 /* splash_icon.png */,
+				5DFDFEB927FCBC7000D1345D /* splash_icon.png */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -377,9 +374,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				5DBB448D27E7643B005997C0 /* background.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				5DBB448B27E76433005997C0 /* splash_icon.png in Resources */,
+				5DFDFEBA27FCBC7000D1345D /* splash_icon.png in Resources */,
 				264009D182ED476995BB019C /* SVN-Gilroy Black Italic.otf in Resources */,
 				96960FF4F70D42439B5B22F9 /* SVN-Gilroy Black.otf in Resources */,
 				E85D4034817D4E069FF8A1D8 /* SVN-Gilroy Bold Italic.otf in Resources */,

@@ -347,7 +347,7 @@ const DetailJob = props => {
             <JobRequire data={dataJobDetail.jobRequire} />
           </View>
           <View style={styles.jobContact}>
-            <JobContact data={dataJobDetail.jobContact} />
+            <JobContact data={dataJobDetail.jobContact} cardJob={cardJob} />
           </View>
         </View>
       </ScrollView>

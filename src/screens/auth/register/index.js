@@ -5,7 +5,7 @@ import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
 import { Formik } from 'formik';
 import { translate } from 'src/i18n';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dimensions,
   Image,
@@ -26,6 +26,8 @@ import { loginFailure, loginHandle, registerFailure, registerHandle } from 'acti
 import { ModalNotification } from 'components/Modal/NotificationWarning';
 import { showCompleteModal, showConfirmModal } from 'actions/system';
 import { Icon } from 'components/';
+import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { auth, firebaseDatabase, firebaseDatabaseRef, firebaseSet } from 'configs/firebase';
 
 const { width: WIDTH } = Dimensions.get('window');
 // const phoneRegExp = /((0|1)+([0-9]{8,10})\b)/g;
@@ -42,7 +44,6 @@ const Register = () => {
   const [isShowPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const navigation = useNavigation();
-
   const onPressLogin = () => {
     navigation.navigate(SCREENS_NAME.LOGIN_SCREEN, {});
   };
@@ -148,6 +149,11 @@ const Register = () => {
                       }
                     })
                   );
+                  createUserWithEmailAndPassword(auth, params.email.trim(), params.password.trim())
+                    .then(res => {
+                      console.log('==== register firebase user success ====', res);
+                    })
+                    .catch(err => console.log('==== register firebase user failure ====', err));
                 },
                 failure: () => {
                   dispatch(registerFailure());

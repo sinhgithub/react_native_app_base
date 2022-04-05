@@ -16,9 +16,11 @@ export function* getListMessageByRoomSaga(obj) {
     if (res.status === 200) {
       const data = { ...res.data };
       const messages = {};
-      data.data.forEach(item => {
-        messages[item.id] = item;
-      });
+      data.data
+        .filter(item => item.message && !!item.message)
+        .forEach(item => {
+          messages[item.id] = item;
+        });
       yield put(getListMessageByRoomHandleSuccess({ messages, messagesMeta: data.metadata }));
       success?.();
     } else {

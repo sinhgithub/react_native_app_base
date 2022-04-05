@@ -5,7 +5,7 @@ import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
 import { Formik } from 'formik';
 import { translate } from 'src/i18n';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Dimensions,
   Image,
@@ -24,6 +24,14 @@ import SCREENS_NAME from 'constants/screens';
 import { loginFailure, loginHandle } from 'actions/auth';
 import { showCompleteModal } from 'actions/system';
 import { Icon } from 'components/';
+import {
+  auth,
+  firebaseDatabase,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  firebaseDatabaseRef,
+  firebaseSet
+} from 'src/configs/firebase';
 
 const { width: WIDTH } = Dimensions.get('window');
 
@@ -34,9 +42,25 @@ const LoginSchema = Yup.object().shape({
 
 const LoginScreen = () => {
   const [isShowPassword, setShowPassword] = useState(false);
-
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const [values, setValues] = useState(null);
+
+  useEffect(() => {
+    if (values) {
+      dispatch(
+        loginHandle({
+          params: {
+            email: values.account.trim(),
+            password: values.password.trim()
+          },
+          onRegisterSuccess,
+          onRegisterFail,
+          handleErr
+        })
+      );
+    }
+  }, [values]);
 
   const onRegisterSuccess = () => {
     dispatch(
@@ -94,11 +118,8 @@ const LoginScreen = () => {
           validateOnMount={true}
           validationSchema={LoginSchema}
           onSubmit={(values, actions) => {
-            const params = {
-              email: values.account.trim(),
-              password: values.password.trim()
-            };
-            dispatch(loginHandle({ params, onRegisterSuccess, onRegisterFail, handleErr }));
+            setValues(values);
+
             actions.setSubmitting(false);
           }}>
           {({

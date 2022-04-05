@@ -4,8 +4,8 @@
         android:drawable="@mipmap/background"
         android:scaleType = "centerCrop" />
     <item
-        android:width="200dp"
-        android:height="176dp"
+        android:width="250dp"
+        android:height="45dp"
         android:gravity="center"
         android:drawable="@mipmap/splash_icon"
      />

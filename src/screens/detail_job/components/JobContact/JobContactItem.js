@@ -17,10 +17,12 @@ const JobContactItem = props => {
           <Text style={styles.companyName}>{data.contactName}</Text>
         </View>
         <View style={styles.jobContactItemContentIconAction}>
-          <TouchableOpacity style={styles.iconAction}>
+          <TouchableOpacity style={styles.iconAction} onPress={() => onPress?.('sendMessage')}>
             <Icon name="new-message" fontName="Entypo" size={20} color={CUSTOM_COLOR.Orange} />
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.iconAction, styles.actionPhone]}>
+          <TouchableOpacity
+            style={[styles.iconAction, styles.actionPhone]}
+            onPress={() => onPress?.('contact')}>
             <Icon name="phone" fontName="AntDesign" size={20} color={CUSTOM_COLOR.Orange} />
           </TouchableOpacity>
         </View>

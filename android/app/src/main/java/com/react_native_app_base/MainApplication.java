@@ -1,4 +1,4 @@
-package com.react_native_app_base;
+package com.ttv_app;
 
 import android.app.Application;
 import android.content.Context;

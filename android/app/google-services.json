@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "71257409565",
+    "project_id": "chat-leaning",
+    "storage_bucket": "chat-leaning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71257409565:android:5a4c69712ce70311f65ef4",
+        "android_client_info": {
+          "package_name": "com.ttv_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71257409565-7oh0538jnuh36aqrkd16acjvkld54h1q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnqvDvvg2P4bbMYzoQrfwdC5JVlTCVAWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71257409565-7oh0538jnuh36aqrkd16acjvkld54h1q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
