@@ -186,32 +186,32 @@ export const inputType = {
 export const addExperienceForm = [
   {
     id: 'companyName',
-    placeholder: 'Tên công ty',
+    label: 'Tên công ty',
     type: inputType.text,
     order: 1
   },
   {
     id: 'description',
-    placeholder: 'Mô tả',
+    label: 'Mô tả',
     type: inputType.textarea,
     order: 5
   },
   {
     id: 'endDate',
-    placeholder: 'Ngày kết thúc',
+    label: 'Ngày kết thúc',
     type: inputType.date,
     order: 4
   },
   {
     id: 'position',
-    placeholder: 'Vị trí',
+    label: 'Vị trí',
     type: inputType.text,
     order: 2
   },
   {
     id: 'startDate',
-    placeholder: 'Ngày bắt đầu',
-    type: inputType.text,
+    label: 'Ngày bắt đầu',
+    type: inputType.date,
     order: 3
   }
 ];
@@ -230,7 +230,7 @@ export const addEducationForm = [
   {
     id: 'educationStatus',
     placeholder: 'Tốt nghiệp/ Chưa tốt nghiệp',
-    type: inputType.date
+    type: inputType.text
   }
 ];
 

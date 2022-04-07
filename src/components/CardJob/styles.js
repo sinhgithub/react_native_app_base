@@ -86,6 +86,14 @@ const styles = StyleSheet.create({
   },
   marginVertical12: {
     marginVertical: scale(12)
+  },
+  jobInfoInfoImageText: {
+    position: 'absolute',
+    borderRadius: 8
+  },
+  jobInfoInfoImageTextDesc: {
+    fontFamily: FONT_FAMILY.REGULAR,
+    color: TEXT_COLOR.White
   }
 });
 

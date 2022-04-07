@@ -4,6 +4,7 @@ import { getWalletTotalHandle } from 'actions/wallet';
 import { useDispatch, useSelector } from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import { Icon } from 'components/';
+import { default_avatar } from 'assets/images';
 
 import { SPACING } from 'constants/size';
 
@@ -12,16 +13,20 @@ import { FONT_SIZE, FONT_FAMILY } from 'constants/appFonts';
 import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
 import { Shadow } from 'constants/stylesCSS';
 import { formatNumber } from 'helpers/formatNumber';
+import { getImageFromHost } from 'configs/appConfigs';
 
 const IncomeOverView = props => {
   const { user, loading } = useSelector(state => state.user);
   const { walletTotal, loadingWalletTotal } = useSelector(state => state.wallets);
   const avatar = user?.avatar;
   const [avatarSize, setAvatarSize] = useState(null);
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getWalletTotalHandle({}));
   }, [dispatch]);
+
   return (
     <View style={styles.container}>
       <View
@@ -33,7 +38,7 @@ const IncomeOverView = props => {
         {avatar ? (
           <FastImage
             source={{
-              uri: avatar
+              uri: getImageFromHost(avatar)
             }}
             style={[
               styles.avatar,
@@ -41,10 +46,8 @@ const IncomeOverView = props => {
             ]}
           />
         ) : (
-          <FastImage
-            source={{
-              uri: 'https://static.vecteezy.com/system/resources/previews/000/420/940/non_2x/avatar-icon-vector-illustration.jpg'
-            }}
+          <Image
+            source={default_avatar}
             style={[
               styles.avatar,
               avatarSize && { width: avatarSize.width, height: avatarSize.width }

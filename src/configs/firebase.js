@@ -1,16 +1,21 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword } from 'firebase/auth';
-import { getDatabase, ref as firebaseDatabaseRef, set as firebaseSet } from 'firebase/database';
+import {
+  getDatabase,
+  ref as firebaseDatabaseRef,
+  set as firebaseSet,
+  child,
+  get
+} from 'firebase/database';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyAnqvDvvg2P4bbMYzoQrfwdC5JVlTCVAWc',
-  authDomain: 'chat-leaning.firebaseapp.com',
-  databaseURL: 'https://chat-leaning-default-rtdb.asia-southeast1.firebasedatabase.app/',
-  projectId: 'chat-leaning',
-  storageBucket: 'chat-leaning.appspot.com',
-  messagingSenderId: '71257409565',
-  appId: '1:71257409565:android:5a4c69712ce70311f65ef4',
-  measurementId: 'G-MEASUREMENT_ID'
+  apiKey: 'AIzaSyAKRwldppVmH1awRFkUK43a_3073FbloWM',
+  authDomain: 'ttv-work.firebaseapp.com',
+  // databaseURL: 'https://chat-leaning-default-rtdb.asia-southeast1.firebasedatabase.app/',
+  projectId: 'ttv-work',
+  storageBucket: 'ttv-work.appspot.com',
+  messagingSenderId: '542310957066',
+  appId: '1:542310957066:android:e5db8752a5f4be528f5ff3'
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
@@ -21,6 +26,8 @@ export {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   firebaseDatabaseRef,
-  firebaseSet
+  firebaseSet,
+  child,
+  get
 };
 export default app;

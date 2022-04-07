@@ -1,33 +1,14 @@
-import { useNavigation } from '@react-navigation/core';
-
-import AppText from 'components/AppText';
-import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
-
-import SCREENS_NAME from 'constants/screens';
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  ActivityIndicator,
-  Animated,
-  Easing,
-  Image,
-  Keyboard,
-  Platform,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-  ScrollView
-} from 'react-native';
+import { BACKGROUND_COLOR } from 'constants/colors';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Image, Keyboard, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import { Actions, Day, GiftedChat, Bubble } from 'react-native-gifted-chat';
+import { Day, GiftedChat, Bubble } from 'react-native-gifted-chat';
 import { useDispatch, useSelector } from 'react-redux';
 import { scale } from 'utils/responsive';
 import { styles } from './styles';
-import moment from 'moment';
 import { SPACING } from 'constants/size';
 import { getListMessageByRoomHandle, sendMessageHandle } from 'actions/chat';
 import { ICSend } from 'assets/icons';
-import user from 'src/redux/reducers/user';
 import { default_avatar } from 'assets/images';
 import { Icon } from 'components/';
 import { getImageFromHost } from 'src/configs/appConfigs';
@@ -36,8 +17,7 @@ import { showCompleteModal } from 'actions/system';
 const ChatDetail = props => {
   const dispatch = useDispatch();
   const { data } = props?.route.params;
-
-  const { messages, messagesMeta, loadingMessages } = useSelector(state => state.chat);
+  const { messages } = useSelector(state => state.chat);
   const { user } = useSelector(state => state.user);
   const [page, setPage] = useState(0);
   const [value, setValue] = useState('');
@@ -76,9 +56,29 @@ const ChatDetail = props => {
   }, [dispatch, keyboardDidHide, keyboardDidShow, data, page]);
 
   useEffect(() => {
+    let eventCallConversations;
+    if (messagesProcessed?.length > 0) {
+      eventCallConversations = setInterval(() => {
+        dispatch(
+          getListMessageByRoomHandle({
+            params: { roomId: data?.item?.id, page, size: 20 },
+            success: () => {},
+            failure: () => {},
+            handleErr: () => {}
+          })
+        );
+      }, 5000);
+    }
+    return () => {
+      if (eventCallConversations) {
+        clearInterval(eventCallConversations);
+      }
+    };
+  }, [messagesProcessed]);
+
+  useEffect(() => {
     if (messagesProcessed?.length > 0) {
       const temp = messagesProcessed.map((message, index) => {
-        // console.log(message, 'message');
         const messagesProps = {
           _id: message?.id,
           isRead: message?.isRead,
@@ -126,10 +126,18 @@ const ChatDetail = props => {
     if (sending) {
       dispatch(
         sendMessageHandle({
-          params: { toUser: 38, message: value },
+          params: { toUser: data?.item?.replyToId, message: value },
           success: () => {
             setSending(false);
             makeEmptyValue();
+            dispatch(
+              getListMessageByRoomHandle({
+                params: { roomId: data?.item?.id, page, size: 20 },
+                success: () => {},
+                failure: () => {},
+                handleErr: () => {}
+              })
+            );
           },
           failure: () => {
             dispatch(
@@ -223,7 +231,7 @@ const ChatDetail = props => {
   );
 
   const renderCustomView = viewMessageProps => {
-    const { position, isRead, message, roomId, senderId } = viewMessageProps?.currentMessage;
+    const { message } = viewMessageProps?.currentMessage;
     return (
       <View renderToHardwareTextureAndroid ref={ref => {}}>
         <TouchableOpacity onLongPress={e => {}} onPress={() => {}}>
@@ -261,33 +269,10 @@ const ChatDetail = props => {
 
   const renderChatEmpty = useCallback(() => {
     return null;
-    // return (
-    //   <View style={styles.emptyContainer}>
-    //     <Image source={chat_empty} style={styles.imgEmpty} />
-    //     <AppText translate style={styles.emptyText}>
-    //       {'chat.start_chat'}
-    //     </AppText>
-    //   </View>
-    // );
   }, []);
 
   const scrollToBottomComponent = useCallback(() => {
     return null;
-    // return (
-    //   <View style={unreadCount > 0 ? styles.scrollToBottomContainer : null}>
-    //     {unreadCount > 0 ? (
-    //       <TouchableOpacity style={styles.bottomContainer} onPress={readMessage}>
-    //         <ICDownload />
-    //         <AppText translate style={styles.unreadText}>
-    //           {unreadCount}
-    //           {'chat.unread_message'}
-    //         </AppText>
-    //       </TouchableOpacity>
-    //     ) : (
-    //       <ICDownload />
-    //     )}
-    //   </View>
-    // );
   }, []);
 
   const renderSystemMessage = useCallback(() => {
@@ -296,13 +281,6 @@ const ChatDetail = props => {
 
   const renderLoadEarlier = () => {
     return null;
-    // return (
-    //   <View style={styles.loadEarlier}>
-    //     {loadingMore ? (
-    //       <ActivityIndicator size="small" color={CUSTOM_COLOR.DustyGray} style={styles.indicator} />
-    //     ) : null}
-    //   </View>
-    // );
   };
 
   const renderDay = messageProps => {

@@ -76,7 +76,8 @@ const DetailJob = props => {
         address: cardJob?.addressMapped,
         isBonus: cardJob?.isBonusMapped,
         isPaidAfterWork: cardJob?.isPaidAfterWorkMapped,
-        timeRemaining: cardJob?.timeRemainingMapped
+        timeRemaining: cardJob?.timeRemainingMapped,
+        jobBanner: cardJob?.jobBanner
       },
       income: {
         wage: cardJob?.wageMapped

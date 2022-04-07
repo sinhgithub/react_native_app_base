@@ -13,3 +13,4 @@ export { default as ICSend } from './ic_send.js';
 export { default as ICFindJobNew } from './ic_find_job_new';
 export { default as ICWorkNew } from './ic_work_new';
 export { default as ICAccountNew } from './ic_account_new';
+export { default as ICMessageNew } from './ic_message_new';

@@ -6,7 +6,6 @@ import Input from './Input';
 const Form = props => {
   const { refScroll, data, onChange, onSubmit, defaultTextSelect, dataInputSelect } = props;
   const [focus, setFocus] = useState(null);
-
   const processedData = useMemo(() => {
     const result = [];
     if (data) {

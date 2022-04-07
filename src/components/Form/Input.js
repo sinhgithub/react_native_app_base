@@ -1,15 +1,26 @@
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
-import React, { memo, useEffect, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Animated } from 'react-native';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Animated,
+  TouchableOpacity,
+  ScrollView
+} from 'react-native';
 import { editExperienceForm, sectionProfileType, inputType } from 'constants/data_constants';
-import SelectDropdown from 'components/CustomInput/SelectDropdown';
+import SelectDropdown from './SelectDropdown';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
   RadioButtonLabel
 } from 'react-native-simple-radio-button';
+import { Icon } from 'components/';
+import ModalSelectDate from 'components/Modal/ModalSelectDate';
+import moment from 'moment';
 
 const Input = props => {
   const {
@@ -23,12 +34,18 @@ const Input = props => {
     dataInputSelect
   } = props;
   const animation = React.useRef(new Animated.Value(0)).current;
+  const [showSelectDateModal, setShowSelectDateModal] = useState(false);
+
+  const onClickSelectDate = useCallback(index => {
+    setShowSelectDateModal(true);
+  }, []);
+
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const translateY = animation.interpolate({
     inputRange: [0, 1],
     outputRange: [0, -25]
   });
-
   useEffect(() => {
     if (focused === data.index) {
       Animated.timing(animation, {
@@ -111,17 +128,42 @@ const Input = props => {
                     }
                   ]
                 }
-                // focused === data.index && { paddingVertical: SPACING.XSmall }
               ]}>
               {!!data?.placeholder && <Text style={[styles.placeholder]}>{data?.placeholder}</Text>}
             </Animated.View>
-            <TextInput
+            <TouchableOpacity
               style={styles.input}
-              onBlur={() => onBlur(data.index)}
-              onFocus={() => onFocus(data.index)}
-              defaultValue={data?.defaultValue}
-              onChangeText={text => onChange?.(data.id, text)}
-              value={data?.value}
+              activeOpacity={0.8}
+              onPress={() => onClickSelectDate(data.index)}>
+              <View style={styles.inputDateIconWrapper}>
+                <Text style={!styles.inputDateIconText}>
+                  {data?.value ? moment(data?.value).format('DD-MM-YYYY') : ''}
+                </Text>
+                <Icon fontName="AntDesign" name="caretdown" size={15} color="gray" />
+              </View>
+            </TouchableOpacity>
+            <ModalSelectDate
+              id={data?.id}
+              isDisplay={showSelectDateModal}
+              initialModalSelectDate={
+                data?.value
+                  ? moment(data?.value).format('YYYY-MM-DD')
+                  : moment().format('YYYY-MM-DD')
+              }
+              onChange={date => {
+                setSelectedDate({ id: data.id, value: date });
+              }}
+              onSubmitChange={() => {
+                onChange?.(selectedDate?.id, selectedDate?.value);
+                if (showSelectDateModal) {
+                  setShowSelectDateModal?.(false);
+                }
+              }}
+              onCancelChange={() => {
+                if (showSelectDateModal) {
+                  setShowSelectDateModal?.(false);
+                }
+              }}
             />
           </View>
         );
@@ -169,8 +211,8 @@ const Input = props => {
         );
       case inputType.genderRadios:
         const radio_props = [
-          { label: 'Nam', value: 0 },
-          { label: 'Nữ', value: 1 }
+          { label: 'Nam', value: 1 },
+          { label: 'Nữ', value: 0 }
         ];
         return (
           <View style={[styles.wrapper, isDoubleInput && styles.widthControl]}>
@@ -216,27 +258,28 @@ const Input = props => {
     }
   };
 
-  return (
-    <View style={[styles.container, isDoubleInput && styles.containerRow]}>
-      {renderInputByType()}
-    </View>
-  );
+  return <View style={styles.container}>{renderInputByType()}</View>;
 };
 
 const styles = StyleSheet.create({
+  container: {},
+  flex1: {
+    flex: 1
+  },
   containerRow: {
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
   input: {
     paddingHorizontal: SPACING.XXNormal,
-    paddingVertical: SPACING.XNormal,
+    height: 48,
     borderWidth: 1,
     borderColor: 'gray',
     fontFamily: FONT_FAMILY.REGULAR,
     fontSize: FONT_SIZE.BodyText,
     borderRadius: 5,
-    zIndex: 0
+    zIndex: 0,
+    justifyContent: 'center'
   },
   inputTextArea: {
     paddingHorizontal: SPACING.XXNormal,
@@ -268,6 +311,14 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.BodyText,
     color: TEXT_COLOR.Black,
     marginBottom: SPACING.Normal
+  },
+  inputDateIconWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  inputDateIconText: {
+    fontFamily: FONT_FAMILY.REGULAR,
+    fontSize: FONT_SIZE.BodyText
   }
 });
 

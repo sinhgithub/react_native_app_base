@@ -119,7 +119,6 @@ const LoginScreen = () => {
           validationSchema={LoginSchema}
           onSubmit={(values, actions) => {
             setValues(values);
-
             actions.setSubmitting(false);
           }}>
           {({

@@ -11,7 +11,8 @@ import {
   ICHomeNew,
   ICFindJobNew,
   ICWorkNew,
-  ICAccountNew
+  ICAccountNew,
+  ICMessageNew
 } from 'assets/icons';
 import FindJobScreen from 'screens/find_job';
 import MainTabbar from 'components/MainTabbar';
@@ -254,8 +255,16 @@ export const TabStack = () => {
         options={({ route }) => ({
           tabBarLabel: 'tab_name.message_box',
           tabBarIcon: {
-            active: <ICMessageActive width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />,
-            inactive: <ICMessageInActive width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />
+            active: (
+              <ICMessageNew
+                color={BACKGROUND_COLOR.RedBasic}
+                width={ICON_SIZE.MEDIUM}
+                height={ICON_SIZE.MEDIUM}
+              />
+            ),
+            inactive: (
+              <ICMessageNew color="gray" width={ICON_SIZE.MEDIUM} height={ICON_SIZE.MEDIUM} />
+            )
           },
           key: 4
         })}

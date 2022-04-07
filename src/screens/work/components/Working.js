@@ -65,7 +65,7 @@ const Working = props => {
         listSkeleton
       ) : (
         <FlatList
-          contentContainerStyle={styles.flex1}
+          style={styles.flex1}
           keyExtractor={(item, index) => `${item?.id || index}`}
           data={list || []}
           renderItem={renderItem}

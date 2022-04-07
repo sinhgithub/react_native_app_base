@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, Keyboard } from 'react-native';
+import { View, Text, StyleSheet, Keyboard, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { translate } from 'src/i18n';
 import { useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -127,6 +127,11 @@ const AddProfileScreen = props => {
         if (!values.education.value || !values.educationStatus.value) {
           return true;
         }
+        return false;
+      case sectionProfileType.add_skill:
+        // if (!values.education.value || !values.educationStatus.value) {
+        //   return true;
+        // }
         return false;
       default:
         break;
@@ -290,7 +295,6 @@ const AddProfileScreen = props => {
                       getUserHandle({ callback: () => {}, handleErr: () => {}, failure: () => {} })
                     );
                     const cloneValues = cloneDeep(values);
-                    console.log(cloneValues, 'cloneValues');
                     for (const k in cloneValues) {
                       cloneValues[k].value = '';
                     }
@@ -339,24 +343,24 @@ const AddProfileScreen = props => {
 
   return (
     <View style={styles.addProfileScreen} onStartShouldSetResponder={() => Keyboard.dismiss()}>
-      <KeyboardAwareScrollView>
-        <View>
+      <KeyboardAvoidingView enabled behavior="padding" style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }}>
           <Form
             data={values}
             onChange={onChangeForm}
             defaultTextSelect="Chọn kỹ năng"
             dataInputSelect={dataInputSelect}
           />
-        </View>
-        <View>
-          <Button
-            type="modal"
-            title={titleButton}
-            submitMethod={onSubmitForm}
-            disable={disableButton}
-          />
-        </View>
-      </KeyboardAwareScrollView>
+          <View>
+            <Button
+              type="modal"
+              title={titleButton}
+              submitMethod={onSubmitForm}
+              disable={disableButton}
+            />
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </View>
   );
 };

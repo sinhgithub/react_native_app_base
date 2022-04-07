@@ -18,7 +18,7 @@ import SCREEN_NAME from 'constants/screens';
 import { getUserHandle } from 'actions/user';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, firebaseDatabase, firebaseDatabaseRef, firebaseSet } from 'configs/firebase';
-
+console.log(auth, 'auth');
 const HomeScreen = () => {
   const numberNewMessage = 5;
   const dispatch = useDispatch();
@@ -26,15 +26,6 @@ const HomeScreen = () => {
   const { listJobHomePage, loading } = useSelector(state => state.listJob);
 
   useEffect(() => {
-    onAuthStateChanged(auth, user => {
-      if (user?.uid) {
-        firebaseSet(firebaseDatabaseRef(firebaseDatabase, `user/${user.id}`), {
-          email: user.email,
-          emailVerified: user.emailVerified,
-          accessToken: user.accessToken
-        });
-      }
-    });
     dispatch(getListJobHomePageHandle());
     dispatch(getUserHandle({}));
     const focusListener = navigation.addListener('focus', () => {

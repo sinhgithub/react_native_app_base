@@ -7,14 +7,20 @@ import ListAllJob from './components/ListAllJob';
 import ListSavedJob from './components/ListSavedJob';
 import ListJobApply from './components/ListJobApply';
 
-const FindJobScreen = props => {
+const FindJobScreen = ({ navigation, route }) => {
   const [content, setContent] = useState(<ListAllJob />);
+
+  React.useEffect(() => {
+    if (route) {
+      console.log(route, 'routeroute');
+    }
+  }, [route]);
 
   const onChangeTab = useCallback(index => {
     Keyboard.dismiss();
     switch (index.index) {
       case 0:
-        setContent(<ListAllJob />);
+        setContent(<ListAllJob navigation={navigation} />);
         break;
       case 1:
         setContent(<ListSavedJob />);

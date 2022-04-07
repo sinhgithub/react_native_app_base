@@ -4,10 +4,12 @@ import styles from './styles';
 import FastImage from 'react-native-fast-image';
 import { formatNumber } from 'helpers/formatNumber';
 import moment from 'moment';
+import { getImageFromHost } from 'configs/appConfigs';
 
 const CardWallet = props => {
   const { data, hideBorder, isLastItem, from } = props;
   const [sizeCardJobContentImage, setSizeCardJobContentImage] = useState(null);
+  console.log(data, 'data');
 
   const dataProcessed = useMemo(() => {
     switch (from) {
@@ -70,9 +72,6 @@ const CardWallet = props => {
               setSizeCardJobContentImage(e.nativeEvent.layout);
             }
           }}>
-          {!dataProcessed?.jobBanner && (
-            <Text style={styles.cardJobContentImageTextDesc}>Banner</Text>
-          )}
           {sizeCardJobContentImage && dataProcessed?.jobBanner && (
             <FastImage
               style={[
@@ -83,7 +82,7 @@ const CardWallet = props => {
                 }
               ]}
               source={{
-                uri: dataProcessed?.jobBanner
+                uri: getImageFromHost(dataProcessed?.jobBanner)
               }}
               resizeMode={FastImage.resizeMode.stretch}
             />

@@ -14,6 +14,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getListChatHandle } from 'actions/chat';
 import { useNavigation } from '@react-navigation/core';
 import SCREENS_NAME from 'constants/screens';
+import {
+  auth,
+  firebaseDatabase,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  firebaseDatabaseRef,
+  firebaseSet,
+  child,
+  get
+} from 'src/configs/firebase';
+import { getFirebaseDbByCollection } from 'src/helpers/getFirebaseDbByCollection';
 
 const MessagesTab = props => {
   const { conversations, conversationsMeta, loading } = useSelector(state => state.chat);
@@ -29,11 +40,6 @@ const MessagesTab = props => {
     }
     return result.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
   }, [conversations]);
-  // const listNotificationSkeleton = Array(10)
-  //   .fill('')
-  //   .map((item, index) => {
-  //     return <ConversationSkeleton key={index} />;
-  //   });
 
   useEffect(() => {
     dispatch(getListChatHandle({ success: () => {}, failure: () => {}, handleErr: () => {} }));
@@ -44,6 +50,20 @@ const MessagesTab = props => {
       focusListener();
     };
   }, [dispatch, navigation]);
+
+  // useEffect(() => {
+  //   let eventCallConversations;
+  //   if (conversationsProcessed?.length > 0) {
+  //     eventCallConversations = setInterval(() => {
+  //       dispatch(getListChatHandle({ success: () => {}, failure: () => {}, handleErr: () => {} }));
+  //     }, 5000);
+  //   }
+  //   return () => {
+  //     if (eventCallConversations) {
+  //       clearInterval(eventCallConversations);
+  //     }
+  //   };
+  // }, [conversationsProcessed]);
 
   const onViewDetail = useCallback(
     params => {

@@ -1,6 +1,5 @@
 import { formatDateChat } from 'helpers/formatTime';
-import moment from 'moment';
-import React, { memo, useMemo } from 'react';
+import React, { memo } from 'react';
 import { View, Text, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import styles from './styles';
@@ -8,7 +7,7 @@ import { default_avatar } from 'assets/images';
 import { getImageFromHost } from 'src/configs/appConfigs';
 
 const Conversation = props => {
-  const { data, rowMap, isLastMessage } = props;
+  const { data } = props;
   const detail = data?.item;
   return (
     <View style={styles.conversation}>

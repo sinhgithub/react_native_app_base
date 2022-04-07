@@ -6,24 +6,28 @@ import { Button } from 'src/components';
 import { Icon } from 'src/components';
 import { CUSTOM_COLOR } from 'constants/colors';
 import { translate } from 'src/i18n';
+import { getImageFromHost } from 'configs/appConfigs';
 
 const JobInfo = props => {
   const { data } = props;
-  const { title, companyName, address, isBonus, isPaidAfterWork, timeRemaining } = data;
+  const { title, companyName, address, isBonus, isPaidAfterWork, timeRemaining, jobBanner } = data;
 
   return (
     <View style={styles.jobInfoInfo}>
       <View style={styles.jobInfoInfoImage}>
-        <View style={styles.jobInfoInfoImageText}>
-          <Text style={styles.jobInfoInfoImageTextDesc}>Banner</Text>
-        </View>
-        <FastImage
-          style={styles.jobInfoInfoImageImage}
-          source={{
-            uri: 'https://fpthcm.net/wp-content/uploads/2018/06/cropped-logo_fpt.png'
-          }}
-          resizeMode={FastImage.resizeMode.stretch}
-        />
+        {jobBanner ? (
+          <FastImage
+            style={styles.jobInfoInfoImageImage}
+            source={{
+              uri: jobBanner
+            }}
+            resizeMode={FastImage.resizeMode.stretch}
+          />
+        ) : (
+          <View style={styles.jobInfoInfoImageText}>
+            <Text style={styles.jobInfoInfoImageTextDesc}>Banner</Text>
+          </View>
+        )}
       </View>
       <Text style={styles.jobInfoInfoTitle}>{title}</Text>
       <Text style={styles.jobInfoInfoCompany}>{companyName}</Text>

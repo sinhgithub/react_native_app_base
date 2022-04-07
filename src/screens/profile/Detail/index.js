@@ -1,13 +1,8 @@
 import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
-import { View, Text, KeyboardAvoidingView, Keyboard, TextInput, ScrollView } from 'react-native';
-import { tabDetailProfileScreen, detailProfileForm } from 'constants/data_constants';
-import { TabsHorizontal, Form } from 'components/';
+import { View, KeyboardAvoidingView, Keyboard } from 'react-native';
+import { detailProfileForm } from 'constants/data_constants';
+import { Form } from 'components/';
 import styles from './styles';
-import Avatar from './components/Avatar';
-import { screenHeight, navbarHeight, MAIN_HEADER_HEIGHT, statusBarHeight } from 'constants/size';
-import AccountBank from './components/AccountBank';
-import { BACKGROUND_COLOR } from 'constants/colors';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
 import { cloneDeep } from 'lodash';
 import { Button, Icon } from 'components/';
@@ -18,9 +13,10 @@ import { useNavigation } from '@react-navigation/core';
 const DetailProfile = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const onChangeTab = useCallback(index => {}, []);
   const refScroll = useRef(null);
   const { user, loading } = useSelector(state => state.user);
+  const [showSelectDateModal, setShowSelectDateModal] = useState(false);
+
   const formData = useMemo(() => {
     const cloneData = cloneDeep(detailProfileForm);
     cloneData.forEach((item, index) => {
@@ -121,11 +117,17 @@ const DetailProfile = props => {
         {/* <View>
               <TabsHorizontal onPress={onChangeTab} data={tabDetailProfileScreen} />
             </View> */}
-        <View style={styles.avatar}>
+        {/* <View style={styles.avatar}>
           <Avatar avatar={user?.avatar} />
-        </View>
+        </View> */}
         <View style={styles.detailProfile}>
-          <Form refScroll={refScroll} data={values} onChange={onChange} />
+          <Form
+            refScroll={refScroll}
+            data={values}
+            onChange={onChange}
+            showSelectDateModal={showSelectDateModal}
+            setShowSelectDateModal={setShowSelectDateModal}
+          />
           <Button type="modal" title={'Cập nhật'} submitMethod={onSubmitForm} disable={false} />
         </View>
 

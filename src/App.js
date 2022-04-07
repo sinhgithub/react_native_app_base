@@ -8,12 +8,23 @@ import RootNavigator from './routes';
 import { StyleSheet } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import { BACKGROUND_COLOR } from './constants/colors';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, firebaseDatabase, firebaseDatabaseRef, firebaseSet } from 'configs/firebase';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 initLanguge();
 
 const App = () => {
+  onAuthStateChanged(auth, user => {
+    if (user?.uid) {
+      firebaseSet(firebaseDatabaseRef(firebaseDatabase, `user/${user.id}`), {
+        email: user.email,
+        emailVerified: user.emailVerified,
+        accessToken: user.accessToken
+      });
+    }
+  });
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();

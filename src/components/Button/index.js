@@ -105,7 +105,11 @@ const Button = props => {
               disable && { backgroundColor: BACKGROUND_COLOR.BasicGray },
               containerStyle
             ]}
-            onPress={submitMethod}
+            onPress={() => {
+              if (!disable) {
+                submitMethod?.();
+              }
+            }}
             activeOpacity={disable ? 1 : 0.6}>
             <Text style={[styles.buttonTitle, titleStyle]}>{title}</Text>
           </TouchableOpacity>

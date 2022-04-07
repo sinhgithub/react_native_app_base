@@ -10,14 +10,7 @@ import SCREENS_NAME from 'constants/screens';
 const FilterJob = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [activeItem, setActiveItem] = useState({ index: 0, data: null });
-  const [search, setSearch] = useState(null);
   const { provinces, loading } = useSelector(state => state.masterData);
-
-  useEffect(() => {
-    dispatch(getListProvinceHandle({}));
-  }, [dispatch]);
-
   const listSuggestData = useMemo(() => {
     const result = [];
     if (provinces) {
@@ -25,9 +18,15 @@ const FilterJob = props => {
         result.push(provinces?.[k]?.name);
       }
     }
-
     return result;
   }, [provinces]);
+
+  const [activeItem, setActiveItem] = useState({ index: 0, data: listSuggestData[0] });
+  const [search, setSearch] = useState(null);
+
+  useEffect(() => {
+    dispatch(getListProvinceHandle({}));
+  }, [dispatch]);
 
   const onPressItemFilter = useCallback((data, index) => {
     setActiveItem?.({ index, data });
@@ -36,9 +35,10 @@ const FilterJob = props => {
 
   useEffect(() => {
     if (search) {
-      navigation.navigate(SCREENS_NAME.FIND_JOB_SCREEN, { searchProvince: search || activeItem });
+      // navigation.setParams({ searchProvince: search || activeItem });
+      navigation.goBack();
     }
-  }, [navigation, search]);
+  }, [activeItem, navigation, search]);
 
   const listSuggest = listSuggestData.map((province, index) => {
     return (

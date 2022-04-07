@@ -7,6 +7,7 @@ import { translate } from 'src/i18n';
 import { mapDistrictsAndProvince } from 'helpers/mapAddress';
 import { mapWageFromTo } from 'helpers/wage';
 import { formatFeatureDurationDate } from 'helpers/formatTime';
+import { getImageFromHost } from 'configs/appConfigs';
 
 const CardJob = props => {
   const { onPress, data, hideAllFlag, hideBorder, isLastItem } = props;
@@ -15,7 +16,6 @@ const CardJob = props => {
   const dataCardJob = useMemo(() => {
     const address = `${data?.address}, ${mapDistrictsAndProvince(data?.district, data?.province)}`;
     const wage = mapWageFromTo(data?.wageFrom, data?.wageTo);
-
     const timeRemaining = formatFeatureDurationDate(data?.expirationDate);
     return {
       id: data?.id,
@@ -26,7 +26,8 @@ const CardJob = props => {
         ? `${translate('common.remind')} ${timeRemaining}`
         : translate('common.expire'),
       isBonus: data?.bonus?.length > 0,
-      isPaidAfterWork: data?.paidAfterWork
+      isPaidAfterWork: data?.paidAfterWork,
+      jobBanner: getImageFromHost(data.employer.banner)
     };
   }, [data]);
 
@@ -41,7 +42,8 @@ const CardJob = props => {
             wageMapped: dataCardJob?.wage,
             timeRemainingMapped: dataCardJob?.timeRemaining,
             isPaidAfterWorkMapped: dataCardJob?.isPaidAfterWork,
-            isBonusMapped: dataCardJob?.isBonus
+            isBonusMapped: dataCardJob?.isBonus,
+            jobBanner: dataCardJob.jobBanner
           })
         }
         activeOpacity={0.6}>
@@ -67,19 +69,9 @@ const CardJob = props => {
               resizeMode={FastImage.resizeMode.stretch}
             />
           ) : (
-            <FastImage
-              style={[
-                styles.image,
-                {
-                  width: sizeCardJobContentImage?.width,
-                  height: sizeCardJobContentImage?.width
-                }
-              ]}
-              source={{
-                uri: 'https://fpthcm.net/wp-content/uploads/2018/06/cropped-logo_fpt.png'
-              }}
-              resizeMode={FastImage.resizeMode.stretch}
-            />
+            <View style={styles.jobInfoInfoImageText}>
+              <Text style={styles.jobInfoInfoImageTextDesc}>Banner</Text>
+            </View>
           )}
         </View>
         <View style={styles.cardJobContentInfo}>
