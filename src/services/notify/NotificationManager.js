@@ -23,30 +23,24 @@ class NotificationManager {
       onAction: () => {
         console.log('onAction90');
       },
-      // (required) Called when a remote is received or opened, or local notification is opened
       onNotification: function (notification) {
-        console.log('onNotification900:', notification);
-
-        if (!notification.userInteraction) {
-          // if not user clicked
-          //onMessageReceived(notification);
+        console.log('NOTIFICATION:', notification);
+        if (!notification?.data) {
           return;
         }
+        notification.userInteraction = true;
+        onOpenNotification(Platform.OS === 'ios' ? notification.data.item : notification.data);
 
-        if (notification?.data?.convId && Platform.OS == 'android') {
-          // notification chat for stringee
-          console.log('onOpenNotification', onOpenNotification);
-          onOpenNotification(notification?.data);
-        }
-        if (Platform.OS == 'ios' && notification?.data?.data?.map?.type === 'CHAT_EVENT') {
-          // notification chat for stringee
-          const { convId, convName, isGroup } = notification?.data?.data?.map?.data?.map;
-          //convId, isGroup, convName
-          console.log('convId, convName, isGroup', convId, convName, isGroup);
-          onOpenNotification({ convId, convName, isGroup: isGroup != 0 });
+        if (Platform.OS === 'ios') {
           notification.finish(PushNotificationIOS.FetchResult.NoData);
         }
       },
+
+      // (optional) Called when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. (iOS)
+      onRegistrationError: function (err) {
+        console.error(err.message, err);
+      },
+
       // IOS only: permission
       permissions: {
         alert: true,
@@ -68,37 +62,65 @@ class NotificationManager {
       requestPermissions: true
     });
   };
-  _buildAndroidNotification = (id, title, message, data) => {
-    return {
-      channelId: 'channelIdApp',
-      id: id,
-      autoCancel: true,
-      largeIcon: 'ic_launcher',
-      smallIcon: 'ic_launcher',
-      largeIconUrl: data?.avatar,
-      //subText: message || '',
-      vibrate: false,
-      vibration: 300,
-      priority: 'high',
-      importance: 'high',
-      data: data
-    };
-  };
-  showNotification = (id, title, message, data) => {
+
+  showNotification = (id, title, message, data = {}, options = {}) => {
     console.log('showNotification');
     console.log('title: ', title);
     console.log('message: ', message);
     console.log('data: ', data);
     PushNotification.localNotification({
       /*--Android---*/
-      ...this._buildAndroidNotification(id, title, message, data),
+      ...this.buildAndroidNotification(id, title, message, data, options),
+      // ios & android
+      ...this.buildIosNotification(id, title, message, data, options),
       data: data,
       title: title || '',
       message: message || '',
-      playSound: true,
-      soundName: 'default',
-      userInteraction: true
+      playSound: options.playSound || true,
+      soundName: options.soundName || 'default',
+      userInteraction: false
     });
+  };
+
+  buildAndroidNotification = (id, title, message, data = {}, options = {}) => {
+    return {
+      // channelId: 'channelIdApp',
+      id: id,
+      autoCancel: true,
+      largeIcon: options.largeIcon || 'ic_launcher',
+      smallIcon: options.smallIcon || 'ic_notification',
+      bigText: message || '',
+      subText: title || '',
+      largeIconUrl: data?.avatar,
+      vibrate: options.vibrate || false,
+      vibration: options.vibration || 300,
+      priority: options.priority || 'high',
+      importance: options.importance || 'high',
+      data: data
+    };
+  };
+  buildIosNotification = (id, title, message, data = {}, options = {}) => {
+    return {
+      alertAction: options.alertAction || 'view',
+      category: options.alertAction || '',
+      userInfo: {
+        id,
+        data
+      }
+    };
+  };
+
+  cancelAllNotification = () => {
+    if (Platform.OS === 'ios') {
+      PushNotificationIOS.removeAllDeliveredNotifications();
+    } else {
+      PushNotification.cancelAllLocalNotifications();
+    }
+  };
+
+  removeDeliveredNotificationByID = notificationId => {
+    console.log('removeDeliveredNotificationByID');
+    PushNotification.cancelLocalNotification({ id: `${notificationId}` });
   };
 }
 export const notificationManager = new NotificationManager();

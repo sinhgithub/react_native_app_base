@@ -1,13 +1,18 @@
 import { Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 class FirebaseNotificationService {
-  register = async onRegister => {
-    if (Platform.OS == 'ios') {
+  register = (onRegister, onNotification, onOpenNotification) => {
+    this.checkPermission(onRegister);
+    this.createNotificationListeners(onRegister, onNotification, onOpenNotification);
+  };
+
+  registerAppWithFCM = async () => {
+    if (Platform.OS === 'ios') {
       await messaging().registerDeviceForRemoteMessages();
       await messaging().setAutoInitEnabled(true);
     }
-    await this.checkPermission(onRegister);
   };
+
   checkPermission = async onRegister => {
     const authorizationStatus = await messaging().requestPermission();
     console.log('checkPermission', authorizationStatus);
@@ -30,7 +35,7 @@ class FirebaseNotificationService {
         .then(token => {
           console.log('getAPNSToken', token);
           if (token) {
-            onRegister(token);
+            onRegister?.(token);
           } else {
             console.log('cannot get token');
           }
@@ -44,7 +49,7 @@ class FirebaseNotificationService {
         .then(fcmToken => {
           console.log('getToken99', fcmToken);
           if (fcmToken) {
-            onRegister(fcmToken);
+            onRegister?.(fcmToken);
           } else {
             console.log('cannot get token');
           }
@@ -54,6 +59,7 @@ class FirebaseNotificationService {
         });
     }
   };
+
   requestPermission = onRegister => {
     messaging()
       .requestPermission()
@@ -65,27 +71,66 @@ class FirebaseNotificationService {
         console.log(error);
       });
   };
-  /*createNotificationListeners = (onRegister, onNotification) => {
-    this.messageListener = messaging().onMessage(async remoteMessage => {
-      console.log('messageListener', remoteMessage);
+
+  deleteToken = () => {
+    console.log('FCM services', 'delete token');
+    messaging.deleteToken().catch(error => {
+      console.log('FCM services delete token error', error);
+    });
+  };
+
+  createNotificationListeners = (onRegister, onNotification, onOpenNotification) => {
+    // when the app running in background
+    messaging().onNotificationOpenedApp(remoteMessage => {
+      console.log('FCM services onNotification Appp caasue to open');
       if (remoteMessage) {
-        const { messageId } = remoteMessage;
-        if (remoteMessage?.data?.data) {
-          const payload = JSON.parse(remoteMessage?.data?.data);
-          console.log('onNotification77', payload);
-          const body = {
-            title: payload?.convName,
-            message: payload?.message?.content,
-            data: {
-              convId: payload?.convId,
-              messageId: payload?.msgId
-            }
-          };
-          console.log('onNotification88', body);
-          onNotification(body);
-        }
+        const notification = remoteMessage.notification;
+        onOpenNotification?.(notification);
       }
     });
-  };*/
+
+    // when the app iss open from a qui state
+    messaging()
+      .getInitialNotification()
+      .then(remoteMessage => {
+        console.log('FCM services onNotification Appp caasue to open');
+        if (remoteMessage) {
+          let notification = null;
+          if (Platform.OS === 'ios') {
+            notification = remoteMessage.data.notification;
+          } else {
+            notification = remoteMessage.notification;
+          }
+          onNotification?.(notification);
+        }
+      })
+      .catch(err => {
+        console.log('getInitialNotification errr', err);
+      });
+
+    // foreground state messsage
+    this.messagingListener = messaging().onMessage(async remoteMessage => {
+      console.log('messagingListener', remoteMessage);
+      if (remoteMessage) {
+        let notification = null;
+        if (Platform.OS === 'ios') {
+          notification = remoteMessage.data.notification;
+        } else {
+          notification = remoteMessage.notification;
+        }
+        onNotification?.(notification);
+      }
+    });
+
+    // trigger when have new token
+    messaging().onTokenRefresh(token => {
+      console.log(token, '======= token Refresh =======');
+      onRegister(token);
+    });
+  };
+
+  unRegister = () => {
+    this.messagingListener();
+  };
 }
 export const firebaseNotificationService = new FirebaseNotificationService();

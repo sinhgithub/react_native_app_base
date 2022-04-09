@@ -10,25 +10,42 @@ import SplashScreen from 'react-native-splash-screen';
 import { BACKGROUND_COLOR } from './constants/colors';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth, firebaseDatabase, firebaseDatabaseRef, firebaseSet } from 'configs/firebase';
+import { firebaseNotificationService } from 'services/notify/FirebaseNotificationService';
+import { notificationManager } from 'services/notify/NotificationManager';
 
 Text.defaultProps = Text.defaultProps || {};
 Text.defaultProps.allowFontScaling = false;
 initLanguge();
 
 const App = () => {
-  onAuthStateChanged(auth, user => {
-    if (user?.uid) {
-      firebaseSet(firebaseDatabaseRef(firebaseDatabase, `user/${user.id}`), {
-        email: user.email,
-        emailVerified: user.emailVerified,
-        accessToken: user.accessToken
-      });
-    }
-  });
+  const onRegister = () => {
+    console.log('onRegister');
+  };
+  const onNotification = notify => {
+    console.log('onNotification');
+    const options = {
+      soundName: 'default',
+      playSound: true
+    };
+    notificationManager.showNotification(0, notify.title, notify.body, notify, options);
+  };
+  const onOpenNotification = notify => {
+    console.log('onOpenNitification');
+  };
+
   useEffect(() => {
+    firebaseNotificationService.registerAppWithFCM();
+    firebaseNotificationService.register(onRegister, onNotification, onOpenNotification);
+
     setTimeout(() => {
       SplashScreen.hide();
     }, 500);
+
+    return () => {
+      console.log('unRegister');
+      firebaseNotificationService.unRegister();
+      notificationManager.unRegister();
+    };
   }, []);
 
   return (

@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "542310957066-ggbov198lp566q27jotivt501ijbg8ke.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ttv_app",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "542310957066-v75dejsm7d8ign2dpaqv4uucees78ruq.apps.googleusercontent.com",
           "client_type": 3
         }
