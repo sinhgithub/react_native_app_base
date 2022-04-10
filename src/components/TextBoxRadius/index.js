@@ -6,7 +6,7 @@ import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
 import { FONT_FAMILY } from 'constants/appFonts';
 
 const TextBoxRadius = props => {
-  const { text, containerStyle, textStyle, onPress, index, activeItem, data } = props;
+  const { containerStyle, textStyle, onPress, index, activeItem, data } = props;
 
   return (
     <TouchableOpacity
@@ -22,7 +22,7 @@ const TextBoxRadius = props => {
           activeItem === index && { color: TEXT_COLOR.White, fontFamily: FONT_FAMILY.BOLD },
           textStyle
         ]}>
-        {text || ''}
+        {data?.name || ''}
       </Text>
     </TouchableOpacity>
   );

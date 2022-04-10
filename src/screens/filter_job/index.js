@@ -6,16 +6,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getListProvinceHandle } from 'actions/master_data';
 import { useNavigation } from '@react-navigation/core';
 import SCREENS_NAME from 'constants/screens';
+import { setFilterJobByProvince } from 'actions/system';
 
 const FilterJob = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { provinces, loading } = useSelector(state => state.masterData);
+
   const listSuggestData = useMemo(() => {
     const result = [];
     if (provinces) {
       for (const k in provinces) {
-        result.push(provinces?.[k]?.name);
+        result.push(provinces?.[k]);
       }
     }
     return result;
@@ -35,16 +37,15 @@ const FilterJob = props => {
 
   useEffect(() => {
     if (search) {
-      // navigation.setParams({ searchProvince: search || activeItem });
+      dispatch(setFilterJobByProvince({ ...search, tabIndex: 0 }));
       navigation.goBack();
     }
-  }, [activeItem, navigation, search]);
+  }, [activeItem, dispatch, navigation, search]);
 
   const listSuggest = listSuggestData.map((province, index) => {
     return (
       <TextBoxRadius
         data={province}
-        text={province}
         index={index}
         activeItem={activeItem.index}
         onPress={onPressItemFilter}

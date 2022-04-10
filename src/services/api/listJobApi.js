@@ -27,3 +27,8 @@ export const apiListAppliedJob = (params, callback) => {
   const url = `${END_POINT}api/job/job_seeker/received`;
   return utils.get(url, params, {}, callback);
 };
+
+export const apiFilterJob = params => {
+  const url = `${END_POINT}api/job`;
+  return utils.get(url, params);
+};

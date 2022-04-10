@@ -9,7 +9,8 @@ const initialState = {
     confirmModal: null
   },
 
-  tabIndexMessageBox: 0
+  tabIndexMessageBox: 0,
+  filterJobByProvince: null
 };
 
 const system = (state = initialState, action) => {
@@ -64,6 +65,19 @@ const system = (state = initialState, action) => {
       return {
         ...state,
         tabIndexMessageBox: action.payload
+      };
+    }
+    // ===============================================
+    case SYSTEM.SET_FILTER_JOB_BY_PROVINCE: {
+      return {
+        ...state,
+        filterJobByProvince: action.payload
+      };
+    }
+    case SYSTEM.CLEAN_FILTER_JOB_BY_PROVINCE: {
+      return {
+        ...state,
+        filterJobByProvince: null
       };
     }
     default:

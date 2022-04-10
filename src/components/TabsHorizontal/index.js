@@ -1,5 +1,6 @@
 import React, { memo, useCallback, useState, useEffect, useMemo } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { useSelector } from 'react-redux';
 import styles from './styles';
 
 const Tabs = props => {
@@ -23,12 +24,18 @@ const Tabs = props => {
   }, [tabActive]);
 
   const [tabIndex, setTabIndex] = useState(initTabIndex);
-
+  const { filterJobByProvince } = useSelector(state => state.system);
   useEffect(() => {
     if (tabIndex.isClick) {
       onPress?.(tabIndex);
     }
   }, [onPress, tabIndex]);
+
+  useEffect(() => {
+    if (filterJobByProvince) {
+      handlePressTab(filterJobByProvince.tabIndex);
+    }
+  }, [filterJobByProvince]);
 
   const handlePressTab = useCallback(
     index => {

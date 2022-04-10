@@ -1,13 +1,15 @@
 import React, { memo, useEffect, useCallback, useState, useMemo } from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, Keyboard, Image, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SearchInput } from 'components/';
-import { CardJob, CardJobSkeleton } from 'components/';
+import { CardJob, CardJobSkeleton, Button } from 'components/';
 import { getListAllJobHandle } from 'actions/getListJob';
 import { useDispatch, useSelector } from 'react-redux';
 import SCREEN_NAME from 'constants/screens';
-import { CUSTOM_COLOR } from 'constants/colors';
+import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
+import { cleanFilterJobByProvince } from 'actions/system';
+import { find } from 'assets/images';
 
 const numberSkeleton = 4;
 let ev;
@@ -22,6 +24,7 @@ const ListAllJob = props => {
   const { listAllJob, loading, metaData } = useSelector(state => state.listJob);
   const [page, setPage] = useState(0);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const { filterJobByProvince } = useSelector(state => state.system);
 
   const list = useMemo(() => {
     const result = [];
@@ -32,8 +35,14 @@ const ListAllJob = props => {
   }, [listAllJob]);
 
   useEffect(() => {
-    dispatch(getListAllJobHandle({ page, size }));
-  }, [dispatch]);
+    if (!filterJobByProvince) {
+      dispatch(getListAllJobHandle({ page, size }));
+    } else {
+      dispatch(
+        getListAllJobHandle({ page, size, province_id: filterJobByProvince.data.id, search: true })
+      );
+    }
+  }, [dispatch, filterJobByProvince, page]);
 
   useEffect(() => {
     if (isSearchText) {
@@ -69,6 +78,12 @@ const ListAllJob = props => {
     }
   }, [dispatch, page]);
 
+  useEffect(() => {
+    if (!searchText || searchText === '') {
+      Keyboard.dismiss();
+    }
+  }, [searchText]);
+
   const handleSetIsSearchText = useCallback(() => {
     setIsSearchText(true);
   }, []);
@@ -82,23 +97,28 @@ const ListAllJob = props => {
 
   const onSearchText = useCallback(
     v => {
+      if (filterJobByProvince) {
+        dispatch(cleanFilterJobByProvince());
+        setPage(0);
+      }
       handleSetIsSearchText(true);
       setSearchText(v);
     },
-    [handleSetIsSearchText]
+    [dispatch, filterJobByProvince, handleSetIsSearchText]
   );
   const renderJobs = ({ item, index }) => {
     const isLastItem = index === list?.length - 1;
     return <CardJob key={item?.id} data={item} onPress={onClickCardJob} isLastItem={isLastItem} />;
   };
 
-  const renderSkeleton = useCallback(() => {
-    return Array(numberSkeleton)
-      .fill('')
-      .map((item, index) => {
-        return <CardJobSkeleton key={index} />;
-      });
-  }, []);
+  const renderListEmptyComponent = () => {
+    return (
+      <View style={styles.imageFindJob}>
+        <Image source={find} style={styles.image} resizeMode="contain" />
+        <Text>Không tìm thấy công việc</Text>
+      </View>
+    );
+  };
 
   const onPressFilter = useCallback(() => {
     navigation.navigate(SCREEN_NAME.FILTER_JOB);
@@ -126,19 +146,16 @@ const ListAllJob = props => {
           onFilter={onPressFilter}
         />
       </View>
-      {loading ? (
-        renderSkeleton()
-      ) : (
-        <FlatList
-          keyExtractor={(item, index) => `${item?.id || index}${index}`}
-          renderItem={renderJobs}
-          data={list || []}
-          onEndReached={loadMore}
-          onEndReachedThreshold={0.2}
-          refreshing={isRefreshing}
-          onRefresh={onRefresh}
-        />
-      )}
+      <FlatList
+        keyExtractor={(item, index) => `${item?.id || index}${index}`}
+        renderItem={renderJobs}
+        data={list || []}
+        onEndReached={loadMore}
+        onEndReachedThreshold={0.2}
+        refreshing={isRefreshing}
+        onRefresh={onRefresh}
+        ListEmptyComponent={renderListEmptyComponent()}
+      />
     </>
   );
 };
@@ -150,8 +167,15 @@ const styles = StyleSheet.create({
     borderBottomColor: CUSTOM_COLOR.BasicGray,
     paddingVertical: SPACING.Normal
   },
-  flatListContainer: {
-    // flex: 1
+  flatListContainer: {},
+  imageFindJob: {
+    flex: 1,
+    backgroundColor: BACKGROUND_COLOR.White,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  image: {
+    width: '50%'
   }
 });
 

@@ -36,3 +36,14 @@ export const setTabIndexMessageBox = payload => ({
   type: SYSTEM.SET_MESSAGE_BOX_TAB_INDEX,
   payload
 });
+// set filterJobByProvince
+export const setFilterJobByProvince = payload => ({
+  type: SYSTEM.SET_FILTER_JOB_BY_PROVINCE,
+  payload
+});
+
+// clean filter by province
+export const cleanFilterJobByProvince = payload => ({
+  type: SYSTEM.CLEAN_FILTER_JOB_BY_PROVINCE,
+  payload
+});
