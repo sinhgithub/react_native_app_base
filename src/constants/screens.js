@@ -16,7 +16,8 @@ const SCREENS_NAME = {
   REGISTER_SCREEN: 'RegisterScreen',
   UPDATE_PROFILE_SCREEN: 'UpdateProfileScreen',
   ADD_PROFILE_SCREEN: 'AddProfileScreen',
-  DETAIL_CHAT_SCREEN: 'DetailChatScreen'
+  DETAIL_CHAT_SCREEN: 'DetailChatScreen',
+  NOTIFY_DETAIL_SCREEN: 'NotifyDetailScreen'
 };
 
 export default SCREENS_NAME;

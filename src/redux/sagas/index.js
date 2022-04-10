@@ -8,6 +8,7 @@ import walletSagas from './walletSagas';
 import userSagas from './userSagas';
 import masterDataSagas from './masterDataSagas';
 import getListChatSagas from './chat';
+import notificationSagas from './notificationSagas';
 
 export default function* rootSaga() {
   yield all([
@@ -19,6 +20,7 @@ export default function* rootSaga() {
     walletSagas(),
     userSagas(),
     masterDataSagas(),
-    getListChatSagas()
+    getListChatSagas(),
+    notificationSagas()
   ]);
 }

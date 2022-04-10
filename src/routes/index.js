@@ -6,17 +6,64 @@ import SCREENS_NAME from 'constants/screens';
 import React, { Suspense, useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { initLanguge } from 'src/i18n';
 import { AppStackScreen } from './TabNavigator';
 import AppLoading from 'components/AppLoading';
 import { AuthStackScreen } from './AuthNavigator';
 import { onAuthStateChanged, auth } from 'src/configs/firebase';
+import { getListNotifyHandle, registerNotificationTokenHandle } from 'actions/notification';
+import { getDeviceId } from 'react-native-device-info';
+import { useNavigation } from '@react-navigation/core';
+import { notificationManager } from 'services/notify/NotificationManager';
+import { firebaseNotificationService } from 'services/notify/FirebaseNotificationService';
+import { setTabIndexMessageBox } from 'actions/system';
 
 const RootStack = createStackNavigator();
 
 const RootStackScreen = props => {
   const { isLogin } = useSelector(state => state.auth);
+
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const onRegister = fcmToken => {
+    if (fcmToken) {
+      dispatch(
+        registerNotificationTokenHandle({
+          params: {
+            deviceId: getDeviceId(),
+            token: fcmToken
+          },
+          success: () => {},
+          failure: () => {},
+          handleErr: () => {}
+        })
+      );
+    }
+  };
+  const onNotification = notify => {
+    const options = {
+      soundName: 'default',
+      playSound: true
+    };
+    notificationManager.showNotification(0, notify.title, notify.body, notify, options);
+  };
+
+  const onOpenNotification = notify => {
+    dispatch(setTabIndexMessageBox(1));
+    navigation.navigate(SCREENS_NAME.MESSAGE_BOX_SCREEN, {});
+  };
+
+  useEffect(() => {
+    if (isLogin) {
+      firebaseNotificationService.registerAppWithFCM();
+      firebaseNotificationService.register(onRegister, onNotification, onOpenNotification);
+    }
+    return () => {
+      firebaseNotificationService.unRegister();
+    };
+  }, [isLogin]);
+
   return (
     <RootStack.Navigator screenOptions={{ headerShown: false }}>
       {isLogin ? (

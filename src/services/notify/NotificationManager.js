@@ -11,7 +11,7 @@ class NotificationManager {
         //channelDescription: 'A channel to categorise your notifications', // (optional) default: undefined.
         soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
         importance: 4, // (optional) default: 4. Int value of the Android notification importance
-        vibrate: true // (optional) default: true. Creates the default vibration patten if true.
+        vibrate: false // (optional) default: true. Creates the default vibration patten if true.
       },
       created => console.log(`createChannel returned '${created}'`) // (optional) callback returns whether the channel was created, false means it already existed.
     );
@@ -21,7 +21,7 @@ class NotificationManager {
         console.log('TOKEN:', token);
       },
       onAction: () => {
-        console.log('onAction90');
+        console.log('onAction90onAction90onAction90onAction90');
       },
       onNotification: function (notification) {
         console.log('NOTIFICATION:', notification);
@@ -29,7 +29,7 @@ class NotificationManager {
           return;
         }
         notification.userInteraction = true;
-        onOpenNotification(Platform.OS === 'ios' ? notification.data.item : notification.data);
+        // onOpenNotification(Platform.OS === 'ios' ? notification.data.item : notification.data);
 
         if (Platform.OS === 'ios') {
           notification.finish(PushNotificationIOS.FetchResult.NoData);
@@ -64,10 +64,6 @@ class NotificationManager {
   };
 
   showNotification = (id, title, message, data = {}, options = {}) => {
-    console.log('showNotification');
-    console.log('title: ', title);
-    console.log('message: ', message);
-    console.log('data: ', data);
     PushNotification.localNotification({
       /*--Android---*/
       ...this.buildAndroidNotification(id, title, message, data, options),
@@ -84,7 +80,6 @@ class NotificationManager {
 
   buildAndroidNotification = (id, title, message, data = {}, options = {}) => {
     return {
-      // channelId: 'channelIdApp',
       id: id,
       autoCancel: true,
       largeIcon: options.largeIcon || 'ic_launcher',

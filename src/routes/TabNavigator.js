@@ -5,15 +5,7 @@ import { add, interpolate } from 'react-native-reanimated';
 import SCREENS_NAME from 'constants/screens';
 import HomeScreen from 'screens/home';
 import { ICON_SIZE } from 'constants/size';
-import {
-  ICMessageActive,
-  ICMessageInActive,
-  ICHomeNew,
-  ICFindJobNew,
-  ICWorkNew,
-  ICAccountNew,
-  ICMessageNew
-} from 'assets/icons';
+import { ICHomeNew, ICFindJobNew, ICWorkNew, ICAccountNew, ICMessageNew } from 'assets/icons';
 import FindJobScreen from 'screens/find_job';
 import MainTabbar from 'components/MainTabbar';
 import WorkScreen from 'screens/work';
@@ -31,6 +23,7 @@ import UpdateProfileScreen from 'screens/profile/update_profile';
 import AddProfileScreen from 'screens/profile/add_profile';
 import DetailChatScreen from 'screens/message_box/components/MessageTab/ChatDetail';
 import { BACKGROUND_COLOR } from 'constants/colors';
+import NotifyDetail from 'screens/message_box/components/NotificationsTab/NotifyDetail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -364,6 +357,13 @@ export const AppStackScreen = () => {
       <Stack.Screen
         name={SCREENS_NAME.DETAIL_CHAT_SCREEN}
         component={DetailChatScreen}
+        options={{
+          headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.NOTIFY_DETAIL_SCREEN}
+        component={NotifyDetail}
         options={{
           headerShown: true
         }}

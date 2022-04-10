@@ -7,7 +7,9 @@ const initialState = {
     content: null,
     completeModal: null,
     confirmModal: null
-  }
+  },
+
+  tabIndexMessageBox: 0
 };
 
 const system = (state = initialState, action) => {
@@ -57,7 +59,13 @@ const system = (state = initialState, action) => {
         confirmModal: null
       };
     }
-
+    // ===============================================
+    case SYSTEM.SET_MESSAGE_BOX_TAB_INDEX: {
+      return {
+        ...state,
+        tabIndexMessageBox: action.payload
+      };
+    }
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import { View, ScrollView } from 'react-native';
 import {
   NotificationWarning,
@@ -16,18 +16,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import SCREEN_NAME from 'constants/screens';
 import { getUserHandle } from 'actions/user';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth, firebaseDatabase, firebaseDatabaseRef, firebaseSet } from 'configs/firebase';
-console.log(auth, 'auth');
+import { getListNotifyHandle } from 'actions/notification';
+
 const HomeScreen = () => {
-  const numberNewMessage = 5;
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { listJobHomePage, loading } = useSelector(state => state.listJob);
+  const {
+    loading: loadingNotifyList,
+    metaNotifyList,
+    notifyList
+  } = useSelector(state => state.notification);
 
   useEffect(() => {
     dispatch(getListJobHomePageHandle());
     dispatch(getUserHandle({}));
+    dispatch(getListNotifyHandle({ success: () => {}, failure: () => {}, handleErr: () => {} }));
     const focusListener = navigation.addListener('focus', () => {
       dispatch(getUserHandle({}));
     });
@@ -35,6 +39,18 @@ const HomeScreen = () => {
       focusListener();
     };
   }, [dispatch, navigation]);
+
+  const notifyListUnread = useMemo(() => {
+    const result = [];
+    if (notifyList) {
+      for (const k in notifyList) {
+        if (!notifyList[k].isRead) {
+          result.push(notifyList[k]);
+        }
+      }
+    }
+    return result;
+  }, [notifyList]);
 
   const onClickCardJob = useCallback(
     data => {
@@ -75,10 +91,11 @@ const HomeScreen = () => {
         <View style={styles.notificationWarning}>
           <NotificationWarning
             icon={<ICNotification />}
-            contentText={`${translate('common.you_have')} ${numberNewMessage} ${translate(
-              'common.new_message'
-            )}`}
+            contentText={`${translate('common.you_have')} ${
+              notifyListUnread?.length || 0
+            } ${translate('common.new_message')}`}
             titleAction="common.see_now"
+            notifyListUnread={notifyListUnread}
           />
         </View>
         <View style={styles.rowBigIcon}>

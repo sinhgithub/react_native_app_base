@@ -30,10 +30,14 @@ const Button = props => {
         return (
           <>
             <TouchableOpacity style={[styles.button, containerStyle]} onPress={submitMethod}>
-              <Text style={styles.buttonTitle}>{title}</Text>
+              <Text style={styles.buttonTitle} numberOfLines={1}>
+                {title}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.forgetPassword} onPress={forgetPasswordMethod}>
-              <Text style={styles.forgetPasswordTitle}>{'Quên mật khẩu'}</Text>
+              <Text style={styles.forgetPasswordTitle} numberOfLines={1}>
+                {'Quên mật khẩu'}
+              </Text>
             </TouchableOpacity>
           </>
         );
@@ -111,7 +115,9 @@ const Button = props => {
               }
             }}
             activeOpacity={disable ? 1 : 0.6}>
-            <Text style={[styles.buttonTitle, titleStyle]}>{title}</Text>
+            <Text style={[styles.buttonTitle, titleStyle]} numberOfLines={1}>
+              {title}
+            </Text>
           </TouchableOpacity>
         );
       default:
@@ -125,7 +131,9 @@ const Button = props => {
               <Text style={styles.buttonTitle}>{title}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.forgetPassword} onPress={forgetPasswordMethod}>
-              <Text style={styles.forgetPasswordTitle}>{'Quên mật khẩu'}</Text>
+              <Text style={styles.forgetPasswordTitle} numberOfLines={1}>
+                {'Quên mật khẩu'}
+              </Text>
             </TouchableOpacity>
           </>
         );
@@ -146,7 +154,8 @@ const Button = props => {
     titleStyle,
     type,
     disableConfirm,
-    disableReject
+    disableReject,
+    disable
   ]);
 
   return <View style={[styles.container, containerStyle]}>{renderButton()}</View>;

@@ -1,6 +1,7 @@
 import { Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 class FirebaseNotificationService {
+  messagingListener = () => {};
   register = (onRegister, onNotification, onOpenNotification) => {
     this.checkPermission(onRegister);
     this.createNotificationListeners(onRegister, onNotification, onOpenNotification);
@@ -82,10 +83,10 @@ class FirebaseNotificationService {
   createNotificationListeners = (onRegister, onNotification, onOpenNotification) => {
     // when the app running in background
     messaging().onNotificationOpenedApp(remoteMessage => {
-      console.log('FCM services onNotification Appp caasue to open');
+      console.log('onNotificationOpenedApp ===== onNotificationOpenedApp', remoteMessage);
       if (remoteMessage) {
         const notification = remoteMessage.notification;
-        onOpenNotification?.(notification);
+        // onOpenNotification?.(notification);
       }
     });
 
@@ -93,15 +94,15 @@ class FirebaseNotificationService {
     messaging()
       .getInitialNotification()
       .then(remoteMessage => {
-        console.log('FCM services onNotification Appp caasue to open');
         if (remoteMessage) {
+          console.log('getInitialNotification ==== getInitialNotification', remoteMessage);
           let notification = null;
           if (Platform.OS === 'ios') {
             notification = remoteMessage.data.notification;
           } else {
             notification = remoteMessage.notification;
           }
-          onNotification?.(notification);
+          onOpenNotification?.(notification);
         }
       })
       .catch(err => {
@@ -110,7 +111,7 @@ class FirebaseNotificationService {
 
     // foreground state messsage
     this.messagingListener = messaging().onMessage(async remoteMessage => {
-      console.log('messagingListener', remoteMessage);
+      console.log('messagingListener ===== messagingListener', remoteMessage);
       if (remoteMessage) {
         let notification = null;
         if (Platform.OS === 'ios') {
@@ -130,7 +131,7 @@ class FirebaseNotificationService {
   };
 
   unRegister = () => {
-    this.messagingListener();
+    this.messagingListener?.();
   };
 }
 export const firebaseNotificationService = new FirebaseNotificationService();

@@ -31,3 +31,8 @@ export const hideConfirmModal = payload => ({
   type: SYSTEM.CLEAR_CONFIRM_MODAL.SUCCESS,
   payload
 });
+// set tabindex message box
+export const setTabIndexMessageBox = payload => ({
+  type: SYSTEM.SET_MESSAGE_BOX_TAB_INDEX,
+  payload
+});

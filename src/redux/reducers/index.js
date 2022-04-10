@@ -11,6 +11,7 @@ import wallets from './wallet';
 import user from './user';
 import masterData from './master_data';
 import chat from './chat';
+import notification from './notification';
 
 const systemPersistConfig = {
   key: 'system',
@@ -82,6 +83,12 @@ const chatPersistConfig = {
   version: 1.0
 };
 
+const notificationPersistConfig = {
+  key: 'notification',
+  storage: AsyncStorage,
+  whitelist: [],
+  version: 1.0
+};
 export default combineReducers({
   system: persistReducer(systemPersistConfig, system),
   auth: persistReducer(authPersistConfig, auth),
@@ -92,5 +99,6 @@ export default combineReducers({
   wallets: persistReducer(walletsPersistConfig, wallets),
   user: persistReducer(userPersistConfig, user),
   masterData: persistReducer(masterDataPersistConfig, masterData),
-  chat: persistReducer(chatPersistConfig, chat)
+  chat: persistReducer(chatPersistConfig, chat),
+  notification: persistReducer(notificationPersistConfig, notification)
 });
