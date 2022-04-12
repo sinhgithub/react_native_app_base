@@ -1,14 +1,15 @@
 import { BACKGROUND_COLOR } from 'constants/colors';
 import React, { memo, useCallback, useMemo, useState } from 'react';
-import { View, StyleSheet, Keyboard, Platform } from 'react-native';
+import { View, StyleSheet, Keyboard } from 'react-native';
 import { SPACING } from 'constants/size';
 import { CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
-import { CustomInput, Button, Icon } from 'components/';
+import { Button, Icon, Form } from 'components/';
 import { formatNumber } from 'helpers/formatNumber';
 import { useDispatch } from 'react-redux';
 import { withdrawHandle } from 'actions/wallet';
 import { showCompleteModal } from 'actions/system';
+import { withdrawRequestForm } from 'constants/data_constants';
 
 const getHardCodeCompare = item => {
   return `${item?.id?.employer?.companyName} ( ${formatNumber(item?.balance, ',')} VND )`;
@@ -28,6 +29,7 @@ const WithDrawRequest = props => {
   }, [data]);
 
   const onSelectWallet = (selectedItem, index) => {
+    console.log(selectedItem, 'selectedItemselectedItem');
     const selected = data.find(item => {
       const compare = getHardCodeCompare(item);
       if (selectedItem === compare) {
@@ -106,7 +108,7 @@ const WithDrawRequest = props => {
     <View style={styles.container} onStartShouldSetResponder={() => Keyboard.dismiss()}>
       <View style={styles.content}>
         <View style={styles.form}>
-          <CustomInput type="select" label="Ví" data={selectInputData} onChange={onSelectWallet} />
+          {/* <CustomInput type="select" label="Ví" data={selectInputData} onChange={onSelectWallet} />
           <CustomInput
             autoCapitalize="none"
             type="text"
@@ -115,6 +117,12 @@ const WithDrawRequest = props => {
             keyInput="withdrawalAmount"
             onChange={onChangeValue}
             placeholder="Nhập số tiền cần rút"
+          /> */}
+          <Form
+            data={withdrawRequestForm}
+            dataInputSelect={selectInputData}
+            onSelect={onSelectWallet}
+            onChange={onChangeValue}
           />
           <Button
             type="modal"

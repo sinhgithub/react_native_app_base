@@ -20,5 +20,5 @@ export const apiReadAllNoti = (params = {}, callback) => {
 
 export const apiRegisterDeviceNotiToken = (params = {}, callback) => {
   const url = `${END_POINT}api/notification/register_token`;
-  return utils.put(url, params, callback);
+  return utils.post(url, params, {}, callback);
 };

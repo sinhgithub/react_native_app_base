@@ -1,5 +1,5 @@
-import React, { memo, useCallback, useState, useMemo, useRef, useEffect } from 'react';
-import { View, Animated, Easing } from 'react-native';
+import React, { memo, useCallback, useState, useMemo } from 'react';
+import { View, Animated } from 'react-native';
 import styles from './styles';
 import { translate } from 'src/i18n';
 import { ToggleBottomContent } from 'components/';
@@ -10,12 +10,12 @@ import {
   jobDetailType,
   genderType,
   educationType,
-  experienceLevelType
+  experienceLevelType,
+  degreeType
 } from 'constants/data_constants';
 
 const JobRequire = props => {
   const { type, gender, degree, education, experienceLevel, career } = props.data;
-  const animation = useRef(new Animated.Value(0)).current;
   const [isShowContent, setIsShowContent] = useState(true);
 
   const mapJobType = key => {
@@ -26,7 +26,7 @@ const JobRequire = props => {
     return genderType.find(item => item.value === key)?.label || key;
   };
   const mapDegree = key => {
-    return key;
+    return degreeType.find(item => item.value === key)?.label || key;
   };
   const mapCareer = key => {
     return key;

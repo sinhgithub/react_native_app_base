@@ -32,7 +32,7 @@ class FirebaseNotificationService {
   getToken = onRegister => {
     if (Platform.OS === 'ios') {
       messaging()
-        .getAPNSToken()
+        .getToken()
         .then(token => {
           console.log('getAPNSToken', token);
           if (token) {

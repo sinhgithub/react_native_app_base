@@ -4,7 +4,8 @@ import styles from './styles';
 import Input from './Input';
 
 const Form = props => {
-  const { refScroll, data, onChange, onSubmit, defaultTextSelect, dataInputSelect } = props;
+  const { refScroll, data, onChange, onSubmit, defaultTextSelect, dataInputSelect, onSelect } =
+    props;
   const [focus, setFocus] = useState(null);
   const processedData = useMemo(() => {
     const result = [];
@@ -42,6 +43,7 @@ const Form = props => {
           onChange={onChange}
           defaultTextSelect={defaultTextSelect}
           dataInputSelect={dataInputSelect}
+          onSelect={onSelect}
         />
       </View>
     );

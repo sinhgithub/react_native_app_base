@@ -1,11 +1,4 @@
-import { ic_logo } from 'assets/images';
-import AppText from 'components/AppText';
-import StyledTouchable from 'components/StyledTouchable';
-import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
-import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
-import { Formik } from 'formik';
-import { translate } from 'src/i18n';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Dimensions,
   Image,
@@ -15,19 +8,22 @@ import {
   Text,
   View
 } from 'react-native';
+import { ic_logo } from 'assets/images';
+import AppText from 'components/AppText';
+import StyledTouchable from 'components/StyledTouchable';
+import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
+import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
+import { Formik } from 'formik';
+import { translate } from 'src/i18n';
 import { useDispatch } from 'react-redux';
 import { scale } from 'utils/responsive';
 import * as Yup from 'yup';
 import CustomInput from '../components/CustomInput';
-// import RegisterTypeModal from '../components/RegisterTypeModal';
-import { useNavigation, StackActions } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import SCREENS_NAME from 'constants/screens';
 import { loginFailure, loginHandle, registerFailure, registerHandle } from 'actions/auth';
-import { ModalNotification } from 'components/Modal/NotificationWarning';
 import { showCompleteModal, showConfirmModal } from 'actions/system';
 import { Icon } from 'components/';
-import { createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
-import { auth, firebaseDatabase, firebaseDatabaseRef, firebaseSet } from 'configs/firebase';
 
 const { width: WIDTH } = Dimensions.get('window');
 // const phoneRegExp = /((0|1)+([0-9]{8,10})\b)/g;
@@ -149,11 +145,6 @@ const Register = () => {
                       }
                     })
                   );
-                  createUserWithEmailAndPassword(auth, params.email.trim(), params.password.trim())
-                    .then(res => {
-                      console.log('==== register firebase user success ====', res);
-                    })
-                    .catch(err => console.log('==== register firebase user failure ====', err));
                 },
                 failure: () => {
                   dispatch(registerFailure());

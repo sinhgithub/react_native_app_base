@@ -64,9 +64,39 @@ export const educationType = [
     label: translate('common.high_school')
   },
   {
+    id: 'JUNIOR_HIGH_SCHOOL',
+    value: 'JUNIOR_HIGH_SCHOOL',
+    label: 'PTCS'
+  },
+  {
     id: 'INTERMEDIATE',
     value: 'INTERMEDIATE',
     label: translate('common.intermediate')
+  },
+  {
+    id: 'CERTIFICATE',
+    value: 'CERTIFICATE',
+    label: 'Chứng chỉ'
+  },
+  {
+    id: 'BACHELOR',
+    value: 'BACHELOR',
+    label: 'Cử nhân'
+  },
+  {
+    id: 'ENGINEER',
+    value: 'ENGINEER',
+    label: 'Kĩ sư'
+  },
+  {
+    id: 'DOCTOR',
+    value: 'DOCTOR',
+    label: 'Tiến sĩ'
+  },
+  {
+    id: 'OTHER',
+    value: 'OTHER',
+    label: 'Khác'
   }
 ];
 
@@ -80,6 +110,39 @@ export const experienceLevelType = [
     id: 'JUNIOR',
     value: 'JUNIOR',
     label: translate('common.junior_level')
+  },
+  {
+    id: 'MIDDLE',
+    value: 'MIDDLE',
+    label: '2 - 3 năm kinh nghiệm'
+  },
+  {
+    id: 'SENIOR',
+    value: 'SENIOR',
+    label: '5 - 10 năm kinh nghiệm'
+  },
+  {
+    id: 'MASTER',
+    value: 'MASTER',
+    label: 'hơn 10 năm kinh nghiệm'
+  }
+];
+
+export const degreeType = [
+  {
+    id: 'PARTTIME',
+    value: 'PARTTIME',
+    label: translate('common.part_time_employee')
+  },
+  {
+    id: 'FULLTIME',
+    value: 'FULLTIME',
+    label: translate('common.full_time_employee')
+  },
+  {
+    id: 'INTERNS',
+    value: 'INTERNS',
+    label: 'INTERNS'
   }
 ];
 
@@ -271,5 +334,18 @@ export const detailProfileForm = [
     id: 'address',
     type: inputType.text,
     label: 'Địa chỉ'
+  }
+];
+
+export const withdrawRequestForm = [
+  {
+    id: 'wallet',
+    type: inputType.select,
+    label: 'Ví'
+  },
+  {
+    id: 'phone',
+    type: inputType.text,
+    label: 'Nhập số tiền cần rút'
   }
 ];

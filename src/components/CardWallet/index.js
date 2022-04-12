@@ -9,7 +9,6 @@ import { getImageFromHost } from 'configs/appConfigs';
 const CardWallet = props => {
   const { data, hideBorder, isLastItem, from } = props;
   const [sizeCardJobContentImage, setSizeCardJobContentImage] = useState(null);
-  console.log(data, 'data');
 
   const dataProcessed = useMemo(() => {
     switch (from) {

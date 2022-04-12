@@ -11,27 +11,26 @@ import { initLanguge } from 'src/i18n';
 import { AppStackScreen } from './TabNavigator';
 import AppLoading from 'components/AppLoading';
 import { AuthStackScreen } from './AuthNavigator';
-import { onAuthStateChanged, auth } from 'src/configs/firebase';
-import { getListNotifyHandle, registerNotificationTokenHandle } from 'actions/notification';
-import { getDeviceId } from 'react-native-device-info';
-import { useNavigation } from '@react-navigation/core';
+import { registerNotificationTokenHandle } from 'actions/notification';
+import { getUniqueId } from 'react-native-device-info';
 import { notificationManager } from 'services/notify/NotificationManager';
 import { firebaseNotificationService } from 'services/notify/FirebaseNotificationService';
 import { setTabIndexMessageBox } from 'actions/system';
+import { useNavigation } from '@react-navigation/core';
 
 const RootStack = createStackNavigator();
 
 const RootStackScreen = props => {
   const { isLogin } = useSelector(state => state.auth);
-
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
   const onRegister = fcmToken => {
     if (fcmToken) {
       dispatch(
         registerNotificationTokenHandle({
           params: {
-            deviceId: getDeviceId(),
+            deviceId: getUniqueId(),
             token: fcmToken
           },
           success: () => {},
@@ -63,7 +62,6 @@ const RootStackScreen = props => {
       firebaseNotificationService.unRegister();
     };
   }, [isLogin]);
-
   return (
     <RootStack.Navigator screenOptions={{ headerShown: false }}>
       {isLogin ? (

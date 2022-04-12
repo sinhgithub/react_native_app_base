@@ -10,6 +10,7 @@ import JobDesc from './components/JobDesc';
 import Benefit from './components/Benefit';
 import JobRequire from './components/JobRequire';
 import JobContact from './components/JobContact';
+import FileIncome from './components/File';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAnimatedBottomModalSuccess, showCompleteModal, showConfirmModal } from 'actions/system';
 import { saveJobHandle } from 'actions/saveJob';
@@ -350,9 +351,9 @@ const DetailJob = props => {
           <View style={styles.jobContact}>
             <JobContact data={dataJobDetail.jobContact} cardJob={cardJob} />
           </View>
-          {/* <View style={styles.jobContact}>
-            <JobContact data={dataJobDetail.jobContact} cardJob={cardJob} />
-          </View> */}
+          <View style={styles.jobContact}>
+            <FileIncome />
+          </View>
         </View>
       </ScrollView>
       <View style={styles.buttonArea}>

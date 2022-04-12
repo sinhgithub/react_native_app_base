@@ -7,7 +7,6 @@ import { useNavigation } from '@react-navigation/core';
 import Overview from './components/Overview';
 import WalletHistory from './components/WalletHistory';
 import WithdrawRequest from './components/WithdrawRequest';
-import MainHeader from 'components/MainHeader';
 import IncomeOverView from './components/IncomeOverView';
 const Income = props => {
   const navigation = useNavigation();

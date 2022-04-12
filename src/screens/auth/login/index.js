@@ -24,14 +24,6 @@ import SCREENS_NAME from 'constants/screens';
 import { loginFailure, loginHandle } from 'actions/auth';
 import { showCompleteModal } from 'actions/system';
 import { Icon } from 'components/';
-import {
-  auth,
-  firebaseDatabase,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  firebaseDatabaseRef,
-  firebaseSet
-} from 'src/configs/firebase';
 
 const { width: WIDTH } = Dimensions.get('window');
 

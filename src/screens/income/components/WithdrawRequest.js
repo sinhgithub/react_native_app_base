@@ -1,16 +1,12 @@
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import CardWallet from 'components/CardWallet';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWalletWithDrawHandle } from 'actions/wallet';
-import { useNavigation } from '@react-navigation/core';
-import HeaderTitleScreen from 'components/HeaderTitleScreen';
-import SCREENS_NAME from 'constants/screens';
 
 const WithdrawRequest = props => {
-  const navigation = useNavigation();
   const dispatch = useDispatch();
-  const { loadingWalletWithDraw, walletWithDraw, wallets } = useSelector(state => state.wallets);
+  const { walletWithDraw } = useSelector(state => state.wallets);
 
   useEffect(() => {
     dispatch(getWalletWithDrawHandle({ callback: () => {}, failure: () => {} }));
