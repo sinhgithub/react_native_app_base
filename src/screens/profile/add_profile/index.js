@@ -277,7 +277,15 @@ const AddProfileScreen = props => {
         if (!userClone?.jobSeeker?.skill || userClone?.jobSeeker?.skill?.length <= 0) {
           userClone.jobSeeker.skill = [tmpSkill];
         } else {
-          userClone.jobSeeker.skill.push(tmpSkill);
+          let checkExits = false;
+          userClone.jobSeeker.skill.forEach(item => {
+            if (item.name === tmpSkill['name']) {
+              checkExits = true;
+            }
+          });
+          if (!checkExits) {
+            userClone.jobSeeker.skill.push(tmpSkill);
+          }
         }
         dispatch(
           updateUserHandle({

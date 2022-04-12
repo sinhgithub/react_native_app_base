@@ -36,7 +36,6 @@ const Input = props => {
   } = props;
   const animation = React.useRef(new Animated.Value(0)).current;
   const [showSelectDateModal, setShowSelectDateModal] = useState(false);
-  console.log(onSelect, 'onSelect');
   const onClickSelectDate = useCallback(index => {
     setShowSelectDateModal(true);
   }, []);
@@ -84,6 +83,7 @@ const Input = props => {
               defaultValue={data?.defaultValue}
               onChangeText={text => onChange?.(data.id, text)}
               value={data?.value}
+              keyboardType={data?.keyboardType || 'default'}
             />
           </View>
         );
@@ -174,7 +174,7 @@ const Input = props => {
             {!!data?.label && <Text style={[styles.label]}>{data?.label}</Text>}
             <View>
               <SelectDropdown
-                onChange={onSelect}
+                onChange={onSelect || onChange}
                 data={dataInputSelect || []}
                 defaultButtonText={defaultTextSelect}
               />

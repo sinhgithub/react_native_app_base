@@ -22,11 +22,7 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { listJobHomePage, loading } = useSelector(state => state.listJob);
-  const {
-    loading: loadingNotifyList,
-    metaNotifyList,
-    notifyList
-  } = useSelector(state => state.notification);
+  const { notifyList } = useSelector(state => state.notification);
 
   useEffect(() => {
     dispatch(getListJobHomePageHandle());
@@ -34,6 +30,7 @@ const HomeScreen = () => {
     dispatch(getListNotifyHandle({ success: () => {}, failure: () => {}, handleErr: () => {} }));
     const focusListener = navigation.addListener('focus', () => {
       dispatch(getUserHandle({}));
+      dispatch(getListNotifyHandle({ success: () => {}, failure: () => {}, handleErr: () => {} }));
     });
     return () => {
       focusListener();

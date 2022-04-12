@@ -344,8 +344,9 @@ export const withdrawRequestForm = [
     label: 'Ví'
   },
   {
-    id: 'phone',
+    id: 'withdrawalAmount',
     type: inputType.text,
-    label: 'Nhập số tiền cần rút'
+    label: 'Nhập số tiền cần rút',
+    keyboardType: 'numeric'
   }
 ];

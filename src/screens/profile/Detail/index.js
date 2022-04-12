@@ -54,7 +54,8 @@ const DetailProfile = props => {
     if (cloneUser) {
       cloneUser.name = values.name.value || values.name.defaultValue;
       cloneUser.phone = values.phone.value || values.phone.defaultValue;
-      cloneUser.gender = values.gender.value || values.gender.defaultValue;
+      cloneUser.gender =
+        typeof values.gender.value === 'number' ? values.gender.value : values.gender.defaultValue;
       cloneUser.birthday = values.birthday.value || values.birthday.defaultValue;
       if (cloneUser.jobSeeker) {
         cloneUser.jobSeeker.address = values.address.value || values.address.defaultValue;

@@ -17,6 +17,7 @@ const WalletHistory = props => {
   return (
     <View style={styles.container}>
       <FlatList
+        style={styles.flex1}
         keyExtractor={(item, index) => `${item.id || index}${index}`}
         data={walletHistory?.data || []}
         renderItem={renderItem}
@@ -25,6 +26,13 @@ const WalletHistory = props => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  flex1: {
+    flex: 1
+  }
+});
 
 export default memo(WalletHistory);

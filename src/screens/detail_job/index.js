@@ -29,7 +29,7 @@ const DetailJob = props => {
   const { listFollowJob, listApplyJob, listAppliedJob } = useSelector(state => state.listJob);
   const [modalBonusInfo, setModalBonusInfo] = useState(null);
   const { onPressWarningBox = () => {} } = props;
-
+  console.log(cardJob, 'cardJob');
   useEffect(() => {
     dispatch(getListFollowJobHandle({}));
     dispatch(getListApplyJobHandle({}));
@@ -352,7 +352,7 @@ const DetailJob = props => {
             <JobContact data={dataJobDetail.jobContact} cardJob={cardJob} />
           </View>
           <View style={styles.jobContact}>
-            <FileIncome />
+            <FileIncome data={dataJobDetail.jobContact} cardJob={cardJob} />
           </View>
         </View>
       </ScrollView>

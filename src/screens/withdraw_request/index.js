@@ -29,7 +29,6 @@ const WithDrawRequest = props => {
   }, [data]);
 
   const onSelectWallet = (selectedItem, index) => {
-    console.log(selectedItem, 'selectedItemselectedItem');
     const selected = data.find(item => {
       const compare = getHardCodeCompare(item);
       if (selectedItem === compare) {
@@ -108,16 +107,6 @@ const WithDrawRequest = props => {
     <View style={styles.container} onStartShouldSetResponder={() => Keyboard.dismiss()}>
       <View style={styles.content}>
         <View style={styles.form}>
-          {/* <CustomInput type="select" label="Ví" data={selectInputData} onChange={onSelectWallet} />
-          <CustomInput
-            autoCapitalize="none"
-            type="text"
-            label="Số tiền cần rút"
-            keyboardType="numeric"
-            keyInput="withdrawalAmount"
-            onChange={onChangeValue}
-            placeholder="Nhập số tiền cần rút"
-          /> */}
           <Form
             data={withdrawRequestForm}
             dataInputSelect={selectInputData}
