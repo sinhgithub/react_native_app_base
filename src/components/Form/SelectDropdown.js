@@ -1,11 +1,9 @@
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
-import { SPACING } from 'constants/size';
-import React, { memo, useMemo } from 'react';
-import { View, Text, StyleSheet, TextInput } from 'react-native';
+import React, { memo } from 'react';
+import { View, StyleSheet } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Icon } from 'components/';
-import { formatNumber } from 'helpers/formatNumber';
 import { inputType } from 'constants/data_constants';
 const Component = props => {
   const { data, onChange, defaultButtonText } = props;

@@ -26,8 +26,6 @@ import { showCompleteModal, showConfirmModal } from 'actions/system';
 import { Icon } from 'components/';
 
 const { width: WIDTH } = Dimensions.get('window');
-// const phoneRegExp = /((0|1)+([0-9]{8,10})\b)/g;
-
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required('auth.passwordRequired').min(6, 'auth.passwordErrorMin'),
   account: Yup.string().required('auth.userNameRequired').max(255, 'auth.accountErrorMax'),

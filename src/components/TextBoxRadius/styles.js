@@ -1,13 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
-import {
-  DEVICE_HEIGHT,
-  statusBarHeight,
-  navbarHeight,
-  SPACING,
-  BOTTOM_TAB_HEIGHT
-} from 'constants/size';
-import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
+import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
+import { SPACING } from 'constants/size';
+import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { scale } from 'utils/responsive';
 const styles = StyleSheet.create({
   container: {

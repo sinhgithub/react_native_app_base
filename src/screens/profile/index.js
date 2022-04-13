@@ -163,20 +163,6 @@ const ProfileScreen = props => {
             hideRightTittle
           />
         </View>
-        {/* <View style={styles.ranking}>
-          <BackgroundTextBox title={translate('common.ranking_board')} />
-        </View> */}
-        {/* <View style={styles.section}>
-          <Section
-            containerStyle={styles.section1}
-            leftTitle={translate('common.experience_on_ttv')}
-            descText={translate('common.experience_on_ttv_desc')}
-            buttonTile={translate('common.find_job_now')}
-            hideRightTittle
-            onPressButton={onPressButtonSection}
-            type="find_job_now"
-          />
-        </View> */}
         <View style={styles.section}>
           <Section
             containerStyle={styles.section1}

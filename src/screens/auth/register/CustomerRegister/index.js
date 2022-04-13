@@ -161,17 +161,6 @@ const RegisterScreen = props => {
                     auth.register
                   </AppText>
                 </StyledTouchable>
-                {/* <StyledTouchable
-                  onPress={() =>
-                    navigation.navigate(SCREENS_NAME.MAIN_SCREEN, {
-                      screen: SCREENS_NAME.HOME_SCREEN
-                    })
-                  }
-                  customStyle={[styles.forgotBtn]}>
-                  <AppText style={[styles.gobackTxt]} translate>
-                    auth.goback
-                  </AppText>
-                </StyledTouchable> */}
               </View>
             );
           }}

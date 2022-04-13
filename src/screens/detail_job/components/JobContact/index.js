@@ -4,7 +4,6 @@ import styles from './styles';
 import { translate } from 'src/i18n';
 import { ToggleBottomContent } from 'components/';
 import ContactItem from './JobContactItem';
-import { SPACING } from 'constants/size';
 import { Icon } from 'components/';
 import { useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,7 +15,7 @@ const JobContact = props => {
   const { data, cardJob } = props;
   const [isShowContent, setIsShowContent] = useState(true);
   const navigation = useNavigation();
-  const { conversations, conversationsMeta, loading } = useSelector(state => state.chat);
+  const { conversations } = useSelector(state => state.chat);
   const dispatch = useDispatch();
   const handleToggleContent = useCallback(key => {
     if (key === 'down') {
@@ -55,7 +54,6 @@ const JobContact = props => {
                 handleErr: () => {}
               })
             );
-            // navigation.navigate(SCREENS_NAME.MESSAGE_BOX_SCREEN, { data: {} });
           },
           failure: () => {
             dispatch(

@@ -1,6 +1,5 @@
 import moment from 'moment';
 import { RESPONSE_CODE } from 'constants/errors';
-import I18n from 'src/i18n';
 
 export function merge2Array(array1, array2, key) {
   const array12 = [...array1, ...array2];
@@ -14,8 +13,6 @@ export function merge2Array(array1, array2, key) {
         return e;
       });
     }
-    // result.push(item);
-
     return [...result, item];
   }, []);
   return data;

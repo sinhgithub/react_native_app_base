@@ -1,11 +1,11 @@
 import React, { memo } from 'react';
-import { View, Text, Alert } from 'react-native';
+import { View, Text } from 'react-native';
 import styles from './styles';
 import moment from 'moment';
 import { Calendar, LocaleConfig } from 'react-native-calendars';
 import { TEXT_COLOR } from 'constants/colors';
 import { FONT_FAMILY } from 'constants/appFonts';
-LocaleConfig.locales['fr'] = {
+LocaleConfig.locales.fr = {
   monthNames: [
     'Tháng 1',
     'Tháng 2',
@@ -38,8 +38,6 @@ LocaleConfig.locales['fr'] = {
   dayNamesShort: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7']
 };
 LocaleConfig.defaultLocale = 'fr';
-const minDate = moment(new Date('2010-01-01')).format('YYYY-MM-DD');
-const now = moment(new Date()).format('YYYY-MM-DD');
 const CustomCalendar = props => {
   const { markedDates, onPressDay, id, data } = props;
   return (

@@ -29,7 +29,6 @@ const DetailJob = props => {
   const { listFollowJob, listApplyJob, listAppliedJob } = useSelector(state => state.listJob);
   const [modalBonusInfo, setModalBonusInfo] = useState(null);
   const { onPressWarningBox = () => {} } = props;
-  console.log(cardJob, 'cardJob');
   useEffect(() => {
     dispatch(getListFollowJobHandle({}));
     dispatch(getListApplyJobHandle({}));

@@ -16,8 +16,8 @@ import { formatNumber } from 'helpers/formatNumber';
 import { getImageFromHost } from 'configs/appConfigs';
 
 const IncomeOverView = props => {
-  const { user, loading } = useSelector(state => state.user);
-  const { walletTotal, loadingWalletTotal } = useSelector(state => state.wallets);
+  const { user } = useSelector(state => state.user);
+  const { walletTotal } = useSelector(state => state.wallets);
   const avatar = user?.avatar;
   const [avatarSize, setAvatarSize] = useState(null);
 

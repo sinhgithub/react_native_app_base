@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback, useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { tabMessageBoxScreen } from 'constants/data_constants';
 import { TabsHorizontal } from 'components/';
 import styles from './styles';

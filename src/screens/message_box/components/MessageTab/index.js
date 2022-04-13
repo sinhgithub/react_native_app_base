@@ -1,7 +1,6 @@
-import React, { memo, useState, useEffect, useCallback, useMemo } from 'react';
-import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import { Conversation, ConversationSkeleton } from 'components/';
-import { SPACING } from 'constants/size';
+import React, { memo, useEffect, useCallback, useMemo } from 'react';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Conversation } from 'components/';
 import { CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import ButtonLeft from './ButtonLeft';
@@ -14,20 +13,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getListChatHandle } from 'actions/chat';
 import { useNavigation } from '@react-navigation/core';
 import SCREENS_NAME from 'constants/screens';
-import {
-  auth,
-  firebaseDatabase,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-  firebaseDatabaseRef,
-  firebaseSet,
-  child,
-  get
-} from 'src/configs/firebase';
-import { getFirebaseDbByCollection } from 'src/helpers/getFirebaseDbByCollection';
 
 const MessagesTab = props => {
-  const { conversations, conversationsMeta, loading } = useSelector(state => state.chat);
+  const { conversations } = useSelector(state => state.chat);
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
@@ -50,20 +38,6 @@ const MessagesTab = props => {
       focusListener();
     };
   }, [dispatch, navigation]);
-
-  // useEffect(() => {
-  //   let eventCallConversations;
-  //   if (conversationsProcessed?.length > 0) {
-  //     eventCallConversations = setInterval(() => {
-  //       dispatch(getListChatHandle({ success: () => {}, failure: () => {}, handleErr: () => {} }));
-  //     }, 5000);
-  //   }
-  //   return () => {
-  //     if (eventCallConversations) {
-  //       clearInterval(eventCallConversations);
-  //     }
-  //   };
-  // }, [conversationsProcessed]);
 
   const onViewDetail = useCallback(
     params => {

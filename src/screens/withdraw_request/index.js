@@ -61,7 +61,6 @@ const WithDrawRequest = props => {
         withdrawHandle({
           params: values,
           success: () => {
-            console.log('Gởi yêu cầu thành công!');
             dispatch(
               showCompleteModal({
                 title: 'Gởi yêu cầu thành công!',

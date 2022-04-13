@@ -1,6 +1,6 @@
 import { SPACING } from 'constants/size';
-import React, { memo, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import React, { memo } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button } from 'components/';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';

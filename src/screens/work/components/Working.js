@@ -1,8 +1,7 @@
-import React, { memo, useCallback, useState, useMemo, useEffect } from 'react';
+import React, { memo, useCallback, useMemo, useEffect } from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { CardJob, CardJobSkeleton } from 'components/';
 import { useDispatch, useSelector } from 'react-redux';
-import { empty_quote } from 'assets/images';
 import { BACKGROUND_COLOR } from 'constants/colors';
 import { Button } from 'components/';
 import { useNavigation } from '@react-navigation/native';
@@ -12,9 +11,7 @@ import { find } from 'assets/images';
 
 const Working = props => {
   const dispatch = useDispatch();
-  const { listAppliedJob, loadingAppliedJob, metaDataAppliedJob } = useSelector(
-    state => state?.listJob
-  );
+  const { listAppliedJob, loadingAppliedJob } = useSelector(state => state?.listJob);
   const list = useMemo(() => {
     const result = [];
     for (const k in listAppliedJob) {

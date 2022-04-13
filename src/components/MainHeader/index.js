@@ -6,13 +6,7 @@ import { AppText } from 'src/components';
 import { useNavigation } from '@react-navigation/native';
 
 const MainHeader = props => {
-  const {
-    mainHeaderRightText,
-    mainHeaderMiddleText,
-    containerStyle,
-    mainHeaderRightTextStyle,
-    mainHeaderMiddleTextStyle
-  } = props;
+  const { mainHeaderRightText, containerStyle, mainHeaderRightTextStyle } = props;
   const navigation = useNavigation();
   const onPressGoBack = useCallback(() => {
     navigation.goBack();

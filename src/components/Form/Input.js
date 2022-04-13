@@ -1,17 +1,9 @@
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  Animated,
-  TouchableOpacity,
-  ScrollView
-} from 'react-native';
-import { editExperienceForm, sectionProfileType, inputType } from 'constants/data_constants';
+import React, { memo, useCallback, useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TextInput, Animated, TouchableOpacity } from 'react-native';
+import { inputType } from 'constants/data_constants';
 import SelectDropdown from './SelectDropdown';
 import RadioForm, {
   RadioButton,
@@ -101,7 +93,6 @@ const Input = props => {
                     }
                   ]
                 }
-                // focused === data.index && { paddingVertical: SPACING.XSmall }
               ]}>
               {!!data?.placeholder && <Text style={[styles.placeholder]}>{data?.placeholder}</Text>}
             </Animated.View>
@@ -195,7 +186,6 @@ const Input = props => {
                     }
                   ]
                 }
-                // focused === data.index && { paddingVertical: SPACING.XSmall }
               ]}>
               {!!data?.placeholder && <Text style={[styles.placeholder]}>{data?.placeholder}</Text>}
             </Animated.View>

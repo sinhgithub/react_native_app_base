@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getWalletHistoryHandle } from 'actions/wallet';
 const WalletHistory = props => {
   const dispatch = useDispatch();
-  const { loadingWalletHistory, walletHistory } = useSelector(state => state.wallets);
+  const { walletHistory } = useSelector(state => state.wallets);
   useEffect(() => {
     dispatch(getWalletHistoryHandle({ callback: () => {}, failure: () => {} }));
   }, [dispatch]);

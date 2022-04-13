@@ -1,10 +1,7 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
 import { CUSTOM_COLOR } from 'constants/colors';
-import { BOTTOM_TAB_HEIGHT, DEVICE_WIDTH } from 'constants/size';
+import { BOTTOM_TAB_HEIGHT } from 'constants/size';
 import React from 'react';
 import { View } from 'react-native';
-import { scale } from 'utils/responsive';
 import BottomTabBar from './bottom_tab/TabBar';
 
 const TabBar = props => {

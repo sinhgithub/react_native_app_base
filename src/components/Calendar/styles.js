@@ -1,15 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { TEXT_COLOR, CUSTOM_COLOR } from 'constants/colors';
+import { TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 
 const styles = StyleSheet.create({
-  // yearTextStyles: {
-  //   color: TEXT_COLOR.Black
-  // },
-  // arrowStyles: {
-  //   tintColor: CUSTOM_COLOR.Orange
-  // },
   headerArea: {
     flex: 1,
     flexDirection: 'row',

@@ -6,7 +6,6 @@ import { Button } from 'src/components';
 import { Icon } from 'src/components';
 import { CUSTOM_COLOR } from 'constants/colors';
 import { translate } from 'src/i18n';
-import { getImageFromHost } from 'configs/appConfigs';
 
 const JobInfo = props => {
   const { data } = props;

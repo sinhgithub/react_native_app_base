@@ -2,7 +2,6 @@ import React, { memo } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { Icon } from 'components/';
-import {} from 'react-native-gesture-handler';
 
 const BenefitItem = props => {
   const { bonusName, bonusDesc, containerStyle, onPress, data } = props;

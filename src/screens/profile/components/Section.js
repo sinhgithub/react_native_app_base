@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, Icon, AppText } from 'components/';
 import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';

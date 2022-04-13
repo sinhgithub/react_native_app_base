@@ -12,7 +12,7 @@ const NotifyDetail = props => {
   const dispatch = useDispatch();
   const { id } = props?.route?.params;
 
-  const { loadingNotifyDetail, notifyDetail } = useSelector(state => state.notification);
+  const { notifyDetail } = useSelector(state => state.notification);
 
   const onOpenLink = () => {};
 

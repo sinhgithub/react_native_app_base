@@ -1,7 +1,6 @@
 import React, { memo, useCallback, useState, useEffect } from 'react';
 import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
 import { CardJob, CardJobSkeleton } from 'components/';
-import { useSelector } from 'react-redux';
 import { find } from 'assets/images';
 import { BACKGROUND_COLOR } from 'constants/colors';
 import { Button } from 'components/';

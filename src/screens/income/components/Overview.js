@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useCallback } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import CardWallet from 'components/CardWallet';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWalletHandle } from 'actions/wallet';
@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/core';
 const Overview = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { loadingWallet, wallets } = useSelector(state => state.wallets);
+  const { wallets } = useSelector(state => state.wallets);
   useEffect(() => {
     dispatch(getWalletHandle({ callback: () => {}, failure: () => {} }));
   }, [dispatch]);

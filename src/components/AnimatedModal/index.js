@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react';
-import { View, Text, Animated, TouchableOpacity } from 'react-native';
+import { View, Animated, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { Icon } from 'components/';
 import { useDispatch } from 'react-redux';

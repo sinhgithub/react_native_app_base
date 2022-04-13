@@ -6,7 +6,6 @@ export function* getDetailNotifySaga(obj) {
   const { params, success, failure, handleErr } = obj.payload;
   try {
     const res = yield call(apiGetNotifiDetail, params, handleErr);
-    console.log(res, '====res');
     if (res.status === 200) {
       const data = { ...res.data };
       yield put(getDetailNotifySuccess(data));

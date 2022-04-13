@@ -1,7 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
-import { navbarHeight, TAB_MENU_HEIGHT } from 'constants/size';
-import { scale } from 'utils/responsive';
+import { BACKGROUND_COLOR } from 'constants/colors';
 
 const styles = StyleSheet.create({
   findJobScreen: {

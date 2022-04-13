@@ -1,7 +1,7 @@
 import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
 import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
-import { DEVICE_WIDTH, SPACING } from 'constants/size';
-import { Platform, StyleSheet } from 'react-native';
+import { SPACING } from 'constants/size';
+import { StyleSheet } from 'react-native';
 import { scale } from 'utils/responsive';
 
 export const styles = StyleSheet.create({

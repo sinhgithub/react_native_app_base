@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import { View, StyleSheet, SafeAreaView } from 'react-native';
 import React from 'react';
 import Modal from 'react-native-modal';
 import { windowWidth } from 'constants/size';

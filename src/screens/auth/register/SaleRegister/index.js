@@ -148,17 +148,6 @@ const RegisterScreen = props => {
                     auth.register
                   </AppText>
                 </StyledTouchable>
-                {/* <StyledTouchable
-                  onPress={() =>
-                    navigation.navigate(SCREENS_NAME.MAIN_SCREEN, {
-                      screen: SCREENS_NAME.HOME_SCREEN
-                    })
-                  }
-                  customStyle={[styles.forgotBtn]}>
-                  <AppText style={[styles.gobackTxt]} translate>
-                    auth.goback
-                  </AppText>
-                </StyledTouchable> */}
               </View>
             );
           }}
@@ -187,7 +176,6 @@ const styles = StyleSheet.create({
     marginHorizontal: scale(24),
     paddingVertical: scale(24),
     justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: '#FFF',
     borderRadius: scale(16),
     shadowColor: '#000',

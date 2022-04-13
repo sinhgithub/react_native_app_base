@@ -5,7 +5,7 @@ import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { CUSTOM_COLOR } from 'constants/colors';
 import { Formik } from 'formik';
 import { translate } from 'language';
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Dimensions,
   Image,
@@ -161,18 +161,6 @@ const RegisterScreen = props => {
                     auth.register
                   </AppText>
                 </StyledTouchable>
-
-                {/* <StyledTouchable
-                  onPress={() =>
-                    navigation.navigate(SCREENS_NAME.MAIN_SCREEN, {
-                      screen: SCREENS_NAME.HOME_SCREEN
-                    })
-                  }
-                  customStyle={[styles.forgotBtn]}>
-                  <AppText style={[styles.gobackTxt]} translate>
-                    auth.goback
-                  </AppText>
-                </StyledTouchable> */}
               </View>
             );
           }}

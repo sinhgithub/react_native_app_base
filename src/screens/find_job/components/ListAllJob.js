@@ -2,7 +2,7 @@ import React, { memo, useEffect, useCallback, useState, useMemo } from 'react';
 import { FlatList, View, StyleSheet, Keyboard, Image, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SearchInput } from 'components/';
-import { CardJob, CardJobSkeleton, Button } from 'components/';
+import { CardJob } from 'components/';
 import { getListAllJobHandle } from 'actions/getListJob';
 import { useDispatch, useSelector } from 'react-redux';
 import SCREEN_NAME from 'constants/screens';
@@ -11,7 +11,6 @@ import { SPACING } from 'constants/size';
 import { cleanFilterJobByProvince } from 'actions/system';
 import { find } from 'assets/images';
 
-const numberSkeleton = 4;
 let ev;
 const size = 10;
 

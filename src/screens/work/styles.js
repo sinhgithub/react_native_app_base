@@ -1,13 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
-import {
-  DEVICE_HEIGHT,
-  statusBarHeight,
-  navbarHeight,
-  SPACING,
-  BOTTOM_BAR_HEIGHT
-} from 'constants/size';
-import { scale } from 'utils/responsive';
+import { BACKGROUND_COLOR } from 'constants/colors';
 
 const styles = StyleSheet.create({
   workScreen: {
@@ -19,7 +11,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1
-  },
+  }
 });
 
 export default styles;

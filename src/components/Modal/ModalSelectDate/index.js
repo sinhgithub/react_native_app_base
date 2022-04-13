@@ -1,7 +1,7 @@
 import { BACKGROUND_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
 import React, { memo } from 'react';
-import { View, Text, StyleSheet, Modal } from 'react-native';
+import { View, StyleSheet, Modal } from 'react-native';
 import DatePickerStyled from 'react-native-styled-datepicker';
 import { Button } from 'components/';
 

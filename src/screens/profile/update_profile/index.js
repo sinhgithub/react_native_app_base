@@ -1,6 +1,5 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, Keyboard } from 'react-native';
-import { translate } from 'src/i18n';
+import React, { memo, useEffect, useMemo, useState } from 'react';
+import { View, StyleSheet, Keyboard } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderTitleScreen from 'components/HeaderTitleScreen';
@@ -20,7 +19,7 @@ const UpdateProfile = props => {
   const { updateType, titleScreen, itemRoot } = props.route.params;
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { user, loading } = useSelector(state => state.user);
+  const { user } = useSelector(state => state.user);
 
   const formData = useMemo(() => {
     switch (updateType) {

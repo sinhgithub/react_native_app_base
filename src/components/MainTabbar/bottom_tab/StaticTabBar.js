@@ -13,14 +13,8 @@ export const tabHeight = BOTTOM_TAB_HEIGHT;
 const { width } = Dimensions.get('window');
 
 const StaticTabBar = props => {
-  const { value, state, descriptors, navigation } = props;
+  const { state, descriptors, navigation } = props;
   const tabWidth = width / state?.routes?.length;
-
-  // const values = useMemo(
-  //   () => state.routes.map((tab, index) => new Animated.Value(index === 0 ? 1 : 0)),
-  //   [state.routes]
-  // );
-
   return (
     <View style={styles.container}>
       {state?.routes.map((route, index) => {
@@ -39,7 +33,6 @@ const StaticTabBar = props => {
             canPreventDefault: true
           });
           if (!isFocused && !event.defaultPrevented) {
-            // console.log({ name: route.name });
             navigation.navigate(route.name);
           }
         };
@@ -50,21 +43,6 @@ const StaticTabBar = props => {
             target: route.key
           });
         };
-        // const activeValue = values[index];
-
-        // const opacity = value.interpolate({
-        //   inputRange: [
-        //     -width + tabWidth * (index - 1),
-        //     -width + tabWidth * index,
-        //     -width + tabWidth * (index + 1)
-        //   ],
-        //   outputRange: [1, 0, 1],
-        //   extrapolate: 'clamp'
-        // });
-        // const translateY = activeValue.interpolate({
-        //   inputRange: [0, 1],
-        //   outputRange: [tabHeight, 0]
-        // });
 
         if (route.name === SCREENS_NAME.HOME) {
           return (
@@ -78,9 +56,7 @@ const StaticTabBar = props => {
               ]}
               onPress={onPress}
               key={key}>
-              <View style={styles.leadBtn}>
-                {/* <ICTabBottoms width={scale(60)} height={scale(60)} /> */}
-              </View>
+              <View style={styles.leadBtn} />
               <AppText
                 translate
                 style={{

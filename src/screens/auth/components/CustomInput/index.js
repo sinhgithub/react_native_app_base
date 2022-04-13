@@ -3,7 +3,7 @@ import StyledTouchable from 'components/StyledTouchable';
 import { CUSTOM_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
 import React, { useRef } from 'react';
-import { StyleSheet, TextInput, View, Text } from 'react-native';
+import { StyleSheet, TextInput, View } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import { scale } from 'utils/responsive';
 

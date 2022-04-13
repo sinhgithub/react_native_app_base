@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { navbarHeight, screenHeight, HEIGHT_BUTTON_BOTTOM } from 'constants/size';
+import { HEIGHT_BUTTON_BOTTOM } from 'constants/size';
 import { SPACING } from 'constants/space';
 import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';

@@ -27,9 +27,7 @@ const WorkCalendar = props => {
   useEffect(() => {
     dispatch(
       calendarWorkHandle({
-        handleErr: v => {
-          //do no thing
-        }
+        handleErr: () => {}
       })
     );
   }, [dispatch]);

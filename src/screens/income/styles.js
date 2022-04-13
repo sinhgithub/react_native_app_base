@@ -1,9 +1,5 @@
 import { StyleSheet } from 'react-native';
-
-import { MAIN_HEADER_HEIGHT, SPACING } from 'constants/size';
-
-import { FONT_SIZE, FONT_FAMILY } from 'constants/appFonts';
-
+import { SPACING } from 'constants/size';
 import { BACKGROUND_COLOR } from 'constants/colors';
 
 const styles = StyleSheet.create({

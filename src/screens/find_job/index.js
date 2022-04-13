@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { Keyboard, View } from 'react-native';
 import { TabsHorizontal } from 'components/';
 import { tabFindJobScreen } from 'constants/data_constants';
@@ -6,7 +6,7 @@ import styles from './styles';
 import ListAllJob from './components/ListAllJob';
 import ListSavedJob from './components/ListSavedJob';
 import ListJobApply from './components/ListJobApply';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { cleanFilterJobByProvince } from 'actions/system';
 
 const FindJobScreen = ({ navigation, route }) => {

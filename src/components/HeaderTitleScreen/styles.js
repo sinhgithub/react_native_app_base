@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
   mainHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // paddingHorizontal: SPACING.XNormal,
     height: MAIN_HEADER_HEIGHT,
     backgroundColor: BACKGROUND_COLOR.White,
     ...Shadow

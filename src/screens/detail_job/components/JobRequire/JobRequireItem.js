@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import { View, Text } from 'react-native';
 import styles from './styles';
-import { Icon } from 'components/';
 
 const JobRequireItem = props => {
   const { containerStyle, icon, title, value } = props;

@@ -1,6 +1,5 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, Keyboard, KeyboardAvoidingView, ScrollView } from 'react-native';
-import { translate } from 'src/i18n';
+import React, { memo, useEffect, useMemo, useState } from 'react';
+import { View, StyleSheet, Keyboard, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { useDispatch, useSelector } from 'react-redux';
 import HeaderTitleScreen from 'components/HeaderTitleScreen';
@@ -15,7 +14,6 @@ import {
   addSkillForm
 } from 'constants/data_constants';
 import { SPACING } from 'constants/size';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { cloneDeep } from 'lodash';
 import { getSkillCriteriaHandle, getUserHandle, updateUserHandle } from 'actions/user';
 import SCREENS_NAME from 'constants/screens';
@@ -26,7 +24,7 @@ const AddProfileScreen = props => {
   const { addType, titleScreen } = props.route.params;
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { user, loading, loadingSkills, skills } = useSelector(state => state.user);
+  const { user, skills } = useSelector(state => state.user);
 
   useEffect(() => {
     if (addType === sectionProfileType.add_skill) {
@@ -166,7 +164,6 @@ const AddProfileScreen = props => {
                   buttonTitleReject: 'Trở lại',
                   buttonTitleConfirm: 'Thêm tiếp',
                   onConfirm: () => {
-                    console.log('Chúc mừng bạn đã thêm kinh nghiệm thành công');
                     dispatch(
                       getUserHandle({ callback: () => {}, handleErr: () => {}, failure: () => {} })
                     );
@@ -268,8 +265,8 @@ const AddProfileScreen = props => {
         let tmpSkill = {};
         for (const k in values) {
           if (k === 'skill') {
-            tmpSkill['name'] = values[k].value;
-            tmpSkill['id'] = values[k].idTmp;
+            tmpSkill.name = values[k].value;
+            tmpSkill.id = values[k].idTmp;
           } else {
             tmpSkill[`${k}`] = values[k].value;
           }
@@ -279,7 +276,7 @@ const AddProfileScreen = props => {
         } else {
           let checkExits = false;
           userClone.jobSeeker.skill.forEach(item => {
-            if (item.name === tmpSkill['name']) {
+            if (item.name === tmpSkill.name) {
               checkExits = true;
             }
           });

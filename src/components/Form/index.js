@@ -1,11 +1,10 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
-import { View, Text, Animated, Keyboard } from 'react-native';
+import React, { memo, useCallback, useMemo, useState } from 'react';
+import { View } from 'react-native';
 import styles from './styles';
 import Input from './Input';
 
 const Form = props => {
-  const { refScroll, data, onChange, onSubmit, defaultTextSelect, dataInputSelect, onSelect } =
-    props;
+  const { refScroll, data, onChange, defaultTextSelect, dataInputSelect, onSelect } = props;
   const [focus, setFocus] = useState(null);
   const processedData = useMemo(() => {
     const result = [];
@@ -17,12 +16,9 @@ const Form = props => {
     return result.sort((a, b) => a.order - b.order);
   }, [data]);
 
-  // console.log(processedData, 'processedData');
-
   const onFocus = useCallback(
     index => {
       setFocus(index);
-      // refScroll.current.scrollTo({ x: 0, y: 100, animated: true });
     },
     [refScroll]
   );

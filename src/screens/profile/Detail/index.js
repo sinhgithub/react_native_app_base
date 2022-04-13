@@ -14,7 +14,7 @@ const DetailProfile = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const refScroll = useRef(null);
-  const { user, loading } = useSelector(state => state.user);
+  const { user } = useSelector(state => state.user);
   const [showSelectDateModal, setShowSelectDateModal] = useState(false);
 
   const formData = useMemo(() => {

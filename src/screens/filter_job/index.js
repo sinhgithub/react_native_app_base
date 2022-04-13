@@ -5,13 +5,12 @@ import { TextBoxRadius } from 'components/';
 import { useDispatch, useSelector } from 'react-redux';
 import { getListProvinceHandle } from 'actions/master_data';
 import { useNavigation } from '@react-navigation/core';
-import SCREENS_NAME from 'constants/screens';
 import { setFilterJobByProvince } from 'actions/system';
 
 const FilterJob = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { provinces, loading } = useSelector(state => state.masterData);
+  const { provinces } = useSelector(state => state.masterData);
 
   const listSuggestData = useMemo(() => {
     const result = [];

@@ -1,7 +1,7 @@
 import utils from 'utils/apiUtils';
 import AppConfigs from 'configs/appConfigs';
 
-const { END_POINT, END_POINT_2 } = AppConfigs;
+const { END_POINT } = AppConfigs;
 
 export const apiListJobHomePage = params => {
   const url = `${END_POINT}api/job?collection=HOME_PAGE`;

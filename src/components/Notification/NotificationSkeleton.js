@@ -1,8 +1,6 @@
 import React, { memo } from 'react';
 import { View } from 'react-native';
-import styles from './styles';
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
-import { SPACING } from 'constants/size';
 
 const NotificationSkeleton = () => {
   return (

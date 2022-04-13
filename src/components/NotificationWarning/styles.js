@@ -1,4 +1,3 @@
-import { FONT_FAMILY } from 'constants/appFonts';
 import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
 import { StyleSheet } from 'react-native';

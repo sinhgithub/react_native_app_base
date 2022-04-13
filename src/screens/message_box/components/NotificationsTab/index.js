@@ -11,7 +11,7 @@ import SCREENS_NAME from 'constants/screens';
 const NotificationsTab = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { loading, metaNotifyList, notifyList } = useSelector(state => state.notification);
+  const { notifyList } = useSelector(state => state.notification);
 
   const notifyListProcessed = useMemo(() => {
     const result = [];
