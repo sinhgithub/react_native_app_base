@@ -24,7 +24,6 @@
 		794C4CB4E2E041A98474F822 /* SVN-Gilroy XBold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C3A96F9E949199EB045E8 /* SVN-Gilroy XBold Italic.otf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		87F92194F4884FA1AD8EFE99 /* SVN-Gilroy Light Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2B78E580D119423AA489F7C6 /* SVN-Gilroy Light Italic.otf */; };
-		8CF0ABD47D8294FB016F2DFE /* libPods-react_native_app_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07865035A2EEB03EF199E6D2 /* libPods-react_native_app_base.a */; };
 		90B140A134A844EFAE8322F9 /* SVN-Gilroy Heavy Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 14260D6E0B0D438E94D6658B /* SVN-Gilroy Heavy Italic.otf */; };
 		92EA2CBE72B64F159F8D9EAA /* SVN-Gilroy Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = F01885CFF39F4C27833E224E /* SVN-Gilroy Thin.otf */; };
 		96960FF4F70D42439B5B22F9 /* SVN-Gilroy Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9BAF5EDD69D04FDA89D58895 /* SVN-Gilroy Black.otf */; };
@@ -35,6 +34,7 @@
 		E85D4034817D4E069FF8A1D8 /* SVN-Gilroy Bold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A69E1FB5B1104066B564DBA4 /* SVN-Gilroy Bold Italic.otf */; };
 		EA376DD74B8841478B7192CE /* SVN-Gilroy Thin Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = C93F0BD165E141608904E3E3 /* SVN-Gilroy Thin Italic.otf */; };
 		ECF0403815F148EB9BFB771E /* SVN-Gilroy Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = A74B192AE6BA47EF89B29036 /* SVN-Gilroy Heavy.otf */; };
+		F96895F7B6075450AC61D12B /* libPods-react_native_app_base.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07865035A2EEB03EF199E6D2 /* libPods-react_native_app_base.a */; };
 		FB0E4FA6A6B0400E9A7705B0 /* SVN-Gilroy Medium Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7ACFBE42DE1047D9861B83E0 /* SVN-Gilroy Medium Italic.otf */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +89,7 @@
 		58D2B231C4F3412180E003C5 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		5AEB6F509B5F4D71A6664866 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../src/assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
 		5D9CD9502801610900F10283 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5DA9CC782806DA8500665B91 /* react_native_app_baseRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = react_native_app_baseRelease.entitlements; path = react_native_app_base/react_native_app_baseRelease.entitlements; sourceTree = "<group>"; };
 		5DFDFEB927FCBC7000D1345D /* splash_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash_icon.png; path = ../../../../../../Users/center/Desktop/image/splash_icon.png; sourceTree = "<group>"; };
 		60C325ACE4E04E6F894EE114 /* SVN-Gilroy Black Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Black Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Black Italic.otf"; sourceTree = "<group>"; };
 		62DF2101E3D14DE597198E76 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -133,7 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CF0ABD47D8294FB016F2DFE /* libPods-react_native_app_base.a in Frameworks */,
+				F96895F7B6075450AC61D12B /* libPods-react_native_app_base.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +161,7 @@
 		13B07FAE1A68108700A75B9A /* react_native_app_base */ = {
 			isa = PBXGroup;
 			children = (
+				5DA9CC782806DA8500665B91 /* react_native_app_baseRelease.entitlements */,
 				5D9CD9502801610900F10283 /* GoogleService-Info.plist */,
 				5DFDFEB927FCBC7000D1345D /* splash_icon.png */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -683,6 +685,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = react_native_app_base/react_native_app_baseRelease.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;

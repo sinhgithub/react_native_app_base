@@ -12,6 +12,12 @@ target 'react_native_app_base' do
     :hermes_enabled => false
   )
 
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}/PhotoLibrary"
+
+  pod 'RNFileViewer', :path => '../node_modules/react-native-file-viewer'
+
   target 'react_native_app_baseTests' do
     inherit! :complete
     # Pods for testing
