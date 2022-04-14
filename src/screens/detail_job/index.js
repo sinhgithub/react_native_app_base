@@ -324,13 +324,13 @@ const DetailJob = props => {
   return (
     <View style={styles.detailScreen}>
       <ScrollView style={styles.scrollView}>
-        <View style={styles.warningBox}>
+        {/* <View style={styles.warningBox}>
           <WarningBox
             warningText={translate('common.not_committed_tax')}
             onPressActionText={onPressWarningBox}
             warningActionText={translate('common.find_out_more')}
           />
-        </View>
+        </View> */}
         <View style={styles.detailScreenContent}>
           <View style={styles.jobInfo}>
             <JobInfo data={dataJobDetail.infoJob} />

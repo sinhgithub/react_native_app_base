@@ -6,6 +6,7 @@ import { SPACING } from 'constants/size';
 import { TEXT_COLOR, CUSTOM_COLOR, BACKGROUND_COLOR } from 'constants/colors';
 import { sectionProfileType } from 'constants/data_constants';
 import { Shadow } from 'constants/stylesCSS';
+import moment from 'moment';
 
 const Section = props => {
   const {
@@ -37,11 +38,18 @@ const Section = props => {
           const listItem = ArrayItem.map((v, i) => {
             const isFirstItem = i === 0;
             const isLastItem = i === ArrayItem.length - 1;
+            if (!v?.value) {
+              return null;
+            }
             return (
               <ItemTitleValue
                 key={i}
                 title={v.key}
-                value={v.value}
+                value={
+                  v?.key === 'startDate' || v?.key === 'endDate'
+                    ? moment(v.value).format('DD-MM-YYYY')
+                    : v.value
+                }
                 isFirstItem={isFirstItem}
                 isLastItem={isLastItem}
               />
@@ -76,6 +84,9 @@ const Section = props => {
         const listItem = ArrayItem.map((v, i) => {
           const isFirstItem = i === 0;
           const isLastItem = i === ArrayItem.length - 1;
+          if (!v?.value) {
+            return null;
+          }
           return (
             <ItemTitleValue
               key={i}
@@ -127,6 +138,10 @@ const Section = props => {
           const listItemSkill = ArrayItemValue.map((v, i) => {
             const isFirstItem = i === 0;
             const isLastItem = i === ArrayItemSkill.length - 1;
+            console.log(v, '9999999');
+            if (!v?.value) {
+              return null;
+            }
             return (
               <ItemTitleValue
                 key={i}

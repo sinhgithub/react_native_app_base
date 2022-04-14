@@ -17,6 +17,8 @@ import { useNavigation } from '@react-navigation/native';
 import SCREEN_NAME from 'constants/screens';
 import { getUserHandle } from 'actions/user';
 import { getListNotifyHandle } from 'actions/notification';
+import { setTabIndexMessageBox } from 'actions/system';
+import SCREENS_NAME from 'constants/screens';
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -82,19 +84,26 @@ const HomeScreen = () => {
       return <CardJobSkeleton key={i} />;
     }, []);
 
+  const onViewNoti = useCallback(() => {
+    dispatch(setTabIndexMessageBox(1));
+    navigation.navigate(SCREENS_NAME.MESSAGE_BOX_SCREEN, {});
+  }, []);
+
   return (
     <View style={styles.homeScreen}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        <View style={styles.notificationWarning}>
-          <NotificationWarning
-            icon={<ICNotification />}
-            contentText={`${translate('common.you_have')} ${
-              notifyListUnread?.length || 0
-            } ${translate('common.new_message')}`}
-            titleAction="common.see_now"
-            notifyListUnread={notifyListUnread}
-          />
-        </View>
+        {notifyListUnread?.length >= 0 && (
+          <View style={styles.notificationWarning}>
+            <NotificationWarning
+              icon={<ICNotification />}
+              contentText={`${translate('common.you_have')} ${
+                notifyListUnread?.length || 0
+              } ${translate('common.new_message')}`}
+              titleAction="common.see_now"
+              onPress={onViewNoti}
+            />
+          </View>
+        )}
         <View style={styles.rowBigIcon}>
           <RowBigIcon data={treeBigIconsConfig} onPress={onClickRowBigIcon} />
         </View>

@@ -2,11 +2,9 @@ import React, { memo } from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 import { AppText } from 'src/components';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const NotificationWarning = ({ contentText, titleAction, icon, notifyListUnread }) => {
-  if (notifyListUnread?.length <= 0) {
-    return null;
-  }
+const NotificationWarning = ({ contentText, titleAction, icon, onPress }) => {
   return (
     <View style={styles.NotificationWarning}>
       <View style={styles.NotificationWarningContent}>
@@ -17,13 +15,13 @@ const NotificationWarning = ({ contentText, titleAction, icon, notifyListUnread 
           </AppText>
         )}
       </View>
-      <View style={styles.NotificationWarningAction}>
+      <TouchableOpacity style={styles.NotificationWarningAction} onPress={onPress}>
         {titleAction && (
           <AppText translate style={styles.NotificationWarningActionText}>
             {titleAction}
           </AppText>
         )}
-      </View>
+      </TouchableOpacity>
     </View>
   );
 };

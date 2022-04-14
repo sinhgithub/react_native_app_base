@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 
 const MessageBoxScreen = props => {
   const { tabIndexMessageBox } = useSelector(state => state.system);
-
   const [contentTab, setContentTab] = useState(<MessagesTab />);
 
   useEffect(() => {

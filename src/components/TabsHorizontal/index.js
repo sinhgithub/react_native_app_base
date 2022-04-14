@@ -15,13 +15,16 @@ const Tabs = props => {
     tabsStyle,
     tabItemStyle
   } = props;
-
+  const { tabIndexMessageBox } = useSelector(state => state.system);
   const initTabIndex = useMemo(() => {
+    if (tabIndexMessageBox > 0) {
+      return { index: tabIndexMessageBox, isClick: false };
+    }
     if (tabActive) {
       return { index: tabActive, isClick: false };
     }
     return { index: 0, isClick: false };
-  }, [tabActive]);
+  }, [tabActive, tabIndexMessageBox]);
 
   const [tabIndex, setTabIndex] = useState(initTabIndex);
   const { filterJobByProvince } = useSelector(state => state.system);
