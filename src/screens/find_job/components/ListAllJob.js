@@ -16,98 +16,90 @@ const size = 10;
 
 const ListAllJob = props => {
   const navigation = useNavigation();
+  const { listJob, onPressItem, onRefresh, refreshing, page, onEndReached, onEndReachedThreshold } =
+    props;
   const dispatch = useDispatch();
-
-  const [searchText, setSearchText] = useState(null);
-  const [isSearchText, setIsSearchText] = useState(false);
   const { listAllJob, loading, metaData } = useSelector(state => state.listJob);
-  const [page, setPage] = useState(0);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const { filterJobByProvince } = useSelector(state => state.system);
 
   const list = useMemo(() => {
     const result = [];
+    if (listJob) {
+      return listJob.data.data;
+    }
     for (const k in listAllJob) {
       result.push(listAllJob[k]);
     }
     return result;
-  }, [listAllJob]);
+  }, [listAllJob, listJob]);
 
   useEffect(() => {
-    if (!filterJobByProvince) {
-      dispatch(getListAllJobHandle({ page, size }));
-    } else {
-      dispatch(
-        getListAllJobHandle({ page, size, province_id: filterJobByProvince.data.id, search: true })
-      );
-    }
-  }, [dispatch, filterJobByProvince, page]);
+    dispatch(getListAllJobHandle({ page, size }));
+  }, [dispatch]);
 
-  useEffect(() => {
-    if (isSearchText) {
-      if (searchText !== '') {
-        ev = setTimeout(() => {
-          dispatch(getListAllJobHandle({ key: searchText, search: true }));
-        }, 300);
-      } else {
-        dispatch(getListAllJobHandle({ page, size }));
-      }
-    }
-    return () => {
-      if (ev) {
-        clearTimeout(ev);
-        ev = undefined;
-      }
-    };
-  }, [dispatch, isSearchText, page, searchText]);
+  // useEffect(() => {
+  //   if (isSearchText) {
+  //     if (searchText !== '') {
+  //       ev = setTimeout(() => {
+  //         dispatch(getListAllJobHandle({ key: searchText, search: true }));
+  //       }, 300);
+  //     } else {
+  //       dispatch(getListAllJobHandle({ page, size }));
+  //     }
+  //   }
+  //   return () => {
+  //     if (ev) {
+  //       clearTimeout(ev);
+  //       ev = undefined;
+  //     }
+  //   };
+  // }, [dispatch, isSearchText, page, searchText]);
 
-  useEffect(() => {
-    if (!loading && isRefreshing) {
-      setIsRefreshing(false);
-    }
-  }, [isRefreshing, loading]);
+  // useEffect(() => {
+  //   if (!loading && isRefreshing) {
+  //     setIsRefreshing(false);
+  //   }
+  // }, [isRefreshing, loading]);
 
-  useEffect(() => {
-    if (page > 0 && list?.length <= metaData?.total) {
-      if (searchText && searchText !== '') {
-        dispatch(getListAllJobHandle({ key: searchText, isLoadMore: true }));
-      } else {
-        dispatch(getListAllJobHandle({ page, size, isLoadMore: true }));
-      }
-    }
-  }, [dispatch, page]);
+  // useEffect(() => {
+  //   if (page > 0 && list?.length <= metaData?.total) {
+  //     if (searchText && searchText !== '') {
+  //       dispatch(getListAllJobHandle({ key: searchText, isLoadMore: true }));
+  //     } else {
+  //       dispatch(getListAllJobHandle({ page, size, isLoadMore: true }));
+  //     }
+  //   }
+  // }, [dispatch, page]);
 
-  useEffect(() => {
-    if (!searchText || searchText === '') {
-      Keyboard.dismiss();
-    }
-  }, [searchText]);
+  // useEffect(() => {
+  //   if (!searchText || searchText === '') {
+  //     Keyboard.dismiss();
+  //   }
+  // }, [searchText]);
 
-  const handleSetIsSearchText = useCallback(() => {
-    setIsSearchText(true);
+  // const handleSetIsSearchText = useCallback(() => {
+  //   setIsSearchText(true);
+  // }, []);
+
+  // const onClickCardJob = useCallback(
+  //   data => {
+  //     navigation.navigate(SCREEN_NAME.DETAIL_JOB_SCREEN, { cardJob: data });
+  //   },
+  //   [navigation]
+  // );
+
+  const onSearchText = useCallback(v => {
+    // if (filterJobByProvince) {
+    //   dispatch(cleanFilterJobByProvince());
+    //   setPage(0);
+    // }
+    // handleSetIsSearchText(true);
+    // setSearchText(v);
   }, []);
 
-  const onClickCardJob = useCallback(
-    data => {
-      navigation.navigate(SCREEN_NAME.DETAIL_JOB_SCREEN, { cardJob: data });
-    },
-    [navigation]
-  );
-
-  const onSearchText = useCallback(
-    v => {
-      if (filterJobByProvince) {
-        dispatch(cleanFilterJobByProvince());
-        setPage(0);
-      }
-      handleSetIsSearchText(true);
-      setSearchText(v);
-    },
-    [dispatch, filterJobByProvince, handleSetIsSearchText]
-  );
   const renderJobs = ({ item, index }) => {
     const isLastItem = index === list?.length - 1;
-    return <CardJob key={item?.id} data={item} onPress={onClickCardJob} isLastItem={isLastItem} />;
+    return <CardJob key={item?.id} data={item} onPress={onPressItem} isLastItem={isLastItem} />;
   };
 
   const renderListEmptyComponent = () => {
@@ -119,40 +111,22 @@ const ListAllJob = props => {
     );
   };
 
-  const onPressFilter = useCallback(() => {
-    navigation.navigate(SCREEN_NAME.FILTER_JOB);
-  }, [navigation]);
-
-  const loadMore = () => {
-    setPage(page + 1);
-  };
-  const onRefresh = () => {
-    setIsRefreshing(true);
-    if (!searchText) {
-      dispatch(getListAllJobHandle({ page: 0, size }));
-    } else {
-      dispatch(getListAllJobHandle({ key: searchText, search: true }));
-    }
-  };
-
+  // const loadMore = () => {
+  //   setPage(page + 1);
+  // };
   return (
     <>
-      <View style={styles.searchInput}>
-        <SearchInput
-          onChange={onSearchText}
-          value={searchText}
-          hideSearchIcon
-          onFilter={onPressFilter}
-        />
-      </View>
+      <View style={styles.searchInput} />
       <FlatList
         keyExtractor={(item, index) => `${item?.id || index}${index}`}
         renderItem={renderJobs}
         data={list || []}
-        onEndReached={loadMore}
-        onEndReachedThreshold={0.2}
-        refreshing={isRefreshing}
-        onRefresh={onRefresh}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={onEndReachedThreshold}
+        refreshing={refreshing}
+        onRefresh={() => {
+          onRefresh?.();
+        }}
         ListEmptyComponent={renderListEmptyComponent()}
       />
     </>

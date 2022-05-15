@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect, useMemo } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text, TouchableOpacity, FlatList } from 'react-native';
 import {
   NotificationWarning,
   RowBigIcon,
@@ -10,7 +10,7 @@ import {
 import { ICNotification } from 'assets/icons';
 import { translate } from 'src/i18n';
 import styles from './styles';
-import { idTreeBigIcons, treeBigIconsConfig } from 'constants/data_constants';
+import { idTreeBigIcons, inputType, treeBigIconsConfig } from 'constants/data_constants';
 import { getListJobHomePageHandle } from 'actions/getListJob';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -19,17 +19,66 @@ import { getUserHandle } from 'actions/user';
 import { getListNotifyHandle } from 'actions/notification';
 import { setTabIndexMessageBox } from 'actions/system';
 import SCREENS_NAME from 'constants/screens';
+import FastImage from 'react-native-fast-image';
+import { getConfigSiteHandle } from 'actions/configSite';
+import FormCustom from 'components/FormCustom';
+import CustomInput from 'components/FormCustom/conponents/CustomInput';
+import CardCategoryBg from 'components/CardCategoryBg';
+import { getBusinessCategoryHandle } from 'actions/master_data';
+import { SPACING } from 'constants/size';
+import { getEmployerHandle } from 'actions/employer';
+import CardEmployer from 'components/CardEmployer';
+import { getImageFromHost } from 'configs/appConfigs';
+const banner =
+  'http://167.179.76.33:8000/api/file/upload/images/1c3f596b-a284-42bc-8e9b-b24a60c9f030.png';
+
+const seeAllType = {
+  byCategory: 'byCategory',
+  byHomePageJob: 'byHomePageJob',
+  byEmployer: 'byEmployer'
+};
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { listJobHomePage, loading } = useSelector(state => state.listJob);
   const { notifyList } = useSelector(state => state.notification);
+  const { configSite } = useSelector(state => state.configSite);
+  const { businessCategories } = useSelector(state => state.masterData);
+  const { employers, loading: loadingEmployers } = useSelector(state => state.employers);
+
+  const businessCategoriesProcessed = useMemo(() => {
+    return Object.values(businessCategories || {});
+  }, [businessCategories]);
+
+  const employersProcessed = useMemo(() => {
+    return Object.values(employers?.data || {});
+  }, [employers]);
 
   useEffect(() => {
     dispatch(getListJobHomePageHandle());
+    dispatch(
+      getEmployerHandle({
+        params: { size: 4 },
+        success: () => {},
+        failure: () => {},
+        handleErr: () => {}
+      })
+    );
     dispatch(getUserHandle({}));
+    dispatch(getConfigSiteHandle({}));
     dispatch(getListNotifyHandle({ success: () => {}, failure: () => {}, handleErr: () => {} }));
+    dispatch(
+      getBusinessCategoryHandle({
+        success: () => {},
+        failure: () => {},
+        handleErr: () => {},
+        params: {
+          collection: 'HOME_PAGE',
+          size: 1
+        }
+      })
+    );
     const focusListener = navigation.addListener('focus', () => {
       dispatch(getUserHandle({}));
       dispatch(getListNotifyHandle({ success: () => {}, failure: () => {}, handleErr: () => {} }));
@@ -57,59 +106,131 @@ const HomeScreen = () => {
     },
     [navigation]
   );
-
-  const onClickRowBigIcon = useCallback(id => {
-    switch (id) {
-      case idTreeBigIcons.find_job:
-        navigation.navigate(SCREEN_NAME.FIND_JOB_SCREEN);
-        break;
-      case idTreeBigIcons.income:
-        navigation.navigate(SCREEN_NAME.INCOME_SCREEN);
-        break;
-      case idTreeBigIcons.support:
-        break;
-      default:
-        return;
-    }
-  }, []);
-
   const listJob = listJobHomePage.map((job, index) => {
     const isLastItem = index === listJobHomePage.length - 1;
     return <CardJob onPress={onClickCardJob} data={job} key={job.id} isLastItem={isLastItem} />;
   });
 
-  const listSkeleton = Array(3)
-    .fill('')
-    .map((v, i) => {
-      return <CardJobSkeleton key={i} />;
-    }, []);
+  const renderBusinessCategory = ({ item, index }) => {
+    return (
+      <CardCategoryBg
+        key={item?.id || index}
+        containerStyle={styles.businessCategoryContainer}
+        data={item}
+      />
+    );
+  };
 
-  const onViewNoti = useCallback(() => {
-    dispatch(setTabIndexMessageBox(1));
-    navigation.navigate(SCREENS_NAME.MESSAGE_BOX_SCREEN, {});
-  }, []);
+  const renderEmployerCard = ({ item, index }) => {
+    return (
+      <CardEmployer
+        key={item?.id || index}
+        data={item}
+        containerStyle={styles.employersContainer}
+      />
+    );
+  };
+
+  const onClickSeeAll = useCallback(
+    type => {
+      switch (type) {
+        case seeAllType.byCategory:
+          navigation.navigate(SCREENS_NAME.CATEGORY_SCREEN, {});
+          break;
+        case seeAllType.byHomePageJob:
+          navigation.navigate(SCREENS_NAME.FIND_JOB_SCREEN, {});
+          break;
+        case seeAllType.byEmployer:
+          navigation.navigate(SCREENS_NAME.EMPLOYER_LIST_SCREEN, {});
+          break;
+        default:
+          break;
+      }
+    },
+    [navigation]
+  );
+
+  const handleFocusSearchInput = useCallback(() => {
+    navigation.navigate(SCREENS_NAME.FIND_JOB_SCREEN, { autoFocus: true });
+  }, [navigation]);
+
+  const handlePressLocation = useCallback(() => {
+    navigation.navigate(SCREENS_NAME.FILTER_JOB, {});
+  }, [navigation]);
 
   return (
     <View style={styles.homeScreen}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        {notifyListUnread?.length >= 0 && (
-          <View style={styles.notificationWarning}>
-            <NotificationWarning
-              icon={<ICNotification />}
-              contentText={`${translate('common.you_have')} ${
-                notifyListUnread?.length || 0
-              } ${translate('common.new_message')}`}
-              titleAction="common.see_now"
-              onPress={onViewNoti}
+        <View style={styles.bannerWrapper}>
+          <FastImage
+            source={{
+              uri: getImageFromHost('upload/images/1c3f596b-a284-42bc-8e9b-b24a60c9f030.png')
+            }}
+            style={styles.banner}
+            resizeMode="cover"
+          />
+          {configSite && (
+            <View style={styles.slogan1}>
+              <Text style={styles.slogan}>{configSite.slogan1}</Text>
+              <Text style={styles.slogan}>{configSite.slogan2}</Text>
+            </View>
+          )}
+          {configSite && (
+            <View style={styles.slogan2}>
+              <Text style={styles.slogan}>{configSite.slogan3}</Text>
+            </View>
+          )}
+        </View>
+        <View style={styles.searchWrapper}>
+          <CustomInput
+            type={inputType.searchJob}
+            placeholder="Nhập tên công ty, vị trí,..."
+            handleFocusCustom={handleFocusSearchInput}
+            handlePressLocation={handlePressLocation}
+          />
+        </View>
+        <View style={styles.category}>
+          <View style={[styles.rowBetween, { paddingHorizontal: SPACING.XXNormal }]}>
+            <Text style={styles.sectionName}>Theo ngành nghề</Text>
+            <TouchableOpacity onPress={() => onClickSeeAll(seeAllType.byCategory)}>
+              <Text style={styles.seeAll}>Xem tất cả</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.bushinessCategoriesWrapper}>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={businessCategoriesProcessed || []}
+              keyExtractor={(item, index) => item?.id || index}
+              renderItem={renderBusinessCategory}
             />
           </View>
-        )}
-        <View style={styles.rowBigIcon}>
-          <RowBigIcon data={treeBigIconsConfig} onPress={onClickRowBigIcon} />
         </View>
-        <View style={styles.listJob}>
-          <TitleSection title={translate('common.urgently_need_someone')} />
-          {loading ? listSkeleton : <View style={styles.listCardJob}>{listJob}</View>}
+        <View style={styles.category}>
+          <View style={[styles.rowBetween, { paddingHorizontal: SPACING.XXNormal }]}>
+            <Text style={styles.sectionName}>Việc làm hấp dẫn</Text>
+            <TouchableOpacity onPress={() => onClickSeeAll(seeAllType.byHomePageJob)}>
+              <Text style={styles.seeAll}>Xem tất cả</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.listJobWrapper}>{listJob}</View>
+        </View>
+        <View style={styles.category}>
+          <View style={[styles.rowBetween, { paddingHorizontal: SPACING.XXNormal }]}>
+            <Text style={styles.sectionName}>Nhà tuyển dụng hàng đầu</Text>
+            <TouchableOpacity onPress={() => onClickSeeAll(seeAllType.byEmployer)}>
+              <Text style={styles.seeAll}>Xem tất cả</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.bushinessCategoriesWrapper}>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={employersProcessed || []}
+              keyExtractor={(item, index) => item?.id || index}
+              renderItem={renderEmployerCard}
+            />
+          </View>
         </View>
       </ScrollView>
     </View>

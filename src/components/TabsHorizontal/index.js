@@ -17,10 +17,11 @@ const Tabs = props => {
   } = props;
   const { tabIndexMessageBox } = useSelector(state => state.system);
   const initTabIndex = useMemo(() => {
+    console.log(tabActive, 'tabActivetabActivetabActive');
     if (tabIndexMessageBox > 0) {
       return { index: tabIndexMessageBox, isClick: false };
     }
-    if (tabActive) {
+    if (tabActive >= 0) {
       return { index: tabActive, isClick: false };
     }
     return { index: 0, isClick: false };
@@ -39,6 +40,12 @@ const Tabs = props => {
       handlePressTab(filterJobByProvince.tabIndex);
     }
   }, [filterJobByProvince]);
+
+  useEffect(() => {
+    if (tabActive >= 0) {
+      setTabIndex({ index: tabActive, isClick: false });
+    }
+  }, [tabActive]);
 
   const handlePressTab = useCallback(
     index => {

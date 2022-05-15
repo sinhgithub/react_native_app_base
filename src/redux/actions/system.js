@@ -47,3 +47,17 @@ export const cleanFilterJobByProvince = payload => ({
   type: SYSTEM.CLEAN_FILTER_JOB_BY_PROVINCE,
   payload
 });
+
+// filter job
+export const filterJobHandle = payload => ({
+  type: SYSTEM.FILTER_JOB.HANDLER,
+  payload
+});
+export const filterJobSuccess = payload => ({
+  type: SYSTEM.FILTER_JOB.SUCCESS,
+  payload
+});
+export const filterJobFailure = payload => ({
+  type: SYSTEM.FILTER_JOB.FAILURE,
+  payload
+});

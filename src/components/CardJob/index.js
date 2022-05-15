@@ -36,7 +36,7 @@ const CardJob = props => {
       <TouchableOpacity
         style={[styles.cardJobContent, (hideBorder || isLastItem) && { borderBottomWidth: 0 }]}
         onPress={() =>
-          onPress({
+          onPress?.({
             ...data,
             addressMapped: dataCardJob?.address,
             wageMapped: dataCardJob?.wage,

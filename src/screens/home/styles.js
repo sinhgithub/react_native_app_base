@@ -1,7 +1,9 @@
 import { StyleSheet } from 'react-native';
 import { SPACING } from 'constants/size';
-import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
+import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { scale } from 'utils/responsive';
+import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
+import { Shadow } from 'constants/stylesCSS';
 
 const styles = StyleSheet.create({
   homeScreen: {
@@ -11,15 +13,63 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1
   },
-  notificationWarning: {
-    paddingHorizontal: SPACING.XNormal,
-    paddingBottom: SPACING.Small,
-    borderBottomWidth: 1,
-    borderBottomColor: CUSTOM_COLOR.BasicGray
+  bannerWrapper: {
+    width: '100%',
+    height: 150
   },
-  rowBigIcon: {
-    paddingHorizontal: SPACING.XNormal,
-    paddingVertical: scale(10)
+  banner: {
+    width: '100%',
+    height: 150
+  },
+  slogan1: {
+    position: 'absolute',
+    right: 20,
+    top: 20
+  },
+  slogan: {
+    fontSize: FONT_SIZE.SubHead,
+    fontFamily: FONT_FAMILY.REGULAR,
+    lineHeight: LINE_HEIGHT.SubHead
+  },
+  slogan2: {
+    position: 'absolute',
+    right: 10,
+    bottom: 20
+  },
+  searchWrapper: {
+    paddingHorizontal: SPACING.XXNormal
+  },
+  category: {
+    marginTop: SPACING.XXLarge
+  },
+  rowBetween: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: SPACING.Medium
+  },
+  bushinessCategoriesWrapper: {
+    flexDirection: 'row'
+  },
+  businessCategoryContainer: {
+    marginHorizontal: SPACING.Normal
+  },
+  employersContainer: {
+    marginHorizontal: SPACING.Normal,
+    ...Shadow,
+    marginBottom: SPACING.Normal,
+    paddingBottom: SPACING.XNormal
+  },
+  sectionName: {
+    fontSize: FONT_SIZE.Heading,
+    fontFamily: FONT_FAMILY.REGULAR,
+    lineHeight: LINE_HEIGHT.Heading,
+    color: TEXT_COLOR.Black
+  },
+  seeAll: {
+    fontSize: FONT_SIZE.SubHead,
+    fontFamily: FONT_FAMILY.REGULAR,
+    lineHeight: LINE_HEIGHT.SubHead,
+    color: 'gray'
   }
 });
 

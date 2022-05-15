@@ -9,6 +9,9 @@ import userSagas from './userSagas';
 import masterDataSagas from './masterDataSagas';
 import getListChatSagas from './chat';
 import notificationSagas from './notificationSagas';
+import configSiteSagas from './configSiteSagas';
+import employerSagas from './employerSagas';
+import filterJobSagas from './filterJobSagas';
 
 export default function* rootSaga() {
   yield all([
@@ -21,6 +24,9 @@ export default function* rootSaga() {
     userSagas(),
     masterDataSagas(),
     getListChatSagas(),
-    notificationSagas()
+    notificationSagas(),
+    configSiteSagas(),
+    employerSagas(),
+    filterJobSagas()
   ]);
 }

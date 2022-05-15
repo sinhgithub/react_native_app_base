@@ -47,12 +47,11 @@ const listJob = (state = initialState, action) => {
       };
     }
     case GET_LIST_JOB.ALL_JOB.SUCCESS: {
-      const { data, metadata, search } = action.payload;
-      const newData = search ? {} : { ...state.listAllJob };
+      const { data, metadata } = action.payload;
+      const newData = { ...state.listAllJob };
       data.forEach(item => {
         newData[item.id] = item;
       }, []);
-
       return {
         ...state,
         loading: false,

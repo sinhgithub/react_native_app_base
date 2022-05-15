@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { BACKGROUND_COLOR } from 'constants/colors';
+import { SPACING } from 'constants/size';
 
 const styles = StyleSheet.create({
   findJobScreen: {
@@ -8,6 +9,9 @@ const styles = StyleSheet.create({
   },
   tabItemStyle: {
     width: '33%'
+  },
+  inputArea: {
+    paddingHorizontal: SPACING.XXNormal
   }
 });
 

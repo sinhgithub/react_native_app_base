@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getListProvinceHandle } from 'actions/master_data';
 import { useNavigation } from '@react-navigation/core';
 import { setFilterJobByProvince } from 'actions/system';
+import SCREENS_NAME from 'constants/screens';
 
 const FilterJob = props => {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const FilterJob = props => {
   useEffect(() => {
     if (search) {
       dispatch(setFilterJobByProvince({ ...search, tabIndex: 0 }));
-      navigation.goBack();
+      navigation.navigate(SCREENS_NAME.FIND_JOB_SCREEN);
     }
   }, [activeItem, dispatch, navigation, search]);
 

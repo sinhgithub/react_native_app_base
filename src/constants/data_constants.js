@@ -243,7 +243,8 @@ export const inputType = {
   textarea: 'textarea',
   select: 'select',
   number: 'number',
-  genderRadios: 'genderRadios'
+  genderRadios: 'genderRadios',
+  searchJob: 'searchJob'
 };
 
 export const addExperienceForm = [

@@ -5,7 +5,7 @@ import { Icon } from 'components/';
 import { BACKGROUND_COLOR } from 'constants/colors';
 
 const SearchInput = props => {
-  const { onChange, value, hideSearchIcon, onFilter } = props;
+  const { onChange, value, hideSearchIcon, onFilter, getRef } = props;
   const [isActiveFilter, setIsActiveFilter] = useState(false);
 
   const handleClickFilter = () => {
@@ -26,7 +26,12 @@ const SearchInput = props => {
             <Icon name="search" fontName="FontAwesome" size={20} color="gray" />
           </View>
         )}
-        <TextInput style={styles.searchAreaInput} onChangeText={onChange} value={value || ''} />
+        <TextInput
+          ref={ref => getRef?.(ref)}
+          style={styles.searchAreaInput}
+          onChangeText={onChange}
+          value={value || ''}
+        />
       </View>
       <TouchableOpacity
         style={[

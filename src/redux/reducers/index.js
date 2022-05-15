@@ -12,6 +12,8 @@ import user from './user';
 import masterData from './master_data';
 import chat from './chat';
 import notification from './notification';
+import configSite from './configSite';
+import employers from './employer';
 
 const systemPersistConfig = {
   key: 'system',
@@ -89,6 +91,20 @@ const notificationPersistConfig = {
   whitelist: [],
   version: 1.0
 };
+
+const configSitePersistConfig = {
+  key: 'configSite',
+  storage: AsyncStorage,
+  whitelist: [],
+  version: 1.0
+};
+const employersPersistConfig = {
+  key: 'employers',
+  storage: AsyncStorage,
+  whitelist: ['employers'],
+  version: 1.0
+};
+
 export default combineReducers({
   system: persistReducer(systemPersistConfig, system),
   auth: persistReducer(authPersistConfig, auth),
@@ -100,5 +116,7 @@ export default combineReducers({
   user: persistReducer(userPersistConfig, user),
   masterData: persistReducer(masterDataPersistConfig, masterData),
   chat: persistReducer(chatPersistConfig, chat),
-  notification: persistReducer(notificationPersistConfig, notification)
+  notification: persistReducer(notificationPersistConfig, notification),
+  configSite: persistReducer(configSitePersistConfig, configSite),
+  employers: persistReducer(employersPersistConfig, employers)
 });

@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { add, interpolate } from 'react-native-reanimated';
 import SCREENS_NAME from 'constants/screens';
-import HomeScreen from 'screens/home';
+import HomeScreen from 'screens/home/index';
 import { ICON_SIZE } from 'constants/size';
 import { ICHomeNew, ICFindJobNew, ICWorkNew, ICAccountNew, ICMessageNew } from 'assets/icons';
 import FindJobScreen from 'screens/find_job';
@@ -11,7 +11,7 @@ import MainTabbar from 'components/MainTabbar';
 import WorkScreen from 'screens/work';
 import MessageBoxScreen from 'screens/message_box';
 import ProfileScreen from 'screens/profile';
-import HomeHeader from 'components/HeaderHello';
+// import HomeHeader from 'components/HeaderHello';
 import MainHeader from 'components/MainHeader';
 import HeaderTitleScreen from 'components/HeaderTitleScreen';
 import DetailJob from 'screens/detail_job';
@@ -24,6 +24,10 @@ import AddProfileScreen from 'screens/profile/add_profile';
 import DetailChatScreen from 'screens/message_box/components/MessageTab/ChatDetail';
 import { BACKGROUND_COLOR } from 'constants/colors';
 import NotifyDetail from 'screens/message_box/components/NotificationsTab/NotifyDetail';
+import CategoryScreen from 'screens/categories';
+import EmployerListScreen from 'screens/employer_list';
+import MenuScreen from 'screens/menu';
+import HomeHeader from 'components/HomeHeader';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -366,6 +370,30 @@ export const AppStackScreen = () => {
         component={NotifyDetail}
         options={{
           headerShown: true
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.MENU_SCREEN}
+        component={MenuScreen}
+        options={{
+          headerShown: true,
+          header: () => <HomeHeader isShowBack />
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.CATEGORY_SCREEN}
+        component={CategoryScreen}
+        options={{
+          headerShown: true,
+          header: () => <HeaderTitleScreen title={'Danh mục'} />
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.EMPLOYER_LIST_SCREEN}
+        component={EmployerListScreen}
+        options={{
+          headerShown: true,
+          header: () => <HeaderTitleScreen title={'Nhà tuyển dụng'} />
         }}
       />
     </Stack.Navigator>
