@@ -17,6 +17,7 @@ const JobContact = props => {
   const navigation = useNavigation();
   const { conversations } = useSelector(state => state.chat);
   const dispatch = useDispatch();
+  console.log({ data, cardJob }, '{ data, cardJob }');
   const handleToggleContent = useCallback(key => {
     if (key === 'down') {
       setIsShowContent(true);
@@ -39,7 +40,10 @@ const JobContact = props => {
     if (type === 'sendMessage') {
       dispatch(
         sendMessageHandle({
-          params: { toUser: cardJob?.employer?.id, message: '' },
+          params: {
+            toUser: cardJob?.employer?.id,
+            message: `Xin chào! Tôi muốn trao đổi với bạn về ${cardJob?.title}`
+          },
           success: () => {
             dispatch(
               getListChatHandle({

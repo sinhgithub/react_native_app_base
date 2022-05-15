@@ -138,7 +138,6 @@ const Section = props => {
           const listItemSkill = ArrayItemValue.map((v, i) => {
             const isFirstItem = i === 0;
             const isLastItem = i === ArrayItemSkill.length - 1;
-            console.log(v, '9999999');
             if (!v?.value) {
               return null;
             }

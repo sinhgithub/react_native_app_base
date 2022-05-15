@@ -17,7 +17,6 @@ const Tabs = props => {
   } = props;
   const { tabIndexMessageBox } = useSelector(state => state.system);
   const initTabIndex = useMemo(() => {
-    console.log(tabActive, 'tabActivetabActivetabActive');
     if (tabIndexMessageBox > 0) {
       return { index: tabIndexMessageBox, isClick: false };
     }
@@ -28,7 +27,7 @@ const Tabs = props => {
   }, [tabActive, tabIndexMessageBox]);
 
   const [tabIndex, setTabIndex] = useState(initTabIndex);
-  const { filterJobByProvince } = useSelector(state => state.system);
+  const { filterJobByProvince, filterJobByCategory } = useSelector(state => state.system);
   useEffect(() => {
     if (tabIndex.isClick) {
       onPress?.(tabIndex);
@@ -39,7 +38,10 @@ const Tabs = props => {
     if (filterJobByProvince) {
       handlePressTab(filterJobByProvince.tabIndex);
     }
-  }, [filterJobByProvince]);
+    if (filterJobByCategory) {
+      handlePressTab(0);
+    }
+  }, [filterJobByCategory, filterJobByProvince, handlePressTab]);
 
   useEffect(() => {
     if (tabActive >= 0) {

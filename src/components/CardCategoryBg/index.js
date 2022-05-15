@@ -1,21 +1,21 @@
 import { getImageFromHost } from 'configs/appConfigs';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
-import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
-import React, { memo, useCallback } from 'react';
-import { TouchableOpacity, Text, View, ImageBackground, StyleSheet } from 'react-native';
+import { TEXT_COLOR } from 'constants/colors';
+import React, { memo } from 'react';
+import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 const imageTmp = 'https://www.w3schools.com/w3css/img_lights.jpg';
 
 const CardCategoryBg = props => {
-  const { title, containerStyle, data } = props;
+  const { onPress, containerStyle, data } = props;
   const image = getImageFromHost(data?.image) ? getImageFromHost(data?.image) : imageTmp;
 
   return (
-    <View style={[styles.container, containerStyle]}>
+    <TouchableOpacity style={[styles.container, containerStyle]} onPress={() => onPress?.(data)}>
       <View style={styles.backgroundDisable} />
       <FastImage source={{ uri: image }} resizeMode="cover" style={styles.image} />
       <Text style={styles.categoryName}>{data?.name || 'Tên category'}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

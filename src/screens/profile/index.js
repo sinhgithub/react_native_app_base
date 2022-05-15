@@ -11,6 +11,7 @@ import SCREENS_NAME from 'constants/screens';
 import { sectionProfileType, titleUpdateProfile } from 'constants/data_constants';
 import { getUserHandle, updateUserHandle } from 'actions/user';
 import { cloneDeep } from 'lodash';
+import { getListProvinceHandle } from 'actions/master_data';
 
 const ProfileScreen = props => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const ProfileScreen = props => {
   const { user } = useSelector(state => state.user);
   useEffect(() => {
     dispatch(getUserHandle({}));
+    dispatch(getListProvinceHandle({}));
     const focusListener = navigation.addListener('focus', () => {
       dispatch(getUserHandle({}));
     });

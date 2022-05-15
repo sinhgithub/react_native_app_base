@@ -35,3 +35,6 @@ export const registerFailure = payload => ({
   payload
 });
 // ===================================================
+export const logout = () => ({
+  type: AUTH.LOGOUT
+});

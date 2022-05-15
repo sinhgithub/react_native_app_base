@@ -61,6 +61,12 @@ const auth = (state = initialState, action) => {
         loading: false
       };
     }
+    // =================================
+    case AUTH.LOGOUT: {
+      return {
+        ...initialState
+      };
+    }
     default:
       return state;
   }

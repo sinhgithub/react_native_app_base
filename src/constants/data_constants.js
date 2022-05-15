@@ -315,26 +315,43 @@ export const detailProfileForm = [
     id: 'name',
     type: inputType.text,
     label: 'Tên'
+    // placeholder: 'Nhập tên'
   },
   {
     id: 'phone',
     type: inputType.number,
     label: 'Số điện thoại'
+    // placeholder: 'Nhập số điện thoại'
   },
   {
     id: 'gender',
     type: inputType.genderRadios,
     label: 'Giới tính'
+    // placeholder: 'Chọn giới tính'
   },
   {
     id: 'birthday',
     type: inputType.date,
     label: 'Ngày sinh'
+    // placeholder: 'Chọn ngày tháng'
+  },
+  {
+    id: 'province',
+    type: inputType.select,
+    label: 'Tỉnh/ Thành phố'
+    // placeholder: 'Chọn tỉnh thành'
+  },
+  {
+    id: 'district',
+    type: inputType.select,
+    label: 'Quận/ huyện'
+    // placeholder: 'Chọn quận/ huyện'
   },
   {
     id: 'address',
     type: inputType.text,
-    label: 'Địa chỉ'
+    label: 'Địa chỉ chi tiết'
+    // placeholder: 'Nhập địa chỉ chi tiết'
   }
 ];
 

@@ -1,27 +1,26 @@
-import React, { memo, useEffect, useCallback, useState, useMemo } from 'react';
-import { FlatList, View, StyleSheet, Keyboard, Image, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { SearchInput } from 'components/';
+import React, { memo, useEffect, useMemo } from 'react';
+import { FlatList, View, StyleSheet, Image, Text } from 'react-native';
 import { CardJob } from 'components/';
 import { getListAllJobHandle } from 'actions/getListJob';
 import { useDispatch, useSelector } from 'react-redux';
-import SCREEN_NAME from 'constants/screens';
 import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
-import { cleanFilterJobByProvince } from 'actions/system';
 import { find } from 'assets/images';
 
-let ev;
-const size = 10;
-
 const ListAllJob = props => {
-  const navigation = useNavigation();
-  const { listJob, onPressItem, onRefresh, refreshing, page, onEndReached, onEndReachedThreshold } =
-    props;
+  const {
+    listJob,
+    onPressItem,
+    size,
+    onRefresh,
+    refreshing,
+    page,
+    onEndReached,
+    onEndReachedThreshold
+  } = props;
   const dispatch = useDispatch();
-  const { listAllJob, loading, metaData } = useSelector(state => state.listJob);
-  const { filterJobByProvince } = useSelector(state => state.system);
-
+  const { listAllJob } = useSelector(state => state.listJob);
+  const { filterJobByCategory, filterJobByProvince } = useSelector(state => state.system);
   const list = useMemo(() => {
     const result = [];
     if (listJob) {
@@ -34,68 +33,10 @@ const ListAllJob = props => {
   }, [listAllJob, listJob]);
 
   useEffect(() => {
-    dispatch(getListAllJobHandle({ page, size }));
-  }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (isSearchText) {
-  //     if (searchText !== '') {
-  //       ev = setTimeout(() => {
-  //         dispatch(getListAllJobHandle({ key: searchText, search: true }));
-  //       }, 300);
-  //     } else {
-  //       dispatch(getListAllJobHandle({ page, size }));
-  //     }
-  //   }
-  //   return () => {
-  //     if (ev) {
-  //       clearTimeout(ev);
-  //       ev = undefined;
-  //     }
-  //   };
-  // }, [dispatch, isSearchText, page, searchText]);
-
-  // useEffect(() => {
-  //   if (!loading && isRefreshing) {
-  //     setIsRefreshing(false);
-  //   }
-  // }, [isRefreshing, loading]);
-
-  // useEffect(() => {
-  //   if (page > 0 && list?.length <= metaData?.total) {
-  //     if (searchText && searchText !== '') {
-  //       dispatch(getListAllJobHandle({ key: searchText, isLoadMore: true }));
-  //     } else {
-  //       dispatch(getListAllJobHandle({ page, size, isLoadMore: true }));
-  //     }
-  //   }
-  // }, [dispatch, page]);
-
-  // useEffect(() => {
-  //   if (!searchText || searchText === '') {
-  //     Keyboard.dismiss();
-  //   }
-  // }, [searchText]);
-
-  // const handleSetIsSearchText = useCallback(() => {
-  //   setIsSearchText(true);
-  // }, []);
-
-  // const onClickCardJob = useCallback(
-  //   data => {
-  //     navigation.navigate(SCREEN_NAME.DETAIL_JOB_SCREEN, { cardJob: data });
-  //   },
-  //   [navigation]
-  // );
-
-  const onSearchText = useCallback(v => {
-    // if (filterJobByProvince) {
-    //   dispatch(cleanFilterJobByProvince());
-    //   setPage(0);
-    // }
-    // handleSetIsSearchText(true);
-    // setSearchText(v);
-  }, []);
+    if (!filterJobByCategory && !filterJobByProvince) {
+      dispatch(getListAllJobHandle({ page, size }));
+    }
+  }, [dispatch, filterJobByProvince, filterJobByCategory]);
 
   const renderJobs = ({ item, index }) => {
     const isLastItem = index === list?.length - 1;
@@ -111,9 +52,6 @@ const ListAllJob = props => {
     );
   };
 
-  // const loadMore = () => {
-  //   setPage(page + 1);
-  // };
   return (
     <>
       <View style={styles.searchInput} />

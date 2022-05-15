@@ -28,6 +28,12 @@ const DetailProfile = props => {
       if (item.id === 'address') {
         cloneData[index].value = user?.jobSeeker?.address;
       }
+      if (item.id === 'district') {
+        cloneData[index].value = user?.jobSeeker?.district.id;
+      }
+      if (item.id === 'province') {
+        cloneData[index].value = user?.jobSeeker?.province.id;
+      }
     });
     return cloneData;
   }, [user]);

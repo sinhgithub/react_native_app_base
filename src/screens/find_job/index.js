@@ -7,24 +7,48 @@ import ListAllJob from './components/ListAllJob';
 import ListSavedJob from './components/ListSavedJob';
 import ListJobApply from './components/ListJobApply';
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanFilterJobByProvince, filterJobHandle } from 'actions/system';
+import {
+  cleanFilterJobByCategory,
+  cleanFilterJobByProvince,
+  filterJobHandle,
+  setFocusInput
+} from 'actions/system';
 import CustomInput from 'components/FormCustom/conponents/CustomInput';
 import SCREENS_NAME from 'constants/screens';
 import { getListProvinceHandle } from 'actions/master_data';
 import { removeAccents } from 'helpers/removeAccents';
 import { experienceLevelType } from 'constants/data_constants';
-import { getListAllJobHandle, getListApplyJobHandle } from 'actions/getListJob';
+import {
+  getListAllJobHandle,
+  getListApplyJobHandle,
+  getListFollowJobHandle
+} from 'actions/getListJob';
 const size = 10;
+const onEndReachedThreshold = 0.2;
 
 const FindJobScreen = ({ navigation, route }) => {
   const [tabIndex, setTabIndex] = useState(0);
   const dispatch = useDispatch();
   const [searchText, setSearchText] = useState(null);
   const { provinces } = useSelector(state => state.masterData);
-  const [page, setPage] = useState(1);
-  const { listAllJob, loading: loadingAllJob, metaData } = useSelector(state => state.listJob);
+  const { isFocusInput, filterJobByCategory, filterJobByProvince } = useSelector(
+    state => state.system
+  );
+  const [refInput, setRefInput] = useState(null);
+  const [page, setPage] = useState(0);
+  const {
+    listAllJob,
+    loading: loadingAllJob,
+    metaData,
+    listFollowJob,
+    metaDataFollowJob,
+    loadingFollowJob,
+    listApplyJob,
+    loadingApplyJob,
+    metaDataApplyJob
+  } = useSelector(state => state.listJob);
+
   const [listJob, setListJob] = useState(null);
-  const { filterJobByProvince } = useSelector(state => state.system);
   const [refreshing, setRefreshing] = useState(false);
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -33,7 +57,7 @@ const FindJobScreen = ({ navigation, route }) => {
       case 0:
         dispatch(
           getListAllJobHandle({
-            page: 1,
+            page: 0,
             size,
             success: () => {
               setRefreshing(false);
@@ -43,8 +67,8 @@ const FindJobScreen = ({ navigation, route }) => {
         break;
       case 1:
         dispatch(
-          getListAllJobHandle({
-            page: 1,
+          getListFollowJobHandle({
+            page: 0,
             size,
             success: () => {
               setRefreshing(false);
@@ -55,7 +79,7 @@ const FindJobScreen = ({ navigation, route }) => {
       case 2:
         dispatch(
           getListApplyJobHandle({
-            page: 1,
+            page: 0,
             size,
             success: () => {
               setRefreshing(false);
@@ -64,32 +88,44 @@ const FindJobScreen = ({ navigation, route }) => {
         );
         break;
       default:
-        dispatch(
-          getListAllJobHandle({
-            page: 1,
-            size,
-            success: () => {
-              setRefreshing(false);
-            }
-          })
-        );
         break;
     }
   }, [dispatch, resetSearch, tabIndex]);
-  const onEndReachedThreshold = 0.2;
+
   const onEndReached = useCallback(() => {
     resetSearch();
     switch (tabIndex) {
       case 0:
-        if (metaData?.totalPage > page) {
+        if (metaData?.totalPage >= page && !filterJobByProvince && !filterJobByCategory) {
           setPage(page + 1);
         }
         break;
+      case 1:
+        if (metaDataFollowJob?.totalPage >= page && !filterJobByProvince && !filterJobByCategory) {
+          setPage(page + 1);
+        }
+        break;
+      case 2:
+        if (metaDataApplyJob?.totalPage >= page && !filterJobByProvince && !filterJobByCategory) {
+          setPage(page + 1);
+        }
+        break;
+      default:
+        break;
     }
-  }, [metaData?.totalPage, page, resetSearch, tabIndex]);
+  }, [
+    filterJobByCategory,
+    filterJobByProvince,
+    metaData?.totalPage,
+    metaDataApplyJob?.totalPage,
+    metaDataFollowJob?.totalPage,
+    page,
+    resetSearch,
+    tabIndex
+  ]);
 
   useEffect(() => {
-    if (!loadingAllJob && !refreshing) {
+    if (!loadingAllJob && !refreshing && !loadingFollowJob && !loadingApplyJob) {
       switch (tabIndex) {
         case 0:
           if (metaData?.total > listAllJobProcessed?.length) {
@@ -102,38 +138,42 @@ const FindJobScreen = ({ navigation, route }) => {
           }
           break;
         case 1:
-          dispatch(
-            getListAllJobHandle({
-              page: 1,
-              size,
-              success: () => {
-                setRefreshing(false);
-              }
-            })
-          );
+          if (metaDataFollowJob?.total > Object.keys(listFollowJob)?.length) {
+            dispatch(
+              getListFollowJobHandle({
+                page,
+                size,
+                success: () => {
+                  setRefreshing(false);
+                }
+              })
+            );
+          }
           break;
         case 2:
-          dispatch(
-            getListAllJobHandle({
-              page: 1,
-              size,
-              success: () => {
-                setRefreshing(false);
-              }
-            })
-          );
+          if (metaDataApplyJob?.total > Object.keys(listApplyJob)?.length) {
+            dispatch(
+              getListApplyJobHandle({
+                page,
+                size,
+                success: () => {
+                  setRefreshing(false);
+                }
+              })
+            );
+          }
           break;
         default:
-          dispatch(
-            getListAllJobHandle({
-              page,
-              size
-            })
-          );
-          break;
+          return;
       }
     }
   }, [page]);
+
+  useEffect(() => {
+    if (isFocusInput) {
+      refInput.focus();
+    }
+  }, [isFocusInput]);
 
   const onPressItem = useCallback(
     item => {
@@ -156,6 +196,7 @@ const FindJobScreen = ({ navigation, route }) => {
             onEndReached={onEndReached}
             onEndReachedThreshold={onEndReachedThreshold}
             page={page}
+            size={size}
           />
         );
       case 1:
@@ -169,6 +210,7 @@ const FindJobScreen = ({ navigation, route }) => {
             page={page}
             navigation={navigation}
             listJob={listJob}
+            size={size}
           />
         );
       case 2:
@@ -180,21 +222,11 @@ const FindJobScreen = ({ navigation, route }) => {
             onRefresh={onRefresh}
             onPressItem={onPressItem}
             page={page}
-            listJob={listJob}
+            size={size}
           />
         );
       default:
-        return (
-          <ListAllJob
-            onEndReached={onEndReached}
-            onEndReachedThreshold={onEndReachedThreshold}
-            refreshing={refreshing}
-            navigation={navigation}
-            onPressItem={onPressItem}
-            page={page}
-            listJob={listJob}
-          />
-        );
+        return null;
     }
   }, [tabIndex, onRefresh, navigation, listJob, onPressItem, refreshing, onEndReached, page]);
 
@@ -212,16 +244,22 @@ const FindJobScreen = ({ navigation, route }) => {
     if (filterJobByProvince) {
       dispatch(cleanFilterJobByProvince({}));
     }
-  }, [dispatch, filterJobByProvince, listJob, searchText]);
+    if (page > 0) {
+      setPage(0);
+    }
+    if (isFocusInput) {
+      dispatch(setFocusInput(false));
+    }
+    if (filterJobByCategory) {
+      dispatch(cleanFilterJobByCategory({}));
+    }
+  }, [dispatch, filterJobByCategory, filterJobByProvince, isFocusInput, listJob, page, searchText]);
 
-  const handleChangeTab = index => {
-    setTabIndex(index.index);
-  };
   const onChangeTab = useCallback(
     index => {
-      setPage(1);
+      setPage(0);
       resetSearch();
-      handleChangeTab(index);
+      setTabIndex(index.index);
     },
     [resetSearch]
   );
@@ -230,17 +268,16 @@ const FindJobScreen = ({ navigation, route }) => {
     navigation.navigate(SCREENS_NAME.FILTER_JOB);
     setListJob(null);
     setSearchText('');
+    resetSearch();
     dispatch(cleanFilterJobByProvince({}));
-  }, [dispatch, navigation]);
+  }, [dispatch, navigation, resetSearch]);
 
   const onChangeText = useCallback(
     value => {
-      if (filterJobByProvince) {
-        dispatch(cleanFilterJobByProvince({}));
-      }
+      resetSearch();
       setSearchText(value);
     },
-    [dispatch, filterJobByProvince]
+    [resetSearch]
   );
 
   const provincesProcessed = useMemo(() => {
@@ -315,7 +352,7 @@ const FindJobScreen = ({ navigation, route }) => {
           ? { address: address.id }
           : { key: searchText };
 
-        dispatch(filterJobHandle({ ...params, size, page, success: setListJob }));
+        dispatch(filterJobHandle({ ...params, size: 9999, page: 0, success: setListJob }));
       }, 200);
     }
     return () => {
@@ -333,13 +370,28 @@ const FindJobScreen = ({ navigation, route }) => {
       dispatch(
         filterJobHandle({
           province_id: filterJobByProvince.data.id,
-          size,
-          page,
+          size: 99999,
+          page: 0,
           success: setListJob
         })
       );
     }
-  }, [dispatch, filterJobByProvince, page]);
+    if (filterJobByCategory) {
+      dispatch(
+        filterJobHandle({
+          category_id: filterJobByCategory.id,
+          size: 99999,
+          page: 0,
+          success: setListJob
+        })
+      );
+    }
+    return () => {
+      if (listJob) {
+        setListJob(null);
+      }
+    };
+  }, [dispatch, filterJobByProvince, filterJobByCategory]);
 
   return (
     <View
@@ -362,6 +414,7 @@ const FindJobScreen = ({ navigation, route }) => {
           placeholder="Nhập tên công ty, vị trí,..."
           onChangeSearch={onChangeText}
           value={searchText}
+          getRef={setRefInput}
         />
       </View>
       <View style={{ flex: 1 }}>{content}</View>

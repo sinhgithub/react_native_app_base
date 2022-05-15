@@ -13,6 +13,7 @@ import RadioForm, {
 import { Icon } from 'components/';
 import ModalSelectDate from 'components/Modal/ModalSelectDate';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 const Input = props => {
   const {
@@ -28,6 +29,7 @@ const Input = props => {
   } = props;
   const animation = React.useRef(new Animated.Value(0)).current;
   const [showSelectDateModal, setShowSelectDateModal] = useState(false);
+
   const onClickSelectDate = useCallback(index => {
     setShowSelectDateModal(true);
   }, []);

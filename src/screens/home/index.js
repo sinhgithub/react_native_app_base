@@ -1,27 +1,24 @@
-import React, { memo, useCallback, useEffect, useMemo } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, FlatList } from 'react-native';
-import {
-  NotificationWarning,
-  RowBigIcon,
-  TitleSection,
-  CardJob,
-  CardJobSkeleton
-} from 'src/components';
-import { ICNotification } from 'assets/icons';
-import { translate } from 'src/i18n';
+import { CardJob } from 'src/components';
 import styles from './styles';
-import { idTreeBigIcons, inputType, treeBigIconsConfig } from 'constants/data_constants';
+import { inputType } from 'constants/data_constants';
 import { getListJobHomePageHandle } from 'actions/getListJob';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import SCREEN_NAME from 'constants/screens';
 import { getUserHandle } from 'actions/user';
 import { getListNotifyHandle } from 'actions/notification';
-import { setTabIndexMessageBox } from 'actions/system';
+import {
+  cleanFilterJobByCategory,
+  cleanFilterJobByProvince,
+  setFilterJobByCategory,
+  setFocusInput,
+  setTabIndexMessageBox
+} from 'actions/system';
 import SCREENS_NAME from 'constants/screens';
 import FastImage from 'react-native-fast-image';
 import { getConfigSiteHandle } from 'actions/configSite';
-import FormCustom from 'components/FormCustom';
 import CustomInput from 'components/FormCustom/conponents/CustomInput';
 import CardCategoryBg from 'components/CardCategoryBg';
 import { getBusinessCategoryHandle } from 'actions/master_data';
@@ -29,8 +26,7 @@ import { SPACING } from 'constants/size';
 import { getEmployerHandle } from 'actions/employer';
 import CardEmployer from 'components/CardEmployer';
 import { getImageFromHost } from 'configs/appConfigs';
-const banner =
-  'http://167.179.76.33:8000/api/file/upload/images/1c3f596b-a284-42bc-8e9b-b24a60c9f030.png';
+const size = 10;
 
 const seeAllType = {
   byCategory: 'byCategory',
@@ -41,12 +37,14 @@ const seeAllType = {
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { listJobHomePage, loading } = useSelector(state => state.listJob);
+  const { listJobHomePage } = useSelector(state => state.listJob);
   const { notifyList } = useSelector(state => state.notification);
   const { configSite } = useSelector(state => state.configSite);
   const { businessCategories } = useSelector(state => state.masterData);
-  const { employers, loading: loadingEmployers } = useSelector(state => state.employers);
-
+  const { employers } = useSelector(state => state.employers);
+  const { isFocusInput, filterJobByCategory, filterJobByProvince } = useSelector(
+    state => state.system
+  );
   const businessCategoriesProcessed = useMemo(() => {
     return Object.values(businessCategories || {});
   }, [businessCategories]);
@@ -59,7 +57,7 @@ const HomeScreen = () => {
     dispatch(getListJobHomePageHandle());
     dispatch(
       getEmployerHandle({
-        params: { size: 4 },
+        params: { size, page: 0 },
         success: () => {},
         failure: () => {},
         handleErr: () => {}
@@ -82,6 +80,15 @@ const HomeScreen = () => {
     const focusListener = navigation.addListener('focus', () => {
       dispatch(getUserHandle({}));
       dispatch(getListNotifyHandle({ success: () => {}, failure: () => {}, handleErr: () => {} }));
+      if (isFocusInput) {
+        dispatch(setFocusInput(false));
+      }
+      if (filterJobByCategory) {
+        dispatch(cleanFilterJobByCategory({}));
+      }
+      if (filterJobByProvince) {
+        dispatch(cleanFilterJobByProvince({}));
+      }
     });
     return () => {
       focusListener();
@@ -111,12 +118,21 @@ const HomeScreen = () => {
     return <CardJob onPress={onClickCardJob} data={job} key={job.id} isLastItem={isLastItem} />;
   });
 
+  const onPressBusinessCategory = useCallback(
+    data => {
+      dispatch(setFilterJobByCategory(data));
+      navigation.navigate(SCREENS_NAME.FIND_JOB_SCREEN);
+    },
+    [dispatch, navigation]
+  );
+
   const renderBusinessCategory = ({ item, index }) => {
     return (
       <CardCategoryBg
         key={item?.id || index}
         containerStyle={styles.businessCategoryContainer}
         data={item}
+        onPress={onPressBusinessCategory}
       />
     );
   };
@@ -151,7 +167,8 @@ const HomeScreen = () => {
   );
 
   const handleFocusSearchInput = useCallback(() => {
-    navigation.navigate(SCREENS_NAME.FIND_JOB_SCREEN, { autoFocus: true });
+    dispatch(setFocusInput(true));
+    navigation.navigate(SCREENS_NAME.FIND_JOB_SCREEN);
   }, [navigation]);
 
   const handlePressLocation = useCallback(() => {

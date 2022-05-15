@@ -10,7 +10,11 @@ const initialState = {
   },
 
   tabIndexMessageBox: 0,
-  filterJobByProvince: null
+  filterJobByProvince: null,
+
+  isFocusInput: false,
+
+  filterJobByCategory: null
 };
 
 const system = (state = initialState, action) => {
@@ -78,6 +82,26 @@ const system = (state = initialState, action) => {
       return {
         ...state,
         filterJobByProvince: null
+      };
+    }
+    // ===============================================
+    case SYSTEM.SET_FOCUS_INPUT: {
+      return {
+        ...state,
+        isFocusInput: action.payload
+      };
+    }
+    // ===============================================
+    case SYSTEM.SET_FILTER_JOB_BY_CATEGORY: {
+      return {
+        ...state,
+        filterJobByCategory: action.payload
+      };
+    }
+    case SYSTEM.CLEAN_FILTER_JOB_BY_CATEGORY: {
+      return {
+        ...state,
+        filterJobByCategory: null
       };
     }
     default:

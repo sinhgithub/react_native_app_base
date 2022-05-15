@@ -1,29 +1,19 @@
-import React, { memo, useEffect, useCallback, useState, useMemo } from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { SearchInput } from 'components/';
+import React, { memo, useEffect, useCallback, useMemo } from 'react';
+import { FlatList, View, StyleSheet, Image, Text } from 'react-native';
 import { CardJob, CardJobSkeleton } from 'components/';
 import { getListFollowJobHandle } from 'actions/getListJob';
 import { useDispatch, useSelector } from 'react-redux';
-import SCREEN_NAME from 'constants/screens';
-import { CUSTOM_COLOR } from 'constants/colors';
+import { BACKGROUND_COLOR, CUSTOM_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
-
+import { find } from 'assets/images';
 const numberSkeleton = 4;
-let ev;
-const size = 10;
-
 const ListAllJob = props => {
-  const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const [searchText, setSearchText] = useState(null);
-  const [isSearchText, setIsSearchText] = useState(false);
-  const { listFollowJob, loadingFollowJob, metaDataFollowJob } = useSelector(
-    state => state.listJob
-  );
-  const [page, setPage] = useState(0);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const { onPressItem, size, onRefresh, refreshing, page, onEndReached, onEndReachedThreshold } =
+    props;
+
+  const { listFollowJob, loadingFollowJob } = useSelector(state => state.listJob);
 
   const list = useMemo(() => {
     const result = [];
@@ -33,107 +23,35 @@ const ListAllJob = props => {
     return result;
   }, [listFollowJob]);
 
-  const [listData, setListData] = useState(list);
-
   useEffect(() => {
     dispatch(getListFollowJobHandle({ page, size }));
   }, [dispatch]);
 
-  useEffect(() => {
-    if (isSearchText) {
-      if (searchText !== '') {
-        const newList = listData.filter(item => item.title.includes(searchText));
-        ev = setTimeout(() => {
-          setListData(newList);
-        }, 300);
-      } else {
-        setListData(list);
-      }
-    }
-    return () => {
-      if (ev) {
-        clearTimeout(ev);
-        ev = undefined;
-      }
-    };
-  }, [dispatch, isSearchText, list, listData, searchText]);
-
-  useEffect(() => {
-    if (!loadingFollowJob && isRefreshing) {
-      setIsRefreshing(false);
-    }
-  }, [isRefreshing, loadingFollowJob]);
-
-  useEffect(() => {
-    if (page > 1 && list?.length <= metaDataFollowJob?.total) {
-      if (searchText && searchText !== '') {
-        dispatch(getListFollowJobHandle({ key: searchText, isLoadMore: true }));
-      } else {
-        dispatch(getListFollowJobHandle({ page, size, isLoadMore: true }));
-      }
-    }
-  }, [dispatch, page]);
-
-  const handleSetIsSearchText = useCallback(() => {
-    setIsSearchText(true);
-  }, []);
-
-  const onClickCardJob = useCallback(
-    data => {
-      navigation.navigate(SCREEN_NAME.DETAIL_JOB_SCREEN, { cardJob: data });
-    },
-    [navigation]
-  );
-
-  const onSearchText = useCallback(
-    v => {
-      handleSetIsSearchText(true);
-      setSearchText(v);
-    },
-    [handleSetIsSearchText]
-  );
-
   const renderJobs = ({ item, index }) => {
-    const isLastItem = listData?.length
-      ? listData?.length - 1 === index
-      : list?.length - 1 === index;
-    return <CardJob key={item?.id} data={item} onPress={onClickCardJob} isLastItem={isLastItem} />;
+    const isLastItem = list?.length - 1 === index;
+    return <CardJob key={item?.id} data={item} onPress={onPressItem} isLastItem={isLastItem} />;
   };
 
   const renderSkeleton = useCallback(() => {
     return Array(numberSkeleton)
       .fill('')
       .map((item, index) => {
-        return <CardJobSkeleton key={index} />;
+        return <CardJobSkeleton key={item?.id || index} />;
       });
   }, []);
 
-  const onPressFilter = useCallback(() => {
-    navigation.navigate(SCREEN_NAME.FILTER_JOB);
-  }, [navigation]);
-
-  const loadMore = () => {
-    setPage(page + 1);
-  };
-  const onRefresh = () => {
-    setIsRefreshing(true);
-    if (!searchText) {
-      dispatch(getListFollowJobHandle({ page: 0, size }));
-    } else {
-      dispatch(getListFollowJobHandle({ key: searchText, search: true }));
-    }
+  const renderListEmptyComponent = () => {
+    return (
+      <View style={styles.imageFindJob}>
+        <Image source={find} style={styles.image} resizeMode="contain" />
+        <Text>Không tìm thấy công việc</Text>
+      </View>
+    );
   };
 
   return (
     <View style={styles.flex1}>
-      <View style={styles.searchInput}>
-        <SearchInput
-          onChange={onSearchText}
-          value={searchText}
-          hideSearchIcon
-          onFilter={onPressFilter}
-        />
-      </View>
+      <View style={styles.searchInput} />
       {loadingFollowJob ? (
         renderSkeleton()
       ) : (
@@ -141,11 +59,12 @@ const ListAllJob = props => {
           style={styles.flex1}
           keyExtractor={(item, index) => `${item?.id || index}${index}`}
           renderItem={renderJobs}
-          data={listData?.length > 0 ? listData : list || []}
-          onEndReached={loadMore}
-          onEndReachedThreshold={-0.3}
-          refreshing={isRefreshing}
+          data={list?.length > 0 ? list : []}
+          onEndReached={onEndReached}
+          onEndReachedThreshold={onEndReachedThreshold}
+          refreshing={refreshing}
           onRefresh={onRefresh}
+          ListEmptyComponent={renderListEmptyComponent}
         />
       )}
     </View>
@@ -162,8 +81,15 @@ const styles = StyleSheet.create({
     borderBottomColor: CUSTOM_COLOR.BasicGray,
     paddingVertical: SPACING.Normal
   },
-  flatListContainer: {
-    // flex: 1
+  flatListContainer: {},
+  imageFindJob: {
+    flex: 1,
+    backgroundColor: BACKGROUND_COLOR.White,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  image: {
+    width: '50%'
   }
 });
 

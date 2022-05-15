@@ -61,3 +61,17 @@ export const filterJobFailure = payload => ({
   type: SYSTEM.FILTER_JOB.FAILURE,
   payload
 });
+// ==========================
+export const setFocusInput = payload => ({
+  type: SYSTEM.SET_FOCUS_INPUT,
+  payload
+});
+// set filterJobBy category
+export const setFilterJobByCategory = payload => ({
+  type: SYSTEM.SET_FILTER_JOB_BY_CATEGORY,
+  payload
+});
+export const cleanFilterJobByCategory = payload => ({
+  type: SYSTEM.CLEAN_FILTER_JOB_BY_CATEGORY,
+  payload
+});

@@ -42,14 +42,12 @@ const CustomInput = props => {
     onClickInputView,
     data,
     setFieldValue,
-    setFieldError,
-    setSubmitting,
     handleChangeCustom,
     handleFocusCustom,
     onChangeSearch,
     require,
-    disabled,
-    handlePressLocation
+    handlePressLocation,
+    getRef
   } = props;
   let inputRef = useRef(null);
 
@@ -59,6 +57,9 @@ const CustomInput = props => {
   useEffect(() => {
     if (type === inputType.text || type === inputType.textarea) {
       handleFocus?.(inputRef);
+    }
+    if (type === inputType.searchJob) {
+      getRef?.(inputRef);
     }
   }, []);
 

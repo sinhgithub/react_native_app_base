@@ -2,9 +2,12 @@ import React, { memo, useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 import Input from './Input';
+import { useSelector } from 'react-redux';
 
 const Form = props => {
-  const { refScroll, data, onChange, defaultTextSelect, dataInputSelect, onSelect } = props;
+  const { refScroll, data, onChange, dataInputSelect, onSelect, defaultTextSelect } = props;
+  const { provinces } = useSelector(state => state.masterData);
+  const { user } = useSelector(state => state.user);
   const [focus, setFocus] = useState(null);
   const processedData = useMemo(() => {
     const result = [];
@@ -26,8 +29,31 @@ const Form = props => {
   const onBlur = useCallback(() => {
     setFocus(null);
   }, []);
-
+  const provinceProcessed = useMemo(() => {
+    let result = [];
+    if (provinces) {
+      for (const k in provinces) {
+        result.push(provinces[k].name);
+      }
+    }
+    return result;
+  }, [provinces]);
   const listInput = processedData?.map((item, index) => {
+    let textSelect = '';
+    if (item.id === 'province') {
+      if (user?.jobSeeker?.province?.name) {
+        textSelect = user?.jobSeeker?.province?.name;
+      } else {
+        textSelect = 'Chọn Tỉnh/ Thành';
+      }
+    } else if (item.id === 'district') {
+      if (user?.jobSeeker?.district?.name) {
+        textSelect = user?.jobSeeker?.district?.name;
+      } else {
+        textSelect = 'Chọn Quận/ Huyện';
+      }
+    }
+    const inputSelectData = item.id === 'province' ? provinceProcessed : null;
     return (
       <View style={styles.formGroup} key={item.id || index}>
         <Input
@@ -37,8 +63,8 @@ const Form = props => {
           data={{ ...item, index }}
           focused={focus}
           onChange={onChange}
-          defaultTextSelect={defaultTextSelect}
-          dataInputSelect={dataInputSelect}
+          defaultTextSelect={textSelect || defaultTextSelect}
+          dataInputSelect={inputSelectData || dataInputSelect}
           onSelect={onSelect}
         />
       </View>

@@ -14,7 +14,8 @@ export function* filterJobSaga(obj) {
     province_id,
     success,
     failure,
-    address
+    address,
+    category_id
   } = obj.payload;
   try {
     const res = yield call(apiListAllJob, {
@@ -25,7 +26,8 @@ export function* filterJobSaga(obj) {
       size,
       province_id,
       type,
-      experience_level
+      experience_level,
+      category_id
     });
     if (res.status === 200) {
       const data = { ...res.data };
@@ -42,6 +44,8 @@ export function* filterJobSaga(obj) {
         ? 'type'
         : wage_from || wage_to
         ? 'wages'
+        : category_id
+        ? 'category_id'
         : 'none';
       success?.({ typeFilter, data });
     } else {
