@@ -27,10 +27,9 @@ const CardJob = props => {
         : translate('common.expire'),
       isBonus: data?.bonus?.length > 0,
       isPaidAfterWork: data?.paidAfterWork,
-      jobBanner: getImageFromHost(data.employer.banner)
+      jobBanner: getImageFromHost(data.employer.logo)
     };
   }, [data]);
-
   return (
     <View style={styles.cardJob}>
       <TouchableOpacity

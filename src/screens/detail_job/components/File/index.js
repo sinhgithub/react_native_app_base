@@ -93,7 +93,6 @@ const JobContact = props => {
           })
           .then(async res => {
             let status = res.respInfo.status;
-
             if (status === 200) {
               const route = res?.data;
               if (route) {

@@ -6,9 +6,9 @@ import { Icon } from 'src/components';
 const DropDown = props => {
   const { containerStyle, data, onPressMenu, isActive, handleOpenMenu } = props;
 
-  const listChild = data?.links?.map(item => {
+  const listChild = data?.links?.map((item, index) => {
     return (
-      <TouchableOpacity onPress={() => handleOpenMenu?.(item?.link)}>
+      <TouchableOpacity key={item?.id || index} onPress={() => handleOpenMenu?.(item?.link)}>
         <Text style={styles.dropDownTitle}>{`${item.lable?.trim()}` || ''}</Text>
       </TouchableOpacity>
     );

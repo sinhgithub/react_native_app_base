@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState } from 'react';
-import { View, ScrollView, Text } from 'react-native';
+import { View, ScrollView, Text, Linking } from 'react-native';
 
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,8 +14,6 @@ const MenuScreen = () => {
   const dispatch = useDispatch();
   const [dropDownActives, setDropDownActives] = useState(null);
   const { configSite } = useSelector(state => state.configSite);
-
-  const handleOpenMenu = useCallback(async url => {}, []);
 
   const handlePressShowDropDown = useCallback(title => {
     setDropDownActives(prev => {
@@ -41,6 +39,12 @@ const MenuScreen = () => {
     });
   }, []);
 
+  const onOpenLink = useCallback(url => {
+    try {
+      Linking.openURL(url);
+    } catch (err) {}
+  }, []);
+
   const listMenu = configSite?.footer?.map((item, index) => {
     let isActive = dropDownActives?.[item.title]?.isActive;
     return (
@@ -49,7 +53,7 @@ const MenuScreen = () => {
         key={item?.id || index}
         data={item}
         onPressMenu={handlePressShowDropDown}
-        handleOpenMenu={handleOpenMenu}
+        handleOpenMenu={onOpenLink}
       />
     );
   }, []);
@@ -63,7 +67,7 @@ const MenuScreen = () => {
       <View style={styles.menuArea}>{listMenu}</View>
       <View style={styles.companyInfo}>
         <Text style={styles.companyInfoText}>Hotline: 0987987222</Text>
-        <Text style={styles.companyInfoText}>Website: áhdjasd.com.vn</Text>
+        <Text style={styles.companyInfoText}>Website: https://102.work</Text>
         <Text style={styles.companyInfoText}>Email: sinh@ágdh.com</Text>
         <Text style={styles.companyInfoText}>{configSite?.footerDesc || ''}</Text>
       </View>

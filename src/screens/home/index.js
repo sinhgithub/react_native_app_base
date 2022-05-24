@@ -143,9 +143,17 @@ const HomeScreen = () => {
         key={item?.id || index}
         data={item}
         containerStyle={styles.employersContainer}
+        onPress={onPressEmployerCard}
       />
     );
   };
+
+  const onPressEmployerCard = useCallback(
+    id => {
+      navigation.navigate(SCREENS_NAME.EMPLOYER_DETAIL_SCREEN, {});
+    },
+    [navigation]
+  );
 
   const onClickSeeAll = useCallback(
     type => {

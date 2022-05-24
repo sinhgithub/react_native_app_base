@@ -1,12 +1,13 @@
 import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
 import React, { memo, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
 import { Button } from 'components/';
 import { SPACING } from 'constants/size';
 import { getDetailNotifyHandle } from 'actions/notification';
 import { useDispatch, useSelector } from 'react-redux';
 import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
 import moment from 'moment';
+import { backToWorkScreen } from 'actions/system';
 
 const NotifyDetail = props => {
   const dispatch = useDispatch();
@@ -14,7 +15,9 @@ const NotifyDetail = props => {
 
   const { notifyDetail } = useSelector(state => state.notification);
 
-  const onOpenLink = () => {};
+  const onPressButton = () => {
+    dispatch(backToWorkScreen({ tabIndex: 2, data: notifyDetail }));
+  };
 
   useEffect(() => {
     dispatch(
@@ -47,7 +50,7 @@ const NotifyDetail = props => {
             title={notifyDetail?.linkTo || ''}
             containerStyle={styles.button}
             titleStyle={styles.titleButton}
-            submitMethod={onOpenLink}
+            submitMethod={onPressButton}
           />
         </View>
       </ScrollView>

@@ -9,7 +9,7 @@ export function* getListDistrictSaga(obj) {
     if (res.status === 200) {
       const data = { ...res.data };
       yield put(getListDistrictSuccess(data));
-      success?.();
+      success?.(data);
     } else {
       yield put(getListDistrictFailure(res));
       failure?.();

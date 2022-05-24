@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { View, KeyboardAvoidingView, Keyboard } from 'react-native';
 import { detailProfileForm } from 'constants/data_constants';
 import { Form } from 'components/';
@@ -10,13 +10,15 @@ import { updateUserHandle } from 'actions/user';
 import { showCompleteModal } from 'actions/system';
 import SCREENS_NAME from 'constants/screens';
 import { useNavigation } from '@react-navigation/core';
+import { getListDistrictHandle } from 'actions/master_data';
 const DetailProfile = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const refScroll = useRef(null);
   const { user } = useSelector(state => state.user);
   const [showSelectDateModal, setShowSelectDateModal] = useState(false);
-
+  const provinces = useSelector(state => state?.masterData?.provinces);
+  const districts = useSelector(state => state?.masterData?.districts);
   const formData = useMemo(() => {
     const cloneData = cloneDeep(detailProfileForm);
     cloneData.forEach((item, index) => {
@@ -46,17 +48,73 @@ const DetailProfile = props => {
     return result;
   });
 
-  const onChange = useCallback((id, value) => {
-    setValues(prev => {
-      return {
-        ...prev,
-        [id]: { ...prev[id], value: value }
-      };
-    });
-  }, []);
+  const onChange = useCallback(
+    (id, value, type) => {
+      if (type === 'province') {
+        let idSelected;
+        Object.values(provinces)?.forEach(item => {
+          if (item.name === id) {
+            idSelected = item.id;
+          }
+        });
+        setValues(prev => ({ ...prev, province: { ...values.province, value: idSelected } }));
+      } else if (type === 'district') {
+        let idSelected;
+        Object.values(districts)?.forEach(item => {
+          if (item.name === id) {
+            idSelected = item.id;
+          }
+        });
+        setValues(prev => ({ ...prev, district: { ...values.district, value: idSelected } }));
+      } else {
+        setValues(prev => {
+          return {
+            ...prev,
+            [id]: { ...prev[id], value: value }
+          };
+        });
+      }
+    },
+    [districts, provinces, values.district, values.province]
+  );
+  const [listDistrictDefault, setListDistrictDefault] = useState([]);
+
+  // const provinceInit = useMemo(() => {
+  //   return user?.jobSeeker?.province?.id || null;
+  // }, [user]);
+
+  const [provinceDefault, setProvinceDefault] = useState(null);
+
+  useEffect(() => {
+    if (values?.province?.value) {
+      setProvinceDefault(values?.province?.value);
+    }
+  }, [dispatch, values?.province?.value]);
+
+  useEffect(() => {
+    if (provinceDefault) {
+      dispatch(
+        getListDistrictHandle({
+          params: provinceDefault,
+          success: res => {
+            if (res) {
+              const list = [];
+              Object.values(res).forEach(item => {
+                list.push(item.name);
+              });
+              setListDistrictDefault(list);
+            }
+          },
+          failure: () => {},
+          handleErr: () => {}
+        })
+      );
+    }
+  }, [dispatch, provinceDefault]);
 
   const onSubmitForm = useCallback(() => {
     const cloneUser = cloneDeep(user);
+    console.log(user, 'useruseruser');
     if (cloneUser) {
       cloneUser.name = values.name.value || values.name.defaultValue;
       cloneUser.phone = values.phone.value || values.phone.defaultValue;
@@ -68,6 +126,36 @@ const DetailProfile = props => {
       } else {
         cloneUser.jobSeeker = {};
         cloneUser.jobSeeker.address = values.address.value || values.address.defaultValue;
+      }
+      if (cloneUser.employer) {
+        cloneUser.employer.province = Object.values(provinces)?.find(
+          item => item.id === values?.province?.value
+        );
+        cloneUser.employer.provinceId = Object.values(provinces)?.find(
+          item => item.id === values?.province?.value
+        ).id;
+        cloneUser.employer.district = Object.values(districts)?.find(
+          item => item.id === values?.district?.value
+        );
+        cloneUser.employer.districtId = Object.values(districts)?.find(
+          item => item.id === values?.district?.value
+        ).id;
+        cloneUser.employer.district.provinceId = cloneUser.employer.province.id;
+      } else {
+        cloneUser.employer = {};
+        cloneUser.employer.province = Object.values(provinces)?.find(
+          item => item.id === values?.province?.value
+        );
+        cloneUser.employer.provinceId = Object.values(provinces)?.find(
+          item => item.id === values?.province?.value
+        ).id;
+        cloneUser.employer.district = Object.values(districts)?.find(
+          item => item.id === values?.district?.value
+        );
+        cloneUser.employer.districtId = Object.values(districts)?.find(
+          item => item.id === values?.district?.value
+        ).id;
+        cloneUser.employer.district.provinceId = cloneUser.employer.province.id;
       }
     }
     dispatch(
@@ -120,13 +208,6 @@ const DetailProfile = props => {
   return (
     <View onStartShouldSetResponder={() => Keyboard.dismiss()} style={[styles.container]}>
       <KeyboardAvoidingView enabled behavior="height" style={styles.container}>
-        {/* <ScrollView ref={refScroll} showsVerticalScrollIndicator={false}> */}
-        {/* <View>
-              <TabsHorizontal onPress={onChangeTab} data={tabDetailProfileScreen} />
-            </View> */}
-        {/* <View style={styles.avatar}>
-          <Avatar avatar={user?.avatar} />
-        </View> */}
         <View style={styles.detailProfile}>
           <Form
             refScroll={refScroll}
@@ -134,11 +215,11 @@ const DetailProfile = props => {
             onChange={onChange}
             showSelectDateModal={showSelectDateModal}
             setShowSelectDateModal={setShowSelectDateModal}
+            valueProvinceChanged={values.province.value}
+            listDistrictDefault={listDistrictDefault}
           />
           <Button type="modal" title={'Cập nhật'} submitMethod={onSubmitForm} disable={false} />
         </View>
-
-        {/* </ScrollView> */}
       </KeyboardAvoidingView>
     </View>
   );

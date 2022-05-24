@@ -4,10 +4,8 @@ import React, { memo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Icon } from 'components/';
-import { inputType } from 'constants/data_constants';
 const Component = props => {
-  const { data, onChange, defaultButtonText } = props;
-
+  const { data, onChange, defaultButtonText, id } = props;
   return (
     <View style={styles.container}>
       <SelectDropdown
@@ -20,7 +18,8 @@ const Component = props => {
           <Icon name="caretdown" fontName="AntDesign" size={15} color={CUSTOM_COLOR.BasicGray} />
         )}
         onSelect={(selectedItem, index) => {
-          onChange?.(selectedItem, index, inputType.select);
+          console.log({ selectedItem, index, id }, 'selectedItem, index, id, valueCustom');
+          onChange?.(selectedItem, index, id);
         }}
         buttonTextAfterSelection={(selectedItem, index) => {
           return selectedItem;

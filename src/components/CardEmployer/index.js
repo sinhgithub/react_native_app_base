@@ -1,24 +1,22 @@
 import { getImageFromHost } from 'configs/appConfigs';
-import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
-import React, { memo, useCallback } from 'react';
-import { TouchableOpacity, Text, View, ImageBackground, StyleSheet } from 'react-native';
+import { TEXT_COLOR } from 'constants/colors';
+import React, { memo } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { ICPosition } from 'assets/icons';
 import { scale } from 'utils/responsive';
 import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
-import { Shadow } from 'constants/stylesCSS';
 import { SPACING } from 'constants/size';
 
 const CardEmployer = props => {
-  const { containerStyle, data } = props;
-
+  const { containerStyle, data, onPress = () => {} } = props;
   return (
-    <View style={[styles.container, containerStyle]}>
+    <TouchableOpacity style={[styles.container, containerStyle]} onPress={onPress}>
       <View style={styles.bannerWrapper}>
         {data?.banner ? (
           <FastImage
             source={{
-              uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTw5_aLd98kfyzKzsB7RzT2kl0WUmPr68GjJlvECbtjnw&s'
+              uri: getImageFromHost(data?.banner)
             }}
             resizeMode="cover"
             style={styles.banner}
@@ -29,7 +27,7 @@ const CardEmployer = props => {
         {data?.logo ? (
           <FastImage
             source={{
-              uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiVi1gDxXvbbSWpgvOjUf3dVIsufoQq9INlTIkWCrvQA&s'
+              uri: getImageFromHost(data?.logo)
             }}
             resizeMode="cover"
             style={styles.logo}
@@ -48,7 +46,7 @@ const CardEmployer = props => {
           <Text style={styles.locationName}>{data?.province?.name || 'Tên tỉnh thành'}</Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

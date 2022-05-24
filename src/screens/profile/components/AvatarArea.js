@@ -28,8 +28,8 @@ const AvatarArea = () => {
       </View>
       <View style={styles.info}>
         <View style={styles.infoStatusArea}>
-          <Icon fontName="FontAwesome" name="user-secret" size={20} color="red" />
-          <Text style={styles.statusText}>Hồ sơ chưa xác thực</Text>
+          {/* <Icon fontName="FontAwesome" name="user-secret" size={20} color="red" /> */}
+          <Text style={styles.statusText}>{user?.name}</Text>
         </View>
       </View>
     </View>
@@ -58,12 +58,13 @@ const styles = StyleSheet.create({
     paddingLeft: SPACING.XXNormal
   },
   infoStatusArea: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   statusText: {
     fontSize: FONT_SIZE.BodyText,
     fontFamily: FONT_FAMILY.REGULAR,
-    color: TEXT_COLOR.RedBasic,
+    color: TEXT_COLOR.Black,
     paddingLeft: SPACING.Normal
   },
   codeText: {

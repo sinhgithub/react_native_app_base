@@ -1,4 +1,3 @@
-import { getImageFromHost } from 'configs/appConfigs';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { TEXT_COLOR } from 'constants/colors';
 import React, { memo } from 'react';
@@ -8,7 +7,7 @@ const imageTmp = 'https://www.w3schools.com/w3css/img_lights.jpg';
 
 const CardCategoryBg = props => {
   const { onPress, containerStyle, data } = props;
-  const image = getImageFromHost(data?.image) ? getImageFromHost(data?.image) : imageTmp;
+  const image = data?.image ? data?.image : imageTmp;
 
   return (
     <TouchableOpacity style={[styles.container, containerStyle]} onPress={() => onPress?.(data)}>

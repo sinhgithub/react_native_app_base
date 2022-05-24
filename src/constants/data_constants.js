@@ -163,8 +163,8 @@ export const tabFindJobScreen = [
 
 export const tabWorkScreen = [
   {
-    id: 'continue',
-    title: 'Tiếp theo'
+    id: 'income',
+    title: 'Thu nhập'
   },
   {
     id: 'workCalendar',

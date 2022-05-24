@@ -2,7 +2,7 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import styles from './styles';
 import { useNavigation } from '@react-navigation/native';
-import { WarningBox, Button, Icon } from 'src/components';
+import { Button, Icon } from 'src/components';
 import { translate } from 'src/i18n';
 import JobInfo from './components/JobInfo';
 import Income from './components/Income';
@@ -20,6 +20,7 @@ import {
   getListApplyJobHandle,
   getListFollowJobHandle
 } from 'actions/getListJob';
+import { getImageFromHost } from 'configs/appConfigs';
 
 const DetailJob = props => {
   const navigation = useNavigation();
@@ -28,7 +29,6 @@ const DetailJob = props => {
   const { animatedBottomModal } = useSelector(state => state.system);
   const { listFollowJob, listApplyJob, listAppliedJob } = useSelector(state => state.listJob);
   const [modalBonusInfo, setModalBonusInfo] = useState(null);
-  const { onPressWarningBox = () => {} } = props;
   useEffect(() => {
     dispatch(getListFollowJobHandle({}));
     dispatch(getListApplyJobHandle({}));
@@ -98,7 +98,8 @@ const DetailJob = props => {
       jobContact: {
         contactName: cardJob.contactName,
         contactPhone: cardJob.contactPhone,
-        contactEmail: cardJob.contactEmail
+        contactEmail: cardJob.contactEmail,
+        contactLogo: getImageFromHost(cardJob?.employer?.logo)
       }
     };
   }, [cardJob]);
@@ -324,13 +325,6 @@ const DetailJob = props => {
   return (
     <View style={styles.detailScreen}>
       <ScrollView style={styles.scrollView}>
-        {/* <View style={styles.warningBox}>
-          <WarningBox
-            warningText={translate('common.not_committed_tax')}
-            onPressActionText={onPressWarningBox}
-            warningActionText={translate('common.find_out_more')}
-          />
-        </View> */}
         <View style={styles.detailScreenContent}>
           <View style={styles.jobInfo}>
             <JobInfo data={dataJobDetail.infoJob} />

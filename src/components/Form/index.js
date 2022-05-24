@@ -1,14 +1,24 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 import Input from './Input';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getListDistrictHandle } from 'actions/master_data';
 
 const Form = props => {
-  const { refScroll, data, onChange, dataInputSelect, onSelect, defaultTextSelect } = props;
-  const { provinces } = useSelector(state => state.masterData);
+  const {
+    refScroll,
+    data,
+    onChange,
+    dataInputSelect,
+    onSelect,
+    defaultTextSelect,
+    listDistrictDefault
+  } = props;
+  const { provinces, districts } = useSelector(state => state.masterData);
   const { user } = useSelector(state => state.user);
   const [focus, setFocus] = useState(null);
+
   const processedData = useMemo(() => {
     const result = [];
     if (data) {
@@ -38,6 +48,7 @@ const Form = props => {
     }
     return result;
   }, [provinces]);
+
   const listInput = processedData?.map((item, index) => {
     let textSelect = '';
     if (item.id === 'province') {
@@ -53,7 +64,12 @@ const Form = props => {
         textSelect = 'Chọn Quận/ Huyện';
       }
     }
-    const inputSelectData = item.id === 'province' ? provinceProcessed : null;
+    const inputSelectData =
+      item.id === 'province'
+        ? provinceProcessed
+        : item.id === 'district'
+        ? listDistrictDefault
+        : null;
     return (
       <View style={styles.formGroup} key={item.id || index}>
         <Input

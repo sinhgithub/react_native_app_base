@@ -17,7 +17,6 @@ const JobContact = props => {
   const navigation = useNavigation();
   const { conversations } = useSelector(state => state.chat);
   const dispatch = useDispatch();
-  console.log({ data, cardJob }, '{ data, cardJob }');
   const handleToggleContent = useCallback(key => {
     if (key === 'down') {
       setIsShowContent(true);

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tuyển Dụng 102</string>
+    <string name="app_name">Việc làm 102</string>
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
     <string name="api_key_google">AIzaSyBfUxzO9e-H9PM7gITg9Gxy-zjAJYocP1s</string>

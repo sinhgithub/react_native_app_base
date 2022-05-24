@@ -29,7 +29,6 @@ const Input = props => {
   } = props;
   const animation = React.useRef(new Animated.Value(0)).current;
   const [showSelectDateModal, setShowSelectDateModal] = useState(false);
-
   const onClickSelectDate = useCallback(index => {
     setShowSelectDateModal(true);
   }, []);
@@ -49,7 +48,6 @@ const Input = props => {
       }).start();
     }
   }, [animation, data.index, focused]);
-
   const renderInputByType = () => {
     switch (data?.type) {
       case inputType.text:
@@ -170,6 +168,7 @@ const Input = props => {
                 onChange={onSelect || onChange}
                 data={dataInputSelect || []}
                 defaultButtonText={defaultTextSelect}
+                id={data?.id}
               />
             </View>
           </View>

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Modal, TouchableOpacity, ScrollView } from 'rea
 import { CalendarCustom } from 'components/';
 import { useSelector, useDispatch } from 'react-redux';
 import { calendarWorkHandle, updateCalendarWorkHandle } from 'actions/calendar_work';
-import { showCompleteModal, showConfirmModal } from 'actions/system';
+import { showCompleteModal } from 'actions/system';
 import { FlatList } from 'react-native-gesture-handler';
 import { CardJob, Icon } from 'components/';
 import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
@@ -11,6 +11,8 @@ import { SPACING } from 'constants/size';
 import { Shadow } from 'constants/stylesCSS';
 import moment from 'moment';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
+import ModalSelectTime from 'components/Modal/ModalSelectTime';
+const showModalTimeCheckIn = 'showModalTimeCheckIn';
 
 const WorkCalendar = props => {
   const dispatch = useDispatch();
@@ -50,183 +52,182 @@ const WorkCalendar = props => {
     }
   }, []);
 
+  const [modalTimeCheckIn, setModalTimeCheckIn] = useState(null);
+  const [timeCheckIn, setTimeCheckIn] = useState(null);
+  const handleChangeCheckInTime = useCallback((name, value) => {
+    setTimeCheckIn({ [name]: value });
+  }, []);
   const onCheckIn = data => {
-    const onConfirm = () => {
-      dispatch(
-        updateCalendarWorkHandle({
-          params: {
-            id: data.id,
-            state: 'CHECK_IN',
-            time: moment().format('HH:mm:ss')
-          },
-          callback: () => {
-            dispatch(
-              showCompleteModal({
-                title: 'Chúc mừng',
-                icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                content: 'Bạn đã check in thành công',
-                buttonTitle: 'Xác nhận',
-                onConfirm: () => {
-                  dispatch(
-                    calendarWorkHandle({
-                      handleErr: v => {
-                        //do no thing
-                      }
-                    })
-                  );
-                },
-                onClose: () => {
-                  // navigation.goBack();
-                }
-              })
-            );
-          }
-        })
-      );
-    };
-    dispatch(
-      showConfirmModal({
-        title: 'Bạn có muốn check in',
-        icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-        content: 'Vui lòng xác nhận check in. Thao tác sẽ không phục hồi được !',
-        buttonTitleReject: 'Huỷ bỏ',
-        buttonTitleConfirm: 'Xác nhận',
-        onConfirm,
-        onClose: () => {},
-        onReject: () => {}
-      })
-    );
+    setModalTimeCheckIn(data);
     setDetailModal(null);
   };
 
-  const onCheckOut = data => {
-    const onConfirm = () => {
-      dispatch(
-        updateCalendarWorkHandle({
-          params: {
-            id: data.id,
-            state: 'CHECK_OUT',
-            time: moment().format('HH:mm:ss')
-          },
-          callback: () => {
-            dispatch(
-              showCompleteModal({
-                title: 'Chúc mừng',
-                icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                content: 'Bạn đã check out thành công',
-                buttonTitle: 'Xác nhận',
-                onConfirm: () => {
-                  dispatch(
-                    calendarWorkHandle({
-                      handleErr: v => {
-                        //do no thing
-                      }
-                    })
-                  );
-                },
-                onClose: () => {
-                  // navigation.goBack();
-                }
-              })
-            );
-          }
-        })
-      );
-    };
+  const [modalTimeCheckOut, setModalTimeCheckOut] = useState(null);
+  const [timeCheckOut, setTimeCheckOut] = useState(null);
+  const handleChangeCheckOutTime = useCallback((name, value) => {
+    setTimeCheckOut({ [name]: value });
+  }, []);
+
+  const onConfirmCheckIn = () => {
+    setModalTimeCheckIn(null);
+    if (!timeCheckIn) {
+      return;
+    }
     dispatch(
-      showConfirmModal({
-        title: 'Bạn có muốn check out',
-        icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-        content: 'Vui lòng xác nhận check out. Thao tác sẽ không phục hồi được !',
-        buttonTitleReject: 'Huỷ bỏ',
-        buttonTitleConfirm: 'Xác nhận',
-        onConfirm,
-        onClose: () => {},
-        onReject: () => {}
+      updateCalendarWorkHandle({
+        params: {
+          id: modalTimeCheckIn.id,
+          state: 'CHECK_IN',
+          time: moment(timeCheckIn.timeCheckIn).format('HH:mm:ss')
+        },
+        callback: () => {
+          dispatch(
+            showCompleteModal({
+              title: 'Chúc mừng',
+              icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+              content: 'Bạn đã check in thành công',
+              buttonTitle: 'Xác nhận',
+              onConfirm: () => {
+                dispatch(
+                  calendarWorkHandle({
+                    handleErr: v => {
+                      //do no thing
+                    }
+                  })
+                );
+              },
+              onClose: () => {
+                // navigation.goBack();
+              }
+            })
+          );
+        }
       })
     );
+  };
+
+  const onCheckOut = data => {
+    setModalTimeCheckOut(data);
     setDetailModal(null);
+  };
+
+  const onConfirmCheckOut = () => {
+    setModalTimeCheckOut(null);
+    if (!timeCheckOut) {
+      return;
+    }
+    dispatch(
+      updateCalendarWorkHandle({
+        params: {
+          id: modalTimeCheckOut.id,
+          state: 'CHECK_OUT',
+          time: moment(timeCheckOut.timeCheckOut).format('HH:mm:ss')
+        },
+        callback: () => {
+          dispatch(
+            showCompleteModal({
+              title: 'Chúc mừng',
+              icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+              content: 'Bạn đã check out thành công',
+              buttonTitle: 'Xác nhận',
+              onConfirm: () => {
+                dispatch(
+                  calendarWorkHandle({
+                    handleErr: v => {
+                      //do no thing
+                    }
+                  })
+                );
+              },
+              onClose: () => {
+                // navigation.goBack();
+              }
+            })
+          );
+        }
+      })
+    );
   };
 
   const closeModal = useCallback(() => {
     setDetailModal(null);
   }, []);
 
+  const [modalTimeCancel, setModalTimeCancel] = useState(null);
+  const [timeCancel, setTimeCancel] = useState(null);
+  const handleChangeCancelTime = useCallback((name, value) => {
+    setTimeCancel({ [name]: value });
+  }, []);
+
   const onCancel = data => {
-    const onConfirm = () => {
-      dispatch(
-        updateCalendarWorkHandle({
-          params: {
-            id: data.id,
-            state: 'CANCLE',
-            time: moment().format('HH:mm:ss')
-          },
-          callback: () => {
-            dispatch(
-              showCompleteModal({
-                title: 'Thành công',
-                icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                content: 'Bạn đã báo nghĩ thành công',
-                buttonTitle: 'Xác nhận',
-                onConfirm: () => {
-                  dispatch(
-                    calendarWorkHandle({
-                      handleErr: v => {
-                        //do no thing
-                      }
-                    })
-                  );
-                },
-                onClose: () => {
-                  // navigation.goBack();
-                }
-              })
-            );
-          },
-          failure: () => {
-            dispatch(
-              showCompleteModal({
-                title: 'Gởi yêu cầu thất baị',
-                icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                content: 'Bạn đã báo nghĩ không thành công. Xin vui lòng kiểm tra lại',
-                buttonTitle: 'Xác nhận',
-                onConfirm: () => {},
-                onClose: () => {
-                  // navigation.goBack();
-                }
-              })
-            );
-          },
-          handleErr: () => {
-            dispatch(
-              showCompleteModal({
-                title: 'Gởi yêu cầu thất baị',
-                icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                content: 'Bạn đã báo nghĩ không thành công. Xin vui lòng kiểm tra lại',
-                buttonTitle: 'Xác nhận',
-                onConfirm: () => {},
-                onClose: () => {
-                  // navigation.goBack();
-                }
-              })
-            );
-          }
-        })
-      );
-    };
+    setModalTimeCancel(data);
+    setDetailModal(null);
+  };
+
+  const onConfirmCancel = () => {
+    setModalTimeCancel(null);
+    if (!timeCancel) {
+      return;
+    }
     dispatch(
-      showConfirmModal({
-        title: 'Bạn có muốn nghỉ hôm nay ?',
-        icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-        content: 'Vui lòng xác nhận nghỉ. Thao tác sẽ không phục hồi được !',
-        buttonTitleReject: 'Huỷ bỏ',
-        buttonTitleConfirm: 'Xác nhận',
-        onConfirm,
-        onClose: () => {},
-        onReject: () => {}
+      updateCalendarWorkHandle({
+        params: {
+          id: modalTimeCancel.id,
+          state: 'CANCLE',
+          time: moment(timeCancel.timeCancel).format('HH:mm:ss')
+        },
+        callback: () => {
+          dispatch(
+            showCompleteModal({
+              title: 'Thành công',
+              icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+              content: 'Bạn đã báo nghĩ thành công',
+              buttonTitle: 'Xác nhận',
+              onConfirm: () => {
+                dispatch(
+                  calendarWorkHandle({
+                    handleErr: v => {
+                      //do no thing
+                    }
+                  })
+                );
+              },
+              onClose: () => {
+                // navigation.goBack();
+              }
+            })
+          );
+        },
+        failure: () => {
+          dispatch(
+            showCompleteModal({
+              title: 'Gởi yêu cầu thất baị',
+              icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+              content: 'Bạn đã báo nghĩ không thành công. Xin vui lòng kiểm tra lại',
+              buttonTitle: 'Xác nhận',
+              onConfirm: () => {},
+              onClose: () => {
+                // navigation.goBack();
+              }
+            })
+          );
+        },
+        handleErr: () => {
+          dispatch(
+            showCompleteModal({
+              title: 'Gởi yêu cầu thất baị',
+              icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+              content: 'Bạn đã báo nghĩ không thành công. Xin vui lòng kiểm tra lại',
+              buttonTitle: 'Xác nhận',
+              onConfirm: () => {},
+              onClose: () => {
+                // navigation.goBack();
+              }
+            })
+          );
+        }
       })
     );
-    setDetailModal(null);
   };
 
   const buttonsConfig = [
@@ -259,16 +260,24 @@ const WorkCalendar = props => {
       markedDates[date] = {
         customStyles: {
           container: {
-            backgroundColor: calendar.checkInTime
-              ? BACKGROUND_COLOR.RedBasic
+            backgroundColor: calendar.cancelTime
+              ? 'black'
               : calendar.checkOutTime
-              ? BACKGROUND_COLOR.RedError
-              : calendar.cancelTime
-              ? BACKGROUND_COLOR.Black
-              : BACKGROUND_COLOR.RedBasic
+              ? '#ff9a9a'
+              : calendar.checkInTime
+              ? 'white'
+              : BACKGROUND_COLOR.RedBasic,
+            borderWidth: calendar.checkInTime ? 2 : 0,
+            borderColor:
+              calendar.checkInTime && !calendar.checkOutTime && !calendar.cancelTime
+                ? BACKGROUND_COLOR.RedBasic
+                : 'transparent'
           },
           text: {
-            color: 'white',
+            color:
+              calendar.checkInTime && !calendar.checkOutTime && !calendar.cancelTime
+                ? BACKGROUND_COLOR.RedBasic
+                : 'white',
             fontWeight: 'bold'
           }
         }
@@ -290,22 +299,22 @@ const WorkCalendar = props => {
   const renderModalDetail = data => {
     const date = moment(data?.date).format('DD-MM-YYYY');
     const employerChecking = data?.checkInTime
-      ? moment(data?.checkInTime).format('DD-MM-YYYY HH:mm')
+      ? moment(data?.checkInTime).format('DD-MM-YYYY HH:mm:ss')
       : 'Chưa check in';
     const employerCheckout = data?.checkOutTime
-      ? moment(data?.checkInTime).format('DD-MM-YYYY HH:mm')
+      ? moment(data?.checkInTime).format('DD-MM-YYYY HH:mm:ss')
       : 'Chưa check out';
     const employerCancel = data?.cancelTime
-      ? moment(data?.checkInTime).format('DD-MM-YYYY HH:mm')
+      ? moment(data?.checkInTime).format('DD-MM-YYYY HH:mm:ss')
       : 'none';
     const userChecking = data?.userCheckinTime
-      ? moment(data?.userCheckinTime).format('DD-MM-YYYY HH:mm')
+      ? moment(data?.userCheckinTime).format('DD-MM-YYYY HH:mm:ss')
       : 'Chưa check in';
     const userCheckout = data?.userCheckoutTime
-      ? moment(data?.userCheckoutTime).format('DD-MM-YYYY HH:mm')
+      ? moment(data?.userCheckoutTime).format('DD-MM-YYYY HH:mm:ss')
       : 'Chưa check out';
     const userCancel = data?.userCancelTime
-      ? moment(data?.userCancelTime).format('DD-MM-YYYY HH:mm')
+      ? moment(data?.userCancelTime).format('DD-MM-YYYY HH:mm:ss')
       : 'none';
     const mappedData = [
       {
@@ -374,12 +383,42 @@ const WorkCalendar = props => {
     }
 
     const listButton = buttonData.map(button => {
+      let styleCustomWrapper;
+      let styleCustomText;
+      switch (button.id) {
+        case 'userChecking':
+          styleCustomWrapper = {
+            backgroundColor: 'white',
+            borderWidth: 1,
+            borderColor: BACKGROUND_COLOR.RedBasic
+          };
+          styleCustomText = {
+            color: BACKGROUND_COLOR.RedBasic
+          };
+          break;
+        case 'userCheckout':
+          styleCustomWrapper = {
+            backgroundColor: '#ff9a9a'
+          };
+          break;
+        case 'userCancel':
+          styleCustomWrapper = {
+            backgroundColor: 'black'
+          };
+          break;
+        case 'close':
+          break;
+      }
       return (
         <TouchableOpacity
-          style={[styles.buttonDetail, { width: `${100 / buttonData?.length - 1}%` }]}
+          style={[
+            styles.buttonDetail,
+            styleCustomWrapper,
+            { width: `${100 / buttonData?.length - 1}%` }
+          ]}
           onPress={() => button?.onClick?.(data)}
           key={button.id}>
-          <Text style={styles.buttonTitle}>{button.title}</Text>
+          <Text style={[styles.buttonTitle, styleCustomText]}>{button.title}</Text>
         </TouchableOpacity>
       );
     });
@@ -407,7 +446,7 @@ const WorkCalendar = props => {
         <FlatList keyExtractor={(item, index) => index} renderItem={renderItem} data={list || []} />
       </View>
       <Modal
-        visible={detailModal !== null}
+        visible={detailModal !== null && detailModal !== showModalTimeCheckIn}
         style={styles.modal}
         animationType="fade"
         transparent={true}
@@ -417,6 +456,36 @@ const WorkCalendar = props => {
           {renderModalDetail(detailModal)}
         </View>
       </Modal>
+      <ModalSelectTime
+        isDisplay={modalTimeCheckIn !== null}
+        onChange={handleChangeCheckInTime}
+        onCancelChange={() => {
+          setModalTimeCheckIn(null);
+        }}
+        onSubmitChange={onConfirmCheckIn}
+        name={'timeCheckIn'}
+        date={timeCheckIn ? new Date(timeCheckIn.timeCheckIn) : new Date()}
+      />
+      <ModalSelectTime
+        isDisplay={modalTimeCheckOut !== null}
+        onChange={handleChangeCheckOutTime}
+        onCancelChange={() => {
+          setModalTimeCheckOut(null);
+        }}
+        onSubmitChange={onConfirmCheckOut}
+        name={'timeCheckOut'}
+        date={timeCheckOut ? new Date(timeCheckOut.timeCheckOut) : new Date()}
+      />
+      <ModalSelectTime
+        isDisplay={modalTimeCancel !== null}
+        onChange={handleChangeCancelTime}
+        onCancelChange={() => {
+          setModalTimeCancel(null);
+        }}
+        onSubmitChange={onConfirmCancel}
+        name={'timeCancel'}
+        date={timeCancel ? new Date(timeCancel.timeCancel) : new Date()}
+      />
     </View>
   );
 };
@@ -509,7 +578,7 @@ const styles = StyleSheet.create({
   buttonTitle: {
     textAlign: 'center',
     fontFamily: FONT_FAMILY.BOLD,
-    fontSize: FONT_SIZE.BodyText,
+    fontSize: FONT_SIZE.SubHead,
     color: TEXT_COLOR.White
   }
 });

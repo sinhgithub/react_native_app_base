@@ -1,35 +1,47 @@
 import { BACKGROUND_COLOR } from 'constants/colors';
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { View, StyleSheet, Keyboard } from 'react-native';
 import { SPACING } from 'constants/size';
 import { CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { Button, Icon, Form } from 'components/';
 import { formatNumber } from 'helpers/formatNumber';
-import { useDispatch } from 'react-redux';
-import { withdrawHandle } from 'actions/wallet';
+import { useDispatch, useSelector } from 'react-redux';
+import { getWalletWithDrawHandle, withdrawHandle } from 'actions/wallet';
 import { showCompleteModal } from 'actions/system';
 import { withdrawRequestForm } from 'constants/data_constants';
+import { useNavigation } from '@react-navigation/core';
 
 const getHardCodeCompare = item => {
-  return `${item?.id?.employer?.companyName} ( ${formatNumber(item?.balance, ',')} VND )`;
+  return `${item?.id?.employer?.companyName}`;
 };
 
 const WithDrawRequest = props => {
   const dispatch = useDispatch();
-  const { data } = props?.route?.params;
+  const navigation = useNavigation();
+  const wallets = useSelector(state => state.wallets.wallets);
+  useEffect(() => {
+    dispatch(getWalletWithDrawHandle({ callback: () => {}, failure: () => {} }));
+    const focusListener = navigation.addListener('focus', () => {
+      dispatch(getWalletWithDrawHandle({ callback: () => {}, failure: () => {} }));
+    });
+    return () => {
+      focusListener();
+    };
+  }, []);
 
   const [values, setValues] = useState(null);
   const [walletSelected, setWalletSelected] = useState(null);
   const selectInputData = useMemo(() => {
-    if (!data) {
-      return [];
-    }
-    return data.map(item => getHardCodeCompare(item));
-  }, [data]);
+    const result = [];
+    wallets.forEach(item => {
+      result.push(item.id.employer.companyName);
+    });
+    return result;
+  }, [wallets]);
 
   const onSelectWallet = (selectedItem, index) => {
-    const selected = data.find(item => {
+    const selected = wallets.find(item => {
       const compare = getHardCodeCompare(item);
       if (selectedItem === compare) {
         return item;
@@ -68,7 +80,9 @@ const WithDrawRequest = props => {
                 content:
                   'Bạn đã gởi yêu cầu rút tiền thành công, Yêu cầu của bạn sẽ được xử lý từ 30 - 60 phút',
                 buttonTitle: 'Xác nhận',
-                onConfirm: () => {},
+                onConfirm: () => {
+                  navigation.goBack();
+                },
                 onClose: () => {}
               })
             );

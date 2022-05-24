@@ -9,7 +9,6 @@ import { getImageFromHost } from 'configs/appConfigs';
 const CardWallet = props => {
   const { data, hideBorder, isLastItem, from } = props;
   const [sizeCardJobContentImage, setSizeCardJobContentImage] = useState(null);
-
   const dataProcessed = useMemo(() => {
     switch (from) {
       case 'overview':
@@ -26,7 +25,7 @@ const CardWallet = props => {
               <Text>{data?.totalShift}</Text> ca hoàn thành
             </Text>
           ),
-          jobBanner: data?.id?.employer?.banner
+          jobBanner: data?.id?.employer?.logo
         };
       case 'history':
         return {
@@ -36,7 +35,7 @@ const CardWallet = props => {
           line4: `Thời gian: ${
             data?.createdAt ? moment(data?.createdAt)?.format('DD/MM/YYYY HH:mm') : ''
           }`,
-          jobBanner: data?.employer?.banner
+          jobBanner: data?.employer?.logo
         };
       case 'withDraw':
         return {
@@ -46,7 +45,7 @@ const CardWallet = props => {
           line4: `Thời gian: ${
             data?.createdAt ? moment(data?.createdAt)?.format('DD/MM/YYYY HH:mm') : ''
           }`,
-          jobBanner: data?.employer?.banner
+          jobBanner: data?.employer?.logo
         };
       default:
         return {
@@ -54,7 +53,7 @@ const CardWallet = props => {
           line2: data?.total,
           line3: data?.totalJob,
           line4: data?.totalShift,
-          jobBanner: data?.id?.employer?.banner
+          jobBanner: data?.id?.employer?.logo
         };
     }
   }, [data, from]);

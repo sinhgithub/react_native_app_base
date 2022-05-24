@@ -75,3 +75,8 @@ export const cleanFilterJobByCategory = payload => ({
   type: SYSTEM.CLEAN_FILTER_JOB_BY_CATEGORY,
   payload
 });
+// set filterJobBy category
+export const backToWorkScreen = payload => ({
+  type: SYSTEM.CLEAN_FILTER_JOB_BY_CATEGORY,
+  payload
+});

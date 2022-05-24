@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
-import { CUSTOM_COLOR, TEXT_COLOR, BACKGROUND_COLOR } from 'constants/colors';
+import { CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
 
 const styles = StyleSheet.create({
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
     borderRadius: 25
   },
   logoImage: {
-    width: 30,
-    height: 30,
+    width: 50,
+    height: 50,
     borderRadius: 25
   },
   companyName: {
@@ -48,15 +48,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   iconAction: {
-    width: 40,
+    width: 30,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 20,
-    backgroundColor: BACKGROUND_COLOR.Pink
+    borderRadius: 20
   },
   actionPhone: {
-    marginLeft: SPACING.XXNormal
+    marginLeft: SPACING.Normal
   }
 });
 

@@ -28,6 +28,7 @@ import CategoryScreen from 'screens/categories';
 import EmployerListScreen from 'screens/employer_list';
 import MenuScreen from 'screens/menu';
 import HomeHeader from 'components/HomeHeader';
+import EmployerDetailScreen from 'screens/employer_detail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -391,6 +392,14 @@ export const AppStackScreen = () => {
       <Stack.Screen
         name={SCREENS_NAME.EMPLOYER_LIST_SCREEN}
         component={EmployerListScreen}
+        options={{
+          headerShown: true,
+          header: () => <HeaderTitleScreen title={'Nhà tuyển dụng'} />
+        }}
+      />
+      <Stack.Screen
+        name={SCREENS_NAME.EMPLOYER_DETAIL_SCREEN}
+        component={EmployerDetailScreen}
         options={{
           headerShown: true,
           header: () => <HeaderTitleScreen title={'Nhà tuyển dụng'} />

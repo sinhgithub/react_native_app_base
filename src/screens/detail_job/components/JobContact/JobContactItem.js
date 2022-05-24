@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import { Icon } from 'components/';
-import { ic_logo } from 'assets/images';
 import { CUSTOM_COLOR } from 'constants/colors';
+import FastImage from 'react-native-fast-image';
 
 const JobContactItem = props => {
   const { data, onPress, containerStyle } = props;
@@ -12,18 +12,27 @@ const JobContactItem = props => {
       <View style={styles.jobContactItemContent}>
         <View style={styles.jobContactItemContentCompany}>
           <View style={styles.logo}>
-            <Image source={ic_logo} style={styles.logoImage} />
+            <FastImage
+              source={{ uri: data.contactLogo }}
+              style={styles.logoImage}
+              resizeMode="cover"
+            />
           </View>
           <Text style={styles.companyName}>{data.contactName}</Text>
         </View>
         <View style={styles.jobContactItemContentIconAction}>
           <TouchableOpacity style={styles.iconAction} onPress={() => onPress?.('sendMessage')}>
-            <Icon name="new-message" fontName="Entypo" size={20} color={CUSTOM_COLOR.Orange} />
+            <Icon
+              name="message-square"
+              fontName="Feather"
+              size={20}
+              color={CUSTOM_COLOR.RedBasic}
+            />
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.iconAction, styles.actionPhone]}
             onPress={() => onPress?.('contact')}>
-            <Icon name="phone" fontName="AntDesign" size={20} color={CUSTOM_COLOR.Orange} />
+            <Icon name="phone" fontName="AntDesign" size={20} color={CUSTOM_COLOR.RedBasic} />
           </TouchableOpacity>
         </View>
       </View>
