@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   },
   cardJobContentImage: {
-    width: '25%',
+    width: '23%',
     backgroundColor: BACKGROUND_COLOR.BasicGray,
     borderRadius: 8,
     justifyContent: 'center',

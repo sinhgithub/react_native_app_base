@@ -35,7 +35,7 @@ const WithDrawRequest = props => {
   const selectInputData = useMemo(() => {
     const result = [];
     wallets.forEach(item => {
-      result.push(item.id.employer.companyName);
+      result.push(`${item.id.employer.companyName} - ${formatNumber(item.total, ',')} VND`);
     });
     return result;
   }, [wallets]);

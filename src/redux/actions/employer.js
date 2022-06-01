@@ -30,3 +30,20 @@ export const getEmployerRecruitmentFailure = payload => ({
   type: EMPLOYER.GET_EMPLOYER_RECRUITMENT.FAILURE,
   payload
 });
+
+// ================================================
+
+export const getEmployerInfoHandle = payload => ({
+  type: EMPLOYER.GET_EMPLOYER_INFO.HANDLER,
+  payload
+});
+
+export const getEmployerInfoSuccess = payload => ({
+  type: EMPLOYER.GET_EMPLOYER_INFO.SUCCESS,
+  payload
+});
+
+export const getEmployerInfoFailure = payload => ({
+  type: EMPLOYER.GET_EMPLOYER_INFO.FAILURE,
+  payload
+});

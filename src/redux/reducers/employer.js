@@ -5,7 +5,10 @@ const initialState = {
   employers: null,
 
   loadingEmployerJobs: false,
-  employerJobs: null
+  employerJobs: null,
+
+  loadingEmployerInfo: false,
+  employerInfo: null
 };
 
 const employers = (state = initialState, action) => {
@@ -49,6 +52,27 @@ const employers = (state = initialState, action) => {
       return {
         ...state,
         loadingEmployerJobs: false
+      };
+    }
+    // ===========================================
+    case EMPLOYER.GET_EMPLOYER_INFO.HANDLER: {
+      return {
+        ...state,
+        loadingEmployerInfo: true
+      };
+    }
+
+    case EMPLOYER.GET_EMPLOYER_INFO.SUCCESS: {
+      return {
+        ...state,
+        loadingEmployerInfo: false,
+        employerInfo: action.payload
+      };
+    }
+    case EMPLOYER.GET_EMPLOYER_INFO.FAILURE: {
+      return {
+        ...state,
+        loadingEmployerInfo: false
       };
     }
     default:

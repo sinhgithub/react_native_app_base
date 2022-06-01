@@ -8,7 +8,7 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import FontAwesome5Pro from 'react-native-vector-icons/FontAwesome5Pro';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialIcons';
-
+import Foundation from 'react-native-vector-icons/Foundation';
 const Icon = props => {
   const { fontName, size, color, name } = props;
   switch (fontName) {
@@ -26,6 +26,8 @@ const Icon = props => {
       return <MaterialIcons name={name} size={size} color={color} />;
     case 'MaterialCommunityIcons':
       return <MaterialCommunityIcons name={name} size={size} color={color} />;
+    case 'Foundation':
+      return <Foundation name={name} size={size} color={color} />;
     default:
       return <IconFontAwesome name={name} size={size} color={color} />;
   }

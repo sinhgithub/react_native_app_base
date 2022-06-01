@@ -12,3 +12,8 @@ export const apiGetEmployerRecruitment = (employerId, callback = () => {}) => {
   const url = `${END_POINT}api/employer/${employerId}/job`;
   return utils.get(url, {}, {}, callback);
 };
+
+export const apiGetEmployerInfo = (id, callback = () => {}) => {
+  const url = `${END_POINT}api/employer/${id}`;
+  return utils.get(url, {}, {}, callback);
+};

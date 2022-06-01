@@ -1,67 +1,137 @@
-import React, { memo, useCallback, useState, useMemo, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './styles';
-import { TextBoxRadius } from 'components/';
 import { useDispatch, useSelector } from 'react-redux';
-import { getListProvinceHandle } from 'actions/master_data';
 import { useNavigation } from '@react-navigation/core';
-import { setFilterJobByProvince } from 'actions/system';
 import SCREENS_NAME from 'constants/screens';
+import FastImage from 'react-native-fast-image';
+import { getImageFromHost } from 'configs/appConfigs';
+import { getEmployerInfoHandle, getEmployerRecruitmentHandle } from 'actions/employer';
+import CardJob from 'components/CardJob';
+import Icon from 'components/Icon';
+import { mapDistrictsAndProvince } from 'helpers/mapAddress';
+import QRCode from 'react-native-qrcode-svg';
 
-const FilterJob = props => {
-  const dispatch = useDispatch();
+const EmployerDetail = props => {
+  const { route } = props;
+  const { id } = route.params;
   const navigation = useNavigation();
-  const { provinces } = useSelector(state => state.masterData);
-
-  const listSuggestData = useMemo(() => {
-    const result = [];
-    if (provinces) {
-      for (const k in provinces) {
-        result.push(provinces?.[k]);
-      }
-    }
-    return result;
-  }, [provinces]);
-
-  const [activeItem, setActiveItem] = useState({ index: 0, data: listSuggestData[0] });
-  const [search, setSearch] = useState(null);
-
+  const { employerInfo, employerJobs } = useSelector(state => state.employers);
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getListProvinceHandle({}));
-  }, [dispatch]);
-
-  const onPressItemFilter = useCallback((data, index) => {
-    setActiveItem?.({ index, data });
-    setSearch({ index, data });
-  }, []);
-
-  useEffect(() => {
-    if (search) {
-      dispatch(setFilterJobByProvince({ ...search, tabIndex: 0 }));
-      navigation.navigate(SCREENS_NAME.FIND_JOB_SCREEN);
-    }
-  }, [activeItem, dispatch, navigation, search]);
-
-  const listSuggest = listSuggestData.map((province, index) => {
-    return (
-      <TextBoxRadius
-        data={province}
-        index={index}
-        activeItem={activeItem.index}
-        onPress={onPressItemFilter}
-        key={index}
-      />
+    dispatch(
+      getEmployerInfoHandle({
+        params: id,
+        success: () => {},
+        failure: () => {},
+        handleErr: () => {}
+      })
     );
+    dispatch(
+      getEmployerRecruitmentHandle({
+        params: id,
+        success: () => {},
+        failure: () => {},
+        handleErr: () => {}
+      })
+    );
+  }, [dispatch, id]);
+
+  const onPressCardJob = useCallback(
+    data => {
+      navigation.navigate(SCREENS_NAME.DETAIL_JOB_SCREEN, { cardJob: data });
+    },
+    [navigation]
+  );
+
+  const listJob = employerJobs?.data?.map((item, index) => {
+    return <CardJob key={item?.id || index} data={item} hideLogo onPress={onPressCardJob} />;
   });
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Khu vực tuyển dụng</Text>
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-        <View style={styles.rowWrap}>{listSuggest}</View>
+        <View style={styles.bannerWrapper}>
+          {employerInfo?.banner ? (
+            <FastImage
+              source={{
+                uri: getImageFromHost(employerInfo?.banner)
+              }}
+              resizeMode="cover"
+              style={styles.banner}
+            />
+          ) : (
+            <View style={styles.bannerWrapper} />
+          )}
+          {employerInfo?.logo ? (
+            <FastImage
+              source={{
+                uri: getImageFromHost(employerInfo?.logo)
+              }}
+              resizeMode="cover"
+              style={styles.logo}
+            />
+          ) : (
+            <View style={styles.logo} />
+          )}
+          {employerInfo?.website ? (
+            <View style={styles.qrCode}>
+              <QRCode value={employerInfo.website} size={60} />
+            </View>
+          ) : null}
+        </View>
+        <View style={styles.employerInfo}>
+          <View style={styles.employerInfoItem}>
+            <Icon fontName="Entypo" name="location-pin" size={30} color={'red'} />
+            {employerInfo?.district && employerInfo?.province ? (
+              <Text style={styles.employerInfoItemText}>
+                {`${employerInfo?.address}${employerInfo?.address && ', '}${mapDistrictsAndProvince(
+                  employerInfo?.district,
+                  employerInfo?.province
+                )}`}
+              </Text>
+            ) : null}
+          </View>
+          <View style={styles.employerInfoItem}>
+            <Icon fontName="Feather" name="users" size={30} color={'red'} />
+            {employerInfo?.teamSize ? (
+              <Text
+                style={
+                  styles.employerInfoItemText
+                }>{`Quy mô công ty: ${employerInfo?.teamSize?.name}`}</Text>
+            ) : null}
+          </View>
+          <View style={styles.employerInfoItem}>
+            <Icon fontName="Feather" name="users" size={30} color={'red'} />
+            {employerInfo?.teamSize ? (
+              <Text
+                style={
+                  styles.employerInfoItemText
+                }>{`Số lượng trung bình cần tuyển: ${employerInfo?.demandSize?.name}`}</Text>
+            ) : null}
+          </View>
+          {employerInfo?.website ? (
+            <View style={styles.employerInfoItem}>
+              <Icon fontName="Foundation" name="web" size={30} color={'red'} />
+              <Text
+                style={styles.employerInfoItemText}>{` Website: ${employerInfo?.website}`}</Text>
+            </View>
+          ) : null}
+        </View>
+        <View style={styles.employerDesc}>
+          {!!employerInfo?.shortDescription && (
+            <Text style={styles.employerDescText}>{employerInfo.shortDescription}</Text>
+          )}
+        </View>
+        {employerJobs?.data?.length > 0 && (
+          <View style={styles.employerJobs}>
+            <Text style={styles.employerJobsTitle}>Công việc đang tuyển dụng</Text>
+            {listJob}
+          </View>
+        )}
       </ScrollView>
     </View>
   );
 };
 
-export default memo(FilterJob);
+export default memo(EmployerDetail);

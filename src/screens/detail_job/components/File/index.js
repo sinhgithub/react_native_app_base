@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import RNFetchBlob from 'rn-fetch-blob';
 import { getImageFromHost } from 'configs/appConfigs';
 import FileViewer from 'react-native-file-viewer';
-import { check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 const JobContact = props => {
   const [isShowContent, setIsShowContent] = useState(true);
@@ -24,11 +23,11 @@ const JobContact = props => {
 
   const onViewFile = async file => {
     let dirs = RNFetchBlob.fs.dirs;
-    const arr = file.split('.');
-    const fileType = arr[arr.length - 1].toUpperCase();
-    const fileArr = file.split('/');
-    const dirToSave = Platform.OS === 'ios' ? dirs.DocumentDir : dirs.DownloadDir;
-    let path = dirToSave + '/' + fileArr[fileArr?.length - 1];
+    const arr = file?.split('.');
+    const fileType = arr?.[arr.length - 1]?.toUpperCase();
+    const fileArr = file?.split('/');
+    const dirToSave = Platform.OS === 'ios' ? dirs?.DocumentDir : dirs?.DownloadDir;
+    let path = dirToSave + '/' + fileArr?.[fileArr?.length - 1];
 
     try {
       if (Platform.OS === 'android') {
@@ -42,7 +41,7 @@ const JobContact = props => {
             buttonPositive: 'OK'
           }
         );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        if (granted === PermissionsAndroid.RESULTS.GRANTED && file) {
           RNFetchBlob.config({
             fileCache: true,
             appendExt: fileType,
@@ -83,29 +82,31 @@ const JobContact = props => {
           console.log('Camera permission denied');
         }
       } else {
-        RNFetchBlob.config({
-          fileCache: true,
-          appendExt: fileType,
-          path
-        })
-          .fetch('GET', getImageFromHost(file), {
-            Authorization: `Bearer ${token}`
+        if (file) {
+          RNFetchBlob.config({
+            fileCache: true,
+            appendExt: fileType,
+            path
           })
-          .then(async res => {
-            let status = res.respInfo.status;
-            if (status === 200) {
-              const route = res?.data;
-              if (route) {
-                FileViewer.open(route);
+            .fetch('GET', getImageFromHost(file), {
+              Authorization: `Bearer ${token}`
+            })
+            .then(async res => {
+              let status = res.respInfo.status;
+              if (status === 200) {
+                const route = res?.data;
+                if (route) {
+                  FileViewer.open(route);
+                }
+              } else {
+                // handle other status codes
               }
-            } else {
-              // handle other status codes
-            }
-          })
-          // Something went wrong:
-          .catch((errorMessage, statusCode) => {
-            // error handling
-          });
+            })
+            // Something went wrong:
+            .catch((errorMessage, statusCode) => {
+              // error handling
+            });
+        }
       }
     } catch (err) {
       console.warn(err);

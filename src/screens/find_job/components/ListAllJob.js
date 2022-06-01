@@ -29,7 +29,9 @@ const ListAllJob = props => {
     for (const k in listAllJob) {
       result.push(listAllJob[k]);
     }
-    return result;
+    return result?.sort(
+      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+    );
   }, [listAllJob, listJob]);
 
   useEffect(() => {

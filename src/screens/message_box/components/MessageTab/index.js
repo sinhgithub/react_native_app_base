@@ -26,7 +26,7 @@ const MessagesTab = props => {
         result.push(conversations[k]);
       }
     }
-    return result.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    return result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }, [conversations]);
 
   useEffect(() => {

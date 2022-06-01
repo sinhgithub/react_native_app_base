@@ -11,7 +11,7 @@ import { SPACING } from 'constants/size';
 const CardEmployer = props => {
   const { containerStyle, data, onPress = () => {} } = props;
   return (
-    <TouchableOpacity style={[styles.container, containerStyle]} onPress={onPress}>
+    <TouchableOpacity style={[styles.container, containerStyle]} onPress={() => onPress?.(data)}>
       <View style={styles.bannerWrapper}>
         {data?.banner ? (
           <FastImage

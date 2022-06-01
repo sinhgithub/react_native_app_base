@@ -20,7 +20,7 @@ const NotificationsTab = props => {
         result.push(notifyList[k]);
       }
     }
-    return result;
+    return result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }, [notifyList]);
 
   const onPressNotify = useCallback(

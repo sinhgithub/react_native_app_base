@@ -23,7 +23,8 @@ const WorkCalendar = props => {
     for (const k in calendarWork) {
       result.push(calendarWork[k]);
     }
-    return result;
+
+    return result.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
   }, [calendarWork]);
 
   useEffect(() => {

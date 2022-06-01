@@ -21,7 +21,7 @@ const DetailProfile = props => {
   const districts = useSelector(state => state?.masterData?.districts);
   const formData = useMemo(() => {
     const cloneData = cloneDeep(detailProfileForm);
-    cloneData.forEach((item, index) => {
+    cloneData?.forEach((item, index) => {
       for (const k in user) {
         if (k === item.id) {
           cloneData[index].value = user[k];
@@ -31,10 +31,10 @@ const DetailProfile = props => {
         cloneData[index].value = user?.jobSeeker?.address;
       }
       if (item.id === 'district') {
-        cloneData[index].value = user?.jobSeeker?.district.id;
+        cloneData[index].value = user?.jobSeeker?.district?.id;
       }
       if (item.id === 'province') {
-        cloneData[index].value = user?.jobSeeker?.province.id;
+        cloneData[index].value = user?.jobSeeker?.province?.id;
       }
     });
     return cloneData;

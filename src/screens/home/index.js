@@ -13,8 +13,7 @@ import {
   cleanFilterJobByCategory,
   cleanFilterJobByProvince,
   setFilterJobByCategory,
-  setFocusInput,
-  setTabIndexMessageBox
+  setFocusInput
 } from 'actions/system';
 import SCREENS_NAME from 'constants/screens';
 import FastImage from 'react-native-fast-image';
@@ -38,7 +37,6 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { listJobHomePage } = useSelector(state => state.listJob);
-  const { notifyList } = useSelector(state => state.notification);
   const { configSite } = useSelector(state => state.configSite);
   const { businessCategories } = useSelector(state => state.masterData);
   const { employers } = useSelector(state => state.employers);
@@ -52,7 +50,6 @@ const HomeScreen = () => {
   const employersProcessed = useMemo(() => {
     return Object.values(employers?.data || {});
   }, [employers]);
-
   useEffect(() => {
     dispatch(getListJobHomePageHandle());
     dispatch(
@@ -95,26 +92,21 @@ const HomeScreen = () => {
     };
   }, [dispatch, navigation]);
 
-  const notifyListUnread = useMemo(() => {
-    const result = [];
-    if (notifyList) {
-      for (const k in notifyList) {
-        if (!notifyList[k].isRead) {
-          result.push(notifyList[k]);
-        }
-      }
-    }
-    return result;
-  }, [notifyList]);
-
   const onClickCardJob = useCallback(
     data => {
       navigation.navigate(SCREEN_NAME.DETAIL_JOB_SCREEN, { cardJob: data });
     },
     [navigation]
   );
-  const listJob = listJobHomePage.map((job, index) => {
-    const isLastItem = index === listJobHomePage.length - 1;
+
+  const listJobHomePageSorted = useMemo(() => {
+    return listJobHomePage.sort(
+      (a, b) => new Date(a.updatedAt).getMilliseconds() - new Date(b.updatedAt).getMilliseconds()
+    );
+  }, [listJobHomePage]);
+
+  const listJob = listJobHomePageSorted?.map((job, index) => {
+    const isLastItem = index === listJobHomePageSorted?.length - 1;
     return <CardJob onPress={onClickCardJob} data={job} key={job.id} isLastItem={isLastItem} />;
   });
 
@@ -149,8 +141,8 @@ const HomeScreen = () => {
   };
 
   const onPressEmployerCard = useCallback(
-    id => {
-      navigation.navigate(SCREENS_NAME.EMPLOYER_DETAIL_SCREEN, {});
+    employer => {
+      navigation.navigate(SCREENS_NAME.EMPLOYER_DETAIL_SCREEN, { id: employer.id });
     },
     [navigation]
   );

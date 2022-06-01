@@ -43,7 +43,7 @@ const CustomCalendar = props => {
   return (
     <View style={styles.container}>
       <Calendar
-        initialDate={'2022-03-20'}
+        initialDate={moment().format('YYYY-MM-DD')}
         minDate={'2000-01-01'}
         maxDate={'2100-01-31'}
         onDayPress={date => {

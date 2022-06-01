@@ -10,7 +10,7 @@ import { formatFeatureDurationDate } from 'helpers/formatTime';
 import { getImageFromHost } from 'configs/appConfigs';
 
 const CardJob = props => {
-  const { onPress, data, hideAllFlag, hideBorder, isLastItem } = props;
+  const { onPress, data, hideAllFlag, hideBorder, isLastItem, hideLogo } = props;
   const [sizeCardJobContentImage, setSizeCardJobContentImage] = useState(null);
 
   const dataCardJob = useMemo(() => {
@@ -27,7 +27,7 @@ const CardJob = props => {
         : translate('common.expire'),
       isBonus: data?.bonus?.length > 0,
       isPaidAfterWork: data?.paidAfterWork,
-      jobBanner: getImageFromHost(data.employer.logo)
+      jobBanner: getImageFromHost(data?.employer?.logo)
     };
   }, [data]);
   return (
@@ -46,33 +46,39 @@ const CardJob = props => {
           })
         }
         activeOpacity={0.6}>
-        <View
-          style={[styles.cardJobContentImage, { height: sizeCardJobContentImage?.width || 'auto' }]}
-          onLayout={e => {
-            if (e) {
-              setSizeCardJobContentImage(e.nativeEvent.layout);
-            }
-          }}>
-          {sizeCardJobContentImage && dataCardJob?.jobBanner ? (
-            <FastImage
-              style={[
-                styles.image,
-                {
-                  width: sizeCardJobContentImage?.width,
-                  height: sizeCardJobContentImage?.width
-                }
-              ]}
-              source={{
-                uri: dataCardJob?.jobBanner
-              }}
-              resizeMode={FastImage.resizeMode.stretch}
-            />
-          ) : (
-            <View style={styles.jobInfoInfoImageText}>
-              <Text style={styles.jobInfoInfoImageTextDesc}>Banner</Text>
-            </View>
-          )}
-        </View>
+        {!hideLogo && (
+          <View
+            style={[
+              styles.cardJobContentImage,
+              { height: sizeCardJobContentImage?.width || 'auto' }
+            ]}
+            onLayout={e => {
+              if (e) {
+                setSizeCardJobContentImage(e.nativeEvent.layout);
+              }
+            }}>
+            {sizeCardJobContentImage && dataCardJob?.jobBanner ? (
+              <FastImage
+                style={[
+                  styles.image,
+                  {
+                    width: sizeCardJobContentImage?.width,
+                    height: sizeCardJobContentImage?.width
+                  }
+                ]}
+                source={{
+                  uri: dataCardJob?.jobBanner
+                }}
+                resizeMode={FastImage.resizeMode.stretch}
+              />
+            ) : (
+              <View style={styles.jobInfoInfoImageText}>
+                <Text style={styles.jobInfoInfoImageTextDesc}>Banner</Text>
+              </View>
+            )}
+          </View>
+        )}
+
         <View style={styles.cardJobContentInfo}>
           <Text style={styles.cardJobContentInfoName} numberOfLines={2}>
             {dataCardJob?.title}
