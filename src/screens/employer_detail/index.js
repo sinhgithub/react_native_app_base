@@ -45,7 +45,7 @@ const EmployerDetail = props => {
   );
 
   const listJob = employerJobs?.data?.map((item, index) => {
-    return <CardJob key={item?.id || index} data={item} hideLogo onPress={onPressCardJob} />;
+    return <CardJob key={item?.id || index} data={item} onPress={onPressCardJob} />;
   });
 
   return (
@@ -82,7 +82,9 @@ const EmployerDetail = props => {
         </View>
         <View style={styles.employerInfo}>
           <View style={styles.employerInfoItem}>
-            <Icon fontName="Entypo" name="location-pin" size={30} color={'red'} />
+            <View style={styles.employerInfoItemIcon}>
+              <Icon fontName="Entypo" name="location-pin" size={30} color={'gray'} />
+            </View>
             {employerInfo?.district && employerInfo?.province ? (
               <Text style={styles.employerInfoItemText}>
                 {`${employerInfo?.address}${employerInfo?.address && ', '}${mapDistrictsAndProvince(
@@ -93,7 +95,9 @@ const EmployerDetail = props => {
             ) : null}
           </View>
           <View style={styles.employerInfoItem}>
-            <Icon fontName="Feather" name="users" size={30} color={'red'} />
+            <View style={styles.employerInfoItemIcon}>
+              <Icon fontName="Feather" name="users" size={25} color={'gray'} />
+            </View>
             {employerInfo?.teamSize ? (
               <Text
                 style={
@@ -102,7 +106,9 @@ const EmployerDetail = props => {
             ) : null}
           </View>
           <View style={styles.employerInfoItem}>
-            <Icon fontName="Feather" name="users" size={30} color={'red'} />
+            <View style={styles.employerInfoItemIcon}>
+              <Icon fontName="Feather" name="users" size={25} color={'gray'} />
+            </View>
             {employerInfo?.teamSize ? (
               <Text
                 style={
@@ -112,7 +118,9 @@ const EmployerDetail = props => {
           </View>
           {employerInfo?.website ? (
             <View style={styles.employerInfoItem}>
-              <Icon fontName="Foundation" name="web" size={30} color={'red'} />
+              <View style={styles.employerInfoItemIcon}>
+                <Icon fontName="Foundation" name="web" size={30} color={'gray'} />
+              </View>
               <Text
                 style={styles.employerInfoItemText}>{` Website: ${employerInfo?.website}`}</Text>
             </View>

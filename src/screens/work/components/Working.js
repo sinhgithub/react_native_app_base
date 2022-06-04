@@ -44,7 +44,7 @@ const Working = props => {
     return (
       <View style={styles.imageFindJob}>
         <Image source={find} style={styles.image} resizeMode="contain" />
-        <Text>Bạn chưa có việc làm</Text>
+        <Text>Không tìm thấy công việc</Text>
         <Button title="Tìm việc ngay" type="basic" submitMethod={onClickFindJobNow} />
       </View>
     );

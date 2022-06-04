@@ -114,7 +114,6 @@ const DetailProfile = props => {
 
   const onSubmitForm = useCallback(() => {
     const cloneUser = cloneDeep(user);
-    console.log(user, 'useruseruser');
     if (cloneUser) {
       cloneUser.name = values.name.value || values.name.defaultValue;
       cloneUser.phone = values.phone.value || values.phone.defaultValue;

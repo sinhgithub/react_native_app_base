@@ -69,6 +69,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 10,
     top: 10
+  },
+  employerInfoItemIcon: {
+    width: 35,
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
   }
 });
 

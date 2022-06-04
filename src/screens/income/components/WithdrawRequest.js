@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, Image, Text } from 'react-native';
 import CardWallet from 'components/CardWallet';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWalletWithDrawHandle } from 'actions/wallet';
@@ -7,6 +7,8 @@ import Button from 'components/Button';
 import { SPACING } from 'constants/size';
 import { useNavigation } from '@react-navigation/core';
 import SCREENS_NAME from 'constants/screens';
+import { find } from 'assets/images';
+import { BACKGROUND_COLOR } from 'constants/colors';
 
 const WithdrawRequest = props => {
   const dispatch = useDispatch();
@@ -28,6 +30,15 @@ const WithdrawRequest = props => {
     navigation.navigate(SCREENS_NAME.WITHDRAW_REQUEST, {});
   }, [navigation]);
 
+  const renderListEmptyComponent = useCallback(() => {
+    return (
+      <View style={styles.imageFindJob}>
+        <Image source={find} style={styles.image} resizeMode="contain" />
+        <Text>Bạn chưa có yêu cầu rút tiền</Text>
+      </View>
+    );
+  }, []);
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -35,9 +46,15 @@ const WithdrawRequest = props => {
         keyExtractor={(item, index) => `${item.id || index}${index}`}
         data={walletWithDraw?.data || []}
         renderItem={renderItem}
+        ListEmptyComponent={renderListEmptyComponent()}
       />
       <View style={styles.buttonWithDraw}>
-        <Button type="modal" title="Yêu cầu rút tiền" submitMethod={onWithDrawRequest} />
+        <Button
+          disable={walletWithDraw?.data?.length <= 0}
+          type="modal"
+          title="Yêu cầu rút tiền"
+          submitMethod={onWithDrawRequest}
+        />
       </View>
     </View>
   );
@@ -52,6 +69,15 @@ const styles = StyleSheet.create({
   },
   flex1: {
     flex: 1
+  },
+  imageFindJob: {
+    flex: 1,
+    backgroundColor: BACKGROUND_COLOR.White,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  image: {
+    width: '50%'
   }
 });
 

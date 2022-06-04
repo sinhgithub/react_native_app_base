@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
   },
   buttonCard: {
     backgroundColor: BACKGROUND_COLOR.BasicGray,
-    width: 80,
     paddingVertical: SPACING.Small,
+    paddingHorizontal: 4,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center'

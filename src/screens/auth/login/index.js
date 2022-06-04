@@ -204,7 +204,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     alignSelf: 'center',
     marginBottom: 40,
-    marginTop: -100
+    marginTop: -100,
+    width: 220,
+    height: 180
   },
   titleText: {
     fontSize: 50,

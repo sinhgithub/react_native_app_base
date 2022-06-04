@@ -1,5 +1,5 @@
 import React, { memo, useMemo, useEffect, useCallback, useState } from 'react';
-import { View, Text, StyleSheet, Modal, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Modal, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { CalendarCustom } from 'components/';
 import { useSelector, useDispatch } from 'react-redux';
 import { calendarWorkHandle, updateCalendarWorkHandle } from 'actions/calendar_work';
@@ -12,6 +12,7 @@ import { Shadow } from 'constants/stylesCSS';
 import moment from 'moment';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import ModalSelectTime from 'components/Modal/ModalSelectTime';
+import { find } from 'assets/images';
 const showModalTimeCheckIn = 'showModalTimeCheckIn';
 
 const WorkCalendar = props => {
@@ -423,7 +424,6 @@ const WorkCalendar = props => {
         </TouchableOpacity>
       );
     });
-
     return (
       <View style={styles.contentDetail}>
         <View style={styles.heading}>
@@ -441,10 +441,24 @@ const WorkCalendar = props => {
     );
   };
 
+  const renderListEmptyComponent = () => {
+    return (
+      <View style={styles.imageFindJob}>
+        <Image source={find} style={styles.image} resizeMode="contain" />
+        <Text>Không tìm thấy công việc</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.calendar}>
-        <FlatList keyExtractor={(item, index) => index} renderItem={renderItem} data={list || []} />
+        <FlatList
+          keyExtractor={(item, index) => index}
+          renderItem={renderItem}
+          data={list || []}
+          ListEmptyComponent={renderListEmptyComponent()}
+        />
       </View>
       <Modal
         visible={detailModal !== null && detailModal !== showModalTimeCheckIn}
@@ -572,8 +586,8 @@ const styles = StyleSheet.create({
   buttonDetail: {
     marginTop: 10,
     backgroundColor: 'red',
-    paddingHorizontal: SPACING.Small,
-    paddingVertical: SPACING.XXNormal,
+    paddingHorizontal: 4,
+    paddingVertical: SPACING.XNormal,
     borderRadius: 10
   },
   buttonTitle: {
@@ -581,6 +595,15 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY.BOLD,
     fontSize: FONT_SIZE.SubHead,
     color: TEXT_COLOR.White
+  },
+  imageFindJob: {
+    flex: 1,
+    backgroundColor: BACKGROUND_COLOR.White,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  image: {
+    width: '50%'
   }
 });
 

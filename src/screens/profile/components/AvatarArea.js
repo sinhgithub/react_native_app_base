@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { Icon } from 'components/';
 import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
@@ -25,6 +25,9 @@ const AvatarArea = () => {
         ) : (
           <Image source={default_avatar} style={styles.avatarImage} resizeMode="stretch" />
         )}
+        <TouchableOpacity style={styles.changeCamera}>
+          <Icon fontName="AntDesign" name="camera" size={25} color="red" />
+        </TouchableOpacity>
       </View>
       <View style={styles.info}>
         <View style={styles.infoStatusArea}>
@@ -72,6 +75,11 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY.REGULAR,
     color: TEXT_COLOR.Gray,
     marginTop: SPACING.Small
+  },
+  changeCamera: {
+    position: 'absolute',
+    bottom: -5,
+    right: 0
   }
 });
 
