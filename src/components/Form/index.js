@@ -1,9 +1,8 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import styles from './styles';
 import Input from './Input';
-import { useDispatch, useSelector } from 'react-redux';
-import { getListDistrictHandle } from 'actions/master_data';
+import { useSelector } from 'react-redux';
 
 const Form = props => {
   const {

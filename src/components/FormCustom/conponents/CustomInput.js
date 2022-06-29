@@ -18,7 +18,6 @@ import { Shadow } from 'constants/stylesCSS';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import SwitchToggle from 'react-native-switch-toggle';
 import ModalSelectTime from 'components/Modal/ModalSelectTime';
-import { TabRouter } from '@react-navigation/core';
 
 const CustomInput = props => {
   const {
