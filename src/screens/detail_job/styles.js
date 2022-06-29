@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   detailScreen: {
     backgroundColor: BACKGROUND_COLOR.White,
-    paddingBottom: HEIGHT_BUTTON_BOTTOM,
+    paddingBottom: HEIGHT_BUTTON_BOTTOM + 30,
     flex: 1
   },
   warningBox: {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     width: DEVICE_WIDTH,
     position: 'absolute',
     height: HEIGHT_BUTTON_BOTTOM,
-    bottom: 0,
+    bottom: 30,
     left: 0,
     justifyContent: 'center',
     alignItems: 'center'

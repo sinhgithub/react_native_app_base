@@ -13,7 +13,8 @@ const Form = props => {
     dataInputSelect,
     onSelect,
     defaultTextSelect,
-    listDistrictDefault
+    listDistrictDefault,
+    values
   } = props;
   const { provinces, districts } = useSelector(state => state.masterData);
   const { user } = useSelector(state => state.user);
@@ -82,6 +83,7 @@ const Form = props => {
           defaultTextSelect={textSelect || defaultTextSelect}
           dataInputSelect={inputSelectData || dataInputSelect}
           onSelect={onSelect}
+          values={values}
         />
       </View>
     );

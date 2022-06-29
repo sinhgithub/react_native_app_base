@@ -27,7 +27,8 @@ const CardJob = props => {
         : translate('common.expire'),
       isBonus: data?.bonus?.length > 0,
       isPaidAfterWork: data?.paidAfterWork,
-      jobBanner: getImageFromHost(data?.employer?.logo)
+      jobBanner: getImageFromHost(data?.employer?.logo),
+      luongthoathuan: data?.luongthoathuan
     };
   }, [data]);
   return (
@@ -84,7 +85,7 @@ const CardJob = props => {
             {dataCardJob?.title}
           </Text>
           <Text style={styles.cardJobContentInfoIncome} numberOfLines={1}>
-            {dataCardJob?.wage}
+            {dataCardJob?.luongthoathuan ? 'Lương thoả thuận' : dataCardJob?.wage}
           </Text>
           <Text style={styles.cardJobContentInfoAddress} numberOfLines={2}>
             {dataCardJob?.address}

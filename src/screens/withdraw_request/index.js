@@ -11,6 +11,7 @@ import { getWalletWithDrawHandle, withdrawHandle } from 'actions/wallet';
 import { showCompleteModal } from 'actions/system';
 import { withdrawRequestForm } from 'constants/data_constants';
 import { useNavigation } from '@react-navigation/core';
+import { cloneDeep } from 'lodash';
 
 const getHardCodeCompare = item => {
   return `${item?.id?.employer?.companyName}`;
@@ -43,7 +44,9 @@ const WithDrawRequest = props => {
   const onSelectWallet = (selectedItem, index) => {
     const selected = wallets.find(item => {
       const compare = getHardCodeCompare(item);
-      if (selectedItem === compare) {
+      const tmp = selectedItem?.split('-');
+
+      if (tmp[0]?.trim() === compare) {
         return item;
       }
     });
@@ -52,9 +55,12 @@ const WithDrawRequest = props => {
   };
 
   const onChangeValue = (key, value) => {
-    setValues(prev => ({ ...prev, [key]: value }));
+    let tmpValue = value;
+    if (key === 'withdrawalAmount') {
+      tmpValue = tmpValue.split(',').join('');
+    }
+    setValues(prev => ({ ...prev, [key]: formatNumber(tmpValue, ',') }));
   };
-
   const isDisableButton = useMemo(() => {
     if (
       !values?.employerId ||
@@ -69,9 +75,15 @@ const WithDrawRequest = props => {
 
   const onWithdraw = useCallback(() => {
     if (!isDisableButton) {
+      const cloneValues = cloneDeep(values);
+      for (const k in values) {
+        if (k === 'withdrawalAmount') {
+          cloneValues[k] = values[k].split(',').join('');
+        }
+      }
       dispatch(
         withdrawHandle({
-          params: values,
+          params: cloneValues,
           success: () => {
             dispatch(
               showCompleteModal({
@@ -125,6 +137,7 @@ const WithDrawRequest = props => {
             dataInputSelect={selectInputData}
             onSelect={onSelectWallet}
             onChange={onChangeValue}
+            values={values}
           />
           <Button
             type="modal"

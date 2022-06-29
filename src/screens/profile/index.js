@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import Header from './components/Header';
 import styles from './styles';
@@ -12,10 +12,14 @@ import { sectionProfileType, titleUpdateProfile } from 'constants/data_constants
 import { getUserHandle, updateUserHandle } from 'actions/user';
 import { cloneDeep } from 'lodash';
 import { getListProvinceHandle } from 'actions/master_data';
-
+import Button from 'components/Button';
+import { logout } from 'actions/auth';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { uploadImage } from 'services/api/upload';
 const ProfileScreen = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { memberInfo } = useSelector(state => state.auth);
 
   const { user } = useSelector(state => state.user);
   useEffect(() => {
@@ -28,6 +32,8 @@ const ProfileScreen = props => {
       focusListener();
     };
   }, [dispatch, navigation]);
+
+  console.log(user, 'useruser');
 
   const onEdit = (item, type, index) => {
     switch (type) {
@@ -136,11 +142,36 @@ const ProfileScreen = props => {
     [navigation]
   );
 
+  const handleLogout = useCallback(() => {
+    dispatch(logout({}));
+  }, [dispatch]);
+
   const onSeeAllAppellation = useCallback(() => {}, []);
 
   const onViewDetail = useCallback(() => {
     navigation.navigate(SCREENS_NAME.DETAIL_PROFILE_SCREEN, {});
   }, [navigation]);
+  const onChangeAvatar = useCallback(() => {
+    launchImageLibrary({ noData: true }, async response => {
+      if (response) {
+        const callBack = response => {
+          dispatch(
+            updateUserHandle({
+              params: { ...user, avatar: response.data },
+              success: v => dispatch(getUserHandle({})),
+              failure: e => {
+                console.log(e);
+              },
+              handleErr: e => {
+                console.log(e);
+              }
+            })
+          );
+        };
+        uploadImage(response?.assets?.[0], callBack);
+      }
+    });
+  }, []);
 
   return (
     <View style={styles.profileScreen}>
@@ -149,7 +180,7 @@ const ProfileScreen = props => {
       </View>
       <ScrollView style={styles.flex1}>
         <View style={styles.avatarArea}>
-          <AvatarArea />
+          <AvatarArea onChangeAvatar={onChangeAvatar} />
         </View>
         <View style={[styles.section, styles.mtLittle]}>
           <Section
@@ -213,6 +244,9 @@ const ProfileScreen = props => {
           />
         </View>
       </ScrollView>
+      <View style={styles.buttonArea}>
+        <Button submitMethod={handleLogout} type="modal" title="Đăng xuất" />
+      </View>
     </View>
   );
 };

@@ -17,10 +17,27 @@ const FilterJob = props => {
     const result = [];
     if (provinces) {
       for (const k in provinces) {
+        switch (provinces?.[k].name.toLowerCase()) {
+          case 'hồ chí minh':
+            provinces[k].order = 1;
+            break;
+          case 'bình dương':
+            provinces[k].order = 2;
+            break;
+          case 'đồng nai':
+            provinces[k].order = 3;
+            break;
+          case 'hà nội':
+            provinces[k].order = 4;
+            break;
+          default:
+            provinces[k].order = 5;
+            break;
+        }
         result.push(provinces?.[k]);
       }
     }
-    return result;
+    return result.sort((a, b) => a.order - b.order);
   }, [provinces]);
 
   const [activeItem, setActiveItem] = useState({ index: 0, data: listSuggestData[0] });

@@ -67,7 +67,6 @@ const DetailJob = props => {
     }
     return result;
   }, [cardJob?.id, listAppliedJob, listApplyJob]);
-
   const dataJobDetail = useMemo(() => {
     return {
       infoJob: {
@@ -80,7 +79,8 @@ const DetailJob = props => {
         jobBanner: cardJob?.jobBanner
       },
       income: {
-        wage: cardJob?.wageMapped
+        wage: cardJob?.wageMapped,
+        luongthoathuan: cardJob?.luongthoathuan
       },
       jobDesc: {
         recruitedQuantity: cardJob?.recruitedQuantity,

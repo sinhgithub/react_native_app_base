@@ -9,7 +9,6 @@ import { getImageFromHost } from 'src/configs/appConfigs';
 const Conversation = props => {
   const { data } = props;
   const detail = data?.item;
-  console.log({ data, detail }, 'data,detail');
   return (
     <View style={styles.conversation}>
       <View style={styles.rowDetail}>

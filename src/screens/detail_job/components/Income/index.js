@@ -6,7 +6,7 @@ import { AppText } from 'src/components';
 
 const Income = props => {
   const { data } = props;
-  const { wage } = data;
+  const { wage, luongthoathuan } = data;
   return (
     <View style={styles.income}>
       <View style={styles.incomeTitle}>
@@ -15,8 +15,9 @@ const Income = props => {
           common.income_2
         </AppText>
       </View>
+
       <View style={styles.incomeWage}>
-        <Text style={styles.incomeWageText}>{wage}</Text>
+        <Text style={styles.incomeWageText}>{luongthoathuan ? 'Lương thoả thuận' : wage}</Text>
       </View>
     </View>
   );

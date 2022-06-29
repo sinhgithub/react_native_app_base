@@ -5,6 +5,7 @@ import FastImage from 'react-native-fast-image';
 import { formatNumber } from 'helpers/formatNumber';
 import moment from 'moment';
 import { getImageFromHost } from 'configs/appConfigs';
+import { mapState } from 'helpers/mapping';
 
 const CardWallet = props => {
   const { data, hideBorder, isLastItem, from } = props;
@@ -41,7 +42,7 @@ const CardWallet = props => {
         return {
           line1: `Gửi tới: ${data?.employer?.companyName}`,
           line2: `Số tiền: ${formatNumber(data?.withdrawals, ',')} VND`,
-          line3: `Trạng thái: ${data?.state}`,
+          line3: `Trạng thái: ${mapState(data?.state)}`,
           line4: `Thời gian: ${
             data?.createdAt ? moment(data?.createdAt)?.format('DD/MM/YYYY HH:mm') : ''
           }`,
@@ -87,16 +88,16 @@ const CardWallet = props => {
           )}
         </View>
         <View style={styles.cardJobContentInfo}>
-          <Text style={styles.cardJobContentInfoName} numberOfLines={2}>
+          <Text style={[styles.cardJobContentInfoName]} numberOfLines={2}>
             {dataProcessed?.line1}
           </Text>
-          <Text style={styles.cardJobContentInfoIncome} numberOfLines={1}>
+          <Text style={[styles.cardJobContentInfoIncome]} numberOfLines={1}>
             {dataProcessed?.line2}
           </Text>
-          <Text style={styles.cardJobContentInfoAddress} numberOfLines={2}>
+          <Text style={[styles.cardJobContentInfoName, { color: 'gray' }]} numberOfLines={2}>
             {dataProcessed?.line3}
           </Text>
-          <Text style={styles.cardJobContentInfoAddress} numberOfLines={2}>
+          <Text style={[styles.cardJobContentInfoName, { color: 'gray' }]} numberOfLines={2}>
             {dataProcessed?.line4}
           </Text>
         </View>

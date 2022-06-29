@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 import { default_avatar } from 'assets/images';
 import { getImageFromHost } from 'configs/appConfigs';
 
-const AvatarArea = () => {
+const AvatarArea = props => {
+  const { onChangeAvatar } = props;
   const { user } = useSelector(state => state.user);
   return (
     <View style={styles.avatarArea}>
@@ -25,13 +26,12 @@ const AvatarArea = () => {
         ) : (
           <Image source={default_avatar} style={styles.avatarImage} resizeMode="stretch" />
         )}
-        <TouchableOpacity style={styles.changeCamera}>
+        <TouchableOpacity style={styles.changeCamera} onPress={onChangeAvatar}>
           <Icon fontName="AntDesign" name="camera" size={25} color="red" />
         </TouchableOpacity>
       </View>
       <View style={styles.info}>
         <View style={styles.infoStatusArea}>
-          {/* <Icon fontName="FontAwesome" name="user-secret" size={20} color="red" /> */}
           <Text style={styles.statusText}>{user?.name}</Text>
         </View>
       </View>

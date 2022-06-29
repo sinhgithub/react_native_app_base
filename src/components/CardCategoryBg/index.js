@@ -13,7 +13,7 @@ const CardCategoryBg = props => {
     <TouchableOpacity style={[styles.container, containerStyle]} onPress={() => onPress?.(data)}>
       <View style={styles.backgroundDisable} />
       <FastImage source={{ uri: image }} resizeMode="cover" style={styles.image} />
-      {/* <Text style={styles.categoryName}>{data?.name || 'Tên category'}</Text> */}
+      <Text style={styles.categoryName}>{data?.name || 'Tên category'}</Text>
     </TouchableOpacity>
   );
 };

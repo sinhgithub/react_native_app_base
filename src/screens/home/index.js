@@ -179,14 +179,17 @@ const HomeScreen = () => {
     <View style={styles.homeScreen}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <View style={styles.bannerWrapper}>
-          <FastImage
-            source={{
-              uri: getImageFromHost('upload/images/1c3f596b-a284-42bc-8e9b-b24a60c9f030.png')
-            }}
-            style={styles.banner}
-            resizeMode="cover"
-          />
-          {configSite && (
+          {configSite?.homeBanner && (
+            <FastImage
+              source={{
+                uri: getImageFromHost(configSite?.homeBanner)
+              }}
+              style={styles.banner}
+              resizeMode="cover"
+            />
+          )}
+
+          {/* {configSite && (
             <View style={styles.slogan1}>
               <Text style={styles.slogan}>{configSite.slogan1}</Text>
               <Text style={styles.slogan}>{configSite.slogan2}</Text>
@@ -196,7 +199,7 @@ const HomeScreen = () => {
             <View style={styles.slogan2}>
               <Text style={styles.slogan}>{configSite.slogan3}</Text>
             </View>
-          )}
+          )} */}
         </View>
         <View style={styles.searchWrapper}>
           <CustomInput

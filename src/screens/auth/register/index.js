@@ -58,121 +58,120 @@ const Register = () => {
               email: values.account.trim(),
               password: values.password.trim()
             };
-            console.log('  ===========login ===========');
-            // dispatch(
-            //   registerHandle({
-            //     params,
-            //     success: () => {
-            //       dispatch(
-            //         showConfirmModal({
-            //           title: 'Đăng ký thành công!',
-            //           icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-            //           content: 'Bạn có muốn đăng nhập bằng tài khoản mới đăng ký ?',
-            //           buttonTitleReject: 'Huỷ bỏ',
-            //           buttonTitleConfirm: 'Đăng nhập',
-            //           onConfirm: () => {
-            //             dispatch(
-            //               loginHandle({
-            //                 params,
-            //                 onRegisterSuccess: () => {
-            //                   dispatch(
-            //                     showCompleteModal({
-            //                       title: 'Đăng nhập thành công',
-            //                       icon: (
-            //                         <Icon
-            //                           fontName="AntDesign"
-            //                           size={25}
-            //                           color="red"
-            //                           name="closecircle"
-            //                         />
-            //                       ),
-            //                       content:
-            //                         'Chúc bạn tìm được công việc thích hợp trong thời gian sớm nhất!',
-            //                       buttonTitle: 'Xác nhận',
-            //                       onConfirm: () => {},
-            //                       onClose: () => {}
-            //                     })
-            //                   );
-            //                 },
-            //                 onRegisterFail: () => {
-            //                   dispatch(
-            //                     showCompleteModal({
-            //                       title: 'Đăng nhập không thành công',
-            //                       icon: (
-            //                         <Icon
-            //                           fontName="AntDesign"
-            //                           size={25}
-            //                           color="red"
-            //                           name="closecircle"
-            //                         />
-            //                       ),
-            //                       content: 'Sai tên đăng nhập hoặc mật khẩu',
-            //                       buttonTitle: 'Đăng nhập lại',
-            //                       onConfirm: () => {},
-            //                       onClose: () => {}
-            //                     })
-            //                   );
-            //                 },
-            //                 handleErr: () => {
-            //                   dispatch(loginFailure());
-            //                   dispatch(
-            //                     showCompleteModal({
-            //                       title: 'Lỗi kết nối',
-            //                       icon: (
-            //                         <Icon
-            //                           fontName="AntDesign"
-            //                           size={25}
-            //                           color="red"
-            //                           name="closecircle"
-            //                         />
-            //                       ),
-            //                       content: 'Vui lòng kiểm tra lại',
-            //                       buttonTitle: 'Xác nhận',
-            //                       onConfirm: () => {},
-            //                       onClose: () => {}
-            //                     })
-            //                   );
-            //                 }
-            //               })
-            //             );
-            //           },
-            //           onClose: () => {
-            //             // do no thing
-            //           },
-            //           onReject: () => {
-            //             navigation.navigate(SCREENS_NAME.LOGIN_SCREEN, {});
-            //           }
-            //         })
-            //       );
-            //     },
-            //     failure: () => {
-            //       dispatch(registerFailure());
-            //       dispatch(
-            //         showCompleteModal({
-            //           title: 'Tài khoản đã tồn tại',
-            //           icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-            //           content: 'Vui lòng đăng ký bằng email khác!',
-            //           buttonTitle: 'Xác nhận',
-            //           onConfirm: () => {},
-            //           onClose: () => {}
-            //         })
-            //       );
-            //     },
-            //     handleErr: () => {
-            //       dispatch(registerFailure());
-            //       dispatch(
-            //         showCompleteModal({
-            //           title: 'Tài khoản đã tồn tại',
-            //           icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-            //           content: 'Vui lòng đăng ký bằng email khác!',
-            //           buttonTitle: 'Xác nhận',
-            //           onConfirm: () => {},
-            //           onClose: () => {}
-            //         })
-            //       );
-            //     }
-            //   })
-            // );
+            dispatch(
+              registerHandle({
+                params,
+                success: () => {
+                  dispatch(
+                    showConfirmModal({
+                      title: 'Đăng ký thành công!',
+                      icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                      content: 'Bạn có muốn đăng nhập bằng tài khoản mới đăng ký ?',
+                      buttonTitleReject: 'Huỷ bỏ',
+                      buttonTitleConfirm: 'Đăng nhập',
+                      onConfirm: () => {
+                        dispatch(
+                          loginHandle({
+                            params,
+                            onRegisterSuccess: () => {
+                              dispatch(
+                                showCompleteModal({
+                                  title: 'Đăng nhập thành công',
+                                  icon: (
+                                    <Icon
+                                      fontName="AntDesign"
+                                      size={25}
+                                      color="red"
+                                      name="closecircle"
+                                    />
+                                  ),
+                                  content:
+                                    'Chúc bạn tìm được công việc thích hợp trong thời gian sớm nhất!',
+                                  buttonTitle: 'Xác nhận',
+                                  onConfirm: () => {},
+                                  onClose: () => {}
+                                })
+                              );
+                            },
+                            onRegisterFail: () => {
+                              dispatch(
+                                showCompleteModal({
+                                  title: 'Đăng nhập không thành công',
+                                  icon: (
+                                    <Icon
+                                      fontName="AntDesign"
+                                      size={25}
+                                      color="red"
+                                      name="closecircle"
+                                    />
+                                  ),
+                                  content: 'Sai tên đăng nhập hoặc mật khẩu',
+                                  buttonTitle: 'Đăng nhập lại',
+                                  onConfirm: () => {},
+                                  onClose: () => {}
+                                })
+                              );
+                            },
+                            handleErr: () => {
+                              dispatch(loginFailure());
+                              dispatch(
+                                showCompleteModal({
+                                  title: 'Lỗi kết nối',
+                                  icon: (
+                                    <Icon
+                                      fontName="AntDesign"
+                                      size={25}
+                                      color="red"
+                                      name="closecircle"
+                                    />
+                                  ),
+                                  content: 'Vui lòng kiểm tra lại',
+                                  buttonTitle: 'Xác nhận',
+                                  onConfirm: () => {},
+                                  onClose: () => {}
+                                })
+                              );
+                            }
+                          })
+                        );
+                      },
+                      onClose: () => {
+                        // do no thing
+                      },
+                      onReject: () => {
+                        navigation.navigate(SCREENS_NAME.LOGIN_SCREEN, {});
+                      }
+                    })
+                  );
+                },
+                failure: () => {
+                  dispatch(registerFailure());
+                  dispatch(
+                    showCompleteModal({
+                      title: 'Tài khoản đã tồn tại',
+                      icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                      content: 'Vui lòng đăng ký bằng email khác!',
+                      buttonTitle: 'Xác nhận',
+                      onConfirm: () => {},
+                      onClose: () => {}
+                    })
+                  );
+                },
+                handleErr: () => {
+                  dispatch(registerFailure());
+                  dispatch(
+                    showCompleteModal({
+                      title: 'Tài khoản đã tồn tại',
+                      icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
+                      content: 'Vui lòng đăng ký bằng email khác!',
+                      buttonTitle: 'Xác nhận',
+                      onConfirm: () => {},
+                      onClose: () => {}
+                    })
+                  );
+                }
+              })
+            );
             actions.setSubmitting(false);
           }}>
           {({
@@ -281,7 +280,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     alignSelf: 'center',
     marginBottom: 40,
-    marginTop: -100,
+    // marginTop: -100,
     width: 220,
     height: 180
   },

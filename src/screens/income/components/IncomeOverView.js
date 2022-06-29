@@ -60,7 +60,7 @@ const IncomeOverView = props => {
         <View style={styles.mgt4}>
           <View style={styles.row1}>
             <Icon fontName="AntDesign" name="star" size={20} color={BACKGROUND_COLOR.RedBasic} />
-            <Text style={styles.commonSmallText}>{user?.type || ''}</Text>
+            <Text style={styles.commonSmallText}>Ứng viên</Text>
           </View>
           <View style={styles.row2}>
             <Icon fontName="AntDesign" name="mail" size={20} color={BACKGROUND_COLOR.RedBasic} />

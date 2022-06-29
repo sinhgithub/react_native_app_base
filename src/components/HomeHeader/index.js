@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 import { AppText } from 'src/components';
 import { ICMenu, ICLogo, ICNotification, ICBack } from 'assets/icons';
@@ -8,6 +8,7 @@ import SCREENS_NAME from 'constants/screens';
 import { useDispatch, useSelector } from 'react-redux';
 import { FONT_SIZE } from 'constants/appFonts';
 import { setTabIndexMessageBox } from 'actions/system';
+import { ic_logo } from 'assets/images';
 
 const HomeHeader = props => {
   const { isShowBack, onPressLogo } = props;
@@ -51,10 +52,10 @@ const HomeHeader = props => {
         )}
       </TouchableOpacity>
       <TouchableOpacity onPress={onPressLogo} style={{ width: '32%', alignItems: 'center' }}>
-        <ICLogo />
+        <Image source={ic_logo} style={styles.logo} resizeMode="stretch" />
       </TouchableOpacity>
       <TouchableOpacity onPress={onPressNoti} style={{ width: '32%', alignItems: 'flex-end' }}>
-        {notifyListUnread?.length > 0 && (
+        {!notifyListUnread?.length > 0 && (
           <>
             <Text
               style={{

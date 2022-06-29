@@ -1,7 +1,7 @@
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Animated, TouchableOpacity } from 'react-native';
 import { inputType } from 'constants/data_constants';
 import SelectDropdown from './SelectDropdown';
@@ -13,7 +13,6 @@ import RadioForm, {
 import { Icon } from 'components/';
 import ModalSelectDate from 'components/Modal/ModalSelectDate';
 import moment from 'moment';
-import { useSelector } from 'react-redux';
 
 const Input = props => {
   const {
@@ -25,7 +24,8 @@ const Input = props => {
     onChange,
     defaultTextSelect,
     dataInputSelect,
-    onSelect
+    onSelect,
+    values
   } = props;
   const animation = React.useRef(new Animated.Value(0)).current;
   const [showSelectDateModal, setShowSelectDateModal] = useState(false);
@@ -33,12 +33,15 @@ const Input = props => {
     setShowSelectDateModal(true);
   }, []);
 
+  const ref = useRef(null);
+
   const [selectedDate, setSelectedDate] = useState(null);
 
   const translateY = animation.interpolate({
     inputRange: [0, 1],
     outputRange: [0, -25]
   });
+
   useEffect(() => {
     if (focused === data.index) {
       Animated.timing(animation, {
@@ -51,6 +54,7 @@ const Input = props => {
   const renderInputByType = () => {
     switch (data?.type) {
       case inputType.text:
+        const v = values?.[data?.id];
         return (
           <View style={[styles.wrapper, isDoubleInput && styles.widthControl]}>
             {!!data?.label && <Text style={[styles.label]}>{data?.label}</Text>}
@@ -69,12 +73,15 @@ const Input = props => {
               {!!data?.placeholder && <Text style={[styles.placeholder]}>{data?.placeholder}</Text>}
             </Animated.View>
             <TextInput
+              ref={ref}
               style={styles.input}
               onBlur={() => onBlur(data.index)}
               onFocus={() => onFocus(data.index)}
-              defaultValue={data?.defaultValue}
-              onChangeText={text => onChange?.(data.id, text)}
-              value={data?.value}
+              defaultValue={data?.defaultValue || data?.value}
+              onChangeText={text => {
+                onChange?.(data.id, text);
+              }}
+              value={v || null}
               keyboardType={data?.keyboardType || 'default'}
             />
           </View>

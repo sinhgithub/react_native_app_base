@@ -65,12 +65,12 @@ const MenuScreen = () => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.menuArea}>{listMenu}</View>
-      {/* <View style={styles.companyInfo}>
-        <Text style={styles.companyInfoText}>Hotline: 0987987222</Text>
+      <View style={styles.companyInfo}>
+        {/* <Text style={styles.companyInfoText}>Hotline: 0987987222</Text>
         <Text style={styles.companyInfoText}>Website: https://102.work</Text>
-        <Text style={styles.companyInfoText}>Email: sinh@ágdh.com</Text>
+        <Text style={styles.companyInfoText}>Email: sinh@ágdh.com</Text> */}
         <Text style={styles.companyInfoText}>{configSite?.footerDesc || ''}</Text>
-      </View> */}
+      </View>
       <View style={styles.buttonArea}>
         <Button submitMethod={handleLogout} type="modal" title="Đăng xuất" />
       </View>

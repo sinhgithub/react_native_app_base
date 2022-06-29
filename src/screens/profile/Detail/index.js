@@ -120,13 +120,13 @@ const DetailProfile = props => {
       cloneUser.gender =
         typeof values.gender.value === 'number' ? values.gender.value : values.gender.defaultValue;
       cloneUser.birthday = values.birthday.value || values.birthday.defaultValue;
-      if (cloneUser.jobSeeker) {
+      if (cloneUser?.jobSeeker) {
         cloneUser.jobSeeker.address = values.address.value || values.address.defaultValue;
       } else {
         cloneUser.jobSeeker = {};
         cloneUser.jobSeeker.address = values.address.value || values.address.defaultValue;
       }
-      if (cloneUser.employer) {
+      if (cloneUser?.employer) {
         cloneUser.employer.province = Object.values(provinces)?.find(
           item => item.id === values?.province?.value
         );
@@ -140,7 +140,7 @@ const DetailProfile = props => {
           item => item.id === values?.district?.value
         ).id;
         cloneUser.employer.district.provinceId = cloneUser.employer.province.id;
-      } else {
+      } else if (provinces && districts) {
         cloneUser.employer = {};
         cloneUser.employer.province = Object.values(provinces)?.find(
           item => item.id === values?.province?.value

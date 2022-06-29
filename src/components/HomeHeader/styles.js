@@ -15,6 +15,10 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_COLOR.White,
     marginBottom: SPACING.Small,
     ...Shadow
+  },
+  logo: {
+    width: 50,
+    height: 50
   }
 });
 

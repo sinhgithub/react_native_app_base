@@ -170,7 +170,7 @@ const FindJobScreen = ({ navigation, route }) => {
   }, [page]);
 
   useEffect(() => {
-    if (isFocusInput) {
+    if (isFocusInput && refInput) {
       refInput.focus();
     }
   }, [isFocusInput]);

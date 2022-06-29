@@ -593,7 +593,7 @@ const styles = StyleSheet.create({
   buttonTitle: {
     textAlign: 'center',
     fontFamily: FONT_FAMILY.BOLD,
-    fontSize: FONT_SIZE.SubHead,
+    fontSize: 12,
     color: TEXT_COLOR.White
   },
   imageFindJob: {

@@ -5,7 +5,7 @@
         android:scaleType = "centerCrop" />
     <item
         android:width="250dp"
-        android:height="45dp"
+        android:height="250dp"
         android:gravity="center"
         android:drawable="@mipmap/splash_icon"
      />

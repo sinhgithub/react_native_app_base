@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
   ranking: {
     marginTop: SPACING.Large,
     paddingHorizontal: SPACING.XXNormal
+  },
+  buttonArea: {
+    paddingHorizontal: SPACING.XNormal
   }
 });
 
