@@ -18,7 +18,7 @@
 		31A935C86B9E4D5D9733344C /* SVN-Gilroy Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6926BFBCEE6E4BCBAAAADBA8 /* SVN-Gilroy Light.otf */; };
 		55FC262BBEA141FFB5E758AA /* SVN-Gilroy Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EA7205D166B6477F83EE22C8 /* SVN-Gilroy Bold.otf */; };
 		5D9CD9512801610900F10283 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5D9CD9502801610900F10283 /* GoogleService-Info.plist */; };
-		5DFDFEBA27FCBC7000D1345D /* splash_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DFDFEB927FCBC7000D1345D /* splash_icon.png */; };
+		5DBEAECC286CE6F300357E32 /* splash_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5DBEAECB286CE6F300357E32 /* splash_icon.png */; };
 		65F49E6304C14509A2DF6033 /* SVN-Gilroy Xlight Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 46794E850F8D415C9F3E5F04 /* SVN-Gilroy Xlight Italic.otf */; };
 		6F01904D6C1146ACB2EB2E14 /* SVN-Gilroy Xlight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2C9704AA5EA04CBAB665367F /* SVN-Gilroy Xlight.otf */; };
 		794C4CB4E2E041A98474F822 /* SVN-Gilroy XBold Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1E9C3A96F9E949199EB045E8 /* SVN-Gilroy XBold Italic.otf */; };
@@ -90,7 +90,7 @@
 		5AEB6F509B5F4D71A6664866 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = ../src/assets/fonts/FontAwesome.ttf; sourceTree = "<group>"; };
 		5D9CD9502801610900F10283 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5DA9CC782806DA8500665B91 /* react_native_app_baseRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = react_native_app_baseRelease.entitlements; path = react_native_app_base/react_native_app_baseRelease.entitlements; sourceTree = "<group>"; };
-		5DFDFEB927FCBC7000D1345D /* splash_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash_icon.png; path = ../../../../../../Users/center/Desktop/image/splash_icon.png; sourceTree = "<group>"; };
+		5DBEAECB286CE6F300357E32 /* splash_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splash_icon.png; path = app_icon/splash_icon.png; sourceTree = "<group>"; };
 		60C325ACE4E04E6F894EE114 /* SVN-Gilroy Black Italic.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Black Italic.otf"; path = "../src/assets/fonts/SVN-Gilroy Black Italic.otf"; sourceTree = "<group>"; };
 		62DF2101E3D14DE597198E76 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		6926BFBCEE6E4BCBAAAADBA8 /* SVN-Gilroy Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SVN-Gilroy Light.otf"; path = "../src/assets/fonts/SVN-Gilroy Light.otf"; sourceTree = "<group>"; };
@@ -161,9 +161,9 @@
 		13B07FAE1A68108700A75B9A /* react_native_app_base */ = {
 			isa = PBXGroup;
 			children = (
+				5DBEAECB286CE6F300357E32 /* splash_icon.png */,
 				5DA9CC782806DA8500665B91 /* react_native_app_baseRelease.entitlements */,
 				5D9CD9502801610900F10283 /* GoogleService-Info.plist */,
-				5DFDFEB927FCBC7000D1345D /* splash_icon.png */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -381,7 +381,6 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				5DFDFEBA27FCBC7000D1345D /* splash_icon.png in Resources */,
 				264009D182ED476995BB019C /* SVN-Gilroy Black Italic.otf in Resources */,
 				96960FF4F70D42439B5B22F9 /* SVN-Gilroy Black.otf in Resources */,
 				E85D4034817D4E069FF8A1D8 /* SVN-Gilroy Bold Italic.otf in Resources */,
@@ -393,6 +392,7 @@
 				31A935C86B9E4D5D9733344C /* SVN-Gilroy Light.otf in Resources */,
 				FB0E4FA6A6B0400E9A7705B0 /* SVN-Gilroy Medium Italic.otf in Resources */,
 				BD6BAF4094474525832748FB /* SVN-Gilroy Medium.otf in Resources */,
+				5DBEAECC286CE6F300357E32 /* splash_icon.png in Resources */,
 				2C2960F44D354526A602658B /* SVN-Gilroy Regular.otf in Resources */,
 				2ED69218187A473B8C9D19FC /* SVN-Gilroy SemiBold Italic.otf in Resources */,
 				DF018B2CB5AF45ED861EB6F8 /* SVN-Gilroy SemiBold.otf in Resources */,
@@ -701,7 +701,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.tuyendung102;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vieclam102;
 				PRODUCT_NAME = react_native_app_base;
 				PROVISIONING_PROFILE_SPECIFIER = vieclam102_app_store;
 				SWIFT_VERSION = 5.0;

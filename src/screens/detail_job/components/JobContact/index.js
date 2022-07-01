@@ -35,8 +35,6 @@ const JobContact = props => {
     return result;
   }, [conversations]);
 
-  console.log(cardJob, 'cardJob');
-
   const onAction = type => {
     if (type === 'sendMessage') {
       dispatch(

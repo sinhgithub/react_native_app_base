@@ -7,9 +7,9 @@ import Overview from './components/Overview';
 import WalletHistory from './components/WalletHistory';
 import WithdrawRequest from './components/WithdrawRequest';
 import IncomeOverView from './components/IncomeOverView';
-const Income = props => {
-  const [content, setContent] = useState(<Overview />);
 
+const Income = () => {
+  const [content, setContent] = useState(<Overview />);
   const onChangeTab = useCallback(index => {
     Keyboard.dismiss();
     switch (index.index) {

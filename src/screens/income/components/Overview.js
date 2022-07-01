@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/core';
 import { find } from 'assets/images';
 import { BACKGROUND_COLOR } from 'constants/colors';
 
-const Overview = props => {
+const Overview = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { wallets } = useSelector(state => state.wallets);

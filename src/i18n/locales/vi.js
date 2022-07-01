@@ -52,13 +52,13 @@ export default {
     appellation_desc:
       'Bạn chưa có danh hiệu nào. Hoàn tất hồ sơ để nhận ngay danh hiệu đầu tiên của bạn',
     complete_profile: 'Hoàn tất hồ sơ',
-    experience_on_ttv: 'Kinh nghiệm trên TTV',
-    experience_on_ttv_desc: 'Bạn chưa làm công việc nào trên TTV',
+    experience_on_ttv: 'Kinh nghiệm trên 102.work',
+    experience_on_ttv_desc: 'Bạn chưa làm công việc nào trên 102.work',
     diff_experience: 'Kinh nghiệm khác',
     diff_experience_desc:
       'Điền thông tin về các công việc bạn đã từng làm trước đây để làm đẹp hồ sơ và tăng khả năng được duyệt khi nhận việc',
     add_experience: 'Thêm kinh nghiệm',
-    education_desc: 'Bạn chưa có thông tin học vấn của mình trên TTV',
+    education_desc: 'Bạn chưa có thông tin học vấn của mình trên 102.work',
     add_education: 'Thêm học vấn',
     skill: 'Kỹ năng',
     skill_desc: 'Bạn đươc nhập tối đa 10 kỹ năng',
@@ -75,7 +75,7 @@ export default {
   },
   auth: {
     login: 'Đăng nhập',
-    userNamePlaceholder: 'Email hoặc số điện thoại',
+    userNamePlaceholder: 'Email',
     userNameRequired: 'Tên đăng nhập là bắt buộc',
     account: 'Tài khoản',
     password: 'Mật khẩu',

@@ -14,7 +14,6 @@ function post(uri, postData, callback) {
       })
       .then(response => {
         resolve(response);
-        console.log(response, 'response');
         callback?.(response);
       })
       .catch(err => {

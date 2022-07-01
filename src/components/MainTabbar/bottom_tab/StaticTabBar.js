@@ -1,4 +1,3 @@
-// import { ICTabBottoms } from 'assets/icons';
 import AppText from 'components/AppText';
 import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
 import { TEXT_COLOR } from 'constants/colors';

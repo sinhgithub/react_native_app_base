@@ -6,15 +6,7 @@ import { Button } from 'components/';
 import DatePicker from 'react-native-date-picker';
 
 const ModalSelectTime = props => {
-  const {
-    date,
-    isDisplay,
-    onChange,
-    onSubmitChange,
-    onCancelChange,
-    initialModalSelectDate,
-    name
-  } = props;
+  const { date, isDisplay, onChange, onSubmitChange, onCancelChange, name } = props;
   return (
     <Modal style={styles.container} transparent visible={isDisplay}>
       <View style={styles.wrapper} onStartShouldSetResponder={onCancelChange}>

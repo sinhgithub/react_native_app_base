@@ -1,6 +1,6 @@
 import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
 import React, { memo, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Linking } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { Button } from 'components/';
 import { SPACING } from 'constants/size';
 import { getDetailNotifyHandle } from 'actions/notification';

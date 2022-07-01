@@ -1,28 +1,11 @@
-import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  Keyboard,
-  Image
-} from 'react-native';
-import { ic_logo } from 'assets/images';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
+import { View, Platform, Keyboard } from 'react-native';
 import CustomInput from './conponents/CustomInput';
 import { defaultData, schema as defaultSchema } from './defaultData';
 import { cloneDeep } from 'lodash';
 import { Formik } from 'formik';
 import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
-import useKeyboard from 'src/hooks/useKeyboard';
-import { scale } from 'utils/responsive';
-import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
-import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
-import { SPACING } from 'constants/size';
-import { AppText, Icon } from '..';
-import StyledTouchable from 'components/StyledTouchable';
-import { screenHeight } from 'constants/size';
 import { inputType } from 'constants/data_constants';
 import InputView from './conponents/InputView';
 import { checkFlagFocus } from './helpers/checkFlagFocus';

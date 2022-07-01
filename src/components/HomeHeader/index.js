@@ -2,7 +2,7 @@ import React, { memo, useMemo } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 import { AppText } from 'src/components';
-import { ICMenu, ICLogo, ICNotification, ICBack } from 'assets/icons';
+import { ICMenu, ICNotification, ICBack } from 'assets/icons';
 import { useNavigation } from '@react-navigation/core';
 import SCREENS_NAME from 'constants/screens';
 import { useDispatch, useSelector } from 'react-redux';

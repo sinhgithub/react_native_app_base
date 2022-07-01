@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import Header from './components/Header';
 import styles from './styles';
@@ -19,8 +19,6 @@ import { uploadImage } from 'services/api/upload';
 const ProfileScreen = props => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const { memberInfo } = useSelector(state => state.auth);
-
   const { user } = useSelector(state => state.user);
   useEffect(() => {
     dispatch(getUserHandle({}));
@@ -32,8 +30,6 @@ const ProfileScreen = props => {
       focusListener();
     };
   }, [dispatch, navigation]);
-
-  console.log(user, 'useruser');
 
   const onEdit = (item, type, index) => {
     switch (type) {
@@ -171,7 +167,7 @@ const ProfileScreen = props => {
         uploadImage(response?.assets?.[0], callBack);
       }
     });
-  }, []);
+  }, [dispatch, user]);
 
   return (
     <View style={styles.profileScreen}>

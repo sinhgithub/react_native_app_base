@@ -18,7 +18,6 @@ const Component = props => {
           <Icon name="caretdown" fontName="AntDesign" size={15} color={CUSTOM_COLOR.BasicGray} />
         )}
         onSelect={(selectedItem, index) => {
-          console.log({ selectedItem, index, id }, 'selectedItem, index, id, valueCustom');
           onChange?.(selectedItem, index, id);
         }}
         buttonTextAfterSelection={(selectedItem, index) => {

@@ -140,21 +140,21 @@ const DetailProfile = props => {
           item => item.id === values?.district?.value
         ).id;
         cloneUser.employer.district.provinceId = cloneUser.employer.province.id;
-      } else if (provinces && districts) {
-        cloneUser.employer = {};
-        cloneUser.employer.province = Object.values(provinces)?.find(
-          item => item.id === values?.province?.value
-        );
-        cloneUser.employer.provinceId = Object.values(provinces)?.find(
-          item => item.id === values?.province?.value
-        ).id;
-        cloneUser.employer.district = Object.values(districts)?.find(
-          item => item.id === values?.district?.value
-        );
-        cloneUser.employer.districtId = Object.values(districts)?.find(
-          item => item.id === values?.district?.value
-        ).id;
-        cloneUser.employer.district.provinceId = cloneUser.employer.province.id;
+      } else {
+        if (provinces && districts) {
+          cloneUser.jobSeeker.province = Object.values(provinces)?.find(
+            item => item.id === values?.province?.value
+          );
+          cloneUser.jobSeeker.provinceId = Object.values(provinces)?.find(
+            item => item.id === values?.province?.value
+          ).id;
+          cloneUser.jobSeeker.district = Object.values(districts)?.find(
+            item => item.id === values?.district?.value
+          );
+          cloneUser.jobSeeker.districtId = Object.values(districts)?.find(
+            item => item.id === values?.district?.value
+          ).id;
+        }
       }
     }
     dispatch(

@@ -1,7 +1,5 @@
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
-import { BACKGROUND_COLOR, TEXT_COLOR } from 'constants/colors';
-import { MAIN_HEADER_HEIGHT, SPACING } from 'constants/size';
-import { Shadow } from 'constants/stylesCSS';
+import { SPACING } from 'constants/size';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({

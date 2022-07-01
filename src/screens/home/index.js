@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import { View, ScrollView, Text, TouchableOpacity, FlatList } from 'react-native';
 import { CardJob } from 'src/components';
 import styles from './styles';

@@ -6,7 +6,7 @@ import { getWalletHistoryHandle } from 'actions/wallet';
 import { find } from 'assets/images';
 import { BACKGROUND_COLOR } from 'constants/colors';
 
-const WalletHistory = props => {
+const WalletHistory = () => {
   const dispatch = useDispatch();
   const { walletHistory } = useSelector(state => state.wallets);
   useEffect(() => {

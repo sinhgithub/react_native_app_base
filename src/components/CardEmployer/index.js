@@ -1,12 +1,13 @@
 import { getImageFromHost } from 'configs/appConfigs';
 import { TEXT_COLOR } from 'constants/colors';
 import React, { memo } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { ICPosition } from 'assets/icons';
 import { scale } from 'utils/responsive';
 import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
 import { SPACING } from 'constants/size';
+import { banner_default, default_avatar } from 'assets/images';
 
 const CardEmployer = props => {
   const { containerStyle, data, onPress = () => {} } = props;
@@ -22,7 +23,7 @@ const CardEmployer = props => {
             style={styles.banner}
           />
         ) : (
-          <View style={styles.bannerWrapper} />
+          <Image source={banner_default} style={styles.banner} resizeMode="stretch" />
         )}
         {data?.logo ? (
           <FastImage
@@ -33,13 +34,13 @@ const CardEmployer = props => {
             style={styles.logo}
           />
         ) : (
-          <View style={styles.logo} />
+          <Image source={default_avatar} style={styles.logo} resizeMode="cover" />
         )}
       </View>
       <View style={styles.desc}>
         <Text style={styles.bannerName}>{data?.companyName || ''}</Text>
         <Text style={styles.jobCount}>
-          {data?.jobCount ? `${data?.jobCount} việc đang tuyển dụng` : 'Số việc đang tuyển dụng'}
+          {data?.countJob >= 0 ? `${data?.countJob} việc đang tuyển dụng` : ''}
         </Text>
         <View style={styles.location}>
           <ICPosition width={15} />

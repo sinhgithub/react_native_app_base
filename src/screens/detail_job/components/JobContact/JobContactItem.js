@@ -1,9 +1,10 @@
 import React, { memo } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 import { Icon } from 'components/';
 import { CUSTOM_COLOR } from 'constants/colors';
 import FastImage from 'react-native-fast-image';
+import { default_avatar } from 'assets/images';
 
 const JobContactItem = props => {
   const { data, onPress, containerStyle } = props;
@@ -11,13 +12,20 @@ const JobContactItem = props => {
     <View style={[styles.jobContactItem, containerStyle]} activeOpacity={0.6}>
       <View style={styles.jobContactItemContent}>
         <View style={styles.jobContactItemContentCompany}>
-          <View style={styles.logo}>
-            <FastImage
-              source={{ uri: data.contactLogo }}
-              style={styles.logoImage}
-              resizeMode="cover"
-            />
-          </View>
+          {data.contactLogo ? (
+            <View style={styles.logo}>
+              <FastImage
+                source={{ uri: data.contactLogo }}
+                style={styles.logoImage}
+                resizeMode="cover"
+              />
+            </View>
+          ) : (
+            <View style={styles.logo}>
+              <Image style={styles.logoImage} source={default_avatar} />
+            </View>
+          )}
+
           <Text style={styles.companyName}>{data.contactName}</Text>
         </View>
         <View style={styles.jobContactItemContentIconAction}>

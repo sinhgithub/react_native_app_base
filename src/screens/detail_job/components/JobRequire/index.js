@@ -6,13 +6,8 @@ import { ToggleBottomContent } from 'components/';
 import { SPACING } from 'constants/size';
 import JobRequireItem from './JobRequireItem';
 import { Icon } from 'components/';
-import {
-  jobDetailType,
-  genderType,
-  educationType,
-  experienceLevelType,
-  degreeType
-} from 'constants/data_constants';
+import { jobDetailType, genderType, experienceLevelType } from 'constants/data_constants';
+import { mapLiteracy, mapRank } from 'helpers/mapping';
 
 const JobRequire = props => {
   const { type, gender, degree, education, experienceLevel, career } = props.data;
@@ -26,13 +21,13 @@ const JobRequire = props => {
     return genderType.find(item => item.value === key)?.label || key;
   };
   const mapDegree = key => {
-    return degreeType.find(item => item.value === key)?.label || key;
+    return mapRank(key);
   };
   const mapCareer = key => {
     return key;
   };
   const mapEducation = key => {
-    return educationType.find(item => item.value === key)?.label || key;
+    return mapLiteracy(key);
   };
   const mapExperienceLevel = key => {
     return experienceLevelType.find(item => item.value === key)?.label || key;

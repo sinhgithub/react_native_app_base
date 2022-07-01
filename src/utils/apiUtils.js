@@ -41,7 +41,6 @@ export default class APIUtils {
           params
         })
         .then(response => {
-          console.log('>>>>>>> Response>>>>>> : ', response);
           resolve(response);
         })
         .catch(err => {
@@ -72,7 +71,6 @@ export default class APIUtils {
   }
 
   static delete(uri, deleteBody, headers) {
-    console.log('deleteBody', deleteBody);
     return new Promise((resolve, reject) => {
       axios
         .delete(uri, {
@@ -94,7 +92,6 @@ export default class APIUtils {
   }
 
   static postFormData(uri, postData, headers) {
-    console.log('>>>>>>> Request>>>>>> : ', postData);
     return new Promise((resolve, reject) => {
       axios
         .post(uri, postData, {
@@ -124,13 +121,11 @@ export default class APIUtils {
           timeout: REQUEST_TIMEOUT
         })
         .then(response => {
-          console.log('response', response);
           resolve(response);
         })
         .catch(err => {
           console.log('err', err);
           handleErr?.(err);
-          // console.log('[error]', { err });
           reject(handleErrorMessage(err));
         })
     );
@@ -164,7 +159,6 @@ export default class APIUtils {
     return new Promise((resolve, reject) => {
       axios(config)
         .then(response => {
-          console.log('postUrlencoded', response);
           resolve(response);
         })
         .catch(err => {

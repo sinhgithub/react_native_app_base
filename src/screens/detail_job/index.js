@@ -193,7 +193,7 @@ const DetailJob = props => {
                   showCompleteModal({
                     title: 'Chúc mừng',
                     icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                    content: 'Bạn đã nhận việc thành công',
+                    content: 'Bạn đã gửi yêu cầu nhận việc thành công.',
                     buttonTitle: 'Xác nhận',
                     onConfirm: () => {
                       navigation.goBack();

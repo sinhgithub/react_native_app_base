@@ -1,11 +1,12 @@
 import React, { memo } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import styles from './styles';
 import FastImage from 'react-native-fast-image';
 import { Button } from 'src/components';
 import { Icon } from 'src/components';
 import { CUSTOM_COLOR } from 'constants/colors';
 import { translate } from 'src/i18n';
+import { default_avatar } from 'assets/images';
 
 const JobInfo = props => {
   const { data } = props;
@@ -23,9 +24,7 @@ const JobInfo = props => {
             resizeMode={FastImage.resizeMode.stretch}
           />
         ) : (
-          <View style={styles.jobInfoInfoImageText}>
-            <Text style={styles.jobInfoInfoImageTextDesc}>Banner</Text>
-          </View>
+          <Image style={styles.jobInfoInfoImageImage} source={default_avatar} />
         )}
       </View>
       <Text style={styles.jobInfoInfoTitle}>{title}</Text>

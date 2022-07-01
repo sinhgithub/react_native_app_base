@@ -4,3 +4,4 @@ export { default as default_avatar } from './avatar.png';
 export { default as withdrawal_success } from './withdrawal_success.png';
 export { default as ic_logo } from './logo.png';
 export { default as find } from './find.png';
+export { default as banner_default } from './banner_default.png';

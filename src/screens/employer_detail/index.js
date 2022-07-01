@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useEffect } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Image } from 'react-native';
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/core';
@@ -11,6 +11,7 @@ import CardJob from 'components/CardJob';
 import Icon from 'components/Icon';
 import { mapDistrictsAndProvince } from 'helpers/mapAddress';
 import QRCode from 'react-native-qrcode-svg';
+import { banner_default, default_avatar } from 'assets/images';
 
 const EmployerDetail = props => {
   const { route } = props;
@@ -61,7 +62,7 @@ const EmployerDetail = props => {
               style={styles.banner}
             />
           ) : (
-            <View style={styles.bannerWrapper} />
+            <Image source={banner_default} style={styles.banner} resizeMode="stretch" />
           )}
           {employerInfo?.logo ? (
             <FastImage
@@ -72,7 +73,7 @@ const EmployerDetail = props => {
               style={styles.logo}
             />
           ) : (
-            <View style={styles.logo} />
+            <Image source={default_avatar} style={styles.logo} resizeMode="cover" />
           )}
           {employerInfo?.website ? (
             <View style={styles.qrCode}>

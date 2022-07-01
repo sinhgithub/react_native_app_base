@@ -28,7 +28,10 @@ import { Icon } from 'components/';
 const { width: WIDTH } = Dimensions.get('window');
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required('auth.passwordRequired').min(6, 'auth.passwordErrorMin'),
-  account: Yup.string().required('auth.userNameRequired').max(255, 'auth.accountErrorMax'),
+  account: Yup.string()
+    .required('auth.userNameRequired')
+    .max(255, 'auth.accountErrorMax')
+    .email('email sai định dạng'),
   passwordConfirm: Yup.string()
     .required('auth.passwordRequired')
     .oneOf([Yup.ref('password'), null], 'auth.confirmPasswordError')

@@ -1,5 +1,5 @@
 import React, { memo, useState, useMemo } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import styles from './styles';
 import FastImage from 'react-native-fast-image';
 import { Button } from 'src/components';
@@ -8,6 +8,7 @@ import { mapDistrictsAndProvince } from 'helpers/mapAddress';
 import { mapWageFromTo } from 'helpers/wage';
 import { formatFeatureDurationDate } from 'helpers/formatTime';
 import { getImageFromHost } from 'configs/appConfigs';
+import { default_avatar } from 'assets/images';
 
 const CardJob = props => {
   const { onPress, data, hideAllFlag, hideBorder, isLastItem, hideLogo } = props;
@@ -73,9 +74,16 @@ const CardJob = props => {
                 resizeMode={FastImage.resizeMode.stretch}
               />
             ) : (
-              <View style={styles.jobInfoInfoImageText}>
-                <Text style={styles.jobInfoInfoImageTextDesc}>Banner</Text>
-              </View>
+              <Image
+                style={[
+                  styles.image,
+                  {
+                    width: sizeCardJobContentImage?.width,
+                    height: sizeCardJobContentImage?.width
+                  }
+                ]}
+                source={default_avatar}
+              />
             )}
           </View>
         )}

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { BACKGROUND_COLOR, CUSTOM_COLOR, TEXT_COLOR } from 'constants/colors';
+import { CUSTOM_COLOR } from 'constants/colors';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { scale } from 'utils/responsive';
 

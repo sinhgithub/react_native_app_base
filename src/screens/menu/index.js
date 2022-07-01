@@ -1,11 +1,8 @@
 import React, { memo, useCallback, useState } from 'react';
 import { View, ScrollView, Text, Linking } from 'react-native';
-
 import styles from './styles';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { logout } from 'actions/auth';
-import { useNavigation } from '@react-navigation/core';
 import DropDown from 'components/DropDown';
 import { cloneDeep } from 'lodash';
 import { Button } from 'components/';

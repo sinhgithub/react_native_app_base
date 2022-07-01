@@ -1,6 +1,5 @@
 import React, { memo, useCallback, useMemo } from 'react';
 import { View, FlatList } from 'react-native';
-
 import styles from './styles';
 import { useSelector } from 'react-redux';
 import CardEmployer from 'components/CardEmployer';

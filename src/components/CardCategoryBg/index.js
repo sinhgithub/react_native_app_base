@@ -1,19 +1,24 @@
+import { banner_default } from 'assets/images';
 import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
 import { TEXT_COLOR } from 'constants/colors';
 import React, { memo } from 'react';
-import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, View, StyleSheet, Image } from 'react-native';
 import FastImage from 'react-native-fast-image';
-const imageTmp = 'https://www.w3schools.com/w3css/img_lights.jpg';
 
 const CardCategoryBg = props => {
   const { onPress, containerStyle, data } = props;
-  const image = data?.image ? data?.image : imageTmp;
+  const image = data?.image;
 
   return (
     <TouchableOpacity style={[styles.container, containerStyle]} onPress={() => onPress?.(data)}>
       <View style={styles.backgroundDisable} />
-      <FastImage source={{ uri: image }} resizeMode="cover" style={styles.image} />
-      <Text style={styles.categoryName}>{data?.name || 'Tên category'}</Text>
+      {image ? (
+        <FastImage source={{ uri: image }} resizeMode="stretch" style={styles.image} />
+      ) : (
+        <Image source={banner_default} resizeMode="stretch" style={styles.image} />
+      )}
+
+      <Text style={styles.categoryName}>{data?.name || ''}</Text>
     </TouchableOpacity>
   );
 };

@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useMemo, useCallback } from 'react';
 import { View, ScrollView } from 'react-native';
-
 import styles from './styles';
 import { getListJobHomePageHandle } from 'actions/getListJob';
 import { useDispatch, useSelector } from 'react-redux';

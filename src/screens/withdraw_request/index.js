@@ -61,17 +61,18 @@ const WithDrawRequest = props => {
     }
     setValues(prev => ({ ...prev, [key]: formatNumber(tmpValue, ',') }));
   };
+
   const isDisableButton = useMemo(() => {
     if (
       !values?.employerId ||
       !values?.withdrawalAmount ||
-      walletSelected?.balance < values?.withdrawalAmount ||
-      values?.withdrawalAmount <= 0
+      walletSelected?.balance < parseInt(values?.withdrawalAmount) ||
+      parseInt(values?.withdrawalAmount) <= 0
     ) {
       return true;
     }
     return false;
-  }, [values]);
+  }, [values?.employerId, values?.withdrawalAmount, walletSelected?.balance]);
 
   const onWithdraw = useCallback(() => {
     if (!isDisableButton) {

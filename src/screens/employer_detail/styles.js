@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import { TEXT_COLOR } from 'constants/colors';
 import { SPACING } from 'constants/size';
 import { FONT_FAMILY, FONT_SIZE, LINE_HEIGHT } from 'constants/appFonts';
 import { scale } from 'utils/responsive';
@@ -32,8 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     position: 'absolute',
     left: 15,
-    bottom: -30,
-    backgroundColor: 'red'
+    bottom: -30
   },
   employerJobs: {
     marginTop: 20

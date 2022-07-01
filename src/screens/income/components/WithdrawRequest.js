@@ -10,26 +10,19 @@ import SCREENS_NAME from 'constants/screens';
 import { find } from 'assets/images';
 import { BACKGROUND_COLOR } from 'constants/colors';
 
-const WithdrawRequest = props => {
+const WithdrawRequest = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { walletWithDraw } = useSelector(state => state.wallets);
-
+  const { walletTotal } = useSelector(state => state.wallets);
   useEffect(() => {
     dispatch(getWalletWithDrawHandle({ callback: () => {}, failure: () => {} }));
   }, [dispatch]);
 
   const renderItem = ({ item, index }) => {
     const isLastItem = index === walletWithDraw?.data?.length - 1;
-    // const colorTextCustom = index === 1 || index === 3 || index === 4 ? { color: 'gray' } : {};
     return (
-      <CardWallet
-        // colorTextCustom={colorTextCustom}
-        from="withDraw"
-        isLastItem={isLastItem}
-        data={item}
-        key={item.id || index}
-      />
+      <CardWallet from="withDraw" isLastItem={isLastItem} data={item} key={item.id || index} />
     );
   };
 
@@ -56,7 +49,7 @@ const WithdrawRequest = props => {
       />
       <View style={styles.buttonWithDraw}>
         <Button
-          // disable={walletWithDraw?.data?.length <= 0}
+          disable={walletWithDraw?.data?.length <= 0 || walletTotal?.balance <= 0}
           type="modal"
           title="Yêu cầu rút tiền"
           submitMethod={onWithDrawRequest}

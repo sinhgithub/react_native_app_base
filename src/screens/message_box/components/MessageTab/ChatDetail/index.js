@@ -58,16 +58,16 @@ const ChatDetail = props => {
   useEffect(() => {
     let eventCallConversations;
     if (messagesProcessed?.length > 0) {
-      eventCallConversations = setInterval(() => {
-        dispatch(
-          getListMessageByRoomHandle({
-            params: { roomId: data?.item?.id, page, size: 20 },
-            success: () => {},
-            failure: () => {},
-            handleErr: () => {}
-          })
-        );
-      }, 5000);
+      // eventCallConversations = setInterval(() => {
+      //   dispatch(
+      //     getListMessageByRoomHandle({
+      //       params: { roomId: data?.item?.id, page, size: 20 },
+      //       success: () => {},
+      //       failure: () => {},
+      //       handleErr: () => {}
+      //     })
+      //   );
+      // }, 5000);
     }
     return () => {
       if (eventCallConversations) {
@@ -75,7 +75,6 @@ const ChatDetail = props => {
       }
     };
   }, [messagesProcessed]);
-
   useEffect(() => {
     if (messagesProcessed?.length > 0) {
       const temp = messagesProcessed.map((message, index) => {
@@ -94,6 +93,8 @@ const ChatDetail = props => {
           messagesProps.position = 'left';
           messagesProps.user = { _id: message?.senderId, name: message?.sender };
         }
+        console.log({ user, message, messagesProps }, 'user');
+
         return messagesProps;
       });
       setList(
@@ -242,6 +243,7 @@ const ChatDetail = props => {
   };
 
   const renderBubble = messageProps => {
+    const { position } = messageProps;
     return (
       <Bubble
         user={messageProps.user}
@@ -257,10 +259,12 @@ const ChatDetail = props => {
           }
         }}
         containerStyle={{
-          left: { alignItems: 'flex-end', maxWidth: '60%' },
+          left: {
+            alignItems: position === 'right' ? 'flex-end' : 'flex-start',
+            maxWidth: '60%'
+          },
           right: {
-            alignItems: 'flex-start',
-            backgroundColor: 'red'
+            alignItems: 'flex-start'
           }
         }}
       />
@@ -287,22 +291,25 @@ const ChatDetail = props => {
     return <Day {...messageProps} containerStyle={styles.dayContainer} />;
   };
 
-  const renderAvatar = useCallback(() => {
-    const avatar = user?.avatar;
-    return (
-      <View style={styles.avatar}>
-        {avatar ? (
-          <FastImage
-            source={{ uri: getImageFromHost(avatar) }}
-            style={styles.avatar}
-            resizeMode="cover"
-          />
-        ) : (
-          <Image source={default_avatar} style={styles.avatar} resizeMode="cover" />
-        )}
-      </View>
-    );
-  }, [user]);
+  const renderAvatar = useCallback(
+    ({ position }) => {
+      const avatar = position === 'right' ? user?.avatar : data?.item.avatar;
+      return (
+        <View style={styles.avatar}>
+          {avatar ? (
+            <FastImage
+              source={{ uri: getImageFromHost(avatar) }}
+              style={styles.avatar}
+              resizeMode="cover"
+            />
+          ) : (
+            <Image source={default_avatar} style={styles.avatar} resizeMode="cover" />
+          )}
+        </View>
+      );
+    },
+    [user, data]
+  );
 
   const renderFooter = () => {
     return null;

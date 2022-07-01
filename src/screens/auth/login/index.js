@@ -29,7 +29,10 @@ const { width: WIDTH } = Dimensions.get('window');
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required('auth.passwordRequired').min(6, 'auth.passwordErrorMin'),
-  account: Yup.string().required('auth.userNameRequired').max(255, 'auth.accountErrorMax')
+  account: Yup.string()
+    .required('auth.userNameRequired')
+    .max(255, 'auth.accountErrorMax')
+    .email('Email sai định dạng')
 });
 
 const LoginScreen = () => {

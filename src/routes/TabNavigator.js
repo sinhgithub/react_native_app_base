@@ -11,7 +11,6 @@ import MainTabbar from 'components/MainTabbar';
 import WorkScreen from 'screens/work';
 import MessageBoxScreen from 'screens/message_box';
 import ProfileScreen from 'screens/profile';
-// import HomeHeader from 'components/HeaderHello';
 import MainHeader from 'components/MainHeader';
 import HeaderTitleScreen from 'components/HeaderTitleScreen';
 import DetailJob from 'screens/detail_job';
