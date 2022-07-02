@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
   textMessage: {
     fontFamily: FONT_FAMILY.REGULAR,
     fontSize: FONT_SIZE.SubHead,
-    color: TEXT_COLOR.Black,
+    color: TEXT_COLOR.White,
     lineHeight: LINE_HEIGHT.SubHead
   },
   iconEmptyValue: {

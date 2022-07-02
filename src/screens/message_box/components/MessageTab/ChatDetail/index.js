@@ -58,16 +58,16 @@ const ChatDetail = props => {
   useEffect(() => {
     let eventCallConversations;
     if (messagesProcessed?.length > 0) {
-      // eventCallConversations = setInterval(() => {
-      //   dispatch(
-      //     getListMessageByRoomHandle({
-      //       params: { roomId: data?.item?.id, page, size: 20 },
-      //       success: () => {},
-      //       failure: () => {},
-      //       handleErr: () => {}
-      //     })
-      //   );
-      // }, 5000);
+      eventCallConversations = setInterval(() => {
+        dispatch(
+          getListMessageByRoomHandle({
+            params: { roomId: data?.item?.id, page, size: 20 },
+            success: () => {},
+            failure: () => {},
+            handleErr: () => {}
+          })
+        );
+      }, 5000);
     }
     return () => {
       if (eventCallConversations) {
@@ -232,11 +232,13 @@ const ChatDetail = props => {
   );
 
   const renderCustomView = viewMessageProps => {
-    const { message } = viewMessageProps?.currentMessage;
+    const { message, position } = viewMessageProps?.currentMessage;
     return (
       <View renderToHardwareTextureAndroid ref={ref => {}}>
         <TouchableOpacity onLongPress={e => {}} onPress={() => {}}>
-          <Text style={[styles.textMessage]}>{message}</Text>
+          <Text style={[styles.textMessage, position === 'left' && { color: 'black' }]}>
+            {message}
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -252,7 +254,8 @@ const ChatDetail = props => {
           left: {
             marginRight: 0,
             paddingHorizontal: SPACING.XXNormal,
-            paddingVertical: SPACING.XXNormal
+            paddingVertical: SPACING.XXNormal,
+            backgroundColor: position === 'right' ? BACKGROUND_COLOR.RedBasic : 'rgb(254,188,191)'
           },
           right: {
             marginLeft: 0

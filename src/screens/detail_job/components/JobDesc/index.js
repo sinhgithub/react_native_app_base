@@ -8,7 +8,6 @@ const JobDesc = props => {
   const { data } = props;
   const { recruitedQuantity, desc } = data;
   const [isShowDesc, setIsShowDesc] = useState(true);
-
   const handleToggleContent = useCallback(key => {
     if (key === 'down') {
       setIsShowDesc(true);
@@ -30,7 +29,7 @@ const JobDesc = props => {
       {isShowDesc && (
         <View style={styles.jobDescContent}>
           <Text style={styles.jobDescContentItem}>
-            - {translate('common.recruited_quantity')} : {recruitedQuantity || `${0}`}
+            - {translate('common.recruited_quantity')} : {`${recruitedQuantity || 0} ứng viên`}
           </Text>
           {descContent && descContent}
         </View>

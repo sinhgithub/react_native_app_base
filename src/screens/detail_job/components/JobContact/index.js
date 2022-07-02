@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useMemo, useState } from 'react';
-import { View } from 'react-native';
+import { View, Linking } from 'react-native';
 import styles from './styles';
 import { translate } from 'src/i18n';
 import { ToggleBottomContent } from 'components/';
@@ -85,6 +85,7 @@ const JobContact = props => {
         })
       );
     } else if (type === 'contact') {
+      Linking.openURL(`tel:${data?.contactPhone}`);
     }
   };
 

@@ -54,7 +54,7 @@ const HomeScreen = () => {
     dispatch(getListJobHomePageHandle());
     dispatch(
       getEmployerHandle({
-        params: { size, page: 0 },
+        params: { size: 9999 },
         success: () => {},
         failure: () => {},
         handleErr: () => {}

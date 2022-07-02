@@ -83,7 +83,7 @@ const DetailJob = props => {
         luongthoathuan: cardJob?.luongthoathuan
       },
       jobDesc: {
-        recruitedQuantity: cardJob?.recruitedQuantity,
+        recruitedQuantity: cardJob?.numberRecruitments,
         desc: cardJob?.jobDescription
       },
       benefit: cardJob?.bonus,
