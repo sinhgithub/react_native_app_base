@@ -116,11 +116,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   avatarArea: {
-    width: '30%'
+    width: '30%',
+    borderRadius: 12
   },
   avatar: {
     minWidth: 100,
-    minHeight: 100
+    minHeight: 100,
+    borderRadius: 12
   },
   content: {
     marginLeft: SPACING.XNormal,
@@ -142,13 +144,15 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_COLOR.White,
     ...Shadow,
     padding: SPACING.Normal,
-    width: '48%'
+    width: '48%',
+    borderRadius: 12
   },
   info1: {
     backgroundColor: BACKGROUND_COLOR.White,
     ...Shadow,
     padding: SPACING.Normal,
-    width: '48%'
+    width: '48%',
+    borderRadius: 12
   },
   infoIncome: {
     fontSize: FONT_SIZE.BodyText,
