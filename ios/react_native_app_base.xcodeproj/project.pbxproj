@@ -701,7 +701,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vieclam102;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ttv-app";
 				PRODUCT_NAME = react_native_app_base;
 				PROVISIONING_PROFILE_SPECIFIER = vieclam102_app_store;
 				SWIFT_VERSION = 5.0;

@@ -44,7 +44,7 @@ const NotifyDetail = props => {
             <Text style={styles.contentDetailText}>{notifyDetail?.content}</Text>
           </View>
         </View>
-        <View style={styles.buttonArea}>
+        {/* <View style={styles.buttonArea}>
           <Button
             type="modal"
             title={notifyDetail?.linkTo || ''}
@@ -52,7 +52,7 @@ const NotifyDetail = props => {
             titleStyle={styles.titleButton}
             submitMethod={onPressButton}
           />
-        </View>
+        </View> */}
       </ScrollView>
     </View>
   );

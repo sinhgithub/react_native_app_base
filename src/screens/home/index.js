@@ -98,10 +98,9 @@ const HomeScreen = () => {
     },
     [navigation]
   );
-
   const listJobHomePageSorted = useMemo(() => {
     return listJobHomePage.sort(
-      (a, b) => new Date(a.updatedAt).getMilliseconds() - new Date(b.updatedAt).getMilliseconds()
+      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
     );
   }, [listJobHomePage]);
 

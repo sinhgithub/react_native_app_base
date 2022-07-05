@@ -29,7 +29,9 @@ const CardJob = props => {
       isBonus: data?.bonus?.length > 0,
       isPaidAfterWork: data?.paidAfterWork,
       jobBanner: getImageFromHost(data?.employer?.logo),
-      luongthoathuan: data?.luongthoathuan
+      luongthoathuan: data?.luongthoathuan,
+      note: data?.note,
+      ctv_name: data?.ctv_name
     };
   }, [data]);
   return (
@@ -98,6 +100,19 @@ const CardJob = props => {
           <Text style={styles.cardJobContentInfoAddress} numberOfLines={2}>
             {dataCardJob?.address}
           </Text>
+          {dataCardJob?.note && (
+            <View
+              style={{
+                flexDirection: 'row'
+              }}>
+              <Text style={styles.cardJobContentInfoNote} numberOfLines={2}>
+                {dataCardJob?.note}
+              </Text>
+              <Text style={styles.cardJobContentInfoNote} numberOfLines={2}>
+                {`: ${dataCardJob?.ctv_name || ''}`}
+              </Text>
+            </View>
+          )}
           {!hideAllFlag && (
             <View style={styles.buttonsWrapper}>
               <Button

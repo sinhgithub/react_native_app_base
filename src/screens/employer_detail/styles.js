@@ -61,7 +61,9 @@ const styles = StyleSheet.create({
     fontFamily: FONT_FAMILY.REGULAR,
     fontSize: FONT_SIZE.SubHead,
     color: 'black',
-    marginLeft: 8
+    marginLeft: 8,
+    flex: 1,
+    lineHeight: LINE_HEIGHT.SubHead
   },
   qrCode: {
     position: 'absolute',

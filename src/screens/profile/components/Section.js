@@ -230,17 +230,20 @@ const Section = props => {
         </View>
       )}
       {renderItem()}
-      {!hideSubmitButton && (
+      {/* {!hideSubmitButton && (
         <View style={{ marginTop: 6 }}>
           <Button
-            type="modal"
+            type="card"
             title={buttonTile}
             containerStyle={styles.button}
             titleStyle={styles.titleButton}
             submitMethod={() => onPressButton?.(type)}
           />
         </View>
-      )}
+      )} */}
+      <TouchableOpacity style={styles.button} onPress={() => onPressButton?.(type)}>
+        <Text style={styles.titleButton}>{buttonTile}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -296,10 +299,14 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
-    backgroundColor: BACKGROUND_COLOR.BasicGray
+    backgroundColor: BACKGROUND_COLOR.BasicGray,
+    padding: SPACING.XXNormal
   },
   titleButton: {
-    color: TEXT_COLOR.Black
+    color: TEXT_COLOR.Black,
+    textAlign: 'center',
+    fontSize: FONT_SIZE.BodyText,
+    fontFamily: FONT_FAMILY.BOLD
   },
 
   listExperience: {

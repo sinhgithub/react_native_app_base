@@ -31,12 +31,13 @@ const CardWallet = props => {
       case 'history':
         return {
           line1: `Người gửi: ${data?.employer?.companyName}`,
-          line2: `Số tiền: ${formatNumber(data?.deposits, ',')} VND`,
+          line2: `Số tiền: +${formatNumber(data?.deposits, ',')} VND`,
           line3: `Nội dung: ${data?.job?.title}`,
           line4: `Thời gian: ${
             data?.createdAt ? moment(data?.createdAt)?.format('DD/MM/YYYY HH:mm') : ''
           }`,
-          jobBanner: data?.employer?.logo
+          jobBanner: data?.employer?.logo,
+          type: data.type === 'HOUR' ? 'Tiền lương' : data.type === 'BONUS' ? 'Tiền thưởng' : ''
         };
       case 'withDraw':
         return {
@@ -94,9 +95,21 @@ const CardWallet = props => {
           <Text style={[styles.cardJobContentInfoIncome]} numberOfLines={1}>
             {dataProcessed?.line2}
           </Text>
-          <Text style={[styles.cardJobContentInfoName, { color: 'gray' }]} numberOfLines={2}>
-            {dataProcessed?.line3}
-          </Text>
+          {from === 'history' ? (
+            <>
+              <Text style={[styles.cardJobContentInfoName, { color: 'gray' }]} numberOfLines={2}>
+                {`${dataProcessed?.line3} `}
+              </Text>
+              <Text style={[styles.cardJobContentInfoName, { color: 'gray' }]} numberOfLines={2}>
+                {`Loại : ${dataProcessed?.type}`}
+              </Text>
+            </>
+          ) : (
+            <Text style={[styles.cardJobContentInfoName, { color: 'gray' }]} numberOfLines={2}>
+              {`${dataProcessed?.line3}`}
+            </Text>
+          )}
+
           <Text style={[styles.cardJobContentInfoName, { color: 'gray' }]} numberOfLines={2}>
             {dataProcessed?.line4}
           </Text>

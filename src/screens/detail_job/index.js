@@ -321,7 +321,7 @@ const DetailJob = props => {
       })
     );
   }, [cardJob.id, dispatch, navigation]);
-
+  console.log(cardJob, 'cardJob');
   return (
     <View style={styles.detailScreen}>
       <ScrollView style={styles.scrollView}>
