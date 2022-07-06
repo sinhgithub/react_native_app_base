@@ -10,12 +10,13 @@ import { mapState } from 'helpers/mapping';
 const CardWallet = props => {
   const { data, hideBorder, isLastItem, from } = props;
   const [sizeCardJobContentImage, setSizeCardJobContentImage] = useState(null);
+
   const dataProcessed = useMemo(() => {
     switch (from) {
       case 'overview':
         return {
           line1: data?.id?.employer?.companyName,
-          line2: `${formatNumber(data?.total, ',')} VND`,
+          line2: `${formatNumber(data?.balance, ',')} VND`,
           line3: (
             <Text>
               Đã tham gia <Text>{data?.totalJob}</Text> công việc
@@ -106,7 +107,7 @@ const CardWallet = props => {
             </>
           ) : (
             <Text style={[styles.cardJobContentInfoName, { color: 'gray' }]} numberOfLines={2}>
-              {`${dataProcessed?.line3}`}
+              {dataProcessed?.line3}
             </Text>
           )}
 

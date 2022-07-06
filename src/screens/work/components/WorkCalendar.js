@@ -175,7 +175,7 @@ const WorkCalendar = props => {
       updateCalendarWorkHandle({
         params: {
           id: modalTimeCancel.id,
-          state: 'CANCLE',
+          state: 'CANCEL',
           time: moment(timeCancel.timeCancel).format('HH:mm:ss')
         },
         callback: () => {
