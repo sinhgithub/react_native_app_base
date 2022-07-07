@@ -34,6 +34,7 @@ const CardJob = props => {
       ctv_name: data?.ctv_name
     };
   }, [data]);
+
   return (
     <View style={styles.cardJob}>
       <TouchableOpacity
@@ -76,16 +77,18 @@ const CardJob = props => {
                 resizeMode={FastImage.resizeMode.stretch}
               />
             ) : (
-              <Image
-                style={[
-                  styles.image,
-                  {
-                    width: sizeCardJobContentImage?.width,
-                    height: sizeCardJobContentImage?.width
-                  }
-                ]}
-                source={default_avatar}
-              />
+              <View style={styles.jobInfoInfoImageText}>
+                <Image
+                  style={[
+                    styles.image,
+                    {
+                      width: sizeCardJobContentImage?.width,
+                      height: sizeCardJobContentImage?.width
+                    }
+                  ]}
+                  source={default_avatar}
+                />
+              </View>
             )}
           </View>
         )}
@@ -100,19 +103,6 @@ const CardJob = props => {
           <Text style={styles.cardJobContentInfoAddress} numberOfLines={2}>
             {dataCardJob?.address}
           </Text>
-          {dataCardJob?.note && (
-            <View
-              style={{
-                flexDirection: 'row'
-              }}>
-              <Text style={styles.cardJobContentInfoNote} numberOfLines={2}>
-                {dataCardJob?.note}
-              </Text>
-              <Text style={styles.cardJobContentInfoNote} numberOfLines={2}>
-                {`: ${dataCardJob?.ctv_name || ''}`}
-              </Text>
-            </View>
-          )}
           {!hideAllFlag && (
             <View style={styles.buttonsWrapper}>
               <Button

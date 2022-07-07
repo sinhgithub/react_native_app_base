@@ -21,57 +21,19 @@ import {
   getListFollowJobHandle
 } from 'actions/getListJob';
 import { getImageFromHost } from 'configs/appConfigs';
+import { FONT_FAMILY, FONT_SIZE } from 'constants/appFonts';
+import { CUSTOM_COLOR } from 'constants/colors';
 
 const DetailJob = props => {
-  const navigation = useNavigation();
   const { cardJob } = props.route.params;
   const dispatch = useDispatch();
   const { animatedBottomModal } = useSelector(state => state.system);
-  const { listFollowJob, listApplyJob, listAppliedJob } = useSelector(state => state.listJob);
   const [modalBonusInfo, setModalBonusInfo] = useState(null);
-  useEffect(() => {
-    dispatch(getListFollowJobHandle({}));
-    dispatch(getListApplyJobHandle({}));
-    dispatch(getListAppliedJobHandle({}));
-  }, [dispatch]);
-
-  const disableSaveJob = useMemo(() => {
-    let result = false;
-    if (listFollowJob) {
-      for (const k in listFollowJob) {
-        if (k?.toString() === cardJob?.id?.toString()) {
-          result = true;
-        }
-      }
-    }
-    return result;
-  }, [cardJob?.id, listFollowJob]);
-
-  const disableApplyButton = useMemo(() => {
-    let result = false;
-    if (listApplyJob) {
-      for (const k in listApplyJob) {
-        if (k?.toString() === cardJob?.id?.toString()) {
-          result = true;
-        }
-      }
-    }
-    if (!result) {
-      if (listAppliedJob) {
-        for (const k in listAppliedJob) {
-          if (k?.toString() === cardJob?.id?.toString()) {
-            result = true;
-          }
-        }
-      }
-    }
-    return result;
-  }, [cardJob?.id, listAppliedJob, listApplyJob]);
   const dataJobDetail = useMemo(() => {
     return {
       infoJob: {
         title: cardJob?.title,
-        companyName: cardJob?.companyName,
+        companyName: cardJob?.employer?.companyName,
         address: cardJob?.addressMapped,
         isBonus: cardJob?.isBonusMapped,
         isPaidAfterWork: cardJob?.isPaidAfterWorkMapped,
@@ -86,7 +48,8 @@ const DetailJob = props => {
         recruitedQuantity: cardJob?.numberRecruitments,
         desc: cardJob?.jobDescription
       },
-      benefit: cardJob?.bonus,
+      bonus: cardJob?.bonus,
+      benefit: [cardJob.benefit],
       jobRequire: {
         type: cardJob.type,
         gender: cardJob.sex,
@@ -153,6 +116,8 @@ const DetailJob = props => {
     );
   }, [modalBonusInfo]);
 
+  console.log(cardJob, '======');
+
   useEffect(() => {
     if (modalBonusInfo) {
       dispatch(setAnimatedBottomModalSuccess({ content: renderModalBonusContent() }));
@@ -176,152 +141,6 @@ const DetailJob = props => {
     }
   }, [animatedBottomModal.content, dispatch]);
 
-  const onReceiveJob = useCallback(() => {
-    dispatch(
-      showConfirmModal({
-        title: 'Bạn ứng tuyển công việc này chứ ?',
-        icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-        content: 'Yêu cầu nhận việc của bạn sẽ được gởi đến Người tuyển dụng',
-        buttonTitleReject: 'Huỷ bỏ',
-        buttonTitleConfirm: 'Xác nhận',
-        onConfirm: () => {
-          dispatch(
-            receiveJobHandle({
-              jobId: cardJob.id,
-              callback: () => {
-                dispatch(
-                  showCompleteModal({
-                    title: 'Chúc mừng',
-                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                    content: 'Bạn đã gửi yêu cầu nhận việc thành công.',
-                    buttonTitle: 'Xác nhận',
-                    onConfirm: () => {
-                      navigation.goBack();
-                    },
-                    onClose: () => {
-                      navigation.goBack();
-                    }
-                  })
-                );
-              },
-              failure: () => {
-                dispatch(
-                  showCompleteModal({
-                    title: 'Nhận việc không thành công',
-                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                    content: 'Bạn đã ứng tuyển công việc này rồi, vui lòng kiểm tra lại',
-                    buttonTitle: 'Xác nhận',
-                    onConfirm: () => {
-                      navigation.goBack();
-                    },
-                    onClose: () => {
-                      navigation.goBack();
-                    }
-                  })
-                );
-              },
-              handleErr: () => {
-                dispatch(
-                  showCompleteModal({
-                    title: 'Nhận việc không thành công',
-                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                    content: 'Bạn đã ứng tuyển công việc này rồi, vui lòng kiểm tra lại',
-                    buttonTitle: 'Xác nhận',
-                    onConfirm: () => {
-                      navigation.goBack();
-                    },
-                    onClose: () => {
-                      navigation.goBack();
-                    }
-                  })
-                );
-              }
-            })
-          );
-        },
-        onClose: () => {
-          // do no thing
-        },
-        onReject: () => {
-          // do no thing
-        }
-      })
-    );
-  }, [cardJob.id, dispatch, navigation]);
-
-  const onSaveJob = useCallback(() => {
-    dispatch(
-      showConfirmModal({
-        title: 'Bạn muốn lưu công việc này chứ ?',
-        icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-        content: 'Công việc sẽ được lưu lại trên tài khoản của bạn',
-        buttonTitleReject: 'Huỷ bỏ',
-        buttonTitleConfirm: 'Xác nhận',
-        onConfirm: () => {
-          dispatch(
-            saveJobHandle({
-              jobId: cardJob.id,
-              callback: () => {
-                dispatch(
-                  showCompleteModal({
-                    title: 'Chúc mừng',
-                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                    content: 'Bạn đã lưu việc thành công',
-                    buttonTitle: 'Xác nhận',
-                    onConfirm: () => {
-                      navigation.goBack();
-                    },
-                    onClose: () => {
-                      navigation.goBack();
-                    }
-                  })
-                );
-              },
-              failure: () => {
-                dispatch(
-                  showCompleteModal({
-                    title: 'Lưu việc không thành công',
-                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                    content: 'Bạn đã lưu công việc này rồi, vui lòng kiểm tra lại',
-                    buttonTitle: 'Xác nhận',
-                    onConfirm: () => {
-                      navigation.goBack();
-                    },
-                    onClose: () => {
-                      navigation.goBack();
-                    }
-                  })
-                );
-              },
-              handleErr: () => {
-                dispatch(
-                  showCompleteModal({
-                    title: 'Lưu việc không thành công',
-                    icon: <Icon fontName="AntDesign" size={25} color="red" name="closecircle" />,
-                    content: 'Bạn đã lưu công việc này rồi, vui lòng kiểm tra lại',
-                    buttonTitle: 'Xác nhận',
-                    onConfirm: () => {
-                      navigation.goBack();
-                    },
-                    onClose: () => {
-                      navigation.goBack();
-                    }
-                  })
-                );
-              }
-            })
-          );
-        },
-        onClose: () => {
-          // do no thing
-        },
-        onReject: () => {
-          // do no thing
-        }
-      })
-    );
-  }, [cardJob.id, dispatch, navigation]);
-  console.log(cardJob, 'cardJob');
   return (
     <View style={styles.detailScreen}>
       <ScrollView style={styles.scrollView}>
@@ -336,7 +155,15 @@ const DetailJob = props => {
             <JobDesc data={dataJobDetail.jobDesc} />
           </View>
           <View style={styles.benefit}>
-            <Benefit data={dataJobDetail.benefit} onPress={onPressBenefitItem} />
+            <Benefit title="Quyền lợi" data={dataJobDetail.benefit} onPress={onPressBenefitItem} />
+          </View>
+          <View style={styles.benefit}>
+            <Benefit
+              data={dataJobDetail.bonus}
+              title="Thưởng"
+              isBonus
+              onPress={onPressBenefitItem}
+            />
           </View>
           <View style={styles.jobRequire}>
             <JobRequire data={dataJobDetail.jobRequire} />
@@ -347,19 +174,23 @@ const DetailJob = props => {
           <View style={styles.jobContact}>
             <FileIncome data={dataJobDetail.jobContact} cardJob={cardJob} />
           </View>
+          {cardJob.note && cardJob.ctv_name ? (
+            <View style={styles.jobContact}>
+              <Text
+                style={{
+                  fontFamily: FONT_FAMILY.REGULAR,
+                  fontSize: FONT_SIZE.BodyText,
+                  textDecorationColor: CUSTOM_COLOR.Black,
+                  color: 'red',
+                  flex: 1,
+                  paddingVertical: 20
+                }}>
+                {`${cardJob.note} : ${cardJob.ctv_name}`}
+              </Text>
+            </View>
+          ) : null}
         </View>
       </ScrollView>
-      <View style={styles.buttonArea}>
-        <Button
-          titleConfirm={translate('common.receive_job')}
-          titleReject={translate('common.save')}
-          type="confirm_reject"
-          submitMethod={onReceiveJob}
-          rejectMethod={onSaveJob}
-          disableConfirm={disableApplyButton}
-          disableReject={disableSaveJob}
-        />
-      </View>
     </View>
   );
 };

@@ -30,7 +30,7 @@ const ListAllJob = props => {
       result.push(listAllJob[k]);
     }
     return result?.sort(
-      (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
   }, [listAllJob, listJob]);
 

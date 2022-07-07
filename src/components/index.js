@@ -4,7 +4,7 @@ export { default as Icon } from './Icon';
 export { default as NotificationWarning } from './NotificationWarning';
 export { default as RowBigIcon } from './RowBigIcon';
 export { default as TitleSection } from './TitleSection';
-export { default as CardJob } from './CardJob';
+export { default as CardJob } from './CardJob/index';
 export { default as CardJobSkeleton } from './CardJob/CardJobSkeleton';
 export { default as Button } from './Button';
 export { default as WarningBox } from './WarningBox';

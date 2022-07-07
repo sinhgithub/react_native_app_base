@@ -36,7 +36,7 @@ const WithDrawRequest = props => {
   const selectInputData = useMemo(() => {
     const result = [];
     wallets.forEach(item => {
-      result.push(`${item.id.employer.companyName} - ${formatNumber(item.total, ',')} VND`);
+      result.push(`${item.id.employer.companyName} : ${formatNumber(item.total, ',')} VND`);
     });
     return result;
   }, [wallets]);
@@ -44,8 +44,7 @@ const WithDrawRequest = props => {
   const onSelectWallet = (selectedItem, index) => {
     const selected = wallets.find(item => {
       const compare = getHardCodeCompare(item);
-      const tmp = selectedItem?.split('-');
-
+      const tmp = selectedItem?.split(':');
       if (tmp[0]?.trim() === compare) {
         return item;
       }
@@ -66,8 +65,8 @@ const WithDrawRequest = props => {
     if (
       !values?.employerId ||
       !values?.withdrawalAmount ||
-      walletSelected?.balance < parseInt(values?.withdrawalAmount) ||
-      parseInt(values?.withdrawalAmount) <= 0
+      walletSelected?.balance < parseInt(values?.withdrawalAmount.split(',').join('')) ||
+      parseInt(values?.withdrawalAmount.split(',').join('')) <= 0
     ) {
       return true;
     }

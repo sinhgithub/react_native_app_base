@@ -7,9 +7,10 @@ import BenefitItem from './BenefitItem';
 import { ICBenifit } from 'assets/icons';
 import { SPACING } from 'constants/size';
 import { formatNumber } from 'helpers/formatNumber';
+import Icon from 'components/Icon';
 
 const Benefit = props => {
-  const { data, onPress } = props;
+  const { data, onPress, title, isBonus } = props;
   const [isShowContent, setIsShowContent] = useState(true);
 
   const handleToggleContent = useCallback(key => {
@@ -23,16 +24,17 @@ const Benefit = props => {
   const listBonus = data?.map((item, index) => {
     return (
       <BenefitItem
+        isBonus={isBonus}
         containerStyle={{
           marginTop: index === 0 ? 0 : SPACING.Normal,
           paddingBottom: index === data.length - 1 ? SPACING.XXNormal : 0
         }}
         key={index}
-        bonusName={item.title}
+        bonusName={item?.title || item}
         bonusDesc={`${translate('common.can_up_to')} ${formatNumber(
-          item.bonusFrom,
+          item?.bonusFrom || item,
           '.'
-        )}đ - ${formatNumber(item.bonusTo, '.')}đ`}
+        )}đ - ${formatNumber(item?.bonusTo || item, '.')}đ`}
         data={item}
         onPress={onPress}
       />
@@ -42,8 +44,14 @@ const Benefit = props => {
   return (
     <View style={styles.benefit}>
       <ToggleBottomContent
-        icon={<ICBenifit color="gray" />}
-        title={translate('common.interest')}
+        icon={
+          isBonus ? (
+            <ICBenifit color="gray" />
+          ) : (
+            <Icon fontName="AntDesign" name="star" size={25} color="gray" />
+          )
+        }
+        title={title}
         onToggle={handleToggleContent}
       />
       <View style={styles.benefitContent}>

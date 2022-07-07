@@ -100,7 +100,7 @@ const HomeScreen = () => {
   );
   const listJobHomePageSorted = useMemo(() => {
     return listJobHomePage.sort(
-      (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
     );
   }, [listJobHomePage]);
 
@@ -187,18 +187,6 @@ const HomeScreen = () => {
               resizeMode="cover"
             />
           )}
-
-          {/* {configSite && (
-            <View style={styles.slogan1}>
-              <Text style={styles.slogan}>{configSite.slogan1}</Text>
-              <Text style={styles.slogan}>{configSite.slogan2}</Text>
-            </View>
-          )}
-          {configSite && (
-            <View style={styles.slogan2}>
-              <Text style={styles.slogan}>{configSite.slogan3}</Text>
-            </View>
-          )} */}
         </View>
         <View style={styles.searchWrapper}>
           <CustomInput
